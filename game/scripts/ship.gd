@@ -19,6 +19,6 @@ func _process(delta):
 	if Input.is_action_pressed("ui_down"):
 		ship_pos.y += delta*velocity
 	ship_pos.x = clamp(ship_pos.x, 100, 600)
-	ship_pos.y = clamp(ship_pos.y, 200, 950)
+	ship_pos.y = clamp(ship_pos.y, 200, 1150)
 	set_pos(ship_pos)
 

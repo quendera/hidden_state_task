@@ -13,5 +13,6 @@ func _ready():
 func _on_timer_timeout():
 	var enemy_instance = preload("res://enemy.tscn").instance()
 	enemy_instance.set_pos(Vector2(0,100))
+	enemy_instance.set_z(1)
 	add_child(enemy_instance)
 	

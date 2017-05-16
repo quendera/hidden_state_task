@@ -22,9 +22,11 @@ func _process(delta):
 
 func spawn_enemy_bullet():
 	enemy_bullet_instance = enemy_bullet_scene.instance()
-	var bullet_pos = get_node("shootfrom").get_pos()
-	enemy_bullet_instance.set_pos(bullet_pos)
-	add_child(enemy_bullet_instance)
+	var bullet_pos = get_node("shootfrom").get_global_pos()
+	enemy_bullet_instance.bullet_dir = dir
+	enemy_bullet_instance.set_global_rot(atan2(dir.x, dir.y))
+	enemy_bullet_instance.set_global_pos(bullet_pos)
+	get_node("../").add_child(enemy_bullet_instance)
 
 func _on_timer_timeout():
 	if active:

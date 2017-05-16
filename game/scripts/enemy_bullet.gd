@@ -1,10 +1,11 @@
 extends Area2D
 
-const SPEED = 1600
+const SPEED = 600
 var hit = false
+var bullet_dir
 
 func _process(delta):
-	global_translate(delta*SPEED*get_node("../").dir)
+	translate(delta*SPEED*bullet_dir)
 
 func _ready():
 	set_process(true)
