@@ -21,5 +21,4 @@ func _process(delta):
 	ship_pos.x = clamp(ship_pos.x, 100, 600)
 	ship_pos.y = clamp(ship_pos.y, 200, 950)
 	set_pos(ship_pos)
-	
 
