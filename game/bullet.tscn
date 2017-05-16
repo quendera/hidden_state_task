@@ -47,6 +47,8 @@ trigger = false
 
 [node name="visibility" type="VisibilityNotifier2D" parent="."]
 
+transform/pos = Vector2( 4.4302, -13.1739 )
+transform/scale = Vector2( 1.88247, 2.43566 )
 rect = Rect2( -10, -10, 20, 20 )
 
 [connection signal="area_enter" from="." to="." method="_on_enemy_bullet_area_enter"]

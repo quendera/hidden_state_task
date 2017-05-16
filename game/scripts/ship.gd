@@ -18,8 +18,8 @@ func _process(delta):
 		ship_pos.y -= delta*velocity
 	if Input.is_action_pressed("ui_down"):
 		ship_pos.y += delta*velocity
-#	if Input.is_action_pressed("shoot")
-#		
+	if Input.is_action_pressed("shoot"):
+		get_node("../").spawn_bullet(ship_pos, Vector2(0,-1))
 	ship_pos.x = clamp(ship_pos.x, 100, 600)
 	ship_pos.y = clamp(ship_pos.y, 200, 1150)
 	set_pos(ship_pos)
