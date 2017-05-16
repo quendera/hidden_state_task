@@ -3,7 +3,7 @@ extends Area2D
 # class member variables go here, for example:
 # var a = 2
 var idx
-var enemy_bullet_scene = preload("res://enemy_bullet.tscn")
+var enemy_bullet_scene = preload("res://bullet.tscn")
 var enemy_bullet_instance
 var active = true
 var dir
