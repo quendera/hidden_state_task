@@ -21,7 +21,7 @@ func _process(delta):
 func _on_timer_timeout():
 	if active:
 		var pos = get_node("shootfrom").get_global_pos()
-		get_node("../").spawn_bullet(pos,dir, 0, false)
+		get_node("../").spawn_bullet(pos,dir, rand_range(0,1) > 0.5, false)
 
 func _on_visibility_exit_screen():
 	queue_free()

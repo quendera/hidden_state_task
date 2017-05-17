@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=5 format=1]
 
 [ext_resource path="res://scripts/bullet.gd" type="Script" id=1]
+[ext_resource path="res://assets/PNG/Lasers/laserBlue01.png" type="Texture" id=2]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -15,7 +16,7 @@ size = Vector2( 9, 54 )
 storage = 0
 lossy_quality = 0.7
 
-[node name="enemy_bullet" type="Area2D"]
+[node name="bullet" type="Area2D"]
 
 transform/pos = Vector2( 217.486, 305.567 )
 transform/rot = 180.0
@@ -30,11 +31,18 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 1 )
 
-[node name="sprite" type="Sprite" parent="."]
+[node name="red" type="Sprite" parent="."]
 
 transform/pos = Vector2( 2.29762, -7.51086 )
 transform/scale = Vector2( 2.67971, 1.11655 )
 texture = SubResource( 2 )
+
+[node name="blue" type="Sprite" parent="."]
+
+transform/pos = Vector2( 4.15735, -14.5657 )
+transform/rot = -7.17969e-13
+transform/scale = Vector2( 3.81951, 1.13406 )
+texture = ExtResource( 2 )
 
 [node name="collision" type="CollisionPolygon2D" parent="."]
 
@@ -47,13 +55,11 @@ trigger = false
 
 [node name="visibility" type="VisibilityNotifier2D" parent="."]
 
-transform/pos = Vector2( 4.4302, -13.1739 )
+transform/pos = Vector2( 4.43018, -13.1739 )
 transform/scale = Vector2( 1.88247, 2.43566 )
 rect = Rect2( -10, -10, 20, 20 )
 
-[connection signal="area_enter" from="." to="." method="_on_enemy_bullet_area_enter"]
-
-[connection signal="input_event" from="." to="." method="_on_enemy_bullet_input_event"]
+[connection signal="area_enter" from="." to="." method="_on_bullet_area_enter"]
 
 [connection signal="exit_screen" from="visibility" to="." method="_on_visibility_exit_screen"]
 

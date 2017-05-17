@@ -22,6 +22,6 @@ func spawn_bullet(pos, dir, polarity = 0, friendly = true):
 	bullet_instance.dir = dir
 	bullet_instance.polarity = polarity
 	bullet_instance.friendly = friendly
-	bullet_instance.set_global_rot(atan2(dir.x, dir.y))
+	bullet_instance.set_global_rot(PI+atan2(dir.x, dir.y))
 	bullet_instance.set_global_pos(pos)
 	add_child(bullet_instance)

@@ -19,8 +19,11 @@ func _process(delta):
 	if Input.is_action_pressed("ui_down"):
 		ship_pos.y += delta*velocity
 	if Input.is_action_pressed("shoot"):
-		get_node("../").spawn_bullet(ship_pos, Vector2(0,-1))
+		get_node("../").spawn_bullet(ship_pos, Vector2(0,-1), get_node("shield").polarity)
 	ship_pos.x = clamp(ship_pos.x, 100, 600)
 	ship_pos.y = clamp(ship_pos.y, 200, 1150)
 	set_pos(ship_pos)
+
+func destroy():
+	get_node("anim").play("explosion")
 
