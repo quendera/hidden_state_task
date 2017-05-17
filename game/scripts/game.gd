@@ -17,7 +17,7 @@ func _on_timer_timeout():
 	enemy_instance.set_z(1)
 	add_child(enemy_instance)
 	
-func spawn_bullet(pos, dir, polarity = 0, friendly = true):
+func spawn_bullet(pos, dir, polarity, friendly):
 	var bullet_instance = bullet_scene.instance()
 	bullet_instance.dir = dir
 	bullet_instance.polarity = polarity

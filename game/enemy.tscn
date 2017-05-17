@@ -2,7 +2,7 @@
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="ConvexPolygonShape2D" id=5]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -30.0218, 26.2021, -30.0218, -24.1486, -14.9166, -39.2538, 20.3289, -39.2538, 42.9866, -24.1486, 50.5392, 23.6846, 10.2587, 46.3424 )
@@ -63,7 +63,7 @@ tracks/2/keys = {
 
 transform/pos = Vector2( 480.121, 662.111 )
 input/pickable = true
-shapes/0/shape = SubResource( 1 )
+shapes/0/shape = SubResource( 5 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )

@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=1]
+[gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/diogo/bg/bg1 copy.png" type="Texture" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/Vector/aura_red.png" type="Texture" id=6]
 [ext_resource path="res://assets/Vector/aura_blue.png" type="Texture" id=7]
 [ext_resource path="res://assets/PNG/Effects/fire.png" type="Texture" id=8]
+[ext_resource path="res://assets/scorefont.fnt" type="BitmapFont" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 
@@ -146,6 +147,22 @@ process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = true
+
+[node name="score" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 261.0
+margin/top = 1205.0
+margin/right = 437.0
+margin/bottom = 1249.0
+custom_fonts/font = ExtResource( 9 )
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 
