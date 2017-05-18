@@ -1,7 +1,9 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://scripts/bullet.gd" type="Script" id=1]
 [ext_resource path="res://assets/PNG/Lasers/laserBlue01.png" type="Texture" id=2]
+[ext_resource path="res://assets/sound/explosion.wav" type="Sample" id=3]
+[ext_resource path="res://assets/sound/laser_shooting_sfx.wav" type="Sample" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -15,6 +17,21 @@ image = Image( 9, 54, 0, RGBA, 0, 0, 0, 0, 0, 0, 0, 0, 171, 54, 54, 127, 169, 55
 size = Vector2( 9, 54 )
 storage = 0
 lossy_quality = 0.7
+
+[sub_resource type="SampleLibrary" id=3]
+
+samples/explosion = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 3 )
+}
+samples/laser = {
+"db": -15.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
 
 [node name="bullet" type="Area2D"]
 
@@ -55,9 +72,26 @@ trigger = false
 
 [node name="visibility" type="VisibilityNotifier2D" parent="."]
 
-transform/pos = Vector2( 4.43018, -13.1739 )
-transform/scale = Vector2( 1.88247, 2.43566 )
+transform/pos = Vector2( -4.57508, -6.56363 )
+transform/scale = Vector2( 20.9527, 8.17688 )
 rect = Rect2( -10, -10, 20, 20 )
+
+[node name="sound" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = SubResource( 3 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
 
 [connection signal="area_enter" from="." to="." method="_on_bullet_area_enter"]
 

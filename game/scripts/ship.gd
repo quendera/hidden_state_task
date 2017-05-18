@@ -3,7 +3,7 @@ extends Area2D
 # class member variables go here, for example:
 var score = 0
 var ship_pos
-var velocity = 500
+var velocity = 600
 var reload = 0
 var reload_time = 0.1
 
