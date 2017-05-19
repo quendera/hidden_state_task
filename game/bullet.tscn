@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://scripts/bullet.gd" type="Script" id=1]
 [ext_resource path="res://assets/PNG/Lasers/laserBlue01.png" type="Texture" id=2]
 [ext_resource path="res://assets/sound/explosion.wav" type="Sample" id=3]
 [ext_resource path="res://assets/sound/laser_shooting_sfx.wav" type="Sample" id=4]
+[ext_resource path="res://assets/PNG/Lasers/laserGreen11.png" type="Texture" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -92,6 +93,12 @@ default/filter/gain = 1.0
 default/reverb_room = 2
 default/reverb_send = 0.0
 default/chorus_send = 0.0
+
+[node name="masked" type="Sprite" parent="."]
+
+transform/pos = Vector2( -0.028038, -17.0022 )
+transform/scale = Vector2( 4.0014, 1.06963 )
+texture = ExtResource( 5 )
 
 [connection signal="area_enter" from="." to="." method="_on_bullet_area_enter"]
 
