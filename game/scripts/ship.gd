@@ -3,12 +3,16 @@ extends Area2D
 # class member variables go here, for example:
 var score = 0
 var ship_pos
-var velocity = 600
+var velocity = 800
 var reload = 0
 var reload_time = 0.1
 
 func _ready():
 	set_process(true)
+	set_process_input(true)
+
+func _input(event):
+	pass
 
 func _process(delta):
 	get_node("../score").set_text("Score :"+str(score))
@@ -26,7 +30,7 @@ func _process(delta):
 	if Input.is_action_pressed("shoot") and reload >= reload_time:
 		get_node("../").spawn_bullet(ship_pos, Vector2(0,-1), get_node("shield").polarity, true, false)
 		reload = 0
-	ship_pos.x = clamp(ship_pos.x, 100, 600)
+	ship_pos.x = clamp(ship_pos.x, 0, 720)
 	ship_pos.y = clamp(ship_pos.y, 200, 1150)
 	set_pos(ship_pos)
 

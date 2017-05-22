@@ -5,7 +5,7 @@ extends Node2D
 var polarity = rand_range(0,1) > 0.5
 var bullet_scene = preload("res://bullet.tscn")
 var asteroid_scene = preload("res://asteroid.tscn")
-var rate = 1 # rate of change in Hz
+var gamma = 0.7
 var counter = 0
 
 func _ready():
@@ -15,11 +15,13 @@ func _process(delta):
 	pass
 
 func asteroid_wave():
-	for i in range(0,720,50):
-		for j in range(2):
-			spawn_asteroid(i, 100*j+ rand_range(-200,-100))
+	var side = rand_range(0,1) > 0.5
+	for i in range(side*150,600+side*150,50):
+		for j in range(3):
+			spawn_asteroid(i, 100*j+ rand_range(-300,-200))
 	counter += 1
-	polarity = 1-polarity
+	if rand_range(0,1) < gamma:
+		polarity = 1-polarity
 
 func spawn_asteroid(x_pos, y_pos):
 	var asteroid_instance = asteroid_scene.instance()

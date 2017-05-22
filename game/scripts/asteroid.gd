@@ -19,3 +19,5 @@ func _on_asteroid_area_enter( area ):
 	if area.get_name() == "ship":
 		if area.get_node("shield").polarity != polarity:
 			area.destroy()
+		else:
+			area.score += 10
