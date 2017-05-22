@@ -15,5 +15,4 @@ func _process(delta):
 			polarity_change = true
 	else:
 		polarity_change = false
-	get_node("blue").set_hidden(polarity == 0)
-	get_node("red").set_hidden(polarity == 1)
+	get_node("frames").set_frame(2-polarity)

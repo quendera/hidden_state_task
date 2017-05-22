@@ -10,14 +10,16 @@ var counter = 0
 
 func _ready():
 	set_process(true)
-	for i in range(0,720,50):
-		for j in range(2):
-			spawn_asteroid(i, 100*j+ rand_range(0,100))
 
 func _process(delta):
-	if rand_range(0,1) < delta:
-		polarity = 1-polarity
+	pass
 
+func asteroid_wave():
+	for i in range(0,720,50):
+		for j in range(2):
+			spawn_asteroid(i, 100*j+ rand_range(-200,-100))
+	counter += 1
+	polarity = 1-polarity
 
 func spawn_asteroid(x_pos, y_pos):
 	var asteroid_instance = asteroid_scene.instance()
@@ -27,6 +29,7 @@ func spawn_asteroid(x_pos, y_pos):
 	var asteroid_rot = rand_range(-20,20)
 	asteroid_instance.set_rot(asteroid_rot)
 	asteroid_instance.group = counter
+	asteroid_instance.polarity = polarity
 	asteroid_instance.add_to_group("asteroid"+str(counter))
 	add_child(asteroid_instance)
 	
@@ -39,3 +42,7 @@ func spawn_bullet(pos, dir, polarity, friendly, masked):
 	bullet_instance.set_global_rot(PI+atan2(dir.x, dir.y))
 	bullet_instance.set_global_pos(pos)
 	add_child(bullet_instance)
+
+
+func _on_timer_timeout():
+	asteroid_wave()

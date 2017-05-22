@@ -5,9 +5,9 @@
 [ext_resource path="res://scripts/ship.gd" type="Script" id=3]
 [ext_resource path="res://assets/PNG/playerShip1_red.png" type="Texture" id=4]
 [ext_resource path="res://scripts/shield.gd" type="Script" id=5]
-[ext_resource path="res://assets/Vector/aura_red.png" type="Texture" id=6]
-[ext_resource path="res://assets/Vector/aura_blue.png" type="Texture" id=7]
-[ext_resource path="res://assets/PNG/Effects/fire.png" type="Texture" id=8]
+[ext_resource path="res://assets/mypixel/shield/shield.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://assets/PNG/Effects/fire.png" type="Texture" id=7]
+[ext_resource path="res://assets/sound/ship_sounds.tres" type="SampleLibrary" id=8]
 [ext_resource path="res://assets/scorefont.fnt" type="BitmapFont" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -89,7 +89,6 @@ __meta__ = {
 
 [node name="shield" type="Area2D" parent="ship"]
 
-editor/display_folded = true
 input/pickable = true
 shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 10.5343, 0, 0, 10.8902, -10.6805, 5.51305 )
@@ -103,18 +102,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="red" type="Sprite" parent="ship/shield"]
-
-transform/pos = Vector2( -7.95752, 8.35352 )
-transform/scale = Vector2( 0.75367, 0.75367 )
-texture = ExtResource( 6 )
-
-[node name="blue" type="Sprite" parent="ship/shield"]
-
-transform/pos = Vector2( -11.1849, 8.21695 )
-transform/scale = Vector2( 0.772717, 0.772717 )
-texture = ExtResource( 7 )
-
 [node name="collision" type="CollisionShape2D" parent="ship/shield"]
 
 transform/pos = Vector2( -10.6805, 5.51305 )
@@ -122,6 +109,16 @@ transform/scale = Vector2( 10.5343, 10.8902 )
 shape = SubResource( 4 )
 trigger = false
 _update_shape_index = 0
+
+[node name="frames" type="AnimatedSprite" parent="ship/shield"]
+
+transform/pos = Vector2( -1.96948, 6.38159 )
+transform/scale = Vector2( 0.820627, 0.820627 )
+frames = ExtResource( 6 )
+animation = "default"
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="get_hits" type="Position2D" parent="ship"]
 
@@ -133,7 +130,7 @@ __meta__ = {
 
 visibility/visible = false
 transform/pos = Vector2( -1.85059, 5.55188 )
-texture = ExtResource( 8 )
+texture = ExtResource( 7 )
 
 [node name="anim" type="AnimationPlayer" parent="ship"]
 
@@ -153,6 +150,17 @@ polygon = Vector2Array( -81.5076, -2.4104, -19.7599, -1.67529, -5.05801, -55.337
 shape_range = Vector2( 0, 2 )
 trigger = false
 
+[node name="sound" type="SamplePlayer2D" parent="ship"]
+
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 2048.0
+params/attenuation/distance_exp = 1.0
+config/polyphony = 1
+config/samples = ExtResource( 8 )
+config/pitch_random = 0.0
+
 [node name="score" type="Label" parent="."]
 
 focus/ignore_mouse = true
@@ -168,5 +176,14 @@ align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 2.0
+one_shot = false
+autostart = true
+
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 
 
