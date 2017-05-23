@@ -69,7 +69,7 @@ __meta__ = {
 process_mode = 1
 wait_time = 1.0
 one_shot = false
-autostart = false
+autostart = true
 
 [connection signal="pressed" from="button" to="." method="_on_button_pressed"]
 

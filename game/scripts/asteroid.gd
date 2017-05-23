@@ -3,10 +3,21 @@ extends Area2D
 # class member variables go here, for example:
 const SPEED = 400
 var group
-var polarity
+var polarity # 0 is red, 1 is blue
+var bomb = false
+var exploded = false
+var colors = ["red","blue"]
 
 func _ready():
 	set_process(true)
+	add_to_group("asteroids")
+	if bomb:
+		get_node("frames").set_frame(3)
+		add_to_group("bombs")
+	else:
+		get_node("frames").set_frame(0)
+	get_node("frames").set_hidden(false)
+	get_node("anim").connect("finished", self, "do_anim_finished")
 
 
 func _process(delta):
@@ -21,3 +32,6 @@ func _on_asteroid_area_enter( area ):
 			area.destroy()
 		else:
 			area.score += 10
+
+func do_anim_finished():
+	queue_free()
