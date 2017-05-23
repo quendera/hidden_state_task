@@ -6,6 +6,7 @@ var friendly
 var polarity
 var masked
 var visible_color
+var targets
 
 func _process(delta):
 	if masked:
@@ -38,12 +39,15 @@ func _on_bullet_area_enter(area):
 			get_node("../ship").score += 10 + 40*(area.life == 1)
 			area.life -= 1
 			set_hidden(true)
-		if area.is_in_group("bombs"):
+		if area.is_in_group("asteroids"):
 			if not area.exploded:
-				for asteroid in get_tree().get_nodes_in_group("asteroid"+str(area.group)):
+				if area.bomb:
+					targets = get_tree().get_nodes_in_group("asteroid"+str(area.group))
+				else:
+					targets = [area]
+				for asteroid in targets:
 					asteroid.get_node("anim").play(asteroid.colors[asteroid.polarity])
 					asteroid.exploded = true
-		if area.is_in_group("asteroids"):
 			queue_free()
 
 func _on_visibility_exit_screen():

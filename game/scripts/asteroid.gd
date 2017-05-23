@@ -1,8 +1,9 @@
 extends Area2D
 
 # class member variables go here, for example:
-const SPEED = 400
+const SPEED = 200
 var group
+var life = 5
 var polarity # 0 is red, 1 is blue
 var bomb = false
 var exploded = false
