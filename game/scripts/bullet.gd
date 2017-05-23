@@ -24,30 +24,19 @@ func _ready():
 	set_process(true)
 
 func _on_bullet_area_enter(area):
-	if not friendly:
-		if area.get_name() == "ship":
-			if polarity != area.get_node("shield").polarity:
-				area.destroy()
-				get_node("../ship").score -=15
-				get_node("sound").play("explosion")
-			set_hidden(true)
-		if area.get_name() == "shield":
-			masked = false
+#	if not friendly:
+#		if area.get_name() == "ship":
+#			if polarity != area.get_node("shield").polarity:
+#				area.destroy()
+#				get_node("../ship").score -=15
+#				get_node("sound").play("explosion")
+#			set_hidden(true)
+#		if area.get_name() == "shield":
+#			masked = false
 	if friendly:
-		if area.is_in_group("enemies"):
-			area.get_node("anim").play("explosion")
-			get_node("../ship").score += 10 + 40*(area.life == 1)
-			area.life -= 1
-			set_hidden(true)
 		if area.is_in_group("asteroids"):
-			if not area.exploded:
-				if area.bomb:
-					targets = get_tree().get_nodes_in_group("asteroid"+str(area.group))
-				else:
-					targets = [area]
-				for asteroid in targets:
-					asteroid.get_node("anim").play(asteroid.colors[asteroid.polarity])
-					asteroid.exploded = true
+			if area.polarity == polarity and rand_range(0,1) < get_node("../").accuracy:
+				area.life = 0
 			queue_free()
 
 func _on_visibility_exit_screen():

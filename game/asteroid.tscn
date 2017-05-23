@@ -105,6 +105,12 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
+[node name="visibility" type="VisibilityNotifier2D" parent="."]
+
+rect = Rect2( -10, -10, 20, 20 )
+
 [connection signal="area_enter" from="." to="." method="_on_asteroid_area_enter"]
+
+[connection signal="exit_screen" from="visibility" to="." method="_on_visibility_exit_screen"]
 
 

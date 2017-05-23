@@ -37,5 +37,5 @@ func _process(delta):
 func destroy():
 	get_node("anim").play("explosion")
 	get_node("sound").play("explosion")
-	score -=15
+	score -= 50
 
