@@ -1,7 +1,7 @@
 extends Area2D
 
 # class member variables go here, for example:
-const SPEED = 500
+const SPEED = 300
 var group
 var life = 5
 var polarity # 0 is red, 1 is blue
@@ -33,7 +33,8 @@ func _process(delta):
 func _on_asteroid_area_enter( area ):
 	if area.get_name() == "ship":
 		show_color()
-		area.destroy()
+		get_tree().change_scene("res://game_over.tscn")
+#		area.destroy()
 
 func show_color():
 	for asteroid in get_tree().get_nodes_in_group("asteroid"+str(group)):

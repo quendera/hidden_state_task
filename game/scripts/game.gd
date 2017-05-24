@@ -9,6 +9,8 @@ var gamma = 0.3
 var accuracy = 0.1
 var counter = 0
 
+
+
 func _ready():
 	set_process(true)
 
@@ -22,7 +24,7 @@ func asteroid_wave():
 	for i in range(30+shift,600+shift,100):
 		for j in range(2):
 			spawn_asteroid(i, -100*j+ rand_range(-200,-100), false)
-	spawn_asteroid(rand_range(180,600), -100, true)
+	spawn_asteroid(rand_range(200,580), -100, true)
 	counter += 1
 	if rand_range(0,1) < gamma:
 		polarity = 1-polarity
@@ -44,12 +46,13 @@ func spawn_asteroid(x_pos, y_pos, bomb):
 	asteroid_instance.add_to_group("asteroid"+str(counter))
 	add_child(asteroid_instance)
 	
-func spawn_bullet(pos, dir, polarity, friendly, masked):
+func spawn_bullet(pos, dir, polarity, friendly, masked, super = false):
 	var bullet_instance = bullet_scene.instance()
 	bullet_instance.dir = dir
 	bullet_instance.polarity = polarity
 	bullet_instance.friendly = friendly
 	bullet_instance.masked = masked
+	bullet_instance.super = super
 	bullet_instance.set_global_rot(PI+atan2(dir.x, dir.y))
 	bullet_instance.set_global_pos(pos)
 	add_child(bullet_instance)

@@ -7,6 +7,7 @@ var polarity
 var masked
 var visible_color
 var targets
+var super
 
 func _process(delta):
 	if masked:
@@ -22,6 +23,8 @@ func _ready():
 	if friendly:
 		get_node("sound").play("laser")
 	set_process(true)
+	if super:
+		set_scale(get_scale()*4)
 
 func _on_bullet_area_enter(area):
 #	if not friendly:
@@ -35,8 +38,12 @@ func _on_bullet_area_enter(area):
 #			masked = false
 	if friendly:
 		if area.is_in_group("asteroids"):
-			if area.polarity == polarity and rand_range(0,1) < get_node("../").accuracy:
-				area.life = 0
+			if area.polarity == polarity:
+				if rand_range(0,1) < get_node("../").accuracy:
+					area.life = 0
+				if super:
+					area.life = 0
+#					get_node("../ship").active = true
 			queue_free()
 
 func _on_visibility_exit_screen():

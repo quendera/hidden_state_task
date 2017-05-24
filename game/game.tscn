@@ -160,6 +160,13 @@ config/polyphony = 1
 config/samples = ExtResource( 8 )
 config/pitch_random = 0.0
 
+[node name="timer" type="Timer" parent="ship"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = true
+autostart = false
+
 [node name="score" type="Label" parent="."]
 
 focus/ignore_mouse = true
@@ -179,9 +186,11 @@ max_lines_visible = -1
 [node name="timer" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 2.0
+wait_time = 3.0
 one_shot = false
 autostart = true
+
+[connection signal="timeout" from="ship/timer" to="ship" method="_on_timer_timeout"]
 
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 
