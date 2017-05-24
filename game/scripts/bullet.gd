@@ -1,18 +1,15 @@
 extends Area2D
 
 const SPEED = 600
-var dir
 var polarity # 0 is red, 1 is blue
-var targets
 var super
 
 func _process(delta):
 	get_node("frames").set_frame(polarity)
-	translate(delta*SPEED*dir)
+	translate(delta*SPEED*Vector2(0,-1))
 
 func _ready():
-#	if friendly:
-#		get_node("sound").play("laser")
+	get_node("sound").play("laser")
 	set_process(true)
 	if super:
 		set_scale(get_scale()*4)
@@ -28,3 +25,7 @@ func _on_bullet_area_enter(area):
 
 func _on_visibility_exit_screen():
 	queue_free()
+
+func init(_polarity, _super):
+	polarity = _polarity
+	super = _super

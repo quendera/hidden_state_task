@@ -2,13 +2,11 @@ extends Node2D
 
 # class member variables go here, for example:
 # var a = 2
-var polarity = int(rand_range(0,1) > 0.5)
-var bullet_scene = preload("res://bullet.tscn")
+var polarity = 1*(rand_range(0,1) > 0.5)
 var asteroid_scene = preload("res://asteroid.tscn")
 var gamma = 0.3
 var accuracy = 0.1
 var counter = 0
-
 
 
 func _ready():
@@ -19,7 +17,6 @@ func _process(delta):
 
 func asteroid_wave():
 	var side = rand_range(0,1) > 0.5
-	var bomb = true
 	var shift = side*150
 	for i in range(30+shift,600+shift,100):
 		for j in range(2):
@@ -45,15 +42,7 @@ func spawn_asteroid(x_pos, y_pos, bomb):
 	asteroid_instance.polarity = polarity
 	asteroid_instance.add_to_group("asteroid"+str(counter))
 	add_child(asteroid_instance)
-	
-func spawn_bullet(pos, dir, polarity, super = false):
-	var bullet_instance = bullet_scene.instance()
-	bullet_instance.dir = dir
-	bullet_instance.polarity = polarity
-	bullet_instance.super = super
-	bullet_instance.set_global_rot(PI+atan2(dir.x, dir.y))
-	bullet_instance.set_global_pos(pos)
-	add_child(bullet_instance)
+
 
 
 func _on_timer_timeout():

@@ -1,8 +1,10 @@
-[gd_scene load_steps=6 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://scripts/bullet.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/Lasers/laserRed01.png" type="Texture" id=2]
 [ext_resource path="res://assets/Images/Lasers/laserBlue01.png" type="Texture" id=3]
+[ext_resource path="res://assets/Sounds/explosion.wav" type="Sample" id=4]
+[ext_resource path="res://assets/Sounds/laser_shooting_sfx.wav" type="Sample" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 
@@ -18,10 +20,24 @@ animations = [ {
 "speed": 5.0
 } ]
 
+[sub_resource type="SampleLibrary" id=4]
+
+samples/explosion = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
+}
+samples/laser = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 5 )
+}
+
 [node name="bullet" type="Area2D"]
 
 transform/pos = Vector2( 217.486, 305.567 )
-transform/rot = 180.0
 transform/scale = Vector2( 0.365768, 0.860373 )
 input/pickable = true
 shapes/0/shape = SubResource( 3 )
@@ -62,6 +78,17 @@ animation = "default"
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="sound" type="SamplePlayer2D" parent="."]
+
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 2048.0
+params/attenuation/distance_exp = 1.0
+config/polyphony = 1
+config/samples = SubResource( 4 )
+config/pitch_random = 0.0
 
 [connection signal="area_enter" from="." to="." method="_on_bullet_area_enter"]
 
