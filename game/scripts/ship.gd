@@ -11,18 +11,20 @@ var bullet_scene = preload("res://bullet.tscn")
 var bullet_instance
 var dirs = {"ui_left":Vector2(-1,0), "ui_right":Vector2(1,0), "ui_up":Vector2(0,-1), "ui_down":Vector2(0,1)}
 
+
 func _ready():
 	set_process(true)
 	set_process_input(true)
 
+
 func _input(event):
 	pass
+
 
 func _process(delta):
 	get_node("../score").set_text("Score :"+str(score))
 	reload += delta
 	ship_pos = get_pos()
-	draw_circle(ship_pos, 20, Color(1,0,0))
 	if active:
 		for dir in dirs.keys():
 			if Input.is_action_pressed(dir):
@@ -38,10 +40,6 @@ func _process(delta):
 	ship_pos.y = clamp(ship_pos.y, 200, 1150)
 	set_pos(ship_pos)
 
-func destroy():
-	get_node("anim").play("explosion")
-	get_node("sound").play("explosion")
-	score -= 50
 
 func spawn_bullet(polarity, super):
 	bullet_instance = bullet_scene.instance()

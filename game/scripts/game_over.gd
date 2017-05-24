@@ -12,5 +12,6 @@ func _ready():
 func _on_button_pressed():
 	get_tree().change_scene("res://game.tscn")
 
+
 func _on_timer_timeout():
 	get_tree().change_scene("res://game.tscn")
