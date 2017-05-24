@@ -30,10 +30,10 @@ func _process(delta):
 		if Input.is_action_pressed("ui_down"):
 			ship_pos.y += delta*velocity
 		if Input.is_action_pressed("shoot") and reload >= reload_time:
-			get_node("../").spawn_bullet(ship_pos, Vector2(0,-1), get_node("shield").polarity, true, false)
+			get_node("../").spawn_bullet(ship_pos, Vector2(0,-1), get_node("shield").polarity)
 			reload = 0
 		if Input.is_action_pressed("super_shoot"):
-			get_node("../").spawn_bullet(ship_pos, Vector2(0,-1), get_node("shield").polarity, true, false, true)
+			get_node("../").spawn_bullet(ship_pos, Vector2(0,-1), get_node("shield").polarity, true)
 			active = false
 			get_node("timer").start()
 	ship_pos.x = clamp(ship_pos.x, 0, 720)

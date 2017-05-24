@@ -1,14 +1,13 @@
-[gd_scene load_steps=15 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
-[ext_resource path="res://assets/diogo/bg/bg1 copy.png" type="Texture" id=2]
+[ext_resource path="res://assets/Images/bg/bg1 copy.png" type="Texture" id=2]
 [ext_resource path="res://scripts/ship.gd" type="Script" id=3]
-[ext_resource path="res://assets/PNG/playerShip1_red.png" type="Texture" id=4]
+[ext_resource path="res://assets/Images/spaceshippngs/swordfishII_2.0_animated1.png" type="Texture" id=4]
 [ext_resource path="res://scripts/shield.gd" type="Script" id=5]
-[ext_resource path="res://assets/mypixel/shield/shield.tres" type="SpriteFrames" id=6]
-[ext_resource path="res://assets/PNG/Effects/fire.png" type="Texture" id=7]
-[ext_resource path="res://assets/sound/ship_sounds.tres" type="SampleLibrary" id=8]
-[ext_resource path="res://assets/scorefont.fnt" type="BitmapFont" id=9]
+[ext_resource path="res://assets/Images/shield/shield.tres" type="SpriteFrames" id=6]
+[ext_resource path="res://assets/Images/fire.png" type="Texture" id=7]
+[ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -149,17 +148,6 @@ polygon = Vector2Array( -81.5076, -2.4104, -19.7599, -1.67529, -5.05801, -55.337
 shape_range = Vector2( 0, 2 )
 trigger = false
 
-[node name="sound" type="SamplePlayer2D" parent="ship"]
-
-params/volume_db = 0.0
-params/pitch_scale = 1.0
-params/attenuation/min_distance = 1.0
-params/attenuation/max_distance = 2048.0
-params/attenuation/distance_exp = 1.0
-config/polyphony = 1
-config/samples = ExtResource( 8 )
-config/pitch_random = 0.0
-
 [node name="timer" type="Timer" parent="ship"]
 
 process_mode = 1
@@ -177,7 +165,7 @@ margin/left = 261.0
 margin/top = 1205.0
 margin/right = 437.0
 margin/bottom = 1249.0
-custom_fonts/font = ExtResource( 9 )
+custom_fonts/font = ExtResource( 8 )
 align = 1
 percent_visible = 1.0
 lines_skipped = 0

@@ -53,7 +53,7 @@ func explode():
 # Perform the explosion
 		for asteroid in targets:
 #				asteroid.get_node("sound").play("explosion")
-				get_node("../ship/sound").play("explosion")
+#				get_node("../ship/sound").play("explosion")
 				get_node("../ship").score += 10
 				asteroid.get_node("anim").play(asteroid.colors[asteroid.polarity])
 				asteroid.exploded = true

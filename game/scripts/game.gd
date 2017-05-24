@@ -46,12 +46,10 @@ func spawn_asteroid(x_pos, y_pos, bomb):
 	asteroid_instance.add_to_group("asteroid"+str(counter))
 	add_child(asteroid_instance)
 	
-func spawn_bullet(pos, dir, polarity, friendly, masked, super = false):
+func spawn_bullet(pos, dir, polarity, super = false):
 	var bullet_instance = bullet_scene.instance()
 	bullet_instance.dir = dir
 	bullet_instance.polarity = polarity
-	bullet_instance.friendly = friendly
-	bullet_instance.masked = masked
 	bullet_instance.super = super
 	bullet_instance.set_global_rot(PI+atan2(dir.x, dir.y))
 	bullet_instance.set_global_pos(pos)

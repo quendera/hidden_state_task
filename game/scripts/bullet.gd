@@ -2,17 +2,13 @@ extends Area2D
 
 const SPEED = 600
 var dir
-var friendly
 var polarity
-var masked
 var visible_color
 var targets
 var super
 
 func _process(delta):
-	if masked:
-		visible_color = "masked"
-	elif polarity == 0:
+	if polarity == 0:
 		visible_color = "red"
 	else:
 		visible_color = "blue"
@@ -20,31 +16,21 @@ func _process(delta):
 	translate(delta*SPEED*dir)
 
 func _ready():
-	if friendly:
-		get_node("sound").play("laser")
+#	if friendly:
+#		get_node("sound").play("laser")
 	set_process(true)
 	if super:
 		set_scale(get_scale()*4)
 
 func _on_bullet_area_enter(area):
-#	if not friendly:
-#		if area.get_name() == "ship":
-#			if polarity != area.get_node("shield").polarity:
-#				area.destroy()
-#				get_node("../ship").score -=15
-#				get_node("sound").play("explosion")
-#			set_hidden(true)
-#		if area.get_name() == "shield":
-#			masked = false
-	if friendly:
-		if area.is_in_group("asteroids"):
-			if area.polarity == polarity:
-				if rand_range(0,1) < get_node("../").accuracy:
-					area.life = 0
-				if super:
-					area.life = 0
+	if area.is_in_group("asteroids"):
+		if area.polarity == polarity:
+			if rand_range(0,1) < get_node("../").accuracy:
+				area.life = 0
+			if super:
+				area.life = 0
 #					get_node("../ship").active = true
-			queue_free()
+		queue_free()
 
 func _on_visibility_exit_screen():
 	queue_free()
