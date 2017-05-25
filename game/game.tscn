@@ -3,10 +3,10 @@
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/bg/bg1 copy.png" type="Texture" id=2]
 [ext_resource path="res://scripts/ship.gd" type="Script" id=3]
-[ext_resource path="res://assets/Images/spaceshippngs/swordfishII_2.0_animated1.png" type="Texture" id=4]
-[ext_resource path="res://scripts/shield.gd" type="Script" id=5]
-[ext_resource path="res://assets/Images/shield/shield.tres" type="SpriteFrames" id=6]
-[ext_resource path="res://assets/Images/fire.png" type="Texture" id=7]
+[ext_resource path="res://scripts/shield.gd" type="Script" id=4]
+[ext_resource path="res://assets/Images/shield/shield.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://assets/Images/fire.png" type="Texture" id=6]
+[ext_resource path="res://assets/Images/animated_ship/animated_ship.tres" type="SpriteFrames" id=7]
 [ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
@@ -76,15 +76,6 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 3 )
 
-[node name="sprite" type="Sprite" parent="ship"]
-
-transform/pos = Vector2( -4.63434, 31.9736 )
-transform/scale = Vector2( 0.167049, 0.167049 )
-texture = ExtResource( 4 )
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="shield" type="Area2D" parent="ship"]
 
 input/pickable = true
@@ -95,7 +86,7 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 5 )
+script/script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -112,7 +103,7 @@ _update_shape_index = 0
 
 transform/pos = Vector2( -1.96948, 6.38159 )
 transform/scale = Vector2( 0.820627, 0.820627 )
-frames = ExtResource( 6 )
+frames = ExtResource( 5 )
 animation = "default"
 __meta__ = {
 "_edit_lock_": true
@@ -128,7 +119,7 @@ __meta__ = {
 
 visibility/visible = false
 transform/pos = Vector2( -1.85059, 5.55188 )
-texture = ExtResource( 7 )
+texture = ExtResource( 6 )
 
 [node name="anim" type="AnimationPlayer" parent="ship"]
 
@@ -154,6 +145,18 @@ process_mode = 1
 wait_time = 1.0
 one_shot = true
 autostart = false
+
+[node name="frames" type="AnimatedSprite" parent="ship"]
+
+transform/pos = Vector2( -3.53253, 32.4523 )
+transform/scale = Vector2( 0.24874, 0.24874 )
+frames = ExtResource( 7 )
+animation = "default"
+frame = 8
+playing = true
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="score" type="Label" parent="."]
 

@@ -3,7 +3,7 @@ extends Node2D
 
 var polarity = 1*(rand_range(0,1) > 0.5)
 var asteroid_scene = preload("res://asteroid.tscn")
-var gamma = 0.3
+var gamma = 0.5
 var accuracy = 0.1
 var counter = 0
 var data = {"time":[], "polarity_shot":[], "polarity_asteroid":[]}

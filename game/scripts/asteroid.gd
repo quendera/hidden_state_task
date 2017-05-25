@@ -10,7 +10,7 @@ var targets
 const SPEED = 400
 var life = 1
 var exploded = false
-
+var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
 
 
 func _ready():
@@ -18,10 +18,10 @@ func _ready():
 	add_to_group("asteroids")
 	add_to_group("asteroid"+str(group))
 	if bomb:
-		get_node("frames").set_frame(3)
+		get_node("bomb").set_hidden(false)
+		get_node("sprite").set_hidden(true)
 		add_to_group("bombs")
 		set_z(1)
-	get_node("frames").set_hidden(false)
 
 
 func _process(delta):
@@ -43,7 +43,8 @@ func _on_asteroid_area_enter( area ):
 
 func show_color():
 	for asteroid in get_tree().get_nodes_in_group("asteroid"+str(group)):
-		asteroid.get_node("frames").set_frame(polarity)
+		asteroid.get_node("sprite").set_modulate(colors[polarity])
+		asteroid.get_node("bomb").set_hidden(true)
 
 
 func explode():
@@ -55,7 +56,8 @@ func explode():
 # Perform the explosion
 	for asteroid in targets:
 			get_node("../ship").score += 10
-			asteroid.get_node("frames").set_frame(asteroid.polarity)
+			asteroid.get_node("sprite").set_modulate(colors[polarity])
+			asteroid.get_node("bomb").set_hidden(true)
 			asteroid.get_node("timer").start()
 			asteroid.exploded = true
 
