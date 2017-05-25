@@ -6,6 +6,7 @@ var asteroid_scene = preload("res://asteroid.tscn")
 var gamma = 0.3
 var accuracy = 0.1
 var counter = 0
+var data = {"time":[], "polarity_shot":[], "polarity_asteroid":[]}
 
 
 func _ready():
@@ -29,7 +30,7 @@ func spawn_asteroid(x_pos, y_pos, bomb):
 	asteroid_instance.set_pos(Vector2(x_pos,y_pos))
 	var asteroid_scale = rand_range(0.2,0.4)
 	if bomb:
-		asteroid_scale = 0.6
+		asteroid_scale = 0.4
 	asteroid_instance.set_scale(Vector2(asteroid_scale,asteroid_scale))
 	asteroid_instance.set_rot(rand_range(-20,20))
 	asteroid_instance.bomb = bomb

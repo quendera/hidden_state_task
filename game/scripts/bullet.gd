@@ -1,6 +1,6 @@
 extends Area2D
 
-const SPEED = 600
+const SPEED = 1000
 var polarity # 0 is red, 1 is blue
 var super
 
@@ -16,6 +16,9 @@ func _ready():
 
 func _on_bullet_area_enter(area):
 	if area.is_in_group("asteroids"):
+		get_node("../").data["time"].push_back(OS.get_ticks_msec())
+		get_node("../").data["polarity_shot"].push_back(polarity)
+		get_node("../").data["polarity_asteroid"].push_back(area.polarity)
 		if area.polarity == polarity:
 			if rand_range(0,1) < get_node("../").accuracy:
 				area.life = 0

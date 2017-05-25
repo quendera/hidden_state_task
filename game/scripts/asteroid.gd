@@ -7,7 +7,7 @@ var polarity # 0 is red, 1 is blue
 var bomb
 var targets
 
-const SPEED = 300
+const SPEED = 400
 var life = 1
 var exploded = false
 
@@ -34,6 +34,10 @@ func _process(delta):
 
 func _on_asteroid_area_enter( area ):
 	if area.get_name() == "ship":
+		var file = File.new()
+		file.open("/Users/pietro/Documents/save_try.json", file.WRITE)
+		file.store_line(get_node("../").data.to_json())
+		file.close()
 		get_tree().change_scene("res://game_over.tscn")
 
 

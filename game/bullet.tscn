@@ -6,7 +6,7 @@
 [ext_resource path="res://assets/Sounds/explosion.wav" type="Sample" id=4]
 [ext_resource path="res://assets/Sounds/laser_shooting_sfx.wav" type="Sample" id=5]
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
+[sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -0.901367, 35.6656, -8.89526, 35.2519, -14.2244, -36.7293, 5.76013, -36.7293 )
@@ -20,7 +20,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SampleLibrary" id=4]
+[sub_resource type="SampleLibrary" id=3]
 
 samples/explosion = {
 "db": 0.0,
@@ -40,7 +40,7 @@ samples/laser = {
 transform/pos = Vector2( 217.486, 305.567 )
 transform/scale = Vector2( 0.365768, 0.860373 )
 input/pickable = true
-shapes/0/shape = SubResource( 3 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 0.540761, 0, 0, 0.740385, 3.57431, -15.7015 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -87,7 +87,7 @@ params/attenuation/min_distance = 1.0
 params/attenuation/max_distance = 2048.0
 params/attenuation/distance_exp = 1.0
 config/polyphony = 1
-config/samples = SubResource( 4 )
+config/samples = SubResource( 3 )
 config/pitch_random = 0.0
 
 [connection signal="area_enter" from="." to="." method="_on_bullet_area_enter"]
