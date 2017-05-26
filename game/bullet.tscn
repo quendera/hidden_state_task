@@ -38,6 +38,7 @@ samples/laser = {
 [node name="bullet" type="Area2D"]
 
 transform/pos = Vector2( 217.486, 305.567 )
+transform/rot = -90.0
 transform/scale = Vector2( 0.365768, 0.860373 )
 input/pickable = true
 shapes/0/shape = SubResource( 1 )

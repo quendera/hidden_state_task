@@ -22,7 +22,7 @@ func _input(event):
 
 
 func _process(delta):
-	get_node("../score").set_text("Score :"+str(score))
+	get_node("../score").set_text("Score "+str(score))
 	reload += delta
 	ship_pos = get_pos()
 	if active:
@@ -36,8 +36,8 @@ func _process(delta):
 			spawn_bullet(get_node("shield").polarity, true)
 			active = false
 			get_node("timer").start()
-	ship_pos.x = clamp(ship_pos.x, 0, 720)
-	ship_pos.y = clamp(ship_pos.y, 200, 1150)
+	ship_pos.x = clamp(ship_pos.x, 100, 1180)
+	ship_pos.y = clamp(ship_pos.y, 0, 720)
 	set_pos(ship_pos)
 
 

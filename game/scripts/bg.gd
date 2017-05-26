@@ -1,4 +1,4 @@
-extends TextureFrame
+extends Sprite
 
 # class member variables go here, for example:
 const SPEED = 200
@@ -11,7 +11,7 @@ func _ready():
 
 func _process(delta):
 	bg_pos = get_pos()
-	bg_pos += delta*SPEED*Vector2(0,1)
-	if bg_pos.y > 0:
-		bg_pos -= Vector2(0,1280)
+	bg_pos -= delta*SPEED*Vector2(1,0)
+	if bg_pos.x < -1280:
+		bg_pos += Vector2(1280,0)
 	set_pos(bg_pos)

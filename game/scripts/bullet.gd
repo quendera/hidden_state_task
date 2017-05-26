@@ -6,7 +6,7 @@ var super
 
 func _process(delta):
 	get_node("frames").set_frame(polarity)
-	translate(delta*SPEED*Vector2(0,-1))
+	translate(delta*SPEED*Vector2(1,0))
 
 func _ready():
 	get_node("sound").play("laser")

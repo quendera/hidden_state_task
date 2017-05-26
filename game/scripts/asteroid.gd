@@ -25,10 +25,10 @@ func _ready():
 
 
 func _process(delta):
-	translate(delta*SPEED*Vector2(0,1))
+	translate(delta*SPEED*Vector2(-1,0))
 	if life <= 0 and not exploded:
 		explode()
-	if get_global_pos().y > get_node("../ship/get_hits").get_global_pos().y:
+	if get_global_pos().x < get_node("../ship/get_hits").get_global_pos().x:
 		show_color()
 
 
