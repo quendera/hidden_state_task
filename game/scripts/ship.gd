@@ -22,7 +22,7 @@ func _input(event):
 
 
 func _process(delta):
-	get_node("../score").set_text("Score "+str(score))
+	get_node("../layer/score").set_text("Score "+str(score))
 	reload += delta
 	ship_pos = get_pos()
 	if active:
@@ -44,7 +44,7 @@ func _process(delta):
 func spawn_bullet(polarity, super):
 	bullet_instance = bullet_scene.instance()
 	bullet_instance.init(polarity, super)
-	bullet_instance.set_global_pos(get_global_pos())
+	bullet_instance.set_global_pos(get_node("shoot_from").get_global_pos())
 	get_node("../").add_child(bullet_instance)
 
 

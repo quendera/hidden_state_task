@@ -1,18 +1,13 @@
-[gd_scene load_steps=16 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
-[ext_resource path="res://assets/Images/bg/bg3.png" type="Texture" id=2]
-[ext_resource path="res://scripts/bg.gd" type="Script" id=3]
-[ext_resource path="res://scripts/ship.gd" type="Script" id=4]
-[ext_resource path="res://scripts/shield.gd" type="Script" id=5]
-[ext_resource path="res://assets/Images/shield/shield.tres" type="SpriteFrames" id=6]
-[ext_resource path="res://assets/Images/fire.png" type="Texture" id=7]
-[ext_resource path="res://assets/Images/animated_ship/animated_ship.tres" type="SpriteFrames" id=8]
-[ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=9]
-
-[sub_resource type="CanvasItemMaterial" id=6]
-
-shader/shading_mode = 0
+[ext_resource path="res://scripts/bg.gd" type="Script" id=2]
+[ext_resource path="res://scripts/ship.gd" type="Script" id=3]
+[ext_resource path="res://scripts/shield.gd" type="Script" id=4]
+[ext_resource path="res://assets/Images/shield/shield.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://assets/Images/fire.png" type="Texture" id=6]
+[ext_resource path="res://assets/Images/animated_ship/animated_ship.tres" type="SpriteFrames" id=7]
+[ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -54,22 +49,32 @@ tracks/0/keys = {
 
 script/script = ExtResource( 1 )
 
-[node name="bg" type="Sprite" parent="."]
+[node name="bg" type="TextureFrame" parent="."]
 
-material/material = SubResource( 6 )
-texture = ExtResource( 2 )
-centered = false
-region = true
-region_rect = Rect2( 0, 0, 2560, 720 )
-script/script = ExtResource( 3 )
-__meta__ = {
-"_edit_lock_": true
-}
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 2
+margin/left = 0.0
+margin/top = 0.0
+margin/right = 2560.0
+margin/bottom = 720.0
+expand = true
+stretch_mode = 2
+script/script = ExtResource( 2 )
+
+[node name="timer" type="Timer" parent="bg"]
+
+process_mode = 1
+wait_time = 0.25
+one_shot = false
+autostart = true
 
 [node name="ship" type="Area2D" parent="."]
 
 transform/pos = Vector2( 169.946, 343.228 )
 transform/rot = -90.0
+z/z = 2
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -84,7 +89,7 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 4 )
+script/script = ExtResource( 3 )
 
 [node name="shield" type="Area2D" parent="ship"]
 
@@ -96,7 +101,7 @@ gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
 angular_damp = 1.0
-script/script = ExtResource( 5 )
+script/script = ExtResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -113,7 +118,7 @@ _update_shape_index = 0
 
 transform/pos = Vector2( -1.96948, 6.38159 )
 transform/scale = Vector2( 0.820627, 0.820627 )
-frames = ExtResource( 6 )
+frames = ExtResource( 5 )
 animation = "default"
 __meta__ = {
 "_edit_lock_": true
@@ -129,7 +134,7 @@ __meta__ = {
 
 visibility/visible = false
 transform/pos = Vector2( -1.85059, 5.55188 )
-texture = ExtResource( 7 )
+texture = ExtResource( 6 )
 
 [node name="anim" type="AnimationPlayer" parent="ship"]
 
@@ -160,29 +165,20 @@ autostart = false
 
 transform/pos = Vector2( -3.53253, 32.4523 )
 transform/scale = Vector2( 0.24874, 0.24874 )
-frames = ExtResource( 8 )
+frames = ExtResource( 7 )
 animation = "default"
-frame = 5
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="score" type="Label" parent="."]
+[node name="shoot_from" type="Position2D" parent="ship"]
 
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 964.0
-margin/top = 23.0
-margin/right = 1140.0
-margin/bottom = 67.0
-custom_fonts/font = ExtResource( 9 )
-align = 1
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+transform/pos = Vector2( -3.58829, -50.2653 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="timer" type="Timer" parent="."]
 
@@ -190,6 +186,31 @@ process_mode = 1
 wait_time = 4.0
 one_shot = false
 autostart = true
+
+[node name="layer" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="score" type="Label" parent="layer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 916.0
+margin/top = 38.0
+margin/right = 1092.0
+margin/bottom = 82.0
+custom_fonts/font = ExtResource( 8 )
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
+[connection signal="timeout" from="bg/timer" to="bg" method="_on_timer_timeout"]
 
 [connection signal="timeout" from="ship/timer" to="ship" method="_on_timer_timeout"]
 

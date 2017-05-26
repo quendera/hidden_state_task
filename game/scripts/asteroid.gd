@@ -34,11 +34,7 @@ func _process(delta):
 
 func _on_asteroid_area_enter( area ):
 	if area.get_name() == "ship":
-		var file = File.new()
-		file.open("/Users/pietro/Documents/save_try.json", file.WRITE)
-		file.store_line(get_node("../").data.to_json())
-		file.close()
-		get_tree().change_scene("res://game_over.tscn")
+		get_node("../ship").score -= 100
 
 
 func show_color():

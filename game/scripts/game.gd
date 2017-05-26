@@ -42,3 +42,9 @@ func spawn_asteroid(x_pos, y_pos, bomb):
 
 func _on_timer_timeout():
 	asteroid_wave()
+
+func save_data():
+		var file = File.new()
+		file.open("/Users/pietro/Documents/save_try.json", file.WRITE)
+		file.store_line(get_node("../").data.to_json())
+		file.close()	
