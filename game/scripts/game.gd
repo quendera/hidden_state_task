@@ -10,7 +10,6 @@ var data = {"time":[], "polarity_shot":[], "polarity_asteroid":[]}
 
 
 func _ready():
-	OS.set_window_fullscreen(true)
 	pass
 
 

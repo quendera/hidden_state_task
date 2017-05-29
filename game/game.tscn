@@ -167,7 +167,7 @@ transform/pos = Vector2( -3.53253, 32.4523 )
 transform/scale = Vector2( 0.24874, 0.24874 )
 frames = ExtResource( 7 )
 animation = "default"
-frame = 4
+frame = 10
 playing = true
 __meta__ = {
 "_edit_lock_": true
