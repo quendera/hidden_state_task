@@ -7,6 +7,8 @@ var gamma = 0.5
 var accuracy = 0.1
 var counter = 0
 var data = {"time":[], "polarity_shot":[], "polarity_asteroid":[]}
+var w = Globals.get("display/width")
+var h = Globals.get("display/height")
 
 
 func _ready():
@@ -16,10 +18,10 @@ func _ready():
 func asteroid_wave():
 	var side = rand_range(0,1) > 0.5
 	var shift = side*150
-	for i in range(30+shift,600+shift,100):
+	for i in range(0,h,100):
 		for j in range(2):
-			spawn_asteroid(1280-100*j+ rand_range(200,100), i , false)
-	spawn_asteroid(1280,rand_range(200,580), true)
+			spawn_asteroid(w-100*j+ rand_range(200,100), i , false)
+	spawn_asteroid(w,rand_range(0,h), true)
 	counter += 1
 	if rand_range(0,1) < gamma:
 		polarity = 1-polarity
