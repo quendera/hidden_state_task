@@ -1,14 +1,17 @@
 extends Area2D
 
 # class member variables go here, for example:
-# var a = 2
-# var b = "textvar"
+var polarity
 
 func _ready():
-	# Called every time the node is added to the scene.
-	# Initialization here
+	add_to_group("enemies")
+
+func explode():
 	pass
 
+
+func reflect():
+	pass
 
 func _on_visibility_exit_screen():
 	queue_free()

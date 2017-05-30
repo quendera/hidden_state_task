@@ -5,7 +5,7 @@ var polarity = 1*(rand_range(0,1) > 0.5)
 var asteroid_scene = preload("res://asteroid.tscn")
 var enemy_scene = preload("res://enemy.tscn")
 var gamma = 0.5
-var accuracy = 0.1
+var accuracy = [0.4, 0.6]
 var counter = 0
 var data = {"time":[], "polarity_shot":[], "polarity_asteroid":[]}
 var w = Globals.get("display/width")
@@ -32,12 +32,13 @@ func asteroid_wave():
 		polarity = 1-polarity
 
 
-func spawn_enemy(x_pos, y_pos):
+func spawn_enemy(x_pos, y_pos, polarity):
 	var enemy_instance = enemy_scene.instance()
 	enemy_instance.set_pos(Vector2(x_pos,y_pos))
 	var enemy_scale = rand_range(0.2,0.4)
 	enemy_instance.set_scale(Vector2(enemy_scale,enemy_scale))
 	enemy_instance.set_rot(rand_range(-20,20))
+	enemy_instance.polarity = polarity
 	add_child(enemy_instance)
 
 
@@ -56,7 +57,7 @@ func spawn_asteroid(x_pos, y_pos, bomb):
 
 
 func _on_timer_timeout():
-	asteroid_wave()#spawn_enemy(w-100, rand_range(0,h))
+	spawn_enemy(w-100, rand_range(0,h), polarity)
 
 func save_data():
 		var file = File.new()
