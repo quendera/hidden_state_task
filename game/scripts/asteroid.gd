@@ -7,7 +7,7 @@ var polarity # 0 is red, 1 is blue
 var bomb
 var targets
 
-const SPEED = 400
+export var SPEED = 400
 var life = 1
 var exploded = false
 var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
