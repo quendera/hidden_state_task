@@ -2,7 +2,7 @@ extends Area2D
 
 const SPEED = 1000
 var polarity # 0 is red, 1 is blue
-var power = 1
+var power
 
 func _process(delta):
 	get_node("frames").set_frame(polarity)
@@ -11,7 +11,7 @@ func _process(delta):
 func _ready():
 	get_node("sound").play("laser")
 	set_process(true)
-	set_scale(get_scale()*power)
+	set_scale(get_scale()*power/20)
 
 func _on_bullet_area_enter(area):
 	if area.is_in_group("enemies"):
@@ -27,8 +27,9 @@ func _on_bullet_area_enter(area):
 func _on_visibility_exit_screen():
 	queue_free()
 
-func init(_polarity):
+func init(_polarity, _power):
 	polarity = _polarity
+	power = _power
 
 func _on_bullet_exit_tree():
 	get_node("../ship").ready2shoot = true

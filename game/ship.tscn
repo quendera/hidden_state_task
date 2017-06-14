@@ -1,10 +1,8 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://scripts/ship.gd" type="Script" id=1]
-[ext_resource path="res://scripts/shield.gd" type="Script" id=2]
-[ext_resource path="res://assets/Images/shield/shield.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://assets/Images/fire.png" type="Texture" id=4]
-[ext_resource path="res://assets/Images/animated_ship/animated_ship.tres" type="SpriteFrames" id=5]
+[ext_resource path="res://assets/Images/fire.png" type="Texture" id=2]
+[ext_resource path="res://assets/Images/animated_ship/animated_ship.tres" type="SpriteFrames" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -21,12 +19,7 @@ points = Vector2Array( 65.6243, 39.4948, 53.8628, 63.0178, 20.0485, 38.7597, 14.
 custom_solver_bias = 0.0
 points = Vector2Array( -27.7326, 52.7265, -38.0239, 16.7069, -38.759, -18.5776, -18.1764, -64.1534, 8.28702, -67.8289, 14.9029, -14.1671, 20.0485, 38.7597, 11.2274, 68.1634, -16.7062, 71.1038 )
 
-[sub_resource type="CircleShape2D" id=4]
-
-custom_solver_bias = 0.0
-radius = 10.0
-
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 
 length = 1.0
 loop = false
@@ -63,39 +56,6 @@ linear_damp = 0.1
 angular_damp = 1.0
 script/script = ExtResource( 1 )
 
-[node name="shield" type="Area2D" parent="."]
-
-input/pickable = true
-shapes/0/shape = SubResource( 4 )
-shapes/0/transform = Matrix32( 10.5343, 0, 0, 10.8902, -11.7885, 4.40503 )
-shapes/0/trigger = false
-gravity_vec = Vector2( 0, 1 )
-gravity = 98.0
-linear_damp = 0.1
-angular_damp = 1.0
-script/script = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="collision" type="CollisionShape2D" parent="shield"]
-
-transform/pos = Vector2( -11.7885, 4.40503 )
-transform/scale = Vector2( 10.5343, 10.8902 )
-shape = SubResource( 4 )
-trigger = false
-_update_shape_index = 0
-
-[node name="frames" type="AnimatedSprite" parent="shield"]
-
-transform/pos = Vector2( -1.96948, 6.38159 )
-transform/scale = Vector2( 0.820627, 0.820627 )
-frames = ExtResource( 3 )
-animation = "default"
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="get_hits" type="Position2D" parent="."]
 
 __meta__ = {
@@ -106,14 +66,14 @@ __meta__ = {
 
 visibility/visible = false
 transform/pos = Vector2( -1.85059, 5.55188 )
-texture = ExtResource( 4 )
+texture = ExtResource( 2 )
 
 [node name="anim" type="AnimationPlayer" parent="."]
 
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/explosion = SubResource( 5 )
+anims/explosion = SubResource( 4 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -126,19 +86,12 @@ polygon = Vector2Array( 53.8628, 63.0178, 65.6243, 39.4948, 14.9029, -14.1671, 8
 shape_range = Vector2( 0, 2 )
 trigger = false
 
-[node name="timer" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 1.0
-one_shot = true
-autostart = false
-
 [node name="frames" type="AnimatedSprite" parent="."]
 
 transform/pos = Vector2( -2.79742, 8.92931 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.5, 0.5 )
-frames = ExtResource( 5 )
+frames = ExtResource( 3 )
 animation = "default"
 playing = true
 __meta__ = {
@@ -151,7 +104,5 @@ transform/pos = Vector2( 24.3453, -71.583 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 
 
