@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=1]
+[gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://scripts/bg.gd" type="Script" id=2]
 [ext_resource path="res://ship.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=4]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=5]
 
 [node name="game" type="Node2D"]
 
@@ -15,10 +16,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 2
-margin/left = 0.0
-margin/top = 0.0
-margin/right = 2560.0
-margin/bottom = 720.0
+margin/left = 4.0
+margin/top = 4.0
+margin/right = 2564.0
+margin/bottom = 724.0
 expand = true
 stretch_mode = 2
 script/script = ExtResource( 2 )
@@ -37,7 +38,7 @@ autostart = true
 process_mode = 1
 wait_time = 4.0
 one_shot = false
-autostart = true
+autostart = false
 
 [node name="layer" type="CanvasLayer" parent="."]
 
@@ -62,8 +63,11 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[connection signal="timeout" from="bg/timer" to="bg" method="_on_timer_timeout"]
+[node name="enemy" parent="." instance=ExtResource( 5 )]
 
-[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
+transform/pos = Vector2( 1013.21, 341.53 )
+z/z = 1
+
+[connection signal="timeout" from="bg/timer" to="bg" method="_on_timer_timeout"]
 
 

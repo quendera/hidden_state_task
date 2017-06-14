@@ -1,12 +1,26 @@
-[gd_scene load_steps=4 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
-[ext_resource path="res://assets/Images/enemy/enemyGreen4.png" type="Texture" id=2]
+[ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big1.png" type="Texture" id=2]
+[ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big2.png" type="Texture" id=3]
+[ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big3.png" type="Texture" id=4]
+[ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big4.png" type="Texture" id=5]
+[ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big5.png" type="Texture" id=6]
+[ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big6.png" type="Texture" id=7]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -37.9136, 18.3758, -37.9136, -28.6242, -16.9136, -40.6242, 19.0864, -41.6242, 37.0864, -30.6242, 39.0864, 19.3758, 12.0864, 41.3759, -9.9136, 40.3759 )
+points = Vector2Array( -182.673, -3.23584, -114.2, -145.733, 202.255, -138.331, 124.53, 209.585, -162.316, 131.859 )
+
+[sub_resource type="SpriteFrames" id=2]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
 
 [node name="enemy" type="Area2D"]
 
@@ -23,17 +37,10 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="sprite" type="Sprite" parent="."]
-
-texture = ExtResource( 2 )
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="collision" type="CollisionPolygon2D" parent="."]
 
 build_mode = 0
-polygon = Vector2Array( -9.9136, 40.3759, 12.0864, 41.3759, 39.0864, 19.3758, 37.0864, -30.6242, 19.0864, -41.6242, -16.9136, -40.6242, -37.9136, -28.6242, -37.9136, 18.3758 )
+polygon = Vector2Array( -182.673, -3.23584, -114.2, -145.733, 202.255, -138.331, 124.53, 209.585, -162.316, 131.859 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 __meta__ = {
@@ -42,16 +49,35 @@ __meta__ = {
 
 [node name="shoot_from" type="Position2D" parent="."]
 
-transform/pos = Vector2( 0, 39 )
+transform/pos = Vector2( -86.9791, 74.1617 )
 
 [node name="visibility" type="VisibilityNotifier2D" parent="."]
 
-transform/pos = Vector2( -1.41361, -0.624156 )
-transform/scale = Vector2( 5.75, 6 )
+transform/pos = Vector2( 23.6709, 12.4944 )
+transform/scale = Vector2( 23.7804, 21.0045 )
 rect = Rect2( -10, -10, 20, 20 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="frames" type="AnimatedSprite" parent="."]
+
+transform/pos = Vector2( -3.54698, 3.85551 )
+transform/scale = Vector2( 0.65831, 0.65831 )
+frames = SubResource( 2 )
+animation = "default"
+frame = 2
+playing = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="timer" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
 
 [connection signal="exit_screen" from="visibility" to="." method="_on_visibility_exit_screen"]
 

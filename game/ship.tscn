@@ -9,17 +9,17 @@
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -15.3493, 65.9532, -23.4353, 28.4635, -19.7599, -1.67529, -5.05801, -55.337, 11.114, -6.08582, 19.2, 26.2582, 10.3789, 68.8936 )
+points = Vector2Array( -27.7326, 52.7265, -71.8382, 73.3091, -72.5733, 49.051, -38.0239, 16.7069 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 
 custom_solver_bias = 0.0
-points = Vector2Array( 11.114, -6.08582, 70.6565, -2.4104, 65.5108, 18.9073, 19.2, 26.2582 )
+points = Vector2Array( 65.6243, 39.4948, 53.8628, 63.0178, 20.0485, 38.7597, 14.9029, -14.1671 )
 
 [sub_resource type="ConvexPolygonShape2D" id=3]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -81.5076, 16.702, -81.5076, -2.4104, -19.7599, -1.67529, -23.4353, 28.4635 )
+points = Vector2Array( -27.7326, 52.7265, -38.0239, 16.7069, -38.759, -18.5776, -18.1764, -64.1534, 8.28702, -67.8289, 14.9029, -14.1671, 20.0485, 38.7597, 11.2274, 68.1634, -16.7062, 71.1038 )
 
 [sub_resource type="CircleShape2D" id=4]
 
@@ -65,7 +65,6 @@ script/script = ExtResource( 1 )
 
 [node name="shield" type="Area2D" parent="."]
 
-editor/display_folded = true
 input/pickable = true
 shapes/0/shape = SubResource( 4 )
 shapes/0/transform = Matrix32( 10.5343, 0, 0, 10.8902, -11.7885, 4.40503 )
@@ -123,7 +122,7 @@ autoplay = ""
 [node name="collision" type="CollisionPolygon2D" parent="."]
 
 build_mode = 0
-polygon = Vector2Array( -81.5076, -2.4104, -19.7599, -1.67529, -5.05801, -55.337, 11.114, -6.08582, 70.6565, -2.4104, 65.5108, 18.9073, 19.2, 26.2582, 10.3789, 68.8936, -15.3493, 65.9532, -23.4353, 28.4635, -81.5076, 16.702 )
+polygon = Vector2Array( 53.8628, 63.0178, 65.6243, 39.4948, 14.9029, -14.1671, 8.28702, -67.8289, -18.1764, -64.1534, -38.759, -18.5776, -38.0239, 16.7069, -72.5733, 49.051, -71.8382, 73.3091, -27.7326, 52.7265, -16.7062, 71.1038, 11.2274, 68.1634, 20.0485, 38.7597 )
 shape_range = Vector2( 0, 2 )
 trigger = false
 
@@ -136,11 +135,11 @@ autostart = false
 
 [node name="frames" type="AnimatedSprite" parent="."]
 
-transform/pos = Vector2( -3.53253, 32.4523 )
-transform/scale = Vector2( 0.24874, 0.24874 )
+transform/pos = Vector2( -2.79742, 8.92931 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.5, 0.5 )
 frames = ExtResource( 5 )
 animation = "default"
-frame = 11
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -148,7 +147,7 @@ __meta__ = {
 
 [node name="shoot_from" type="Position2D" parent="."]
 
-transform/pos = Vector2( -3.58829, -50.2653 )
+transform/pos = Vector2( 24.3453, -71.583 )
 __meta__ = {
 "_edit_lock_": true
 }
