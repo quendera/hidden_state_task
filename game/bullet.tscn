@@ -93,6 +93,8 @@ config/pitch_random = 0.0
 
 [connection signal="area_enter" from="." to="." method="_on_bullet_area_enter"]
 
+[connection signal="exit_tree" from="." to="." method="_on_bullet_exit_tree"]
+
 [connection signal="exit_screen" from="visibility" to="." method="_on_visibility_exit_screen"]
 
 

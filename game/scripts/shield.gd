@@ -19,5 +19,3 @@ func _input(event):
 	if event.is_action_pressed("polarity_change"):
 		polarity = 1-polarity
 		get_node("frames").set_frame(polarity)
-#
-#func polarity_change(i)

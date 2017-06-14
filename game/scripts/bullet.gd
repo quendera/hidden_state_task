@@ -18,7 +18,7 @@ func _on_bullet_area_enter(area):
 		get_node("../").data["time"].push_back(OS.get_ticks_msec())
 		get_node("../").data["polarity_shot"].push_back(polarity)
 		get_node("../").data["polarity_asteroid"].push_back(area.polarity)
-		if rand_range(0,1) < get_node("../").accuracy[int(area.polarity == polarity)]:
+		if area.polarity == polarity:
 			area.explode()
 		else:
 			area.reflect()
@@ -29,3 +29,6 @@ func _on_visibility_exit_screen():
 
 func init(_polarity):
 	polarity = _polarity
+
+func _on_bullet_exit_tree():
+	get_node("../ship").ready2shoot = true

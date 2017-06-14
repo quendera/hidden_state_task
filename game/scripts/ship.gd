@@ -4,8 +4,7 @@ extends Area2D
 var score = 0
 var ship_pos
 var velocity = 800
-var reload = 0
-var reload_time = 0.1
+var ready2shoot = true
 var active = true
 var bullet_scene = preload("res://bullet.tscn")
 var bullet_instance
@@ -23,15 +22,14 @@ func _input(event):
 
 func _process(delta):
 	get_node("../layer/score").set_text("Score "+str(score))
-	reload += delta
 	ship_pos = get_pos()
 	if active:
 		for dir in dirs.keys():
 			if Input.is_action_pressed(dir):
 				ship_pos += delta*velocity*dirs[dir]
-		if Input.is_action_pressed("shoot") and reload >= reload_time:
+		if Input.is_action_pressed("shoot") and ready2shoot:
 			spawn_bullet(get_node("shield").polarity)
-			reload = 0
+			ready2shoot = false
 	ship_pos.x = clamp(ship_pos.x, 100, get_node("..").w)
 	ship_pos.y = clamp(ship_pos.y, 0, get_node("..").h)
 	set_pos(ship_pos)

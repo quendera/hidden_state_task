@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=11 format=1]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big1.png" type="Texture" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big4.png" type="Texture" id=5]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big5.png" type="Texture" id=6]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big6.png" type="Texture" id=7]
+[ext_resource path="res://assets/Images/fire.png" type="Texture" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -66,7 +67,6 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -75,10 +75,39 @@ __meta__ = {
 [node name="timer" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 1.0
+wait_time = 0.2
 one_shot = false
 autostart = false
 
+[node name="explosion" type="Particles2D" parent="."]
+
+transform/pos = Vector2( 23.6709, 5.09195 )
+transform/scale = Vector2( 7.02656, 5.46511 )
+config/amount = 60
+config/lifetime = 0.5
+config/time_scale = 2.0
+config/emitting = false
+config/process_mode = 1
+config/texture = ExtResource( 8 )
+params/direction = 0.0
+params/spread = 180.0
+params/linear_velocity = 20.0
+params/spin_velocity = 0.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 9.8
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 0.0
+params/initial_angle = 0.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+
 [connection signal="exit_screen" from="visibility" to="." method="_on_visibility_exit_screen"]
+
+[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 
 
