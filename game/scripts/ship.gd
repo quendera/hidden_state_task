@@ -24,7 +24,7 @@ func _input(event):
 
 
 func _process(delta):
-	get_node("../layer/score").set_text("Score "+str(score))
+	get_node("../layer/score").set_text("Score "+str(int(score)))
 	ship_pos = get_pos()
 	for dir in dirs.keys():
 		if Input.is_action_pressed(dir):

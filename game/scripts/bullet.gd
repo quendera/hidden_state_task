@@ -19,9 +19,9 @@ func _on_bullet_area_enter(area):
 		get_node("../").data["polarity_shot"].push_back(polarity)
 		get_node("../").data["polarity_asteroid"].push_back(area.polarity)
 		if area.polarity == polarity:
-			area.explode()
+			area.explode(power)
 		else:
-			area.reflect()
+			area.reflect(power)
 		queue_free()
 
 func _on_visibility_exit_screen():
