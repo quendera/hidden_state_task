@@ -49,3 +49,7 @@ func spawn_bullet(polarity, charge):
 	bullet_instance.init(polarity, charge)
 	bullet_instance.set_global_pos(get_node("shoot_from").get_global_pos())
 	get_node("../").add_child(bullet_instance)
+
+func explode():
+	get_node("sound").play("explosion")
+	score -= 10

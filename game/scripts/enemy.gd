@@ -32,6 +32,7 @@ func explode(power):
 	_on_bullet_hit()
 	get_node("explosion").set_amount(power)
 	get_node("explosion").set_emitting(true)
+	get_node("sound").play("explosion")
 	get_node("../ship").score += power
 
 func _on_visibility_exit_screen():

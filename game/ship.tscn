@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://scripts/ship.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/fire.png" type="Texture" id=2]
 [ext_resource path="res://assets/Images/animated_ship/animated_ship.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://assets/Sounds/explosion.wav" type="Sample" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -33,6 +34,15 @@ tracks/0/keys = {
 "transitions": FloatArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+
+[sub_resource type="SampleLibrary" id=5]
+
+samples/explosion = {
+"db": -5.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 4 )
 }
 
 [node name="ship" type="Area2D"]
@@ -93,6 +103,7 @@ transform/rot = 90.0
 transform/scale = Vector2( 0.5, 0.5 )
 frames = ExtResource( 3 )
 animation = "default"
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -104,5 +115,22 @@ transform/pos = Vector2( 24.3453, -71.583 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="sound" type="SamplePlayer" parent="."]
+
+config/polyphony = 1
+config/samples = SubResource( 5 )
+default/volume_db = 0.0
+default/pitch_scale = 1.0
+default/pan = 0.0
+default/depth = 0.0
+default/height = 0.0
+default/filter/type = 0
+default/filter/cutoff = 5000.0
+default/filter/resonance = 1.0
+default/filter/gain = 1.0
+default/reverb_room = 2
+default/reverb_send = 0.0
+default/chorus_send = 0.0
 
 

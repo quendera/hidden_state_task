@@ -11,7 +11,8 @@ func _ready():
 	set_process(true)
 
 func _on_enemy_bullet_area_enter(area):
-	pass
+	if area.get_name() == "ship":
+		area.explode()
 
 func _on_visibility_exit_screen():
 	queue_free()

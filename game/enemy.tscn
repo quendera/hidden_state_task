@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=1]
+[gd_scene load_steps=35 format=1]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big1.png" type="Texture" id=2]
@@ -29,6 +29,7 @@
 [ext_resource path="res://assets/Images/enemy_shield/shield_big19.png" type="Texture" id=27]
 [ext_resource path="res://assets/Images/enemy_shield/shield_big20.png" type="Texture" id=28]
 [ext_resource path="res://assets/Images/enemy_shield/shield_big21.png" type="Texture" id=29]
+[ext_resource path="res://assets/Sounds/8bit_bomb_explosion.wav" type="Sample" id=30]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -52,6 +53,15 @@ animations = [ {
 "name": "default",
 "speed": 15.0
 } ]
+
+[sub_resource type="SampleLibrary" id=4]
+
+samples/explosion = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 30 )
+}
 
 [node name="enemy" type="Area2D"]
 
@@ -97,7 +107,7 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 2
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -133,7 +143,7 @@ params/anim_initial_pos = 0.0
 [node name="timer" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 0.2
+wait_time = 0.6
 one_shot = false
 autostart = false
 
@@ -146,6 +156,17 @@ animation = "default"
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="sound" type="SamplePlayer2D" parent="."]
+
+params/volume_db = 0.0
+params/pitch_scale = 1.0
+params/attenuation/min_distance = 1.0
+params/attenuation/max_distance = 2048.0
+params/attenuation/distance_exp = 1.0
+config/polyphony = 1
+config/samples = SubResource( 4 )
+config/pitch_random = 0.0
 
 [connection signal="exit_screen" from="visibility" to="." method="_on_visibility_exit_screen"]
 
