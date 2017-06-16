@@ -4,14 +4,14 @@ extends Area2D
 var polarity = 1*(rand_range(0,1) > 0.5)
 var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
 var enemy_bullet_scene = preload("res://enemy_bullet.tscn")
-const SPEED = 100
+const SPEED = 60
 var enemy_bullet_instance
 var dir
 var pos
-const low_x = 700
-const high_x = 1100
-const low_y = 200
-const high_y = 600
+const low_x = 800
+const high_x = 1000
+const low_y = 250
+const high_y = 650
 var attacking = false
 var explosions = ["explosion_red", "explosion_blue"]
 var explosion

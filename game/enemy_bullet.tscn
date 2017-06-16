@@ -1,13 +1,13 @@
 [gd_scene load_steps=6 format=1]
 
 [ext_resource path="res://scripts/enemy_bullet.gd" type="Script" id=1]
-[ext_resource path="res://assets/Images/Lasers/laserRed01.png" type="Texture" id=2]
-[ext_resource path="res://assets/Images/Lasers/laserBlue01.png" type="Texture" id=3]
+[ext_resource path="res://assets/Images/Lasers/bullet_red_big.png" type="Texture" id=2]
+[ext_resource path="res://assets/Images/Lasers/bullet_blue_big.png" type="Texture" id=3]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="ConvexPolygonShape2D" id=3]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -0.901367, 35.6656, -8.89526, 35.2519, -14.2244, -36.7293, 5.76013, -36.7293 )
+points = Vector2Array( -31.1445, -18.8045, -4.60809, -32.642, 22.6868, -20.261, -4.29279, 59.9609 )
 
 [sub_resource type="SpriteFrames" id=2]
 
@@ -24,7 +24,7 @@ transform/pos = Vector2( 217.486, 305.567 )
 transform/rot = -90.0
 transform/scale = Vector2( 0.565768, 0.860373 )
 input/pickable = true
-shapes/0/shape = SubResource( 1 )
+shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 0.540761, 0, 0, 0.740385, 3.57431, -15.7015 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -38,7 +38,7 @@ script/script = ExtResource( 1 )
 transform/pos = Vector2( 3.57431, -15.7015 )
 transform/scale = Vector2( 0.540761, 0.740385 )
 build_mode = 0
-polygon = Vector2Array( -0.901367, 35.6656, -8.89526, 35.2519, -14.2244, -36.7293, 5.76013, -36.7293 )
+polygon = Vector2Array( -4.29279, 59.9609, 22.6868, -20.261, -4.60809, -32.642, -31.1445, -18.8045 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 __meta__ = {
@@ -56,7 +56,9 @@ __meta__ = {
 
 [node name="frames" type="AnimatedSprite" parent="."]
 
-transform/pos = Vector2( 1.43964, -8.13601 )
+transform/pos = Vector2( 2.46722, -6.05473 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.520781, 0.520781 )
 frames = SubResource( 2 )
 animation = "default"
 __meta__ = {

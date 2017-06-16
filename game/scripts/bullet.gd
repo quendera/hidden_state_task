@@ -11,7 +11,7 @@ func _process(delta):
 func _ready():
 	get_node("sound").play("laser")
 	set_process(true)
-	set_scale(get_scale()*power/20)
+	set_scale(get_scale()*power/30)
 
 func _on_bullet_area_enter(area):
 	if area.is_in_group("enemies"):

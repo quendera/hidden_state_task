@@ -1,14 +1,14 @@
 [gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://scripts/bullet.gd" type="Script" id=1]
-[ext_resource path="res://assets/Images/Lasers/laserRed01.png" type="Texture" id=2]
-[ext_resource path="res://assets/Images/Lasers/laserBlue01.png" type="Texture" id=3]
+[ext_resource path="res://assets/Images/Lasers/bullet_red_big.png" type="Texture" id=2]
+[ext_resource path="res://assets/Images/Lasers/bullet_blue_big.png" type="Texture" id=3]
 [ext_resource path="res://assets/Sounds/laser_shooting_sfx.wav" type="Sample" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -0.901367, 35.6656, -8.89526, 35.2519, -14.2244, -36.7293, 5.76013, -36.7293 )
+points = Vector2Array( -30.6664, -36.5851, -6.02509, -48.4199, 20.8908, -37.4955, -5.26685, 43.7097 )
 
 [sub_resource type="SpriteFrames" id=2]
 
@@ -48,7 +48,7 @@ script/script = ExtResource( 1 )
 transform/pos = Vector2( 3.57431, -15.7015 )
 transform/scale = Vector2( 0.540761, 0.740385 )
 build_mode = 0
-polygon = Vector2Array( -0.901367, 35.6656, -8.89526, 35.2519, -14.2244, -36.7293, 5.76013, -36.7293 )
+polygon = Vector2Array( -5.26685, 43.7097, 20.8908, -37.4955, -6.02509, -48.4199, -30.6664, -36.5851 )
 shape_range = Vector2( 0, 0 )
 trigger = false
 __meta__ = {
@@ -66,7 +66,9 @@ __meta__ = {
 
 [node name="frames" type="AnimatedSprite" parent="."]
 
-transform/pos = Vector2( 3.33786e-06, -16.272 )
+transform/pos = Vector2( 1.89771, -18.6797 )
+transform/rot = 90.0
+transform/scale = Vector2( 0.508392, 0.508392 )
 frames = SubResource( 2 )
 animation = "default"
 __meta__ = {
