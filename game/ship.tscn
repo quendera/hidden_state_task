@@ -104,6 +104,7 @@ transform/rot = 90.0
 transform/scale = Vector2( 0.5, 0.5 )
 frames = ExtResource( 3 )
 animation = "default"
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -132,14 +133,5 @@ default/filter/gain = 1.0
 default/reverb_room = 2
 default/reverb_send = 0.0
 default/chorus_send = 0.0
-
-[node name="timer" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 0.4
-one_shot = true
-autostart = false
-
-[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 
 

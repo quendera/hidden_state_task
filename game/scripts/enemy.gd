@@ -12,11 +12,14 @@ const low_x = 700
 const high_x = 1100
 const low_y = 200
 const high_y = 600
+var attacking = false
+
 
 func _ready():
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
 	add_to_group("enemies")
 	set_process(true)
+
 
 func _process(delta):
 	pos = get_node("shoot_from").get_global_pos()
@@ -34,10 +37,9 @@ func _on_bullet_hit():
 
 
 func reflect(power):
-	for i in range(int(power/3)):
-		var dir = Vector2(rand_range(-1,0),rand_range(-0.5,0.5))
-		spawn_enemy_bullet(dir.normalized(), polarity)
+	attack(power)
 	_on_bullet_hit()
+
 
 func explode(power):
 	get_node("explosion").set_amount(power)
@@ -59,3 +61,8 @@ func spawn_enemy_bullet(dir, polarity):
 	enemy_bullet_instance.init(dir, polarity)
 	enemy_bullet_instance.set_global_pos(get_node("shoot_from").get_global_pos())
 	get_node("../").add_child(enemy_bullet_instance)
+
+func attack(power):
+	for i in range(int(power/3)):
+		var dir = Vector2(rand_range(-1,0),rand_range(-0.5,0.5))
+		spawn_enemy_bullet(dir.normalized(), polarity)
