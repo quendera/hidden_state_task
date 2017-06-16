@@ -4,16 +4,27 @@ extends Area2D
 var polarity = 1*(rand_range(0,1) > 0.5)
 var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
 var enemy_bullet_scene = preload("res://enemy_bullet.tscn")
+const SPEED = 100
 var enemy_bullet_instance
-var shooting = false
+var dir
+var pos
+const low_x = 700
+const high_x = 1100
+const low_y = 200
+const high_y = 600
 
 func _ready():
+	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
 	add_to_group("enemies")
 	set_process(true)
 
 func _process(delta):
-	if shooting:
-		pass
+	pos = get_node("shoot_from").get_global_pos()
+	translate(SPEED*delta*dir)
+	if (dir.x)*(pos.x-clamp(pos.x, low_x, high_x)) > 0.001:
+		dir.x = -dir.x
+	if (dir.y)*(pos.y-clamp(pos.y, low_y, high_y)) > 0.001:
+		dir.y = -dir.y
 
 func _on_bullet_hit():
 	get_node("timer").start()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=1]
+[gd_scene load_steps=13 format=1]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big1.png" type="Texture" id=2]
@@ -8,28 +8,7 @@
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big5.png" type="Texture" id=6]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big6.png" type="Texture" id=7]
 [ext_resource path="res://assets/Images/fire.png" type="Texture" id=8]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big1.png" type="Texture" id=9]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big2.png" type="Texture" id=10]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big3.png" type="Texture" id=11]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big4.png" type="Texture" id=12]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big5.png" type="Texture" id=13]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big6.png" type="Texture" id=14]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big7.png" type="Texture" id=15]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big8.png" type="Texture" id=16]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big9.png" type="Texture" id=17]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big10.png" type="Texture" id=18]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big11.png" type="Texture" id=19]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big12.png" type="Texture" id=20]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big13.png" type="Texture" id=21]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big14.png" type="Texture" id=22]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big15.png" type="Texture" id=23]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big16.png" type="Texture" id=24]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big17.png" type="Texture" id=25]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big18.png" type="Texture" id=26]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big19.png" type="Texture" id=27]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big20.png" type="Texture" id=28]
-[ext_resource path="res://assets/Images/enemy_shield/shield_big21.png" type="Texture" id=29]
-[ext_resource path="res://assets/Sounds/8bit_bomb_explosion.wav" type="Sample" id=30]
+[ext_resource path="res://assets/Sounds/8bit_bomb_explosion.wav" type="Sample" id=9]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -45,22 +24,13 @@ animations = [ {
 "speed": 8.0
 } ]
 
-[sub_resource type="SpriteFrames" id=3]
-
-animations = [ {
-"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ) ],
-"loop": true,
-"name": "default",
-"speed": 15.0
-} ]
-
-[sub_resource type="SampleLibrary" id=4]
+[sub_resource type="SampleLibrary" id=3]
 
 samples/explosion = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 30 )
+"sample": ExtResource( 9 )
 }
 
 [node name="enemy" type="Area2D"]
@@ -107,7 +77,7 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 4
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -147,16 +117,6 @@ wait_time = 0.6
 one_shot = false
 autostart = false
 
-[node name="shield" type="AnimatedSprite" parent="."]
-
-transform/pos = Vector2( 21.4126, 3.23624 )
-transform/scale = Vector2( 0.456308, 0.456308 )
-frames = SubResource( 3 )
-animation = "default"
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="sound" type="SamplePlayer2D" parent="."]
 
 params/volume_db = 0.0
@@ -165,7 +125,7 @@ params/attenuation/min_distance = 1.0
 params/attenuation/max_distance = 2048.0
 params/attenuation/distance_exp = 1.0
 config/polyphony = 1
-config/samples = SubResource( 4 )
+config/samples = SubResource( 3 )
 config/pitch_random = 0.0
 
 [connection signal="exit_screen" from="visibility" to="." method="_on_visibility_exit_screen"]
