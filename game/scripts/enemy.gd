@@ -13,7 +13,8 @@ const high_x = 1100
 const low_y = 200
 const high_y = 600
 var attacking = false
-
+var explosions = ["explosion_red", "explosion_blue"]
+var explosion
 
 func _ready():
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
@@ -42,8 +43,9 @@ func reflect(power):
 
 
 func explode(power):
-	get_node("explosion").set_amount(power)
-	get_node("explosion").set_emitting(true)
+	explosion = explosions[int(polarity)]
+	get_node(explosion).set_scale(Vector2(power/100, power/100))
+	get_node("anim").play(explosion)
 	get_node("sound").play("explosion")
 	get_node("../ship").score += power
 	_on_bullet_hit()
