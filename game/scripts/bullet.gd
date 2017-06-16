@@ -1,6 +1,6 @@
 extends Area2D
 
-const SPEED = 1000
+const SPEED = 1500
 var polarity # 0 is red, 1 is blue
 var power
 
@@ -11,7 +11,7 @@ func _process(delta):
 func _ready():
 	get_node("sound").play("laser")
 	set_process(true)
-	set_scale(get_scale()*power/30)
+	set_scale(get_scale()*power/30+Vector2(0.2,0.2))
 
 func _on_bullet_area_enter(area):
 	if area.is_in_group("enemies"):

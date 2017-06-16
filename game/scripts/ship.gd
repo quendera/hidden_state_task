@@ -4,7 +4,7 @@ extends Area2D
 var charge = 0
 var score = 0
 var ship_pos
-var velocity = 800
+var velocity = 400
 var ready2shoot = true
 var shots = ["shoot_red", "shoot_blue"]
 var charging_velocity = 200
