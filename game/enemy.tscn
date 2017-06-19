@@ -169,7 +169,7 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 3
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -199,7 +199,6 @@ visibility/visible = false
 transform/scale = Vector2( 0.53, 0.53 )
 frames = SubResource( 4 )
 animation = "default"
-frame = 6
 __meta__ = {
 "_edit_lock_": true
 }
@@ -210,7 +209,6 @@ visibility/visible = false
 transform/scale = Vector2( 0.53, 0.53 )
 frames = SubResource( 5 )
 animation = "default"
-frame = 6
 __meta__ = {
 "_edit_lock_": true
 }
@@ -227,8 +225,17 @@ playback/speed = 1.0
 blend_times = [  ]
 autoplay = ""
 
+[node name="shooting" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 0.1
+one_shot = false
+autostart = true
+
 [connection signal="exit_screen" from="visibility" to="." method="_on_visibility_exit_screen"]
 
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
+
+[connection signal="timeout" from="shooting" to="." method="_on_shooting_timeout"]
 
 

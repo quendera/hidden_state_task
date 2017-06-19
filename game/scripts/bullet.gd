@@ -32,4 +32,5 @@ func init(_polarity, _power):
 	power = _power
 
 func _on_bullet_exit_tree():
-	get_node("../ship").ready2shoot = true
+	pass
+#get_node("../ship").ready2shoot = true

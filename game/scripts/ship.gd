@@ -41,7 +41,7 @@ func _process(delta):
 			shooting[i] = false
 			ready2shoot = false
 			charge = 0
-	ship_pos.x = clamp(ship_pos.x, 100, get_node("..").w)
+	ship_pos.x = clamp(ship_pos.x, 100, get_node("..").w/3)
 	ship_pos.y = clamp(ship_pos.y, 0, get_node("..").h)
 	set_pos(ship_pos)
 

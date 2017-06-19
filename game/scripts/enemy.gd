@@ -12,9 +12,10 @@ const low_x = 800
 const high_x = 1000
 const low_y = 300
 const high_y = 600
-var attacking = false
 var explosions = ["explosion_red", "explosion_blue"]
 var explosion
+var charge = 1
+
 
 func _ready():
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
@@ -38,11 +39,12 @@ func _on_bullet_hit():
 
 
 func reflect(power):
-	attack(power)
+	charge = 1+power/20
 	_on_bullet_hit()
 
 
 func explode(power):
+	charge = 1
 	explosion = explosions[int(polarity)]
 	get_node(explosion).set_scale(Vector2(power/100, power/100))
 	get_node("anim").play(explosion)
@@ -57,14 +59,19 @@ func _on_visibility_exit_screen():
 
 func _on_timer_timeout():
 	get_node("frames").set_modulate(Color(1,1,1))
+	get_node("../ship").ready2shoot = true
 
-func spawn_enemy_bullet(dir, polarity):
+func spawn_enemy_bullet(dir):
 	enemy_bullet_instance = enemy_bullet_scene.instance()
-	enemy_bullet_instance.init(dir, polarity)
+	enemy_bullet_instance.init(dir)
 	enemy_bullet_instance.set_global_pos(get_node("shoot_from").get_global_pos())
 	get_node("../").add_child(enemy_bullet_instance)
 
-func attack(power):
-	for i in range(int(power/3)):
-		var dir = Vector2(rand_range(-1,0),rand_range(-0.5,0.5))
-		spawn_enemy_bullet(dir.normalized(), polarity)
+func attack(charge):
+	for i in range(charge):
+		var dir = Vector2(cos(PI/2+PI*(i+0.5)/charge),sin(PI/2+PI*(i+0.5)/charge))
+		spawn_enemy_bullet(dir.normalized())
+
+
+func _on_shooting_timeout():
+	attack(int(4*charge))
