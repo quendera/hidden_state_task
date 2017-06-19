@@ -16,5 +16,11 @@ func _process(delta):
 		style.set_bg_color(new_color)
 		style_bg.set_bg_color(new_color_bg)
 		polarity = get_node("../../ship").polarity
-		set_value(1) # hack to make sure it gets redrawn
+		redraw()
 	set_value(get_node("../../ship").charge)
+
+func redraw(): # hack to make sure it gets redrawn
+	var val = get_value()
+	set_value(val+1)
+	set_value(val-1)
+	set_value(val)
