@@ -1,15 +1,12 @@
-[gd_scene load_steps=9 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://scripts/bg.gd" type="Script" id=2]
 [ext_resource path="res://ship.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scripts/power.gd" type="Script" id=4]
-[ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=5]
+[ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=4]
+[ext_resource path="res://progress_bar.tscn" type="PackedScene" id=5]
 [ext_resource path="res://enemy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=7]
-
-[sub_resource type="Theme" id=1]
-
 
 [node name="game" type="Node2D"]
 
@@ -52,27 +49,6 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 
-[node name="power" type="ProgressBar" parent="layer"]
-
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 3
-size_flags/vertical = 0
-theme/theme = SubResource( 1 )
-margin/left = 53.0
-margin/top = 49.0
-margin/right = 201.0
-margin/bottom = 88.0
-range/min = 0.0
-range/max = 100.0
-range/step = 1.0
-range/page = 0.0
-range/value = 1.0
-range/exp_edit = false
-range/rounded = false
-percent/visible = false
-script/script = ExtResource( 4 )
-
 [node name="score" type="Label" parent="layer"]
 
 focus/ignore_mouse = true
@@ -83,11 +59,13 @@ margin/left = 916.0
 margin/top = 38.0
 margin/right = 1092.0
 margin/bottom = 82.0
-custom_fonts/font = ExtResource( 5 )
+custom_fonts/font = ExtResource( 4 )
 align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+
+[node name="power" parent="layer" instance=ExtResource( 5 )]
 
 [node name="enemy" parent="." instance=ExtResource( 6 )]
 

@@ -1,6 +1,7 @@
 extends Area2D
 
 # class member variables go here, for example:
+var polarity = int(rand_range(0,1) > 0.5)
 var charge = 0
 var score = 0
 var ship_pos
@@ -33,6 +34,7 @@ func _process(delta):
 		if Input.is_action_pressed(shots[i]) and ready2shoot:
 			if not shooting.has(true):
 				shooting[i] = true
+				polarity = i
 			charge = clamp(charge+delta*charging_velocity, 0, 100)
 		if not Input.is_action_pressed(shots[i]) and shooting[i]:
 			spawn_bullet(i, charge)
