@@ -7,9 +7,8 @@ var score = 0
 var ship_pos
 var velocity = 400
 var ready2shoot = true
-var shots = ["shoot_red", "shoot_blue"]
 var charging_velocity = 200
-var shooting = [false, false]
+var shooting = false
 var bullet_scene = preload("res://bullet.tscn")
 var bullet_instance
 var dirs = {"ui_left":Vector2(-1,0), "ui_right":Vector2(1,0), "ui_up":Vector2(0,-1), "ui_down":Vector2(0,1)}
@@ -21,7 +20,8 @@ func _ready():
 
 
 func _input(event):
-	pass
+	if event.is_action_pressed("flip_color"):
+		polarity = 1-polarity
 
 
 func _process(delta):
@@ -30,16 +30,14 @@ func _process(delta):
 	for dir in dirs.keys():
 		if Input.is_action_pressed(dir):
 			ship_pos += delta*velocity*dirs[dir]
-	for i in range(2):
-		if Input.is_action_pressed(shots[i]) and ready2shoot:
-			if not shooting.has(true):
-				shooting[i] = true
-				polarity = i
-			charge = clamp(charge+delta*charging_velocity, 0, 100)
-		if not Input.is_action_pressed(shots[i]) and shooting[i]:
-			spawn_bullet(i, charge)
-			shooting[i] = false
-			ready2shoot = false
+	if Input.is_action_pressed("shoot") and ready2shoot:
+		if not shooting:
+			shooting = true
+		charge = clamp(charge+delta*charging_velocity, 0, 100)
+	if not Input.is_action_pressed("shoot") and shooting:
+		spawn_bullet(polarity, charge)
+		shooting = false
+		ready2shoot = false
 	ship_pos.x = clamp(ship_pos.x, 100, get_node("..").w/3)
 	ship_pos.y = clamp(ship_pos.y, 0, get_node("..").h)
 	set_pos(ship_pos)
