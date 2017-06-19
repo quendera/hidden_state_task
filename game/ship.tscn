@@ -1,26 +1,45 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=18 format=1]
 
 [ext_resource path="res://scripts/ship.gd" type="Script" id=1]
-[ext_resource path="res://assets/Images/fire.png" type="Texture" id=2]
-[ext_resource path="res://assets/Images/animated_ship/animated_ship.tres" type="SpriteFrames" id=3]
-[ext_resource path="res://assets/Sounds/explosion.wav" type="Sample" id=4]
+[ext_resource path="res://assets/Images/animated_ship/animated_ship.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://assets/Sounds/explosion.wav" type="Sample" id=3]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.1.png" type="Texture" id=4]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.2.png" type="Texture" id=5]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.3.png" type="Texture" id=6]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.4.png" type="Texture" id=7]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.5.png" type="Texture" id=8]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.6.png" type="Texture" id=9]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.7.png" type="Texture" id=10]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.8.png" type="Texture" id=11]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.9.png" type="Texture" id=12]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.10.png" type="Texture" id=13]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="ConvexPolygonShape2D" id=4]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -34.0652, 46.0906, -36.3192, -18.8243, -22.1191, -53.9865, 7.40814, -58.9453, 15.9733, 43.1604 )
 
 [sub_resource type="Animation" id=2]
 
-length = 1.0
+length = 0.6
 loop = false
 step = 0.1
 tracks/0/type = "value"
-tracks/0/path = NodePath("explosion:visibility/visible")
+tracks/0/path = NodePath("explosion:frame")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.1 ),
+"times": FloatArray( 0, 0.6 ),
+"transitions": FloatArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 9 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("explosion:visibility/visible")
+tracks/1/interp = 1
+tracks/1/imported = false
+tracks/1/keys = {
+"times": FloatArray( 0, 0.6 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -32,18 +51,27 @@ samples/explosion = {
 "db": -5.0,
 "pitch": 1.0,
 "priority": 0,
-"sample": ExtResource( 4 )
+"sample": ExtResource( 3 )
 }
+
+[sub_resource type="SpriteFrames" id=5]
+
+animations = [ {
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
+"loop": true,
+"name": "default",
+"speed": 12.0
+} ]
 
 [node name="ship" type="Area2D"]
 
-transform/pos = Vector2( 169.946, 343.228 )
+transform/pos = Vector2( 169.788, 343.386 )
 transform/rot = -90.0
 transform/scale = Vector2( 0.7, 0.7 )
 z/z = 2
 input/pickable = true
-shapes/0/shape = SubResource( 1 )
-shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
+shapes/0/shape = SubResource( 4 )
+shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.225403, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
@@ -56,12 +84,6 @@ script/script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="explosion" type="Sprite" parent="."]
-
-visibility/visible = false
-transform/pos = Vector2( -1.85059, 5.55188 )
-texture = ExtResource( 2 )
 
 [node name="anim" type="AnimationPlayer" parent="."]
 
@@ -76,18 +98,23 @@ autoplay = ""
 
 [node name="collision" type="CollisionPolygon2D" parent="."]
 
+transform/pos = Vector2( 0.225403, 0 )
 build_mode = 0
 polygon = Vector2Array( -34.0652, 46.0906, -36.3192, -18.8243, -22.1191, -53.9865, 7.40814, -58.9453, 15.9733, 43.1604 )
 shape_range = Vector2( 0, 0 )
 trigger = false
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="frames" type="AnimatedSprite" parent="."]
 
 transform/pos = Vector2( -2.79742, 8.92931 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.5, 0.5 )
-frames = ExtResource( 3 )
+frames = ExtResource( 2 )
 animation = "default"
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -116,5 +143,14 @@ default/filter/gain = 1.0
 default/reverb_room = 2
 default/reverb_send = 0.0
 default/chorus_send = 0.0
+
+[node name="explosion" type="AnimatedSprite" parent="."]
+
+visibility/visible = false
+transform/pos = Vector2( -7.32651, 2.785 )
+transform/scale = Vector2( 0.281573, 0.281573 )
+frames = SubResource( 5 )
+animation = "default"
+frame = 9
 
 

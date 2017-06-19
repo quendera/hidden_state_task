@@ -51,4 +51,5 @@ func spawn_bullet(polarity, charge):
 
 func explode():
 	get_node("sound").play("explosion")
+	get_node("anim").play("explosion")
 	score -= 10
