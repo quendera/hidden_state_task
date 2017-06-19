@@ -17,11 +17,13 @@ var explosion
 var baseline_charge = 5
 var charge = baseline_charge
 var shooting = 1
+var shooting_delay
 var shooting_dir
 var shooting_offset
 
 
 func _ready():
+	shooting_delay = get_node("shooting").get_wait_time()
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
 	add_to_group("enemies")
 	set_process(true)
@@ -44,7 +46,7 @@ func _on_bullet_hit():
 
 func reflect(power):
 	charge = baseline_charge+power/5
-	get_node("shooting").set_wait_time(0.1)
+	get_node("shooting").set_wait_time(shooting_delay/2)
 	_on_bullet_hit()
 
 
@@ -65,9 +67,9 @@ func _on_visibility_exit_screen():
 func _on_timer_timeout():
 	get_node("frames").set_modulate(Color(1,1,1))
 	charge = baseline_charge
-	get_node("shooting").set_wait_time(0.2)
-#	get_node("../ship").ready2shoot = true
-#	get_node("../ship").charge = 0
+	get_node("shooting").set_wait_time(shooting_delay)
+	get_node("../ship").ready2shoot = true
+	get_node("../ship").charge = 0
 
 func spawn_enemy_bullet(dir):
 	enemy_bullet_instance = enemy_bullet_scene.instance()

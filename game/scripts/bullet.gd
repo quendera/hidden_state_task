@@ -3,6 +3,7 @@ extends Area2D
 const SPEED = 1500
 var polarity # 0 is red, 1 is blue
 var power
+var exploded = false
 
 func _process(delta):
 	get_node("frames").set_frame(polarity)
@@ -15,6 +16,7 @@ func _ready():
 
 func _on_bullet_area_enter(area):
 	if area.is_in_group("enemies"):
+		exploded = true
 		get_node("../").data["time"].push_back(OS.get_ticks_msec())
 		get_node("../").data["polarity_shot"].push_back(polarity)
 		get_node("../").data["polarity_asteroid"].push_back(area.polarity)
@@ -25,8 +27,9 @@ func _on_bullet_area_enter(area):
 		queue_free()
 
 func _on_visibility_exit_screen():
-	get_node("../ship").ready2shoot = true
-	get_node("../ship").charge = 0
+	if not exploded:
+		get_node("../ship").ready2shoot = true
+		get_node("../ship").charge = 0
 	queue_free()
 
 func init(_polarity, _power):

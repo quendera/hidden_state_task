@@ -20,7 +20,7 @@ func _ready():
 
 
 func _input(event):
-	if event.is_action_pressed("flip_color"):
+	if event.is_action_pressed("flip_color") and charge == 0:
 		polarity = 1-polarity
 
 
