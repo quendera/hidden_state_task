@@ -1,24 +1,14 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://scripts/ship.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/fire.png" type="Texture" id=2]
 [ext_resource path="res://assets/Images/animated_ship/animated_ship.tres" type="SpriteFrames" id=3]
 [ext_resource path="res://assets/Sounds/explosion.wav" type="Sample" id=4]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="ConvexPolygonShape2D" id=6]
 
 custom_solver_bias = 0.0
-points = Vector2Array( -27.7326, 52.7265, -71.8382, 73.3091, -72.5733, 49.051, -38.0239, 16.7069 )
-
-[sub_resource type="ConvexPolygonShape2D" id=2]
-
-custom_solver_bias = 0.0
-points = Vector2Array( 65.6243, 39.4948, 53.8628, 63.0178, 20.0485, 38.7597, 14.9029, -14.1671 )
-
-[sub_resource type="ConvexPolygonShape2D" id=3]
-
-custom_solver_bias = 0.0
-points = Vector2Array( -27.7326, 52.7265, -38.0239, 16.7069, -38.759, -18.5776, -18.1764, -64.1534, 8.28702, -67.8289, 14.9029, -14.1671, 20.0485, 38.7597, 11.2274, 68.1634, -16.7062, 71.1038 )
+points = Vector2Array( -7.06116, -59.4409, 15.9844, -7.71648, -34.2037, 16.8655 )
 
 [sub_resource type="Animation" id=4]
 
@@ -52,15 +42,9 @@ transform/rot = -90.0
 transform/scale = Vector2( 0.7, 0.7 )
 z/z = 2
 input/pickable = true
-shapes/0/shape = SubResource( 1 )
+shapes/0/shape = SubResource( 6 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
-shapes/1/shape = SubResource( 2 )
-shapes/1/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/1/trigger = false
-shapes/2/shape = SubResource( 3 )
-shapes/2/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
-shapes/2/trigger = false
 gravity_vec = Vector2( 0, 1 )
 gravity = 98.0
 linear_damp = 0.1
@@ -93,8 +77,8 @@ autoplay = ""
 [node name="collision" type="CollisionPolygon2D" parent="."]
 
 build_mode = 0
-polygon = Vector2Array( 53.8628, 63.0178, 65.6243, 39.4948, 14.9029, -14.1671, 8.28702, -67.8289, -18.1764, -64.1534, -38.759, -18.5776, -38.0239, 16.7069, -72.5733, 49.051, -71.8382, 73.3091, -27.7326, 52.7265, -16.7062, 71.1038, 11.2274, 68.1634, 20.0485, 38.7597 )
-shape_range = Vector2( 0, 2 )
+polygon = Vector2Array( -34.2037, 16.8655, 15.9844, -7.71648, -7.06116, -59.4409 )
+shape_range = Vector2( 0, 0 )
 trigger = false
 
 [node name="frames" type="AnimatedSprite" parent="."]

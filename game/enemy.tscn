@@ -169,7 +169,7 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 3
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -229,7 +229,7 @@ autoplay = ""
 [node name="shooting" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 0.5
+wait_time = 0.2
 one_shot = false
 autostart = true
 

@@ -18,6 +18,7 @@ var baseline_charge = 5
 var charge = baseline_charge
 var shooting = 1
 var shooting_dir
+var shooting_offset
 
 
 func _ready():
@@ -43,6 +44,7 @@ func _on_bullet_hit():
 
 func reflect(power):
 	charge = baseline_charge+power/5
+	get_node("shooting").set_wait_time(0.1)
 	_on_bullet_hit()
 
 
@@ -63,6 +65,7 @@ func _on_visibility_exit_screen():
 func _on_timer_timeout():
 	get_node("frames").set_modulate(Color(1,1,1))
 	charge = baseline_charge
+	get_node("shooting").set_wait_time(0.2)
 #	get_node("../ship").ready2shoot = true
 #	get_node("../ship").charge = 0
 
@@ -74,15 +77,15 @@ func spawn_enemy_bullet(dir):
 
 func attack(charge):
 	for i in range(charge):
-		var dir = Vector2(cos(PI/2+PI*(i+0.5)/charge),sin(PI/2+PI*(i+0.5)/charge))
-		spawn_enemy_bullet(dir.normalized())
+		shooting_offset = sin(OS.get_ticks_msec()/float(1000))*0.5
+		var angle = shooting_offset+PI/2+PI*(i+0.5)/charge
+		shooting_dir = Vector2(cos(angle),sin(angle))
+		spawn_enemy_bullet(shooting_dir)
 
 func targeted_attack(charge):
 	var pos_start = get_node("shoot_from").get_global_pos()
 	var pos_end = get_node("../ship/get_hits").get_global_pos()
-	for i in range(charge):
-		shooting_dir = pos_end+Vector2(0,1000*((i+0.5)/float(charge)-0.5))-(pos_start)
-		spawn_enemy_bullet(shooting_dir.normalized())
+
 
 func _on_shooting_timeout():
-	targeted_attack(int(charge))
+	attack(int(charge))
