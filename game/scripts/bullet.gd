@@ -25,12 +25,10 @@ func _on_bullet_area_enter(area):
 		queue_free()
 
 func _on_visibility_exit_screen():
+	get_node("../ship").ready2shoot = true
+	get_node("../ship").charge = 0
 	queue_free()
 
 func init(_polarity, _power):
 	polarity = _polarity
 	power = _power
-
-func _on_bullet_exit_tree():
-	pass
-#get_node("../ship").ready2shoot = true

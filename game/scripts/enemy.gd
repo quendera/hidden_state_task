@@ -8,13 +8,16 @@ const SPEED = 30
 var enemy_bullet_instance
 var dir
 var pos
-const low_x = 800
-const high_x = 1000
-const low_y = 300
-const high_y = 600
+const low_x = 850
+const high_x = 1050
+const low_y = 200
+const high_y = 500
 var explosions = ["explosion_red", "explosion_blue"]
 var explosion
-var charge = 1
+var baseline_charge = 5
+var charge = baseline_charge
+var shooting = 1
+var shooting_dir
 
 
 func _ready():
@@ -24,7 +27,7 @@ func _ready():
 
 
 func _process(delta):
-	pos = get_node("shoot_from").get_global_pos()
+	pos = get_node("centroid").get_global_pos()
 	translate(SPEED*delta*dir)
 	if (dir.x)*(pos.x-clamp(pos.x, low_x, high_x)) > 0.001:
 		dir.x = -dir.x
@@ -39,12 +42,12 @@ func _on_bullet_hit():
 
 
 func reflect(power):
-	charge = 1+power/20
+	charge = baseline_charge+power/5
 	_on_bullet_hit()
 
 
 func explode(power):
-	charge = 1
+	charge = 0
 	explosion = explosions[int(polarity)]
 	get_node(explosion).set_scale(Vector2(power/100, power/100))
 	get_node("anim").play(explosion)
@@ -59,7 +62,9 @@ func _on_visibility_exit_screen():
 
 func _on_timer_timeout():
 	get_node("frames").set_modulate(Color(1,1,1))
-	get_node("../ship").ready2shoot = true
+	charge = baseline_charge
+#	get_node("../ship").ready2shoot = true
+#	get_node("../ship").charge = 0
 
 func spawn_enemy_bullet(dir):
 	enemy_bullet_instance = enemy_bullet_scene.instance()
@@ -72,6 +77,12 @@ func attack(charge):
 		var dir = Vector2(cos(PI/2+PI*(i+0.5)/charge),sin(PI/2+PI*(i+0.5)/charge))
 		spawn_enemy_bullet(dir.normalized())
 
+func targeted_attack(charge):
+	var pos_start = get_node("shoot_from").get_global_pos()
+	var pos_end = get_node("../ship/get_hits").get_global_pos()
+	for i in range(charge):
+		shooting_dir = pos_end+Vector2(0,1000*((i+0.5)/float(charge)-0.5))-(pos_start)
+		spawn_enemy_bullet(shooting_dir.normalized())
 
 func _on_shooting_timeout():
-	attack(int(4*charge))
+	targeted_attack(int(charge))

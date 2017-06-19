@@ -1,7 +1,7 @@
 extends TextureFrame
 
 # class member variables go here, for example:
-const SPEED = 200
+const SPEED = 50
 var m1 = preload("res://assets/Images/bganim/bg1.png")
 var m2 = preload("res://assets/Images/bganim/bg2.png")
 var m3 = preload("res://assets/Images/bganim/bg3.png")
