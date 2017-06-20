@@ -38,7 +38,7 @@ func _process(delta):
 		spawn_bullet(polarity, charge)
 		shooting = false
 		ready2shoot = false
-	ship_pos.x = clamp(ship_pos.x, 100, get_node("..").w/3)
+	ship_pos.x = clamp(ship_pos.x, 100, get_node("..").w*0.4)
 	ship_pos.y = clamp(ship_pos.y, 0, get_node("..").h)
 	set_pos(ship_pos)
 
@@ -52,4 +52,4 @@ func spawn_bullet(polarity, charge):
 func explode():
 	get_node("sound").play("explosion")
 	get_node("anim").play("explosion")
-	score -= 10
+	score -= 50

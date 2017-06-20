@@ -1,12 +1,11 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=7 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://scripts/bg.gd" type="Script" id=2]
 [ext_resource path="res://ship.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=4]
-[ext_resource path="res://progress_bar.tscn" type="PackedScene" id=5]
-[ext_resource path="res://enemy.tscn" type="PackedScene" id=6]
-[ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=7]
+[ext_resource path="res://enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=6]
 
 [node name="game" type="Node2D"]
 
@@ -65,16 +64,14 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="progress_bar" parent="layer" instance=ExtResource( 5 )]
-
-[node name="enemy" parent="." instance=ExtResource( 6 )]
+[node name="enemy" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 1013.21, 341.53 )
 z/z = 1
 
 [node name="soundtrack" type="StreamPlayer" parent="."]
 
-stream/stream = ExtResource( 7 )
+stream/stream = ExtResource( 6 )
 stream/play = true
 stream/loop = true
 stream/volume_db = 1.0
