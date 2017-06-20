@@ -45,7 +45,9 @@ func _on_bullet_hit():
 
 
 func reflect(power):
-	charge = baseline_charge+power/5
+	charge = 0 #baseline_charge+power/5
+	get_node("laser").set_frame(polarity)
+	get_node("anim").play("laser")
 	get_node("shooting").set_wait_time(shooting_delay/2)
 	_on_bullet_hit()
 
