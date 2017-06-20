@@ -14,16 +14,13 @@ const low_y = 200
 const high_y = 500
 var explosions = ["explosion_red", "explosion_blue"]
 var explosion
-var baseline_charge = 5
-var charge = baseline_charge
-var shooting = 1
-var shooting_delay
+var num_rays = 5
+var shooting = true
 var shooting_dir
 var shooting_offset
 
 
 func _ready():
-	shooting_delay = get_node("shooting").get_wait_time()
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
 	add_to_group("enemies")
 	set_process(true)
@@ -38,6 +35,7 @@ func _process(delta):
 		dir.y = -dir.y
 
 func _on_bullet_hit():
+	shooting = false
 	get_node("timer").start()
 	get_node("frames").set_modulate(colors[polarity])
 	if rand_range(0,1) < get_node("../").gamma:
@@ -47,16 +45,15 @@ func _on_bullet_hit():
 func reflect(power):
 	var vec = get_node("../ship").get_global_pos()-get_node("laser/position").get_global_pos()
 	get_node("laser").set_scale(Vector2(1,power/float(50)))
-	charge = 0 #baseline_charge+power/5
 	get_node("laser").set_rot(vec.angle()+PI/2)
 	get_node("laser").set_frame(polarity)
 	get_node("anim").play("laser")
-	get_node("shooting").set_wait_time(shooting_delay/2)
+	get_node("sound").play("laser")
+	get_node("../ship").score -= pow(power,2)/float(30)
 	_on_bullet_hit()
 
 
 func explode(power):
-	charge = 0
 	explosion = explosions[int(polarity)]
 	get_node(explosion).set_scale(Vector2(power/100, power/100))
 	get_node("anim").play(explosion)
@@ -65,14 +62,12 @@ func explode(power):
 	_on_bullet_hit()
 
 
-func _on_visibility_exit_screen():
-	queue_free()
-
 
 func _on_timer_timeout():
-	charge = 0
-	get_node("waiting").start()
-	get_node("shooting").set_wait_time(shooting_delay)
+	get_node("frames").set_modulate(Color(1,1,1))
+	get_node("../ship").ready2shoot = true
+	get_node("../ship").charge = 0
+	shooting = true
 
 
 func spawn_enemy_bullet(dir):
@@ -81,24 +76,13 @@ func spawn_enemy_bullet(dir):
 	enemy_bullet_instance.set_global_pos(get_node("shoot_from").get_global_pos())
 	get_node("../").add_child(enemy_bullet_instance)
 
-func attack(charge):
-	for i in range(charge):
+func attack(num_rays):
+	for i in range(num_rays):
 		shooting_offset = sin(OS.get_ticks_msec()/float(1000))*0.5
-		var angle = shooting_offset+PI/2+PI*(i+0.5)/charge
+		var angle = shooting_offset+PI/2+PI*(i+0.5)/num_rays
 		shooting_dir = Vector2(cos(angle),sin(angle))
 		spawn_enemy_bullet(shooting_dir)
 
-func targeted_attack(charge):
-	var pos_start = get_node("shoot_from").get_global_pos()
-	var pos_end = get_node("../ship/get_hits").get_global_pos()
-
-
 func _on_shooting_timeout():
-	attack(int(charge))
-
-
-func _on_waiting_timeout():
-	get_node("frames").set_modulate(Color(1,1,1))
-	get_node("../ship").ready2shoot = true
-	get_node("../ship").charge = 0
-	charge = baseline_charge
+	if shooting:
+		attack(num_rays)

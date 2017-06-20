@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=1]
+[gd_scene load_steps=41 format=1]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big1.png" type="Texture" id=2]
@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big4.png" type="Texture" id=5]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big5.png" type="Texture" id=6]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big6.png" type="Texture" id=7]
-[ext_resource path="res://assets/Sounds/8bit_bomb_explosion.wav" type="Sample" id=8]
+[ext_resource path="res://enemy_sound.tres" type="SampleLibrary" id=8]
 [ext_resource path="res://assets/Images/explosion_red/enemy_explosion_red1_big1.png" type="Texture" id=9]
 [ext_resource path="res://assets/Images/explosion_red/enemy_explosion_red1_big2.png" type="Texture" id=10]
 [ext_resource path="res://assets/Images/explosion_red/enemy_explosion_red1_big3.png" type="Texture" id=11]
@@ -46,15 +46,6 @@ animations = [ {
 "name": "default",
 "speed": 8.0
 } ]
-
-[sub_resource type="SampleLibrary" id=3]
-
-samples/explosion = {
-"db": 0.0,
-"pitch": 1.0,
-"priority": 0,
-"sample": ExtResource( 8 )
-}
 
 [sub_resource type="SpriteFrames" id=4]
 
@@ -182,15 +173,6 @@ __meta__ = {
 
 transform/pos = Vector2( -86.9791, 74.1617 )
 
-[node name="visibility" type="VisibilityNotifier2D" parent="."]
-
-transform/pos = Vector2( 23.6709, 12.4944 )
-transform/scale = Vector2( 23.7804, 21.0045 )
-rect = Rect2( -10, -10, 20, 20 )
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="frames" type="AnimatedSprite" parent="."]
 
 transform/pos = Vector2( -3.54698, 3.85551 )
@@ -207,7 +189,7 @@ __meta__ = {
 [node name="timer" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 0.6
+wait_time = 1.2
 one_shot = true
 autostart = false
 
@@ -219,13 +201,14 @@ params/attenuation/min_distance = 1.0
 params/attenuation/max_distance = 2048.0
 params/attenuation/distance_exp = 1.0
 config/polyphony = 1
-config/samples = SubResource( 3 )
+config/samples = ExtResource( 8 )
 config/pitch_random = 0.0
 
 [node name="explosion_red" type="AnimatedSprite" parent="."]
 
 visibility/visible = false
 transform/scale = Vector2( 0.53, 0.53 )
+z/z = 2
 frames = SubResource( 4 )
 animation = "default"
 __meta__ = {
@@ -236,6 +219,7 @@ __meta__ = {
 
 visibility/visible = false
 transform/scale = Vector2( 0.53, 0.53 )
+z/z = 2
 frames = SubResource( 5 )
 animation = "default"
 frame = 10
@@ -265,13 +249,6 @@ autostart = true
 
 [node name="centroid" type="Position2D" parent="."]
 
-[node name="waiting" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 0.6
-one_shot = true
-autostart = false
-
 [node name="laser" type="AnimatedSprite" parent="."]
 
 editor/display_folded = true
@@ -289,12 +266,8 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[connection signal="exit_screen" from="visibility" to="." method="_on_visibility_exit_screen"]
-
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 
 [connection signal="timeout" from="shooting" to="." method="_on_shooting_timeout"]
-
-[connection signal="timeout" from="waiting" to="." method="_on_waiting_timeout"]
 
 
