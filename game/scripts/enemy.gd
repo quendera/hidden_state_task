@@ -66,7 +66,7 @@ func _on_visibility_exit_screen():
 
 func _on_timer_timeout():
 	get_node("frames").set_modulate(Color(1,1,1))
-	charge = baseline_charge
+	charge = 0
 	get_node("shooting").set_wait_time(shooting_delay)
 	get_node("../ship").ready2shoot = true
 	get_node("../ship").charge = 0
@@ -91,3 +91,7 @@ func targeted_attack(charge):
 
 func _on_shooting_timeout():
 	attack(int(charge))
+
+
+func _on_waiting_timeout():
+	pass # replace with function body

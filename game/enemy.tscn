@@ -169,7 +169,6 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -235,10 +234,19 @@ autostart = true
 
 [node name="centroid" type="Position2D" parent="."]
 
+[node name="waiting" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
 [connection signal="exit_screen" from="visibility" to="." method="_on_visibility_exit_screen"]
 
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 
 [connection signal="timeout" from="shooting" to="." method="_on_shooting_timeout"]
+
+[connection signal="timeout" from="waiting" to="." method="_on_waiting_timeout"]
 
 
