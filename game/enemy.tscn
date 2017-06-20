@@ -237,8 +237,8 @@ autostart = true
 [node name="waiting" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 1.0
-one_shot = false
+wait_time = 0.6
+one_shot = true
 autostart = false
 
 [connection signal="exit_screen" from="visibility" to="." method="_on_visibility_exit_screen"]

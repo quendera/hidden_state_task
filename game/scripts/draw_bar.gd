@@ -15,7 +15,8 @@ func _process(delta):
 
 func _draw():
 	draw_arc(Vector2(0,0),100,120,130,230,new_color_bg)
-	draw_arc(Vector2(0,0),100,120,130,130+get_node("../").charge,new_color)
+	if get_node("../").charge > 0.1:
+		draw_arc(Vector2(0,0),100,120,130,130+get_node("../").charge,new_color)
 
 func draw_arc(center, radius1, radius2, angle_from, angle_to, color):
 	var arc1 = get_arc(center, radius1, angle_from, angle_to)
