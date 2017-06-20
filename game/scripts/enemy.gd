@@ -45,7 +45,10 @@ func _on_bullet_hit():
 
 
 func reflect(power):
+	var vec = get_node("../ship").get_global_pos()-get_node("laser/position").get_global_pos()
+	get_node("laser").set_scale(Vector2(1,power/float(50)))
 	charge = 0 #baseline_charge+power/5
+	get_node("laser").set_rot(vec.angle()+PI/2)
 	get_node("laser").set_frame(polarity)
 	get_node("anim").play("laser")
 	get_node("shooting").set_wait_time(shooting_delay/2)

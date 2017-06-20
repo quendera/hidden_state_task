@@ -127,7 +127,7 @@ tracks/1/keys = {
 "values": [ 0, 10 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=8]
 
 resource/name = "laser"
 length = 1.2
@@ -144,7 +144,7 @@ tracks/0/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="SpriteFrames" id=11]
+[sub_resource type="SpriteFrames" id=9]
 
 animations = [ {
 "frames": [ ExtResource( 31 ), ExtResource( 32 ) ],
@@ -195,6 +195,7 @@ __meta__ = {
 
 transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
+z/z = 2
 frames = SubResource( 2 )
 animation = "default"
 frame = 5
@@ -249,7 +250,7 @@ playback/default_blend_time = 0.0
 root/root = NodePath("..")
 anims/explosion_blue = SubResource( 6 )
 anims/explosion_red = SubResource( 7 )
-anims/laser = SubResource( 10 )
+anims/laser = SubResource( 8 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -273,11 +274,20 @@ autostart = false
 
 [node name="laser" type="AnimatedSprite" parent="."]
 
+editor/display_folded = true
 visibility/visible = false
-transform/pos = Vector2( -722.519, 72.7062 )
+transform/pos = Vector2( -161.318, 61.3867 )
 z/z = 1
-frames = SubResource( 11 )
+frames = SubResource( 9 )
 animation = "default"
+offset = Vector2( -561.201, 11.3195 )
+
+[node name="position" type="Position2D" parent="laser"]
+
+transform/pos = Vector2( -0.674683, 2.18028 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [connection signal="exit_screen" from="visibility" to="." method="_on_visibility_exit_screen"]
 
