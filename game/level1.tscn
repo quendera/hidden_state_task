@@ -68,6 +68,8 @@ max_lines_visible = -1
 
 transform/pos = Vector2( 1013.21, 341.53 )
 z/z = 1
+exploding = 0
+frame = 0
 
 [node name="soundtrack" type="StreamPlayer" parent="."]
 

@@ -1,6 +1,6 @@
 extends Area2D
 
-const SPEED = 1500
+const SPEED = 2000
 var polarity # 0 is red, 1 is blue
 var power
 var exploded = false

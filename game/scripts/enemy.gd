@@ -1,5 +1,7 @@
 extends Area2D
 
+export var exploding = 0
+export var frame = 0
 # class member variables go here, for example:
 var polarity = 1*(rand_range(0,1) > 0.5)
 var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
@@ -29,6 +31,7 @@ func _ready():
 func _process(delta):
 	pos = get_node("centroid").get_global_pos()
 	translate(SPEED*delta*dir)
+	
 	if (dir.x)*(pos.x-clamp(pos.x, low_x, high_x)) > 0.001:
 		dir.x = -dir.x
 	if (dir.y)*(pos.y-clamp(pos.y, low_y, high_y)) > 0.001:
