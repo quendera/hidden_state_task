@@ -14,7 +14,7 @@
 [ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.9.png" type="Texture" id=12]
 [ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.10.png" type="Texture" id=13]
 
-[sub_resource type="ConvexPolygonShape2D" id=4]
+[sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -34.0652, 46.0906, -36.3192, -18.8243, -22.1191, -53.9865, 7.40814, -58.9453, 15.9733, 43.1604 )
@@ -54,7 +54,7 @@ samples/explosion = {
 "sample": ExtResource( 3 )
 }
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=4]
 
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
@@ -70,7 +70,7 @@ transform/rot = -90.0
 transform/scale = Vector2( 0.7, 0.7 )
 z/z = 2
 input/pickable = true
-shapes/0/shape = SubResource( 4 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.225403, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -114,7 +114,7 @@ transform/rot = 90.0
 transform/scale = Vector2( 0.5, 0.5 )
 frames = ExtResource( 2 )
 animation = "default"
-frame = 2
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -149,7 +149,7 @@ default/chorus_send = 0.0
 visibility/visible = false
 transform/pos = Vector2( -7.32651, 2.785 )
 transform/scale = Vector2( 0.281573, 0.281573 )
-frames = SubResource( 5 )
+frames = SubResource( 4 )
 animation = "default"
 frame = 9
 
