@@ -3,7 +3,7 @@ extends Area2D
 # class member variables go here, for example:
 var polarity = int(rand_range(0,1) > 0.5)
 var charge = 0
-var score = 0
+var hits = 0
 var ship_pos
 var velocity = 400
 var ready2shoot = true
@@ -25,7 +25,7 @@ func _input(event):
 
 
 func _process(delta):
-	get_node("../layer/score").set_text("Score "+str(int(score)))
+	get_node("../layer/hits").set_text("Damage "+str(hits))
 	ship_pos = get_pos()
 	for dir in dirs.keys():
 		if Input.is_action_pressed(dir):
@@ -52,4 +52,4 @@ func spawn_bullet(polarity, charge):
 func explode():
 	get_node("sound").play("explosion")
 	get_node("anim").play("explosion")
-	score -= 50
+	hits += 1

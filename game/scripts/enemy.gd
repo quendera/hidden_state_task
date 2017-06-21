@@ -20,6 +20,7 @@ var num_rays = 5
 var shooting = true
 var shooting_dir
 var shooting_offset
+var life = 100
 
 
 func _ready():
@@ -29,6 +30,8 @@ func _ready():
 
 
 func _process(delta):
+	life = clamp(life,0,100)
+	get_node("../layer/boss_life").set_value(life)
 	pos = get_node("centroid").get_global_pos()
 	translate(SPEED*delta*dir)
 	
@@ -47,11 +50,11 @@ func _on_bullet_hit():
 
 func reflect(power):
 	var vec = get_node("../ship").get_global_pos()-get_node("laser/position").get_global_pos()
-	get_node("laser").set_scale(Vector2(1,power/float(100)))
+	get_node("laser").set_scale(Vector2(1,0.5)) #power/float(100) if you want it dependent on attack
 	get_node("laser").set_rot(vec.angle()+PI/2)
 	get_node("laser").activate(polarity, 0.2, 0.6 )
 	get_node("sound").play("laser")
-	get_node("../ship").score -= pow(power,2)/float(30)
+	life += power/10
 	_on_bullet_hit()
 
 
@@ -60,7 +63,7 @@ func explode(power):
 	get_node(explosion).set_scale(Vector2(power/100, power/100))
 	get_node("anim").play(explosion)
 	get_node("sound").play("explosion")
-	get_node("../ship").score += power
+	life -= log(power)
 	_on_bullet_hit()
 
 
