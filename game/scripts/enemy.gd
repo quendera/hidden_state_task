@@ -30,6 +30,9 @@ func _ready():
 
 
 func _process(delta):
+	if life <= 0:
+		get_node("../").save_data()
+		get_tree().quit()
 	life = clamp(life,0,100)
 	get_node("../layer/boss_life").set_value(life)
 	pos = get_node("centroid").get_global_pos()
