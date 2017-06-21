@@ -47,10 +47,9 @@ func _on_bullet_hit():
 
 func reflect(power):
 	var vec = get_node("../ship").get_global_pos()-get_node("laser/position").get_global_pos()
-	get_node("laser").set_scale(Vector2(1,power/float(50)))
+	get_node("laser").set_scale(Vector2(1,power/float(100)))
 	get_node("laser").set_rot(vec.angle()+PI/2)
-	get_node("laser").set_frame(polarity)
-	get_node("laser").set_hidden(false)
+	get_node("laser").activate(polarity, 0.2, 0.6 )
 	get_node("sound").play("laser")
 	get_node("../ship").score -= pow(power,2)/float(30)
 	_on_bullet_hit()
@@ -67,7 +66,6 @@ func explode(power):
 
 
 func _on_timer_timeout():
-	get_node("laser").set_hidden(true)
 	get_node("frames").set_modulate(Color(1,1,1))
 	get_node("../ship").ready2shoot = true
 	get_node("../ship").charge = 0
