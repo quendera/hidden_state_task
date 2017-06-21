@@ -165,6 +165,7 @@ transform/scale = Vector2( 0.65831, 0.65831 )
 z/z = 2
 frames = SubResource( 2 )
 animation = "default"
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -236,8 +237,8 @@ autostart = true
 
 editor/display_folded = true
 visibility/visible = false
-transform/pos = Vector2( -161.318, 61.3867 )
-z/z = 1
+transform/pos = Vector2( -97.9587, 63.9776 )
+z/z = 2
 frames = SubResource( 7 )
 animation = "default"
 offset = Vector2( -561.201, 11.3195 )
