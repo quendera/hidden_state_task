@@ -3,13 +3,13 @@ extends Node2D
 var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
 var integrating = false
 var x_scale = 40
-var h = 30
-var frame = 5
+var h = 15
+var frame = 3
 var decreased_life = 0
 var increased_life = 0
 var max_decrease = 0
 var max_increase = 0
-var top_left = Vector2(0,20)
+var top_left = Vector2(200,40)
 var points
 
 func _ready():
@@ -26,7 +26,8 @@ func _process(delta):
 
 func _draw():
 	var size_tot = x_scale*(max_decrease+max_increase)+3*frame
-	top_left.x = (get_node("../../").w-size_tot)/2
+#	top_left.x = (get_node("../../").w-size_tot)/2
+	top_left = Vector2((get_node("../../").w-size_tot)/2, get_node("../..").h-2*frame-h-40)
 	draw_rectangle(top_left-Vector2(frame,frame), Vector2(x_scale*(max_decrease+max_increase)+3*frame, h+2*frame), 
 	colors[get_node("../../ship").polarity])
 	draw_rectangle(top_left, Vector2(x_scale*max_decrease,h), Color(0.5,0.5,0.5))

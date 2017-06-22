@@ -27,7 +27,7 @@ func _on_bullet_area_enter(area):
 		queue_free()
 
 func _on_visibility_exit_screen():
-	if not exploded:
+	if true:#not exploded:
 		get_node("../ship").ready2shoot = true
 		get_node("../ship").charge = 0
 	queue_free()

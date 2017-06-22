@@ -79,8 +79,8 @@ func explode(power):
 
 func _on_timer_timeout():
 	get_node("frames").set_modulate(Color(1,1,1))
-	get_node("../ship").ready2shoot = true
-	get_node("../ship").charge = 0
+#	get_node("../ship").ready2shoot = true
+#	get_node("../ship").charge = 0
 	shooting = true
 
 
