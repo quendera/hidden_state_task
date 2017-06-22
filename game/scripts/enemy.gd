@@ -52,9 +52,9 @@ func _on_bullet_hit():
 
 func lose_life(power, correct):
 	if correct:
-		return log(power)
+		return (power)/50
 	else:
-		return -power/10
+		return -pow(power,1.5)/100
 
 
 func reflect(power):
