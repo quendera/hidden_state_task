@@ -33,7 +33,7 @@ func _process(delta):
 	if life <= 0:
 		get_node("../").save_data()
 		get_tree().quit()
-	life = clamp(life,0,179)
+	life = clamp(life,0,100)
 	pos = get_node("centroid").get_global_pos()
 	translate(SPEED*delta*dir)
 	
