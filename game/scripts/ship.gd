@@ -7,7 +7,7 @@ var hits = 0
 var ship_pos
 var velocity = 400
 var ready2shoot = true
-var charging_velocity = 300
+var charging_velocity = 150
 var shooting = false
 var bullet_scene = preload("res://bullet.tscn")
 var bullet_instance

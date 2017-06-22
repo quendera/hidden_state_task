@@ -44,11 +44,18 @@ func _process(delta):
 		dir.y = -dir.y
 
 func _on_bullet_hit():
+	get_node("draw_life").integrating = false
 	shooting = false
 	get_node("timer").start()
 	get_node("frames").set_modulate(colors[polarity])
 	if rand_range(0,1) < get_node("../").gamma:
 		polarity = 1-polarity
+
+func lose_life(power, correct):
+	if correct:
+		return log(power)
+	else:
+		return -power/10
 
 
 func reflect(power):
@@ -57,7 +64,7 @@ func reflect(power):
 	get_node("laser").set_rot(vec.angle()+PI/2)
 	get_node("laser").activate(polarity, 0.2, 0.6 )
 	get_node("sound").play("laser")
-	life += power/10
+	life -= lose_life(power, false)
 	_on_bullet_hit()
 
 
@@ -66,7 +73,7 @@ func explode(power):
 	get_node(explosion).set_scale(Vector2(power/100, power/100))
 	get_node("anim").play(explosion)
 	get_node("sound").play("explosion")
-	life -= log(power)
+	life -= lose_life(power, true)
 	_on_bullet_hit()
 
 
