@@ -93,6 +93,7 @@ max_lines_visible = -1
 
 [node name="boss_life" type="ProgressBar" parent="layer"]
 
+visibility/visible = false
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2

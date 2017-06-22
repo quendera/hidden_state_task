@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=1]
+[gd_scene load_steps=45 format=1]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big1.png" type="Texture" id=2]
@@ -35,6 +35,7 @@
 [ext_resource path="res://assets/Images/laserasperite/laser_blue1.png" type="Texture" id=33]
 [ext_resource path="res://assets/Images/laserasperite/laser_blue2.png" type="Texture" id=34]
 [ext_resource path="res://scripts/laser.gd" type="Script" id=35]
+[ext_resource path="res://scripts/draw_life.gd" type="Script" id=36]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -173,6 +174,7 @@ transform/scale = Vector2( 0.65831, 0.65831 )
 z/z = 2
 frames = SubResource( 2 )
 animation = "default"
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -242,6 +244,7 @@ autostart = true
 
 [node name="laser" type="AnimatedSprite" parent="."]
 
+editor/display_folded = true
 visibility/visible = false
 transform/pos = Vector2( -97.9587, 63.9776 )
 z/z = 2
@@ -288,6 +291,12 @@ build_mode = 0
 polygon = Vector2Array( -9.36649, 7.94427, -120.404, 39.4048, -1197.46, 37.5541, -1197.46, -30.9187, -118.553, -34.62, -10.9905, -7.99553 )
 shape_range = Vector2( 0, 0 )
 trigger = false
+
+[node name="draw_life" type="Node2D" parent="."]
+
+transform/pos = Vector2( -14.9641, 13.6037 )
+z/z = 2
+script/script = ExtResource( 36 )
 
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 

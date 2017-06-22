@@ -10,10 +10,10 @@ const SPEED = 30
 var enemy_bullet_instance
 var dir
 var pos
-const low_x = 850
-const high_x = 1050
-const low_y = 200
-const high_y = 500
+const low_x = 800
+const high_x = 1000
+const low_y = 300
+const high_y = 400
 var explosions = ["explosion_red", "explosion_blue"]
 var explosion
 var num_rays = 5
@@ -33,7 +33,7 @@ func _process(delta):
 	if life <= 0:
 		get_node("../").save_data()
 		get_tree().quit()
-	life = clamp(life,0,100)
+	life = clamp(life,0,179)
 	get_node("../layer/boss_life").set_value(life)
 	pos = get_node("centroid").get_global_pos()
 	translate(SPEED*delta*dir)
