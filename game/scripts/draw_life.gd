@@ -18,10 +18,10 @@ func _draw():
 	var current_life = get_node("../").life
 	var decreased_life = current_life - get_node("../").lose_life(get_node("../../ship").charge, true)
 	var increased_life = current_life - get_node("../").lose_life(get_node("../../ship").charge, false)
-	draw_arc(Vector2(0,0),275,325,100,100-2*current_life, color)
+	draw_arc(Vector2(0,0),275,300,100,100-2*current_life, color)
 	if integrating and get_node("../../ship").charge > 0.01:
-		draw_arc(Vector2(0,0),275,325,100-2*current_life,100-2*increased_life, color1)
-		draw_arc(Vector2(0,0),275,325,100-2*current_life,100-2*decreased_life, color2)
+		draw_arc(Vector2(0,0),275,300,100-2*current_life,100-2*increased_life, color1)
+		draw_arc(Vector2(0,0),275,300,100-2*current_life,100-2*decreased_life, color2)
 
 func draw_arc(center, radius1, radius2, angle_from, angle_to, color):
 	var arc1 = get_arc(center, radius1, angle_from, angle_to)

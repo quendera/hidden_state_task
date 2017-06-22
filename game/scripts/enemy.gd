@@ -34,7 +34,6 @@ func _process(delta):
 		get_node("../").save_data()
 		get_tree().quit()
 	life = clamp(life,0,179)
-	get_node("../layer/boss_life").set_value(life)
 	pos = get_node("centroid").get_global_pos()
 	translate(SPEED*delta*dir)
 	
