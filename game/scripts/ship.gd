@@ -9,6 +9,7 @@ var velocity = 400
 var ready2shoot = true
 var charging_velocity = 100
 var shooting = false
+var active = false
 var bullet_scene = preload("res://scenes/bullet.tscn")
 var bullet_instance
 var dirs = {"ui_left":Vector2(-1,0), "ui_right":Vector2(1,0), "ui_up":Vector2(0,-1), "ui_down":Vector2(0,1)}
@@ -22,13 +23,16 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("flip_color") and not Input.is_action_pressed("shoot"):
 		polarity = 1-polarity
-
+	for dir in dirs.keys():
+		if event.is_action_pressed(dir):
+			active = true
 
 func _process(delta):
 	ship_pos = get_pos()
-	for dir in dirs.keys():
-		if Input.is_action_pressed(dir):
-			ship_pos += delta*velocity*dirs[dir]
+	if active:
+		for dir in dirs.keys():
+			if Input.is_action_pressed(dir):
+				ship_pos += delta*velocity*dirs[dir]
 	if Input.is_action_pressed("shoot") and ready2shoot:
 		if not shooting:
 			shooting = true

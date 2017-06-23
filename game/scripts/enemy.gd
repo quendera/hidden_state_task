@@ -72,9 +72,8 @@ func lose_life(power, correct):
 
 func reflect(power):
 	var vec = get_node("../ship").get_global_pos()-get_node("laser/position").get_global_pos()
-	get_node("laser").set_scale(Vector2(1,0.5)) #power/float(100) if you want it dependent on attack
 	get_node("laser").set_rot(vec.angle()+PI/2)
-	get_node("laser").activate(polarity, 0.2, 0.6 )
+	get_node("laser").activate(polarity)
 	get_node("sound").play("laser")
 	lost_life = lose_life(power, false)
 	_on_bullet_hit()
@@ -104,7 +103,7 @@ func spawn_enemy_bullet(dir):
 func attack(num_rays):
 	for i in range(num_rays):
 		shooting_offset = sin(OS.get_ticks_msec()/float(1000))*0.5
-		var angle = shooting_offset+PI+0.8*PI*(i-2)/num_rays
+		var angle = shooting_offset+PI+PI*(i-2)/num_rays
 		shooting_dir = Vector2(cos(angle),sin(angle))
 		spawn_enemy_bullet(shooting_dir)
 
