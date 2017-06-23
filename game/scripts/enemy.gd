@@ -87,8 +87,6 @@ func explode(power):
 	lost_life = lose_life(power, true)
 	_on_bullet_hit()
 
-
-
 func _on_timer_timeout():
 	get_node("frames").set_modulate(Color(1,1,1))
 	get_node("lost_life").set_text("")
@@ -110,5 +108,5 @@ func attack(num_rays):
 func _on_shooting_timeout():
 	if shooting:
 		attack(num_rays)
-#	if rand_range(0,1) < 0.1:
-#		shooting = not shooting
+	if rand_range(0,1) < 0.1:
+		shooting = not shooting

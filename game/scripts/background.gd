@@ -2,7 +2,7 @@ extends Sprite
 
 
 # class member variables go here, for example:
-const SPEED = 15
+const SPEED = 30
 var pos
 
 func _ready():
