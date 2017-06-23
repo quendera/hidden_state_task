@@ -17,12 +17,12 @@ const high_y = 400
 var explosions = ["explosion_red", "explosion_blue"]
 var explosion
 var num_rays = 5
-var shooting = true
 var shooting_dir
 var shooting_offset
-var life = 100
-var regenerate_vec = [1, 2.5, 4.833, 8.833, 17.833]
-
+var life = 1000
+var regenerate_vec = [10, 25, 48.33, 88.33, 178.33]
+var lost_life = 0
+var life_sign
 
 func _ready():
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
@@ -34,7 +34,7 @@ func _process(delta):
 	if life <= 0:
 		get_node("../").save_data()
 		get_tree().quit()
-	life = clamp(life,0,100)
+	life = clamp(life,0,1000)
 	pos = get_node("centroid").get_global_pos()
 	translate(SPEED*delta*dir)
 	
@@ -45,8 +45,13 @@ func _process(delta):
 
 
 func _on_bullet_hit():
+	life -= lost_life
+	if - lost_life > 0:
+		life_sign = "+"
+	else:
+		life_sign = ""
+	get_node("lost_life").set_text(life_sign+str(int(-lost_life)))
 	get_node("draw_life").integrating = false
-	shooting = false
 	get_node("timer").start()
 	get_node("frames").set_modulate(colors[polarity])
 	if rand_range(0,1) < get_node("../").gamma:
@@ -58,7 +63,7 @@ func lose_life(power, correct):
 		return 0
 	var steps = int(floor(power/25))
 	if correct:
-		return steps+1
+		return 10*(steps+1)
 	else:
 		return -regenerate_vec[steps]
 
@@ -69,7 +74,7 @@ func reflect(power):
 	get_node("laser").set_rot(vec.angle()+PI/2)
 	get_node("laser").activate(polarity, 0.2, 0.6 )
 	get_node("sound").play("laser")
-	life -= lose_life(power, false)
+	lost_life = lose_life(power, false)
 	_on_bullet_hit()
 
 
@@ -78,16 +83,14 @@ func explode(power):
 	get_node(explosion).set_scale(Vector2(power/100, power/100))
 	get_node("anim").play(explosion)
 	get_node("sound").play("explosion")
-	life -= lose_life(power, true)
+	lost_life = lose_life(power, true)
 	_on_bullet_hit()
 
 
 
 func _on_timer_timeout():
 	get_node("frames").set_modulate(Color(1,1,1))
-#	get_node("../ship").ready2shoot = true
-#	get_node("../ship").charge = 0
-	shooting = true
+	get_node("lost_life").set_text("")
 
 
 func spawn_enemy_bullet(dir):
@@ -104,5 +107,4 @@ func attack(num_rays):
 		spawn_enemy_bullet(shooting_dir)
 
 func _on_shooting_timeout():
-	if shooting:
-		attack(num_rays)
+	attack(num_rays)

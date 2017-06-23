@@ -12,6 +12,6 @@ func _process(delta):
 	update()
 
 func _draw():
-	var current_life = get_node("../").life
+	var current_life = get_node("../").life/float(10)
 	Draw.draw_arc(self,Vector2(0,0),275,300,50,50-current_life, color)
 

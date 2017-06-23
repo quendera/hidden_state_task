@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=1]
+[gd_scene load_steps=46 format=1]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big1.png" type="Texture" id=2]
@@ -36,6 +36,7 @@
 [ext_resource path="res://assets/Images/laserasperite/laser_blue2.png" type="Texture" id=34]
 [ext_resource path="res://scripts/laser.gd" type="Script" id=35]
 [ext_resource path="res://scripts/draw_life.gd" type="Script" id=36]
+[ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=37]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -297,6 +298,21 @@ trigger = false
 transform/pos = Vector2( -14.9641, 13.6037 )
 z/z = 2
 script/script = ExtResource( 36 )
+
+[node name="lost_life" type="Label" parent="."]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = -33.0
+margin/top = -235.0
+margin/right = 45.0
+margin/bottom = -208.0
+custom_fonts/font = ExtResource( 37 )
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
 
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
 
