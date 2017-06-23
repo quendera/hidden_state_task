@@ -21,6 +21,7 @@ var shooting = true
 var shooting_dir
 var shooting_offset
 var life = 100
+var regenerate_vec = [1, 2.5, 4.833, 8.833, 17.833]
 
 
 func _ready():
@@ -42,6 +43,7 @@ func _process(delta):
 	if (dir.y)*(pos.y-clamp(pos.y, low_y, high_y)) > 0.001:
 		dir.y = -dir.y
 
+
 func _on_bullet_hit():
 	get_node("draw_life").integrating = false
 	shooting = false
@@ -50,11 +52,15 @@ func _on_bullet_hit():
 	if rand_range(0,1) < get_node("../").gamma:
 		polarity = 1-polarity
 
+
 func lose_life(power, correct):
+	if power == 0 :
+		return 0
+	var steps = int(floor(power/25))
 	if correct:
-		return (power)/50
+		return steps+1
 	else:
-		return -pow(1.05,power)/20
+		return -regenerate_vec[steps]
 
 
 func reflect(power):
