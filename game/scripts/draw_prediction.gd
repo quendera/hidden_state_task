@@ -34,7 +34,7 @@ func _draw():
 	var begin2 = end1+frame
 	var end2 = begin2 + x_scale*max_increase[5]
 	for i in range(5):
-		var color_pale = color.linear_interpolate(Color(1,1,1),(i+1)/float(6))
+		var color_pale = color.linear_interpolate(Color(1,1,1),(i+2)/float(7))
 		Draw.draw_arc(self,Vector2(0,0),100,120,begin1+x_scale*max_decrease[i],begin1+x_scale*max_decrease[i+1],
 		color_pale)
 		Draw.draw_arc(self,Vector2(0,0),100,120,begin2+x_scale*max_increase[i],begin2+x_scale*max_increase[i+1],

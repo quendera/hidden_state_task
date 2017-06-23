@@ -16,7 +16,7 @@ const low_y = 250
 const high_y = 500
 var explosions = ["explosion_red", "explosion_blue"]
 var explosion
-var num_rays = 5
+var num_rays = 3
 var shooting = true
 var shooting_dir
 var shooting_offset
@@ -103,12 +103,12 @@ func spawn_enemy_bullet(dir):
 func attack(num_rays):
 	for i in range(num_rays):
 		shooting_offset = sin(OS.get_ticks_msec()/float(1000))*0.5
-		var angle = shooting_offset+PI+PI*(i-2)/num_rays
+		var angle = shooting_offset+PI+PI*(i-1)/num_rays
 		shooting_dir = Vector2(cos(angle),sin(angle))
 		spawn_enemy_bullet(shooting_dir)
 
 func _on_shooting_timeout():
 	if shooting:
 		attack(num_rays)
-	if rand_range(0,1) < 0.1:
-		shooting = not shooting
+#	if rand_range(0,1) < 0.1:
+#		shooting = not shooting
