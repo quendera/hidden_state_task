@@ -10,7 +10,7 @@ const SPEED = 30
 var enemy_bullet_instance
 var dir
 var pos
-const low_x = 800
+const low_x = 850
 const high_x = 1000
 const low_y = 250
 const high_y = 500
@@ -20,7 +20,8 @@ var num_rays = 5
 var shooting = true
 var shooting_dir
 var shooting_offset
-var life = 1000
+var max_life = 5000
+var life = max_life
 var regenerate_vec = [10, 25, 48.33, 88.33, 178.33]
 var lost_life = 0
 var life_sign
@@ -35,7 +36,7 @@ func _process(delta):
 	if life <= 0:
 		get_node("../").save_data()
 		get_tree().quit()
-	life = clamp(life,0,1000)
+	life = clamp(life,0,max_life)
 	pos = get_node("centroid").get_global_pos()
 	translate(SPEED*delta*dir)
 	

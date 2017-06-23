@@ -4,7 +4,7 @@ var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
 var integrating = false
 var x_scale = 10
 var h = 15
-var frame = 10
+var frame = 5
 var decreased_life = 0
 var increased_life = 0
 var max_decrease = [1,1,1,1,1,1]
@@ -27,11 +27,11 @@ func _process(delta):
 	update()
 
 func _draw():
-	var x_scale = 100/float(max_increase[5]+max_decrease[5]+frame)
+	var x_scale = (100-frame)/float(max_increase[5]+max_decrease[5])
 	var color = colors[get_node("../").polarity]
 	var begin1 = 40
 	var end1 = begin1+x_scale*max_decrease[5]
-	var begin2 = end1+frame*x_scale
+	var begin2 = end1+frame
 	var end2 = begin2 + x_scale*max_increase[5]
 	for i in range(5):
 		var color_pale = color.linear_interpolate(Color(1,1,1),(i+1)/float(6))

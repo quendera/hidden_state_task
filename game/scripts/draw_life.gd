@@ -6,12 +6,13 @@ var Draw = preload("res://scripts//draw_arc.gd")
 
 
 func _ready():
-    set_process(true)
+	set_process(true)
 
 func _process(delta):
 	update()
 
 func _draw():
-	var current_life = get_node("../").life/float(10)
-	Draw.draw_arc(self,Vector2(0,0),275,300,50,50-current_life, color)
+	var current_life = get_node("../").life
+	var max_life = get_node("../").max_life
+	Draw.draw_arc(self,Vector2(0,0),275,300,50,50-100*current_life/float(max_life), color)
 

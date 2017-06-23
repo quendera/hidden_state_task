@@ -1,6 +1,6 @@
 extends Area2D
 
-const SPEED = 500
+const SPEED = 400
 var dir
 
 func _process(delta):
