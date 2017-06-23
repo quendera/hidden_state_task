@@ -4,4 +4,4 @@ Attempt at a shooting game as a neuroscience task. A compiled version for downlo
 ## Credits
 
 - The soundtrack comes from [FoxSynergy](https://opengameart.org/content/cosmo-blast)
-- Pixel art proudly produced by [dyogurt](https://github.com/dyogurt)
+- Pixel art proudly produced by [dyogurt](https://twitter.com/dfmmatias)
