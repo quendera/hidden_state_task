@@ -5,7 +5,7 @@ export var frame = 0
 # class member variables go here, for example:
 var polarity = 1*(rand_range(0,1) > 0.5)
 var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
-var enemy_bullet_scene = preload("res://enemy_bullet.tscn")
+var enemy_bullet_scene = preload("res://scenes/enemy_bullet.tscn")
 const SPEED = 30
 var enemy_bullet_instance
 var dir
@@ -108,3 +108,4 @@ func attack(num_rays):
 
 func _on_shooting_timeout():
 	attack(num_rays)
+#	get_node("shooting").set_wait_time(rand_range(0.2,0.8))

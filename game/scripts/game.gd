@@ -1,7 +1,7 @@
 extends Node2D
 
 
-var enemy_scene = preload("res://enemy.tscn")
+var enemy_scene = preload("res://scenes/enemy.tscn")
 var gamma = 0.2
 var counter = 0
 var data = {"time":[], "polarity_shot":[], "polarity_asteroid":[]}

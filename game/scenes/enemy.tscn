@@ -7,7 +7,7 @@
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big4.png" type="Texture" id=5]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big5.png" type="Texture" id=6]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big6.png" type="Texture" id=7]
-[ext_resource path="res://enemy_sound.tres" type="SampleLibrary" id=8]
+[ext_resource path="res://resources/enemy_sound.tres" type="SampleLibrary" id=8]
 [ext_resource path="res://assets/Images/explosion_red/enemy_explosion_red1_big1.png" type="Texture" id=9]
 [ext_resource path="res://assets/Images/explosion_red/enemy_explosion_red1_big2.png" type="Texture" id=10]
 [ext_resource path="res://assets/Images/explosion_red/enemy_explosion_red1_big3.png" type="Texture" id=11]
@@ -175,7 +175,6 @@ transform/scale = Vector2( 0.65831, 0.65831 )
 z/z = 2
 frames = SubResource( 2 )
 animation = "default"
-frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true

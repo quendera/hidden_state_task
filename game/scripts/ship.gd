@@ -9,7 +9,7 @@ var velocity = 400
 var ready2shoot = true
 var charging_velocity = 100
 var shooting = false
-var bullet_scene = preload("res://bullet.tscn")
+var bullet_scene = preload("res://scenes/bullet.tscn")
 var bullet_instance
 var dirs = {"ui_left":Vector2(-1,0), "ui_right":Vector2(1,0), "ui_up":Vector2(0,-1), "ui_down":Vector2(0,1)}
 
