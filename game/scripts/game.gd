@@ -1,7 +1,6 @@
 extends Node2D
 
 
-var asteroid_scene = preload("res://asteroid.tscn")
 var enemy_scene = preload("res://enemy.tscn")
 var gamma = 0.2
 var counter = 0

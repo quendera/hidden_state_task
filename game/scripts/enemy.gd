@@ -12,8 +12,8 @@ var dir
 var pos
 const low_x = 800
 const high_x = 1000
-const low_y = 300
-const high_y = 400
+const low_y = 250
+const high_y = 500
 var explosions = ["explosion_red", "explosion_blue"]
 var explosion
 var num_rays = 5
