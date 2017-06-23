@@ -54,7 +54,7 @@ func lose_life(power, correct):
 	if correct:
 		return (power)/50
 	else:
-		return -pow(power,1.5)/100
+		return -pow(1.05,power)/20
 
 
 func reflect(power):

@@ -27,7 +27,8 @@ func _process(delta):
 func _draw():
 	var size_tot = x_scale*(max_decrease+max_increase)+3*frame
 #	top_left.x = (get_node("../../").w-size_tot)/2
-	top_left = Vector2((get_node("../../").w-size_tot)/2, get_node("../..").h-2*frame-h-40)
+#	top_left.y = get_node("../..").h-2*frame-h-40
+	top_left = Vector2(40, 700)
 	draw_rectangle(top_left-Vector2(frame,frame), Vector2(x_scale*(max_decrease+max_increase)+3*frame, h+2*frame), 
 	colors[get_node("../../ship").polarity])
 	draw_rectangle(top_left, Vector2(x_scale*max_decrease,h), Color(0.5,0.5,0.5))

@@ -1,39 +1,12 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=8 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://scripts/bg.gd" type="Script" id=2]
 [ext_resource path="res://ship.tscn" type="PackedScene" id=3]
 [ext_resource path="res://enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=5]
-[ext_resource path="res://scripts/draw_bars.gd" type="Script" id=6]
-[ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=7]
-[ext_resource path="res://scripts/pause.gd" type="Script" id=8]
-
-[sub_resource type="StyleBoxFlat" id=1]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-bg_color = Color( 0.988191, 0.9767, 0.988281, 1 )
-light_color = Color( 0.8, 0.8, 0.8, 1 )
-dark_color = Color( 0.8, 0.8, 0.8, 1 )
-border_size = 0
-border_blend = true
-draw_bg = true
-
-[sub_resource type="StyleBoxFlat" id=2]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-bg_color = Color( 0.6, 0.6, 0.6, 1 )
-light_color = Color( 0.8, 0.8, 0.8, 1 )
-dark_color = Color( 0.8, 0.8, 0.8, 1 )
-border_size = 0
-border_blend = true
-draw_bg = true
+[ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=6]
+[ext_resource path="res://scripts/pause.gd" type="Script" id=7]
 
 [node name="game" type="Node2D"]
 
@@ -101,58 +74,9 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="draw_bars" type="Node2D" parent="layer"]
-
-script/script = ExtResource( 6 )
-
-[node name="decreased_life" type="ProgressBar" parent="layer"]
-
-visibility/visible = false
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 413.0
-margin/top = 39.0
-margin/right = 528.0
-margin/bottom = 62.0
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
-range/min = 0.0
-range/max = 100.0
-range/step = 1.0
-range/page = 0.0
-range/value = 1.0
-range/exp_edit = false
-range/rounded = false
-percent/visible = false
-
-[node name="increased_life" type="ProgressBar" parent="layer"]
-
-visibility/visible = false
-rect/rotation = 180.0
-focus/ignore_mouse = false
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 755.0
-margin/top = 62.0
-margin/right = 978.0
-margin/bottom = 85.0
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
-range/min = 0.0
-range/max = 100.0
-range/step = 1.0
-range/page = 0.0
-range/value = 1.0
-range/exp_edit = false
-range/rounded = false
-percent/visible = false
-
 [node name="soundtrack" type="StreamPlayer" parent="."]
 
-stream/stream = ExtResource( 7 )
+stream/stream = ExtResource( 6 )
 stream/play = true
 stream/loop = true
 stream/volume_db = 1.0
@@ -164,7 +88,7 @@ stream/buffering_ms = 500
 [node name="pause" type="Node2D" parent="."]
 
 process/pause_mode = 2
-script/script = ExtResource( 8 )
+script/script = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
