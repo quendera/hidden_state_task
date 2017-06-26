@@ -29,11 +29,11 @@ func _process(delta):
 
 func _draw():
 	h = get_node("../boss_life").get_size().y
-	y = get_node("../boss_life").get_global_pos().y
 	l = get_node("../boss_life").get_size().x
+	y = get_node("../boss_life").get_global_pos().y-h
 	var x_scale = (l-frame)/float(max_increase[5]+max_decrease[5])
 	var color = colors[get_node("../../ship").polarity]
-	var begin1 = get_node("../../").w-get_node("../boss_life").get_global_pos().x-l
+	var begin1 = get_node("../../").w-get_node("../boss_life").get_global_pos().x
 	var end1 = begin1+x_scale*max_decrease[5]
 	var begin2 = end1+frame
 	var end2 = begin2 + x_scale*max_increase[5]

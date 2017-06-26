@@ -95,14 +95,15 @@ scale = Vector2( 1, 1 )
 
 [node name="boss_life" type="ProgressBar" parent="CanvasLayer"]
 
+rect/rotation = 180.0
 focus/ignore_mouse = false
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 760.0
-margin/top = 34.0
-margin/right = 1224.0
-margin/bottom = 67.0
+margin/left = 1255.0
+margin/top = 57.0
+margin/right = 1719.0
+margin/bottom = 90.0
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
 range/min = 0.0
