@@ -18,7 +18,7 @@ func _process(delta):
 func _ready():
 	set_scale(scale_baseline*pow(1+scale_step,steps-1))
 	get_node("frames").set_frame(polarity)
-	get_node("sound").play("laser")
+#	get_node("sound").play("laser")
 	set_process(true)
 
 func _on_bullet_area_enter(area):

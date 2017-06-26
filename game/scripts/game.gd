@@ -9,7 +9,7 @@ var w = Globals.get("display/width")
 var h = Globals.get("display/height")
 
 func _ready():
-	pass
+	randomize()
 
 
 func save_data():

@@ -172,7 +172,7 @@ transform/scale = Vector2( 0.65831, 0.65831 )
 z/z = 2
 frames = SubResource( 2 )
 animation = "default"
-frame = 3
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -243,7 +243,7 @@ autostart = true
 [node name="laser" type="AnimatedSprite" parent="."]
 
 visibility/visible = false
-transform/pos = Vector2( -97.9587, 63.9776 )
+transform/pos = Vector2( -95.6866, 63.9776 )
 z/z = 2
 frames = SubResource( 7 )
 animation = "default"
@@ -308,7 +308,7 @@ max_lines_visible = -1
 
 process_mode = 1
 wait_time = 4.0
-one_shot = false
+one_shot = true
 autostart = true
 
 [connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
