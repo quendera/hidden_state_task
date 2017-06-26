@@ -38,12 +38,12 @@ func _process(delta):
 			shooting = true
 			spawn_bullet(polarity)
 		charge = clamp(charge+delta*charging_velocity, 0, 100)
-		steps = int(floor(charge/25))+(charge > 0 )
 		bullet_instance.steps = steps
 	if not Input.is_action_pressed("shoot") and shooting:
 		bullet_instance.detached = true
 		shooting = false
 		ready2shoot = false
+	steps = int(floor(charge/25))+(charge > 0 )
 	ship_pos.x = clamp(ship_pos.x, 100, get_node("..").w*0.4)
 	ship_pos.y = clamp(ship_pos.y, 0, get_node("..").h)
 	set_pos(ship_pos)

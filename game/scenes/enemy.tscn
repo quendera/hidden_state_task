@@ -172,6 +172,7 @@ transform/scale = Vector2( 0.65831, 0.65831 )
 z/z = 2
 frames = SubResource( 2 )
 animation = "default"
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -287,11 +288,6 @@ build_mode = 0
 polygon = Vector2Array( -9.36649, 7.94427, -120.404, 39.4048, -1197.46, 37.5541, -1197.46, -30.9187, -118.553, -34.62, -10.9905, -7.99553 )
 shape_range = Vector2( 0, 0 )
 trigger = false
-
-[node name="draw_life" type="Node2D" parent="."]
-
-transform/pos = Vector2( 7.731, 27.1127 )
-z/z = 2
 
 [node name="lost_life" type="Label" parent="."]
 
