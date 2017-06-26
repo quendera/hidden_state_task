@@ -2,7 +2,7 @@ extends Sprite
 
 
 # class member variables go here, for example:
-const SPEED = 30
+const SPEED = 15
 var pos
 
 func _ready():
@@ -13,6 +13,6 @@ func _ready():
 func _process(delta):
 	translate(-delta*SPEED*Vector2(1,0))
 	pos = get_pos()
-	if pos.x < -1000:
-		pos += Vector2(1000,0)
+	if pos.x +  5000*0.9 <= get_node("..").w:
+		pos.x += get_texture().get_size().x*0.9
 		set_pos(pos)

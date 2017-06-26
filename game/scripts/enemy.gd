@@ -10,14 +10,14 @@ const SPEED = 30
 var enemy_bullet_instance
 var dir
 var pos
-const low_x = 850
-const high_x = 1000
+const low_x = 900
+const high_x = 1100
 const low_y = 250
-const high_y = 450
+const high_y = 500
 var explosions = ["explosion_red", "explosion_blue"]
 var explosion
 var num_rays = 5
-var shooting = true
+var shooting = false
 var shooting_dir
 var shooting_offset
 var max_life = 1000
@@ -105,5 +105,6 @@ func attack(num_rays):
 func _on_shooting_timeout():
 	if shooting:
 		attack(num_rays)
-	if rand_range(0,1) < 0.1:
-		shooting = not shooting
+
+func _on_toggle_shooting_timeout():
+	shooting = not shooting
