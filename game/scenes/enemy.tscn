@@ -242,7 +242,6 @@ autostart = true
 
 [node name="laser" type="AnimatedSprite" parent="."]
 
-editor/display_folded = true
 visibility/visible = false
 transform/pos = Vector2( -97.9587, 63.9776 )
 z/z = 2
@@ -261,7 +260,7 @@ __meta__ = {
 [node name="timer" type="Timer" parent="laser"]
 
 process_mode = 1
-wait_time = 0.25
+wait_time = 0.2
 one_shot = true
 autostart = false
 

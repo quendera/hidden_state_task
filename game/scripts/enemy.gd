@@ -68,10 +68,10 @@ func lose_life(steps, correct):
 
 
 func reflect(steps):
-#	var vec = get_node("../ship").get_global_pos()-get_node("laser/position").get_global_pos()
-#	get_node("laser").set_rot(vec.angle()+PI/2)
-#	get_node("laser").activate(polarity)
-#	get_node("sound").play("laser")
+	var vec = get_node("../ship").get_global_pos()+get_node("../ship").ship_displace*get_node("laser/timer").get_wait_time()-get_node("laser/position").get_global_pos()
+	get_node("laser").set_rot(vec.angle()+PI/2)
+	get_node("laser").activate(polarity)
+	get_node("sound").play("laser")
 	lost_life = lose_life(steps, false)
 	_on_bullet_hit()
 

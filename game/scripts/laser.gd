@@ -6,7 +6,6 @@ func activate(polarity):
 	set_hidden(false)
 	set_frame(polarity)
 	set_modulate(Color(1, 1, 1, 0.1))
-	get_node("../../ship").active = false
 	get_node("timer").start()
 	get_node("timer_off").start()
 
