@@ -13,16 +13,16 @@ var pos
 const low_x = 850
 const high_x = 1000
 const low_y = 250
-const high_y = 500
+const high_y = 450
 var explosions = ["explosion_red", "explosion_blue"]
 var explosion
-var num_rays = 3
+var num_rays = 5
 var shooting = true
 var shooting_dir
 var shooting_offset
-var max_life = 5000
+var max_life = 1000
 var life = max_life
-var regenerate_vec = [10, 25, 48.33, 88.33, 178.33]
+var regenerate_vec = [0, 10, 25, 48.33, 88.33, 178.33]
 var lost_life = 0
 var life_sign
 
@@ -53,38 +53,35 @@ func _on_bullet_hit():
 	else:
 		life_sign = ""
 	get_node("lost_life").set_text(life_sign+str(int(-lost_life)))
-	get_node("draw_life").integrating = false
+#	get_node("draw_life").integrating = false
 	get_node("timer").start()
 	get_node("frames").set_modulate(colors[polarity])
 	if rand_range(0,1) < get_node("../").gamma:
 		polarity = 1-polarity
 
 
-func lose_life(power, correct):
-	if power == 0 :
-		return 0
-	var steps = int(floor(power/25))
+func lose_life(steps, correct):
 	if correct:
-		return 10*(steps+1)
+		return 10*steps
 	else:
 		return -regenerate_vec[steps]
 
 
-func reflect(power):
-	var vec = get_node("../ship").get_global_pos()-get_node("laser/position").get_global_pos()
-	get_node("laser").set_rot(vec.angle()+PI/2)
-	get_node("laser").activate(polarity)
-	get_node("sound").play("laser")
-	lost_life = lose_life(power, false)
+func reflect(steps):
+#	var vec = get_node("../ship").get_global_pos()-get_node("laser/position").get_global_pos()
+#	get_node("laser").set_rot(vec.angle()+PI/2)
+#	get_node("laser").activate(polarity)
+#	get_node("sound").play("laser")
+	lost_life = lose_life(steps, false)
 	_on_bullet_hit()
 
 
-func explode(power):
+func explode(steps):
 	explosion = explosions[int(polarity)]
-	get_node(explosion).set_scale(Vector2(power/100, power/100))
+	get_node(explosion).set_scale(Vector2(steps/float(5), steps/float(5)))
 	get_node("anim").play(explosion)
 	get_node("sound").play("explosion")
-	lost_life = lose_life(power, true)
+	lost_life = lose_life(steps, true)
 	_on_bullet_hit()
 
 func _on_timer_timeout():
@@ -101,7 +98,7 @@ func spawn_enemy_bullet(dir):
 func attack(num_rays):
 	for i in range(num_rays):
 		shooting_offset = sin(OS.get_ticks_msec()/float(1000))*0.5
-		var angle = shooting_offset+PI+PI*(i-1)/num_rays
+		var angle = shooting_offset+PI+PI*(i-2)/num_rays
 		shooting_dir = Vector2(cos(angle),sin(angle))
 		spawn_enemy_bullet(shooting_dir)
 

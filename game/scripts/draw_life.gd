@@ -14,5 +14,5 @@ func _process(delta):
 func _draw():
 	var current_life = get_node("../").life
 	var max_life = get_node("../").max_life
-	Draw.draw_arc(self,Vector2(0,0),275,300,50,50-100*current_life/float(max_life), color)
+	Draw.draw_arc(self,Vector2(0,0),275,315,90,90-180*current_life/float(max_life), color)
 

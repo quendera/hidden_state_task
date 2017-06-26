@@ -2,17 +2,24 @@ extends Area2D
 
 const SPEED = 2000
 var polarity # 0 is red, 1 is blue
-var power
+var steps = 0
 var exploded = false
+var detached = false
+var scale_baseline = Vector2(-0.15,-0.15)
+var scale_step = Vector2(0.3,0.3)
 
 func _process(delta):
-	get_node("frames").set_frame(polarity)
-	translate(delta*SPEED*Vector2(1,0))
+	set_scale(scale_baseline+scale_step*steps)
+	if detached:
+		translate(delta*SPEED*Vector2(1,0))
+	else:
+		set_global_pos(get_node("../ship/shoot_from").get_global_pos())
 
 func _ready():
+	set_scale(scale_baseline+scale_step*steps)
+	get_node("frames").set_frame(polarity)
 	get_node("sound").play("laser")
 	set_process(true)
-	set_scale(get_scale()*power/30+Vector2(0.2,0.2))
 
 func _on_bullet_area_enter(area):
 	if area.is_in_group("enemies"):
@@ -21,9 +28,9 @@ func _on_bullet_area_enter(area):
 		get_node("../").data["polarity_shot"].push_back(polarity)
 		get_node("../").data["polarity_asteroid"].push_back(area.polarity)
 		if area.polarity == polarity:
-			area.explode(power)
+			area.explode(steps)
 		else:
-			area.reflect(power)
+			area.reflect(steps)
 		queue_free()
 
 func _on_visibility_exit_screen():
@@ -32,6 +39,5 @@ func _on_visibility_exit_screen():
 		get_node("../ship").charge = 0
 	queue_free()
 
-func init(_polarity, _power):
+func init(_polarity):
 	polarity = _polarity
-	power = _power

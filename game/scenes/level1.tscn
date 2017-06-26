@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=1]
+[gd_scene load_steps=11 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/bganim/bg1.png" type="Texture" id=2]
@@ -7,6 +7,33 @@
 [ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=6]
 [ext_resource path="res://scripts/pause.gd" type="Script" id=7]
+[ext_resource path="res://scripts/boss_life.gd" type="Script" id=8]
+
+[sub_resource type="StyleBoxFlat" id=1]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+bg_color = Color( 0.733568, 0.103073, 0.753906, 1 )
+light_color = Color( 0.527344, 0.527344, 0.527344, 1 )
+dark_color = Color( 0.8, 0.8, 0.8, 1 )
+border_size = 0
+border_blend = true
+draw_bg = true
+
+[sub_resource type="StyleBoxFlat" id=2]
+
+content_margin/left = -1.0
+content_margin/right = -1.0
+content_margin/top = -1.0
+content_margin/bottom = -1.0
+bg_color = Color( 0.93195, 0.565918, 0.953125, 1 )
+light_color = Color( 0.8, 0.8, 0.8, 1 )
+dark_color = Color( 0.8, 0.8, 0.8, 1 )
+border_size = 0
+border_blend = true
+draw_bg = true
 
 [node name="game" type="Node2D"]
 
@@ -35,6 +62,7 @@ autostart = false
 [node name="enemy" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 1013.21, 341.53 )
+transform/scale = Vector2( 0.8, 0.8 )
 z/z = 1
 
 [node name="soundtrack" type="StreamPlayer" parent="."]
@@ -55,5 +83,34 @@ script/script = ExtResource( 7 )
 __meta__ = {
 "_edit_lock_": true
 }
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="boss_life" type="ProgressBar" parent="CanvasLayer"]
+
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 778.0
+margin/top = 666.0
+margin/right = 1242.0
+margin/bottom = 699.0
+custom_styles/fg = SubResource( 1 )
+custom_styles/bg = SubResource( 2 )
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 100.0
+range/exp_edit = false
+range/rounded = false
+percent/visible = false
+script/script = ExtResource( 8 )
 
 
