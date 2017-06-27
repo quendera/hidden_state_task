@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=15 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/bg/Space_bkgr.png" type="Texture" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://scripts/pause.gd" type="Script" id=7]
 [ext_resource path="res://scripts/boss_life.gd" type="Script" id=8]
 [ext_resource path="res://scripts/prediction_bars.gd" type="Script" id=9]
+[ext_resource path="res://assets/Images/white.png" type="Texture" id=10]
 
 [sub_resource type="StyleBoxFlat" id=1]
 
@@ -35,6 +36,39 @@ dark_color = Color( 0.8, 0.8, 0.8, 1 )
 border_size = 0
 border_blend = true
 draw_bg = true
+
+[sub_resource type="CanvasItemShader" id=3]
+
+_code = {
+"fragment": "uniform float brightness = 1.0;
+uniform float contrast = 1.0;
+uniform float saturation = 1.0;
+
+color c = vec4(texscreen(SCREEN_UV),1);
+c.rgb = mix(vec3(0.0), c.rgb, brightness);
+c.rgb = mix(vec3(0.5), c.rgb, contrast);
+c.rgb = mix(vec3(dot(vec3(1.0), c.rgb)*0.33333), c.rgb, saturation);
+
+vec4 to_grayscale(vec4 pixcol) {
+	float average = (pixcol.r+pixcol.g+pixcol.b)/3;
+	return vec4(average,average,average,1);
+}
+
+COLOR = to_grayscale(c);",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=4]
+
+shader/shader = SubResource( 3 )
+shader/shading_mode = 0
+shader_param/brightness = 1.0
+shader_param/contrast = 1.0
+shader_param/saturation = 1.0
 
 [node name="game" type="Node2D"]
 
@@ -119,5 +153,11 @@ script/script = ExtResource( 8 )
 [node name="prediction_bars" type="Node2D" parent="CanvasLayer"]
 
 script/script = ExtResource( 9 )
+
+[node name="shade" type="Sprite" parent="CanvasLayer"]
+
+material/material = SubResource( 4 )
+texture = ExtResource( 10 )
+centered = false
 
 
