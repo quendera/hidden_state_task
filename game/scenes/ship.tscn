@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=1]
 
 [ext_resource path="res://scripts/ship.gd" type="Script" id=1]
-[ext_resource path="res://assets/Images/animated_ship/animated_ship.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://resources/animated_ship.tres" type="SpriteFrames" id=2]
 [ext_resource path="res://assets/Sounds/explosion.wav" type="Sample" id=3]
 [ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.1.png" type="Texture" id=4]
 [ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.2.png" type="Texture" id=5]
@@ -114,6 +114,7 @@ transform/rot = 90.0
 transform/scale = Vector2( 0.5, 0.5 )
 frames = ExtResource( 2 )
 animation = "default"
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
