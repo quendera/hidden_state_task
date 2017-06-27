@@ -17,6 +17,7 @@ var dirs = {"ui_left":Vector2(-1,0), "ui_right":Vector2(1,0), "ui_up":Vector2(0,
 
 
 func _ready():
+	randomize()
 	set_process(true)
 	set_process_input(true)
 

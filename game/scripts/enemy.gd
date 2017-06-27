@@ -1,7 +1,6 @@
 extends Area2D
 
-export var exploding = 0
-export var frame = 0
+var data = {"time":[], "polarity_shot":[], "polarity_enemy":[]}
 # class member variables go here, for example:
 var polarity = 1*(rand_range(0,1) > 0.5)
 var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
@@ -28,9 +27,12 @@ var attacks_effectuated = 0
 var next_attack
 var attack_durations = [4, 2, 1]
 var attack_frequency = [0.3, 0.03, 0.1]
+var hazard
+var consecutive = 0
 
 func _ready():
 	randomize()
+	next_attack = randi() % 3
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
 	add_to_group("enemies")
 	set_process(true)
@@ -38,7 +40,7 @@ func _ready():
 
 func _process(delta):
 	if life <= 0:
-		get_node("../").save_data()
+		save_data()
 		get_tree().quit()
 	life = clamp(life,0,max_life)
 	pos = get_node("centroid").get_global_pos()
@@ -49,6 +51,11 @@ func _process(delta):
 	if (dir.y)*(pos.y-clamp(pos.y, low_y, high_y)) > 0.001:
 		dir.y = -dir.y
 
+func save_data():
+	var file = File.new()
+	file.open("/Users/pietro/Documents/save_try.json", file.WRITE)
+	file.store_line(data.to_json())
+	file.close()
 
 func _on_bullet_hit():
 	life -= lost_life
@@ -57,10 +64,14 @@ func _on_bullet_hit():
 	else:
 		life_sign = ""
 	get_node("lost_life").set_text(life_sign+str(int(-lost_life)))
-	get_node("timer").start()
-	get_node("frames").set_modulate(colors[polarity])
-	if rand_range(0,1) < get_node("../").gamma:
+	get_node("frames").get_material().set_shader_param("hidden", false)
+	get_node("frames").get_material().set_shader_param("x", polarity == 1)
+	hazard = (consecutive)*0.2
+	if rand_range(0,1) < hazard:
 		polarity = 1-polarity
+		consecutive = 0
+	else:
+		consecutive += 1
 
 
 func lose_life(steps, correct):
@@ -84,9 +95,14 @@ func explode(steps):
 	lost_life = lose_life(steps, true)
 	_on_bullet_hit()
 
-func _on_timer_timeout():
-	get_node("frames").set_modulate(Color(1,1,1))
+func _on_anim_finished():
+#	data["time"].push_back(OS.get_ticks_msec())
+#	data["polarity_shot"].push_back(polarity)
+#	data["polarity_enemy"].push_back(area.polarity)
+	get_node("frames").get_material().set_shader_param("hidden", true)
 	get_node("lost_life").set_text("")
+	get_node("../ship").ready2shoot = true
+	get_node("../ship").charge = 0
 
 
 func spawn_enemy_bullet(dir):
@@ -105,7 +121,8 @@ func _on_toggle_shooting_timeout():
 		get_node("toggle_shooting").set_wait_time(4+4*(attacks_effectuated % 3 == 0))
 	else:
 		if attacks_effectuated % 3 == 0:
-			next_attack = randi() % 3
+			next_attack += 2*(randi() % 2)-1
+			next_attack = next_attack % 3
 		attacks_effectuated += 1
 		get_node("shooting").set_wait_time(attack_frequency[next_attack])
 		get_node("toggle_shooting").set_wait_time(attack_durations[next_attack])
@@ -157,5 +174,6 @@ func attack2():
 		enemy_bullet_instance.get_global_pos())
 		vec.x *= 0.8
 		enemy_bullet_instance.dir = vec.normalized()
+
 
 

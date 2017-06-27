@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=1]
+[gd_scene load_steps=66 format=1]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big1.png" type="Texture" id=2]
@@ -59,6 +59,64 @@
 custom_solver_bias = 0.0
 points = Vector2Array( -182.673, -3.23584, -114.2, -145.733, 202.255, -138.331, 124.53, 209.585, -162.316, 131.859 )
 
+[sub_resource type="CanvasItemShader" id=11]
+
+_code = {
+"fragment": "vec3 rgb2hsv(vec3 c) {
+    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+}
+
+
+vec3 hsv2rgb(vec3 c)
+{
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+
+uniform bool x;
+uniform bool hidden;
+float new_hue;
+vec4 textureColor = tex(TEXTURE, UV);
+vec3 fragRGB = textureColor.rgb;
+vec3 fragHSV = rgb2hsv(fragRGB).xyz;
+if (x) {
+	new_hue = 0.66;
+}
+else {
+	new_hue = 0.0;
+}
+if (!hidden) {
+	if (fragHSV.y > 0.2) {
+		fragHSV.x = new_hue;
+		fragHSV.y = clamp(fragHSV.y+0.2,0,1);
+	}
+}
+//	fragHSV.y = clamp(fragHSV.y+0.2,0,1);
+
+//	fragHSV.z = clamp(fragHSV.z-0.1,0,1);
+fragRGB = hsv2rgb(fragHSV);
+COLOR  = vec4(fragRGB, textureColor.w);",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=12]
+
+shader/shader = SubResource( 11 )
+shader/shading_mode = 0
+shader_param/x = false
+shader_param/hidden = true
+
 [sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
@@ -89,7 +147,7 @@ animations = [ {
 [sub_resource type="Animation" id=5]
 
 resource/name = "explosion_blue"
-length = 0.6
+length = 0.5
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -97,7 +155,7 @@ tracks/0/path = NodePath("explosion_blue:visibility/visible")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.6 ),
+"times": FloatArray( 0, 0.5 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -107,7 +165,7 @@ tracks/1/path = NodePath("explosion_blue:frame")
 tracks/1/interp = 1
 tracks/1/imported = false
 tracks/1/keys = {
-"times": FloatArray( 0, 0.6 ),
+"times": FloatArray( 0, 0.5 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 0,
 "values": [ 0, 10 ]
@@ -115,7 +173,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=6]
 
-length = 0.6
+length = 0.5
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -123,7 +181,7 @@ tracks/0/path = NodePath("explosion_red:visibility/visible")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.6 ),
+"times": FloatArray( 0, 0.5 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -133,7 +191,7 @@ tracks/1/path = NodePath("explosion_red:frame")
 tracks/1/interp = 1
 tracks/1/imported = false
 tracks/1/keys = {
-"times": FloatArray( 0, 0.6 ),
+"times": FloatArray( 0, 0.5 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 0,
 "values": [ 0, 10 ]
@@ -142,7 +200,7 @@ tracks/1/keys = {
 [sub_resource type="Animation" id=7]
 
 resource/name = "laser"
-length = 1.0
+length = 0.9
 loop = false
 step = 0.1
 tracks/0/type = "value"
@@ -200,11 +258,10 @@ script/script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
-exploding = 0
-frame = 0
 
 [node name="collision" type="CollisionPolygon2D" parent="."]
 
+visibility/visible = false
 build_mode = 0
 polygon = Vector2Array( -182.673, -3.23584, -114.2, -145.733, 202.255, -138.331, 124.53, 209.585, -162.316, 131.859 )
 shape_range = Vector2( 0, 0 )
@@ -219,23 +276,17 @@ transform/pos = Vector2( -86.9791, 74.1617 )
 
 [node name="frames" type="AnimatedSprite" parent="."]
 
+material/material = SubResource( 12 )
 transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 z/z = 2
 frames = SubResource( 2 )
 animation = "default"
-frame = 3
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
 }
-
-[node name="timer" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 0.8
-one_shot = true
-autostart = false
 
 [node name="sound" type="SamplePlayer2D" parent="."]
 
@@ -266,6 +317,7 @@ transform/scale = Vector2( 0.53, 0.53 )
 z/z = 2
 frames = SubResource( 4 )
 animation = "default"
+frame = 10
 __meta__ = {
 "_edit_lock_": true
 }
@@ -358,7 +410,7 @@ wait_time = 4.0
 one_shot = true
 autostart = true
 
-[connection signal="timeout" from="timer" to="." method="_on_timer_timeout"]
+[connection signal="finished" from="anim" to="." method="_on_anim_finished"]
 
 [connection signal="timeout" from="shooting" to="." method="_on_shooting_timeout"]
 
