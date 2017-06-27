@@ -87,20 +87,19 @@ vec4 textureColor = tex(TEXTURE, UV);
 vec3 fragRGB = textureColor.rgb;
 vec3 fragHSV = rgb2hsv(fragRGB).xyz;
 if (x) {
-	new_hue = 0.66;
+	new_hue = 0.56;
 }
 else {
 	new_hue = 0.0;
 }
 if (!hidden) {
-	if (fragHSV.y > 0.2) {
+	if ((fragHSV.y > 0.2) && (fragHSV.z > 0.2)) {
 		fragHSV.x = new_hue;
-		fragHSV.y = clamp(fragHSV.y+0.2,0,1);
+		fragHSV.y = clamp(fragHSV.y+0.1,0,1);
 	}
 }
-//	fragHSV.y = clamp(fragHSV.y+0.2,0,1);
 
-//	fragHSV.z = clamp(fragHSV.z-0.1,0,1);
+//	
 fragRGB = hsv2rgb(fragHSV);
 COLOR  = vec4(fragRGB, textureColor.w);",
 "fragment_ofs": 0,
@@ -114,7 +113,7 @@ COLOR  = vec4(fragRGB, textureColor.w);",
 
 shader/shader = SubResource( 11 )
 shader/shading_mode = 0
-shader_param/x = false
+shader_param/x = true
 shader_param/hidden = true
 
 [sub_resource type="SpriteFrames" id=2]
@@ -282,7 +281,6 @@ transform/scale = Vector2( 0.65831, 0.65831 )
 z/z = 2
 frames = SubResource( 2 )
 animation = "default"
-frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
