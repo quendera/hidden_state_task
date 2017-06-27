@@ -16,18 +16,18 @@ const low_y = 250
 const high_y = 500
 var explosions = ["explosion_red", "explosion_blue"]
 var explosion
-var num_rays = 5
 var shooting = false
-var max_life = 1000
+var max_life = 4000
 var life = max_life
 var regenerate_vec = [0, 10, 25, 48.33, 88.33, 178.33]
 var lost_life = 0
 var life_sign
 var offset = 45
 var attack_amount = 3
-var attack_number = -1
-var attack_durations = [4, 4, 1]
-var attack_frequency = [0.3, 0.4, 0.1]
+var attacks_effectuated = 0
+var next_attack
+var attack_durations = [4, 2, 1]
+var attack_frequency = [0.3, 0.03, 0.1]
 
 func _ready():
 	randomize()
@@ -71,11 +71,7 @@ func lose_life(steps, correct):
 
 
 func reflect(steps):
-	var vec = get_node("../ship").get_global_pos()+get_node("../ship").ship_displace*get_node("laser/timer").get_wait_time()-get_node("laser/position").get_global_pos()
-	get_node("laser").set_rot(vec.angle()+PI/2)
 	get_node("laser").activate(polarity)
-	get_node("anim").play("laser")
-#	get_node("sound").play("laser")
 	lost_life = lose_life(steps, false)
 	_on_bullet_hit()
 
@@ -101,50 +97,65 @@ func spawn_enemy_bullet(dir):
 
 func _on_shooting_timeout():
 	if shooting:
-		attack(num_rays, attack_number)
+		attack(next_attack)
 
 func _on_toggle_shooting_timeout():
 	shooting = not shooting
 	if not shooting:
-		get_node("toggle_shooting").set_wait_time(4)
+		get_node("toggle_shooting").set_wait_time(4+4*(attacks_effectuated % 3 == 0))
 	else:
-		if rand_range(0,1) < 0.2 or attack_number == -1:
-			sample_attack()
-		attack_number = 2
-		get_node("shooting").set_wait_time(attack_frequency[attack_number])
-		get_node("toggle_shooting").set_wait_time(attack_durations[attack_number])
+		if attacks_effectuated % 3 == 0:
+			next_attack = randi() % 3
+		attacks_effectuated += 1
+		get_node("shooting").set_wait_time(attack_frequency[next_attack])
+		get_node("toggle_shooting").set_wait_time(attack_durations[next_attack])
 	get_node("toggle_shooting").start()
 
-func sample_attack():
-	attack_number = min(int(floor(rand_range(0,attack_amount))),attack_amount-1)
-
-func attack(num_rays, attack_number):
+func attack(attack_number):
 	if attack_number == 0:
-		attack0(num_rays)
+		attack0()
 	elif attack_number == 1:
-		attack1(num_rays)
+		attack1()
 	elif attack_number == 2:
-		attack2(num_rays)
+		attack2()
 
-func attack0(num_rays):
-	for i in range(num_rays):
+func attack0():
+	for i in range(5):
 		var shooting_offset = sin(OS.get_ticks_msec()/float(1000))*0.5
-		var angle = shooting_offset+PI+PI*(i-2)/num_rays
+		var angle = shooting_offset+PI+PI*(i-2)/float(5)
 		var shooting_dir = Vector2(cos(angle),sin(angle))
 		spawn_enemy_bullet(shooting_dir)
 
-func attack1(num_rays):
-	offset = -offset
-	for i in range(num_rays):
-		spawn_enemy_bullet(Vector2(-1,0))
-		enemy_bullet_instance.translate(Vector2(0,180*(i-2)+offset))
+func get_num_rays(t):
+	if t > 0.78:
+		return 3
+	elif t > 0.61:
+		return 0
+	elif t > 0.39:
+		return 2
+	elif t > 0.22:
+		return 0
+	else:
+		return 1 
 
-func attack2(num_rays):
+func attack1():
 	offset = -offset
+	var num_rays = get_num_rays(get_node("toggle_shooting").get_time_left()/get_node("toggle_shooting").get_wait_time())
 	for i in range(num_rays):
+		var angle = PI+0.2*PI*(i-0.5*(num_rays-1))+rand_range(-0.2,0.2)
+		var shooting_dir = Vector2(cos(angle),sin(angle))
+		spawn_enemy_bullet(shooting_dir)
+#		enemy_bullet_instance.translate(Vector2(0, rand_range(-100,100)))
+
+
+func attack2():
+	offset = -offset
+	for i in range(5):
 		spawn_enemy_bullet(Vector2(-1,0))
 		enemy_bullet_instance.translate(Vector2(0,180*(i-2)+offset))
-		enemy_bullet_instance.dir = (get_node("../ship/get_hits").get_global_pos()- 
-		enemy_bullet_instance.get_global_pos()).normalized()
+		var vec = (get_node("../ship/get_hits").get_global_pos() -
+		enemy_bullet_instance.get_global_pos())
+		vec.x *= 0.8
+		enemy_bullet_instance.dir = vec.normalized()
 
 

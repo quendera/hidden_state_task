@@ -139,7 +139,7 @@ tracks/1/keys = {
 "values": [ 0, 10 ]
 }
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=7]
 
 resource/name = "laser"
 length = 1.0
@@ -160,19 +160,19 @@ tracks/1/path = NodePath("laser:frame")
 tracks/1/interp = 1
 tracks/1/imported = false
 tracks/1/keys = {
-"times": FloatArray( 0, 0.2, 0.8, 0.9 ),
+"times": FloatArray( 0, 0.3, 0.8, 0.9 ),
 "transitions": FloatArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0, 7, 14, 19 ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=9]
+[sub_resource type="CanvasItemMaterial" id=8]
 
 shader/shader = ExtResource( 31 )
 shader/shading_mode = 0
 shader_param/x = false
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=9]
 
 animations = [ {
 "frames": [ ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ), ExtResource( 40 ), ExtResource( 41 ), ExtResource( 42 ), ExtResource( 43 ), ExtResource( 44 ), ExtResource( 45 ), ExtResource( 46 ), ExtResource( 47 ), ExtResource( 48 ), ExtResource( 49 ), ExtResource( 50 ), ExtResource( 51 ) ],
@@ -181,7 +181,7 @@ animations = [ {
 "speed": 10.0
 } ]
 
-[sub_resource type="ConvexPolygonShape2D" id=11]
+[sub_resource type="ConvexPolygonShape2D" id=10]
 
 custom_solver_bias = 0.0
 points = Vector2Array( 3008.14, 89.861, 2902.4, 162.869, -561.82, 162.869, -561.82, 36.9929, 2890.91, 44.5454 )
@@ -224,7 +224,7 @@ transform/scale = Vector2( 0.65831, 0.65831 )
 z/z = 2
 frames = SubResource( 2 )
 animation = "default"
-frame = 5
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -266,7 +266,6 @@ transform/scale = Vector2( 0.53, 0.53 )
 z/z = 2
 frames = SubResource( 4 )
 animation = "default"
-frame = 10
 __meta__ = {
 "_edit_lock_": true
 }
@@ -278,7 +277,7 @@ playback/default_blend_time = 0.0
 root/root = NodePath("..")
 anims/explosion_blue = SubResource( 5 )
 anims/explosion_red = SubResource( 6 )
-anims/laser = SubResource( 10 )
+anims/laser = SubResource( 7 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -296,10 +295,10 @@ autostart = true
 [node name="laser" type="AnimatedSprite" parent="."]
 
 visibility/visible = false
-material/material = SubResource( 9 )
+material/material = SubResource( 8 )
 transform/pos = Vector2( -109.848, 72.7018 )
 z/z = 2
-frames = SubResource( 7 )
+frames = SubResource( 9 )
 animation = "default"
 frame = 19
 centered = false
@@ -313,7 +312,7 @@ transform/pos = Vector2( 18.5067, -0.93866 )
 [node name="timer" type="Timer" parent="laser"]
 
 process_mode = 1
-wait_time = 0.2
+wait_time = 0.3
 one_shot = true
 autostart = false
 
@@ -321,7 +320,7 @@ autostart = false
 
 transform/pos = Vector2( -2988.23, -100.594 )
 input/pickable = true
-shapes/0/shape = SubResource( 11 )
+shapes/0/shape = SubResource( 10 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
