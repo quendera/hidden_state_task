@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=1]
+
+[ext_resource path="res://resources/lasershader.tres" type="Shader" id=1]
+[ext_resource path="res://assets/Images/laser/laser_red_big12.png" type="Texture" id=2]
+[ext_resource path="res://resources/laseranim.tres" type="SpriteFrames" id=3]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+shader/shader = ExtResource( 1 )
+shader/shading_mode = 0
+shader_param/brightness = 1.0
+shader_param/contrast = 1.0
+shader_param/saturation = 1.0
+
+[node name="Sprite" type="Sprite"]
+
+material/material = SubResource( 2 )
+transform/pos = Vector2( 1045.45, 342.011 )
+texture = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+
+visibility/visible = false
+frames = ExtResource( 3 )
+animation = "default"
+
+

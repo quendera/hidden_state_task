@@ -1,0 +1,51 @@
+[gd_scene load_steps=24 format=1]
+
+[ext_resource path="res://resources/laseranimationshader.tres" type="Shader" id=1]
+[ext_resource path="res://assets/Images/laser/laser_blue_big1.png" type="Texture" id=2]
+[ext_resource path="res://assets/Images/laser/laser_blue_big2.png" type="Texture" id=3]
+[ext_resource path="res://assets/Images/laser/laser_blue_big3.png" type="Texture" id=4]
+[ext_resource path="res://assets/Images/laser/laser_blue_big4.png" type="Texture" id=5]
+[ext_resource path="res://assets/Images/laser/laser_blue_big5.png" type="Texture" id=6]
+[ext_resource path="res://assets/Images/laser/laser_blue_big6.png" type="Texture" id=7]
+[ext_resource path="res://assets/Images/laser/laser_blue_big7.png" type="Texture" id=8]
+[ext_resource path="res://assets/Images/laser/laser_blue_big8.png" type="Texture" id=9]
+[ext_resource path="res://assets/Images/laser/laser_blue_big9.png" type="Texture" id=10]
+[ext_resource path="res://assets/Images/laser/laser_blue_big10.png" type="Texture" id=11]
+[ext_resource path="res://assets/Images/laser/laser_blue_big11.png" type="Texture" id=12]
+[ext_resource path="res://assets/Images/laser/laser_blue_big12.png" type="Texture" id=13]
+[ext_resource path="res://assets/Images/laser/laser_blue_big13.png" type="Texture" id=14]
+[ext_resource path="res://assets/Images/laser/laser_blue_big14.png" type="Texture" id=15]
+[ext_resource path="res://assets/Images/laser/laser_blue_big15.png" type="Texture" id=16]
+[ext_resource path="res://assets/Images/laser/laser_blue_big16.png" type="Texture" id=17]
+[ext_resource path="res://assets/Images/laser/laser_blue_big17.png" type="Texture" id=18]
+[ext_resource path="res://assets/Images/laser/laser_blue_big18.png" type="Texture" id=19]
+[ext_resource path="res://assets/Images/laser/laser_blue_big19.png" type="Texture" id=20]
+[ext_resource path="res://assets/Images/laser/laser_blue_big20.png" type="Texture" id=21]
+
+[sub_resource type="CanvasItemMaterial" id=3]
+
+shader/shader = ExtResource( 1 )
+shader/shading_mode = 0
+shader_param/x = false
+
+[sub_resource type="SpriteFrames" id=1]
+
+animations = [ {
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ) ],
+"loop": true,
+"name": "default",
+"speed": 5.0
+} ]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+
+material/material = SubResource( 3 )
+transform/pos = Vector2( 613.894, 348.994 )
+frames = SubResource( 1 )
+animation = "default"
+frame = 5
+playing = true
+
+

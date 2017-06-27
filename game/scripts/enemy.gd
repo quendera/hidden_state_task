@@ -57,7 +57,6 @@ func _on_bullet_hit():
 	else:
 		life_sign = ""
 	get_node("lost_life").set_text(life_sign+str(int(-lost_life)))
-#	get_node("draw_life").integrating = false
 	get_node("timer").start()
 	get_node("frames").set_modulate(colors[polarity])
 	if rand_range(0,1) < get_node("../").gamma:
@@ -75,6 +74,7 @@ func reflect(steps):
 	var vec = get_node("../ship").get_global_pos()+get_node("../ship").ship_displace*get_node("laser/timer").get_wait_time()-get_node("laser/position").get_global_pos()
 	get_node("laser").set_rot(vec.angle()+PI/2)
 	get_node("laser").activate(polarity)
+	get_node("anim").play("laser")
 #	get_node("sound").play("laser")
 	lost_life = lose_life(steps, false)
 	_on_bullet_hit()
@@ -110,6 +110,7 @@ func _on_toggle_shooting_timeout():
 	else:
 		if rand_range(0,1) < 0.2 or attack_number == -1:
 			sample_attack()
+		attack_number = 2
 		get_node("shooting").set_wait_time(attack_frequency[attack_number])
 		get_node("toggle_shooting").set_wait_time(attack_durations[attack_number])
 	get_node("toggle_shooting").start()
