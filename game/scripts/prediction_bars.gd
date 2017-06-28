@@ -28,23 +28,24 @@ func _process(delta):
 	update()
 
 func _draw():
-	h = get_node("../boss_life").get_size().y
-	l = get_node("../boss_life").get_size().x
-	y = get_node("../boss_life").get_global_pos().y-h
-	var x_scale = (l-frame)/float(max_increase[5]+max_decrease[5])
-	var color = colors[get_node("../../ship").polarity]
-	var begin1 = get_node("../../").w-get_node("../boss_life").get_global_pos().x
-	var end1 = begin1+x_scale*max_decrease[5]
-	var begin2 = end1+frame
-	var end2 = begin2 + x_scale*max_increase[5]
-	for i in range(5):
-		var color_pale = color.linear_interpolate(Color(1,1,1),(i+2)/float(7))
-		draw_rectangle(Vector2(begin1+x_scale*max_decrease[i],y),Vector2(x_scale*(max_decrease[i+1]-max_decrease[i]),h),color_pale)
-		draw_rectangle(Vector2(begin2+x_scale*max_increase[i],y),Vector2(x_scale*(max_increase[i+1]-max_increase[i]),h),color_pale)
-	
-	if get_node("../../ship").steps > 0 :
-		draw_rectangle(Vector2(begin1,y),Vector2(x_scale*decreased_life,h),color)
-		draw_rectangle(Vector2(begin2,y),Vector2(x_scale*increased_life,h),color)
+	pass
+#	h = get_node("../boss_life").get_size().y
+#	l = get_node("../boss_life").get_size().x
+#	y = get_node("../boss_life").get_global_pos().y-h
+#	var x_scale = (l-frame)/float(max_increase[5]+max_decrease[5])
+#	var color = colors[get_node("../../ship").polarity]
+#	var begin1 = get_node("../../").w-get_node("../boss_life").get_global_pos().x
+#	var end1 = begin1+x_scale*max_decrease[5]
+#	var begin2 = end1+frame
+#	var end2 = begin2 + x_scale*max_increase[5]
+#	for i in range(5):
+#		var color_pale = color.linear_interpolate(Color(1,1,1),(i+2)/float(7))
+#		draw_rectangle(Vector2(begin1+x_scale*max_decrease[i],y),Vector2(x_scale*(max_decrease[i+1]-max_decrease[i]),h),color_pale)
+#		draw_rectangle(Vector2(begin2+x_scale*max_increase[i],y),Vector2(x_scale*(max_increase[i+1]-max_increase[i]),h),color_pale)
+#	
+#	if get_node("../../ship").steps > 0 :
+#		draw_rectangle(Vector2(begin1,y),Vector2(x_scale*decreased_life,h),color)
+#		draw_rectangle(Vector2(begin2,y),Vector2(x_scale*increased_life,h),color)
 
 func draw_rectangle(pos, size, color):
 	points = Vector2Array()

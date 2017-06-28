@@ -13,8 +13,6 @@ const low_x = 900
 const high_x = 1100
 const low_y = 250
 const high_y = 500
-var explosions = ["explosion_red", "explosion_blue"]
-var explosion
 var shooting = false
 var max_life = 4000
 var life = max_life
@@ -88,9 +86,10 @@ func reflect(steps):
 
 
 func explode(steps):
-	explosion = explosions[int(polarity)]
-	get_node(explosion).set_scale(Vector2(steps/float(5), steps/float(5)))
-	get_node("anim").play(explosion)
+	get_node("explosion").set_scale(Vector2(steps/float(5), steps/float(5)))
+	get_node("explosion").get_material().set_shader_param("x", polarity == 1)
+	get_node("explosion").show()
+	get_node("anim").play("explosion")
 	get_node("sound").play("explosion")
 	lost_life = lose_life(steps, true)
 	_on_bullet_hit()
