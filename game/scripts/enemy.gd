@@ -16,7 +16,8 @@ const high_y = 500
 var shooting = false
 var max_life = 4000
 var life = max_life
-var regenerate_vec = [0, 10, 25, 48.33, 88.33, 178.33]
+var die_vec = [0, 50, 90, 120, 140, 150]
+var regenerate_vec = [0, 50, 110, 180, 260, 350]
 var lost_life = 0
 var life_sign
 var offset = 45
@@ -74,7 +75,7 @@ func _on_bullet_hit():
 
 func lose_life(steps, correct):
 	if correct:
-		return 10*steps
+		return die_vec[steps]
 	else:
 		return -regenerate_vec[steps]
 

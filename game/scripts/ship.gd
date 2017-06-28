@@ -46,7 +46,7 @@ func _process(delta):
 		ready2shoot = false
 	steps = int(floor(charge/25))+(charge > 0 )
 	ship_pos.x = clamp(ship_pos.x, 100, get_node("..").w*0.35)
-	ship_pos.y = clamp(ship_pos.y, get_node("..").h*0.2, get_node("..").h)
+	ship_pos.y = clamp(ship_pos.y, get_node("..").h*0.2, get_node("..").h*0.8)
 	set_pos(ship_pos)
 
 
