@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=1]
+[gd_scene load_steps=11 format=1]
 
 [ext_resource path="res://scripts/powerup.gd" type="Script" id=1]
 [ext_resource path="res://resources/laseranimationshader.tres" type="Shader" id=2]
@@ -8,7 +8,6 @@
 [ext_resource path="res://assets/Images/powerbar/bar4.png" type="Texture" id=6]
 [ext_resource path="res://assets/Images/powerbar/bar5.png" type="Texture" id=7]
 [ext_resource path="res://assets/Images/powerbar/bar6.png" type="Texture" id=8]
-[ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=9]
 
 [sub_resource type="CanvasItemMaterial" id=2]
 
@@ -37,37 +36,8 @@ transform/scale = Vector2( 0.552395, 0.552395 )
 frames = SubResource( 1 )
 animation = "default"
 frame = 5
-
-[node name="energy" type="Label" parent="."]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 24.0
-margin/top = 45.0
-margin/right = 223.0
-margin/bottom = 89.0
-custom_fonts/font = ExtResource( 9 )
-text = "ENERGY"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-
-[node name="attack" type="Label" parent="."]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 24.0
-margin/top = 114.0
-margin/right = 225.0
-margin/bottom = 158.0
-custom_fonts/font = ExtResource( 9 )
-text = "ATTACK"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
 
 

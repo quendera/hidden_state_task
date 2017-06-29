@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/bg/Space_bkgr.png" type="Texture" id=2]
@@ -7,37 +7,12 @@
 [ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=6]
 [ext_resource path="res://scripts/pause.gd" type="Script" id=7]
-[ext_resource path="res://scripts/boss_life.gd" type="Script" id=8]
+[ext_resource path="res://assets/Fonts/labelfont.fnt" type="BitmapFont" id=8]
 [ext_resource path="res://scenes/powerup.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/Images/white.png" type="Texture" id=10]
+[ext_resource path="res://scenes/boss_life.tscn" type="PackedScene" id=10]
+[ext_resource path="res://assets/Images/white.png" type="Texture" id=11]
 
-[sub_resource type="StyleBoxFlat" id=1]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-bg_color = Color( 0.733568, 0.103073, 0.753906, 1 )
-light_color = Color( 0.527344, 0.527344, 0.527344, 1 )
-dark_color = Color( 0.8, 0.8, 0.8, 1 )
-border_size = 0
-border_blend = true
-draw_bg = true
-
-[sub_resource type="StyleBoxFlat" id=2]
-
-content_margin/left = -1.0
-content_margin/right = -1.0
-content_margin/top = -1.0
-content_margin/bottom = -1.0
-bg_color = Color( 0.93195, 0.565918, 0.953125, 1 )
-light_color = Color( 0.8, 0.8, 0.8, 1 )
-dark_color = Color( 0.8, 0.8, 0.8, 1 )
-border_size = 0
-border_blend = true
-draw_bg = true
-
-[sub_resource type="CanvasItemShader" id=3]
+[sub_resource type="CanvasItemShader" id=1]
 
 _code = {
 "fragment": "uniform float brightness = 1.0;
@@ -62,9 +37,9 @@ COLOR = to_grayscale(c);",
 "vertex_ofs": 0
 }
 
-[sub_resource type="CanvasItemMaterial" id=4]
+[sub_resource type="CanvasItemMaterial" id=2]
 
-shader/shader = SubResource( 3 )
+shader/shader = SubResource( 1 )
 shader/shading_mode = 0
 shader_param/brightness = 1.0
 shader_param/contrast = 1.0
@@ -127,38 +102,80 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 
-[node name="boss_life" type="ProgressBar" parent="CanvasLayer"]
+[node name="attack" type="Label" parent="CanvasLayer"]
 
-rect/rotation = 180.0
-focus/ignore_mouse = false
+focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 1241.0
-margin/top = 55.0
-margin/right = 1773.0
-margin/bottom = 88.0
-custom_styles/fg = SubResource( 1 )
-custom_styles/bg = SubResource( 2 )
-range/min = 0.0
-range/max = 100.0
-range/step = 1.0
-range/page = 0.0
-range/value = 100.0
-range/exp_edit = false
-range/rounded = false
-percent/visible = false
-script/script = ExtResource( 8 )
+margin/left = 31.0
+margin/top = 70.0
+margin/right = 166.0
+margin/bottom = 114.0
+custom_fonts/font = ExtResource( 8 )
+custom_colors/font_color = Color( 0.996094, 0.515496, 0.00389099, 1 )
+text = "DAMAGE"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="energy" type="Label" parent="CanvasLayer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 34.0
+margin/top = 27.0
+margin/right = 169.0
+margin/bottom = 71.0
+custom_fonts/font = ExtResource( 8 )
+custom_colors/font_color = Color( 0.496817, 0.239624, 0.589844, 1 )
+text = "ENERGY"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="hp" type="Label" parent="CanvasLayer"]
+
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 1201.0
+margin/top = 24.0
+margin/right = 1252.0
+margin/bottom = 68.0
+custom_fonts/font = ExtResource( 8 )
+custom_colors/font_color = Color( 0.496817, 0.239624, 0.589844, 1 )
+text = "HP"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="powerup" parent="CanvasLayer" instance=ExtResource( 9 )]
 
 transform/pos = Vector2( 10.1968, -2.9459 )
 transform/scale = Vector2( 0.626603, 0.626603 )
 
+[node name="boss_life" parent="CanvasLayer" instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 845.602, 17.74 )
+transform/scale = Vector2( 0.356486, 0.356486 )
+
 [node name="shade" type="Sprite" parent="CanvasLayer"]
 
-material/material = SubResource( 4 )
-texture = ExtResource( 10 )
+material/material = SubResource( 2 )
+texture = ExtResource( 11 )
 centered = false
 __meta__ = {
 "_edit_lock_": true

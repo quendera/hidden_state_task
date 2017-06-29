@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=1]
+
+[ext_resource path="res://assets/Images/hpbar/hpbarunder.png" type="Texture" id=1]
+[ext_resource path="res://assets/Images/hpbar/hpbarovertransparent.png" type="Texture" id=2]
+[ext_resource path="res://assets/Images/hpbar/hpbarprogress.png" type="Texture" id=3]
+[ext_resource path="res://scripts/boss_life.gd" type="Script" id=4]
+[ext_resource path="res://assets/Images/hpbar/hpbarover.png" type="Texture" id=5]
+
+[node name="boss_life" type="Node2D"]
+
+[node name="bar" type="TextureProgress" parent="."]
+
+rect/rotation = 180.0
+focus/ignore_mouse = false
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 940.0
+margin/top = 82.0
+margin/right = 1860.0
+margin/bottom = 131.0
+range/min = 0.0
+range/max = 100.0
+range/step = 1.0
+range/page = 0.0
+range/value = 0.0
+range/exp_edit = false
+range/rounded = false
+texture/under = ExtResource( 1 )
+texture/over = ExtResource( 2 )
+texture/progress = ExtResource( 3 )
+radial_fill/fill_degrees = 360.0
+radial_fill/center_offset = Vector2( 0, 0 )
+script/script = ExtResource( 4 )
+
+[node name="frame" type="Sprite" parent="."]
+
+transform/pos = Vector2( 479.36, 58.0352 )
+transform/scale = Vector2( 0.997754, 0.98482 )
+texture = ExtResource( 5 )
+
+
