@@ -11,3 +11,4 @@ func _input(event):
 		is_paused = not is_paused
 		get_tree().set_pause(is_paused)
 		get_node("../CanvasLayer/shade").set_hidden(not is_paused)
+		get_node("../soundtrack").set_paused(is_paused)

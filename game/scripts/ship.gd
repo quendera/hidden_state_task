@@ -9,6 +9,7 @@ var ship_pos
 var velocity = 400
 var ready2shoot = true
 var charging_velocity = 100
+var exploding = false
 var shooting = false
 var bullet_scene = preload("res://scenes/bullet.tscn")
 var bullet_instance
@@ -57,6 +58,14 @@ func spawn_bullet(polarity):
 	get_node("../").add_child(bullet_instance)
 
 func explode():
-	get_node("sound").play("explosion")
-	get_node("anim").play("explosion")
+	if not exploding:
+		get_node("sound").play("explosion")
+		get_node("anim").play("explosion")
 	hits += 1
+
+func _on_anim_animation_started( name ):
+	exploding = true
+
+
+func _on_anim_finished():
+	exploding = false

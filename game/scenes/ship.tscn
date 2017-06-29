@@ -48,7 +48,7 @@ tracks/1/keys = {
 [sub_resource type="SampleLibrary" id=3]
 
 samples/explosion = {
-"db": -5.0,
+"db": -10.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 3 )
@@ -152,5 +152,9 @@ transform/scale = Vector2( 0.281573, 0.281573 )
 frames = SubResource( 4 )
 animation = "default"
 frame = 9
+
+[connection signal="animation_started" from="anim" to="." method="_on_anim_animation_started"]
+
+[connection signal="finished" from="anim" to="." method="_on_anim_finished"]
 
 
