@@ -28,15 +28,11 @@ vec4 textureColor = tex(TEXTURE, UV);
 vec3 fragRGB = textureColor.rgb;
 vec3 fragHSV = rgb2hsv(fragRGB).xyz;
 if (!x) {
-	fragHSV.x = -0.85+fragHSV.z;//mod(fragHSV.x+0.4,1);
-}
-else {
-	fragHSV.x = 1.45-fragHSV.z;
+//	fragHSV.x = -0.85+fragHSV.z;//mod(fragHSV.x+0.4,1);
+	fragHSV.x = mod(fragHSV.x+0.4,1);
 }
 
-fragHSV.y = fragHSV.y - 0.1;
-
-if ((fragHSV.y <= 0.5) && !active) {
+if ((fragHSV.y <= 0.3) && !active) {
 	fragHSV.z = fragHSV.z*0.5;
 }
 

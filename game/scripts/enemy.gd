@@ -14,10 +14,10 @@ const high_x = 1100
 const low_y = 250
 const high_y = 500
 var shooting = false
-var max_life = 4000
+var max_life = 2000
 var life = max_life
-var die_vec = [0, 50, 90, 120, 140, 150]
-var regenerate_vec = [0, 50, 110, 180, 260, 350]
+var die_vec = [0, 6, 12, 18, 24, 30]
+var regenerate_vec = [0, 6, 15, 29, 53, 107]
 var lost_life = 0
 var life_sign
 var offset = 45

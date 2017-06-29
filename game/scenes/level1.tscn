@@ -136,7 +136,7 @@ size_flags/horizontal = 2
 size_flags/vertical = 0
 margin/left = 1241.0
 margin/top = 55.0
-margin/right = 2441.0
+margin/right = 1773.0
 margin/bottom = 88.0
 custom_styles/fg = SubResource( 1 )
 custom_styles/bg = SubResource( 2 )
@@ -152,8 +152,8 @@ script/script = ExtResource( 8 )
 
 [node name="powerup" parent="CanvasLayer" instance=ExtResource( 9 )]
 
-transform/pos = Vector2( 41.4577, 624.868 )
-transform/scale = Vector2( 0.402037, 0.402037 )
+transform/pos = Vector2( 10.1968, -2.9459 )
+transform/scale = Vector2( 0.626603, 0.626603 )
 
 [node name="shade" type="Sprite" parent="CanvasLayer"]
 
