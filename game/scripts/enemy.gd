@@ -36,11 +36,7 @@ func _ready():
 	add_to_group("enemies")
 	set_process(true)
 
-
 func _process(delta):
-	if life <= 0:
-		save_data()
-		get_tree().quit()
 	life = clamp(life,0,max_life)
 	pos = get_node("centroid").get_global_pos()
 	translate(SPEED*delta*dir)
@@ -52,7 +48,7 @@ func _process(delta):
 
 func save_data():
 	var file = File.new()
-	file.open("/Users/pietro/Documents/save_try.json", file.WRITE)
+	file.open("user://" + str(OS.get_unix_time())+".json", file.WRITE)
 	file.store_line(data.to_json())
 	file.close()
 
@@ -95,6 +91,10 @@ func explode(steps):
 	lost_life = lose_life(steps, true)
 	_on_bullet_hit()
 
+func game_over():
+	save_data()
+	get_tree().quit()
+
 func _on_anim_finished():
 #	data["time"].push_back(OS.get_ticks_msec())
 #	data["polarity_shot"].push_back(polarity)
@@ -103,6 +103,8 @@ func _on_anim_finished():
 	get_node("lost_life").set_text("")
 	get_node("../ship").ready2shoot = true
 	get_node("../ship").charge = 0
+	if life <= 0:
+		game_over()
 
 
 func spawn_enemy_bullet(dir):
