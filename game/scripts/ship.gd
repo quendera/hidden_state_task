@@ -1,6 +1,9 @@
 extends Area2D
 
 # class member variables go here, for example:
+var movement_time = 0
+var check_movement = false
+var start_time = 0
 var polarity = int(rand_range(0,1) > 0.5)
 var charge = 0
 var steps = 0
@@ -33,7 +36,11 @@ func _process(delta):
 	for dir in dirs.keys():
 		if Input.is_action_pressed(dir):
 			sum_dir += dirs[dir]
-	ship_displace = sum_dir*velocity
+	if not (ship_displace == sum_dir*velocity):
+		ship_displace = sum_dir*velocity
+		if check_movement:
+			movement_time = OS.get_ticks_msec()-start_time
+			check_movement = false
 	ship_pos += delta*ship_displace
 	if Input.is_action_pressed("shoot") and ready2shoot:
 		if not shooting:

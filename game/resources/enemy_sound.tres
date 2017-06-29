@@ -12,12 +12,18 @@ samples/explosion = {
 "sample": ExtResource( 1 )
 }
 samples/laser = {
-"db": 10.0,
+"db": 0.0,
 "pitch": 1.0,
 "priority": 0,
 "sample": ExtResource( 2 )
 }
 samples/spare = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 2 )
+}
+samples/spare1 = {
 "db": 0.0,
 "pitch": 1.0,
 "priority": 0,

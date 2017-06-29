@@ -239,7 +239,7 @@ transform/scale = Vector2( 0.65831, 0.65831 )
 z/z = 2
 frames = SubResource( 4 )
 animation = "default"
-frame = 1
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true

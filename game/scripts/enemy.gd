@@ -1,6 +1,11 @@
 extends Area2D
 
-var data = {"time":[], "polarity_shot":[], "polarity_enemy":[]}
+var data = {"time":[], "polarity_shot":[], "polarity_enemy":[], "correct" : [], "steps":[],
+"escaped": [], "reaction_time" : [], "hazard_coef" : [], "hazard" : [], "consecutive" : [],
+"probability_blue" : []}
+var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : true, "steps" : 0,
+"escaped": true, "reaction_time" : 0, "hazard_coef" : 0.0, "hazard" : 0.0, "consecutive" : 0,
+"probability_blue" : 0.5}
 # class member variables go here, for example:
 var polarity = 1*(rand_range(0,1) > 0.5)
 var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
@@ -26,8 +31,11 @@ var attacks_effectuated = 0
 var next_attack
 var attack_durations = [4, 2, 1]
 var attack_frequency = [0.3, 0.03, 0.1]
-var hazard
+var hazard = 0.5
+var hazard_coef = 0.2
 var consecutive = 0
+
+
 
 func _ready():
 	randomize()
@@ -48,11 +56,25 @@ func _process(delta):
 
 func save_data():
 	var file = File.new()
-	file.open("user://" + str(OS.get_unix_time())+".json", file.WRITE)
+	file.open("user://data" + str(OS.get_unix_time())+".json", file.WRITE)
 	file.store_line(data.to_json())
 	file.close()
 
-func _on_bullet_hit():
+func _on_bullet_hit(steps):
+	data_line["hazard_coef"] = hazard_coef
+	data_line["hazard"] = hazard
+	data_line["consecutive"] = consecutive
+	data_line["time"] = OS.get_ticks_msec()
+	data_line["polarity_shot"] = get_node("../ship").polarity
+	if data_line["polarity_enemy"] == 1 :
+		data_line["probability_blue"] = 1-data_line["hazard"]
+	else :
+		data_line["probability_blue"] = data_line["hazard"]
+	data_line["polarity_enemy"] = polarity
+	data_line["correct"] = (data_line["polarity_shot"] == data_line["polarity_enemy"])
+	data_line["steps"] = steps
+	data_line["escaped"] = false
+	get_node("../ship").movement_time = 0
 	life -= lost_life
 	if - lost_life > 0:
 		life_sign = "+"
@@ -61,7 +83,7 @@ func _on_bullet_hit():
 	get_node("lost_life").set_text(life_sign+str(int(-lost_life)))
 	get_node("frames").get_material().set_shader_param("hidden", false)
 	get_node("frames").get_material().set_shader_param("x", polarity == 1)
-	hazard = (consecutive)*0.2
+	hazard = (consecutive)*hazard_coef
 	if rand_range(0,1) < hazard:
 		polarity = 1-polarity
 		consecutive = 0
@@ -79,7 +101,7 @@ func lose_life(steps, correct):
 func reflect(steps):
 	get_node("laser").activate(polarity)
 	lost_life = lose_life(steps, false)
-	_on_bullet_hit()
+	_on_bullet_hit(steps)
 
 
 func explode(steps):
@@ -89,16 +111,17 @@ func explode(steps):
 	get_node("anim").play("explosion")
 	get_node("sound").play("explosion")
 	lost_life = lose_life(steps, true)
-	_on_bullet_hit()
+	_on_bullet_hit(steps)
 
 func game_over():
 	save_data()
 	get_tree().quit()
 
 func _on_anim_finished():
-#	data["time"].push_back(OS.get_ticks_msec())
-#	data["polarity_shot"].push_back(polarity)
-#	data["polarity_enemy"].push_back(area.polarity)
+	data_line["escaped"] = not get_node("laser").hit
+	data_line["reaction_time"] = get_node("../ship").movement_time
+	for key in data_line.keys():
+		data[key].push_back(data_line[key])
 	get_node("frames").get_material().set_shader_param("hidden", true)
 	get_node("lost_life").set_text("")
 	get_node("../ship").ready2shoot = true
@@ -159,12 +182,12 @@ func get_num_rays(t):
 
 func attack1():
 	offset = -offset
-	var num_rays = get_num_rays(get_node("toggle_shooting").get_time_left()/get_node("toggle_shooting").get_wait_time())
+	var num_rays = get_num_rays(get_node("toggle_shooting").get_time_left()/
+	get_node("toggle_shooting").get_wait_time())
 	for i in range(num_rays):
 		var angle = PI+0.2*PI*(i-0.5*(num_rays-1))+rand_range(-0.2,0.2)
 		var shooting_dir = Vector2(cos(angle),sin(angle))
 		spawn_enemy_bullet(shooting_dir)
-#		enemy_bullet_instance.translate(Vector2(0, rand_range(-100,100)))
 
 
 func attack2():
