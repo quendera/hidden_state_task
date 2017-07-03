@@ -40,6 +40,7 @@ samples/laser = {
 transform/pos = Vector2( 218.01, 305.567 )
 transform/rot = -90.0
 transform/scale = Vector2( 0.565768, 0.860373 )
+z/z = 4
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 0.540761, 0, 0, 0.740385, 3.57431, -15.7015 )

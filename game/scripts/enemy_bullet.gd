@@ -10,7 +10,7 @@ func _ready():
 	set_process(true)
 
 func _on_enemy_bullet_area_enter(area):
-	if area.get_name() == "ship":
+	if area.get_name() == "ship" and not area.active:
 		area.explode()
 		queue_free()
 

@@ -33,6 +33,7 @@ __meta__ = {
 
 [node name="sprite" type="Sprite" parent="."]
 
+visibility/light_mask = 3
 transform/pos = Vector2( 2.46722, -6.05476 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.520781, 0.520781 )

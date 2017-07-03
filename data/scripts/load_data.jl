@@ -2,6 +2,7 @@ strictify(v::AbstractVector) = convert(Vector{typeof(v[1])},v)
 
 data_folder = joinpath(dirname(dirname(@__FILE__)), "raw_data")
 subject_folders = filter(isdir,joinpath.(data_folder,readdir(data_folder)))
+plot_folder = joinpath(dirname(data_folder),"plots")
 
 df = DataFrame()
 
@@ -37,3 +38,4 @@ get_prob_correct(pol, prob) = 0.2*round(((pol == 1)? prob : 1-prob)/0.2)
 
 df[:probability_correct] = get_prob_correct.(df[:polarity_shot], df[:probability_blue])
 df[:estimate] = 0.5+((-0.05+0.1*df[:steps]).*(-1).^(1+df[:correct]))
+df[:centered_steps] = df[:steps]-3

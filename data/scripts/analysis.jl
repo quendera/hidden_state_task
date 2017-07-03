@@ -2,27 +2,29 @@ using JSON
 using DataFrames
 using Plots
 using StatPlots
+using Query
 gr(grid = false)
 
 include("load_data.jl")
 
-df
 
-cor(df[:polarity_shot], df[:probability_blue])
 
-subdf = df[df[:correct], :]
+subdf = @from i in df begin
+    @where i.Streak > 50
+    @select i
+    @collect DataFrame
+end
+
+
+cor(subdf[:polarity_shot], subdf[:probability_blue])
 cor(subdf[:steps], subdf[:reaction_time])
-scatter(subdf,:steps, :reaction_time, smooth = true)
-violin(subdf, :steps, :reaction_time)
-mean(subdf[:escaped])
-
-grp = groupapply(:density, subdf[100:end,:], :steps, group =[:probability_correct]
-,axis_type = :discrete)
-plt = plot(grp, line = :bar, legend = :best)
 
 
-grp = groupapply(:estimate, df, :probability_correct
+
+grp = groupapply(:polarity_shot, subdf, :probability_blue
 ,axis_type = :discrete, compute_error = :across)
-plt = plot(grp, line = :bar, legend = :best, ylims = (0,1))
+plt = plot!(grp, line = :path, legend = :best, xlabel = "")
 
+xlabel!("Probability blue")
+savefig(joinpath(plot_folder, "prob.pdf"))
 mean(df[200:end,:correct])

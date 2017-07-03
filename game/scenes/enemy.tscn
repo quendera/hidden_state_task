@@ -203,6 +203,7 @@ points = Vector2Array( 3008.14, 89.861, 2902.4, 162.869, -561.82, 162.869, -561.
 
 [node name="enemy" type="Area2D"]
 
+z/z = 1
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0, 0 )
@@ -236,10 +237,10 @@ transform/pos = Vector2( -86.9791, 74.1617 )
 material/material = SubResource( 3 )
 transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
-z/z = 2
+z/z = 1
 frames = SubResource( 4 )
 animation = "default"
-frame = 4
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -293,9 +294,9 @@ autostart = true
 [node name="laser" type="AnimatedSprite" parent="."]
 
 visibility/visible = false
+visibility/light_mask = 3
 material/material = SubResource( 9 )
 transform/pos = Vector2( -109.848, 72.7018 )
-z/z = 2
 frames = SubResource( 10 )
 animation = "default"
 frame = 19
