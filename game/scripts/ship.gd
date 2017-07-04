@@ -1,7 +1,7 @@
 extends Area2D
 
 # class member variables go here, for example:
-var active = true
+var active = false
 var movement_time = 0
 var check_movement = false
 var start_time = 0
@@ -32,6 +32,10 @@ func _input(event):
 		polarity = 1-polarity
 	if event.is_action_pressed("shield"):
 		active = not active
+		if active:
+			set_z( get_z() +2)
+		else:
+			set_z( get_z() -2)
 
 func _process(delta):
 	ship_pos = get_pos()

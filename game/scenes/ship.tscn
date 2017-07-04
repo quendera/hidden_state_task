@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=1]
+[gd_scene load_steps=24 format=1]
 
 [ext_resource path="res://scripts/ship.gd" type="Script" id=1]
 [ext_resource path="res://resources/animated_ship.tres" type="SpriteFrames" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://assets/Images/white.png" type="Texture" id=15]
 [ext_resource path="res://scripts/shader.gd" type="Script" id=16]
 [ext_resource path="res://assets/Images/whitehole.png" type="Texture" id=17]
+[ext_resource path="res://scripts/shadow.gd" type="Script" id=18]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -76,7 +77,7 @@ shader/shading_mode = 0
 
 transform/pos = Vector2( 169.788, 343.386 )
 transform/rot = -90.0
-z/z = 3
+z/z = 1
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.225403, 0 )
@@ -122,7 +123,7 @@ transform/rot = 90.0
 transform/scale = Vector2( 0.35, 0.35 )
 frames = ExtResource( 2 )
 animation = "default"
-frame = 2
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -163,6 +164,7 @@ frame = 9
 
 [node name="shader" type="Sprite" parent="."]
 
+visibility/visible = false
 material/material = SubResource( 5 )
 transform/pos = Vector2( -4.94492, 6.8206 )
 transform/rot = 90.0
@@ -175,13 +177,13 @@ __meta__ = {
 
 [node name="shadow" type="Light2D" parent="shader"]
 
-transform/pos = Vector2( 7.52457, 4.13263 )
+transform/pos = Vector2( 4.24701, -0.149323 )
 transform/scale = Vector2( 2.22454, 2.15747 )
 z/z = 1
 enabled = true
 editor_only = false
 texture = ExtResource( 17 )
-offset = Vector2( 0, 0 )
+offset = Vector2( 1.47336, 1.98471 )
 scale = 1.0
 color = Color( 1, 1, 1, 1 )
 energy = 1.0
@@ -197,6 +199,7 @@ shadow/color = Color( 0, 0, 0, 0 )
 shadow/buffer_size = 2048
 shadow/esm_multiplier = 80.0
 shadow/item_mask = 1
+script/script = ExtResource( 18 )
 __meta__ = {
 "_edit_lock_": true
 }

@@ -79,7 +79,6 @@ autostart = false
 
 transform/pos = Vector2( 1013.21, 341.53 )
 transform/scale = Vector2( 0.8, 0.8 )
-z/z = 1
 
 [node name="soundtrack" type="StreamPlayer" parent="."]
 
