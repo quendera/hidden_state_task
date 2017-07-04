@@ -30,14 +30,13 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("flip_color") and not Input.is_action_pressed("shoot"):
 		polarity = 1-polarity
-	if event.is_action_pressed("shield"):
-		active = not active
-		if active:
-			set_z( get_z() +2)
-		else:
-			set_z( get_z() -2)
+	if event.is_action_pressed("shield") and not ready2shoot:
+		active = true
+		get_node("shield_off").start()
+
 
 func _process(delta):
+	set_z(1+2*int(active))
 	ship_pos = get_pos()
 	var sum_dir = Vector2(0,0)
 	for dir in dirs.keys():
@@ -49,7 +48,7 @@ func _process(delta):
 			movement_time = OS.get_ticks_msec()-start_time
 			check_movement = false
 	ship_pos += delta*ship_displace
-	if Input.is_action_pressed("shoot") and ready2shoot:
+	if Input.is_action_pressed("shoot") and ready2shoot and not active:
 		if not shooting:
 			shooting = true
 			spawn_bullet(polarity)
@@ -83,3 +82,7 @@ func _on_anim_animation_started( name ):
 
 func _on_anim_finished():
 	exploding = false
+
+
+func _on_shield_off_timeout():
+	active = false

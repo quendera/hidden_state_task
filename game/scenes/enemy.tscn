@@ -133,7 +133,7 @@ animations = [ {
 
 length = 0.7
 loop = false
-step = 0.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("explosion:visibility/visible")
 tracks/0/interp = 1
@@ -157,15 +157,15 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id=8]
 
-length = 0.9
+length = 1.2
 loop = false
-step = 0.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("laser:visibility/visible")
 tracks/0/interp = 1
 tracks/0/imported = false
 tracks/0/keys = {
-"times": FloatArray( 0, 0.9 ),
+"times": FloatArray( 0, 1.2 ),
 "transitions": FloatArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
@@ -175,10 +175,34 @@ tracks/1/path = NodePath("laser:frame")
 tracks/1/interp = 1
 tracks/1/imported = false
 tracks/1/keys = {
-"times": FloatArray( 0, 0.3, 0.8, 0.9 ),
+"times": FloatArray( 0, 0.45, 1.05, 1.2 ),
 "transitions": FloatArray( 1, 1, 1, 1 ),
 "update": 0,
 "values": [ 0, 7, 14, 19 ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath("laser")
+tracks/2/interp = 1
+tracks/2/imported = false
+tracks/2/keys = {
+"times": FloatArray( 1.05 ),
+"transitions": FloatArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "retract"
+} ]
+}
+tracks/3/type = "method"
+tracks/3/path = NodePath("laser")
+tracks/3/interp = 1
+tracks/3/imported = false
+tracks/3/keys = {
+"times": FloatArray( 0.45 ),
+"transitions": FloatArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "explode"
+} ]
 }
 
 [sub_resource type="CanvasItemMaterial" id=9]
@@ -239,7 +263,7 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 4 )
 animation = "default"
-frame = 2
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -310,13 +334,6 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="timer" type="Timer" parent="laser"]
-
-process_mode = 1
-wait_time = 0.3
-one_shot = true
-autostart = false
-
 [node name="area" type="Area2D" parent="laser"]
 
 transform/pos = Vector2( -2996.48, -98.3673 )
@@ -362,8 +379,6 @@ autostart = true
 [connection signal="finished" from="anim" to="." method="_on_anim_finished"]
 
 [connection signal="timeout" from="shooting" to="." method="_on_shooting_timeout"]
-
-[connection signal="timeout" from="laser/timer" to="laser" method="_on_timer_timeout"]
 
 [connection signal="timeout" from="toggle_shooting" to="." method="_on_toggle_shooting_timeout"]
 

@@ -131,6 +131,9 @@ func _on_anim_finished():
 	if life <= 0:
 		game_over()
 
+func inactivate_shield():
+	pass
+#	get_node("../ship").
 
 func spawn_enemy_bullet(dir):
 	enemy_bullet_instance = enemy_bullet_scene.instance()
