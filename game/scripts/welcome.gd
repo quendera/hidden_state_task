@@ -5,4 +5,5 @@ extends Label
 # var b = "textvar"
 
 func _ready():
-	set_text("\t PRESS P \n TO PLAY")
+	set_text("""PRESS P
+	TO PLAY""")
