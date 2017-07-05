@@ -77,6 +77,9 @@ func _on_bullet_hit(steps):
 	data_line["steps"] = steps
 	data_line["escaped"] = false
 	get_node("../ship").movement_time = 0
+	get_node("../ship").start_time =  OS.get_ticks_msec()
+	get_node("../ship").ready2shield = true
+	get_node("deactivate_shield").start()
 	life -= lost_life
 	if - lost_life > 0:
 		life_sign = "+"
@@ -85,6 +88,7 @@ func _on_bullet_hit(steps):
 	get_node("lost_life").set_text(life_sign+str(int(-lost_life)))
 	get_node("frames").get_material().set_shader_param("hidden", false)
 	get_node("frames").get_material().set_shader_param("x", polarity == 1)
+
 	hazard = (consecutive)*hazard_coef
 	if rand_range(0,1) < hazard:
 		polarity = 1-polarity
@@ -207,3 +211,5 @@ func attack2():
 
 
 
+func _on_deactivate_shield_timeout():
+	get_node("../ship").ready2shield = false

@@ -123,7 +123,7 @@ transform/rot = 90.0
 transform/scale = Vector2( 0.35, 0.35 )
 frames = ExtResource( 2 )
 animation = "default"
-frame = 1
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -207,7 +207,7 @@ __meta__ = {
 [node name="shield_off" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 5.0
+wait_time = 2.5
 one_shot = true
 autostart = false
 

@@ -7,9 +7,6 @@ func ready():
 
 func activate(polarity):
 	hit = false
-	var ship = get_node("../../ship")
-	ship.check_movement = true
-	ship.start_time = OS.get_ticks_msec()
 	get_material().set_shader_param("x", polarity)
 	show()
 	get_node("../anim").play("laser")

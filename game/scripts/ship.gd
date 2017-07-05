@@ -3,7 +3,6 @@ extends Area2D
 # class member variables go here, for example:
 var active = false
 var movement_time = 0
-var check_movement = false
 var start_time = 0
 var polarity = int(rand_range(0,1) > 0.5)
 var charge = 0
@@ -12,6 +11,7 @@ var hits = 0
 var ship_pos
 var velocity = 400
 var ready2shoot = true
+var ready2shield = false
 var charging_velocity = 100
 var exploding = false
 var shooting = false
@@ -30,12 +30,15 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("flip_color") and not Input.is_action_pressed("shoot"):
 		polarity = 1-polarity
-	if event.is_action_pressed("shield") and not ready2shoot:
+	if event.is_action_pressed("shoot") and ready2shield and not active:
+		movement_time = OS.get_ticks_msec()-start_time
 		active = true
 		get_node("shield_off").start()
 
 
 func _process(delta):
+	if ready2shoot:
+		ready2shield = false
 	set_z(1+2*int(active))
 	ship_pos = get_pos()
 	var sum_dir = Vector2(0,0)
@@ -44,9 +47,6 @@ func _process(delta):
 			sum_dir += dirs[dir]
 	if not (ship_displace == sum_dir*velocity):
 		ship_displace = sum_dir*velocity
-		if check_movement:
-			movement_time = OS.get_ticks_msec()-start_time
-			check_movement = false
 	ship_pos += delta*ship_displace
 	if Input.is_action_pressed("shoot") and ready2shoot and not active:
 		if not shooting:
