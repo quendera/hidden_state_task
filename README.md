@@ -7,6 +7,8 @@ Objective: destroy the enemy spaceship.
 
 A word of warning: the enemy spaceship is in a quantum state that can only be measured upon impact of your attack. If your attack is of the same polarity as the enemy, the corresponding damage is inflicted. Otherwise, the enemy can use the energy of the attack to gain back health points. The enemy may change polarity between attacks. Choose wisely.
 
+In case of incorrect attack, the enemy may use your energy against you, unleashing a powerful laser. There is no escape: you can only protect yourself by warping space-time around you with your shield.
+
 Enemy laser and bullets damage your ship. Avoid them as much as possible. A certain amount of hits will result in your doom.
 
 
@@ -14,7 +16,7 @@ Enemy laser and bullets damage your ship. Avoid them as much as possible. A cert
 
 `←`, `↑`, `↓`, `→` : move.
 
-`X` : shoot (the longer you press, the more damaging/energetic the shot).
+`X` : shoot (the longer you press, the more damaging/energetic the shot)/ shield (only available after shooting)
 
 `C` : change polarity (blue/red).
 
@@ -37,3 +39,7 @@ as a json file called `data`+`unix_timestamp`+`.json`
 - The soundtrack comes from [FoxSynergy](https://opengameart.org/content/cosmo-blast)
 
 - Pixel art proudly produced by [dyogurt](https://twitter.com/dfmmatias)
+
+## Licensing
+
+As of now, no license is provided. This will probably change in the future.
