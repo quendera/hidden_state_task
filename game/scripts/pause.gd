@@ -17,19 +17,19 @@ func _input(event):
 	if not initial_screen:
 		if event.is_action_pressed("pause"):
 			toggle_pause(is_paused)
-			get_node("CanvasLayer/welcome").set_hidden(not is_paused)
+			get_node("CanvasLayer/pause").set_hidden(not is_paused)
 	if event.is_action_pressed("exit"):
 		toggle_pause(false)
-		get_node("CanvasLayer/welcome").set_hidden(true)
-		get_node("../CanvasLayer/instructions").set_hidden(true)
+		get_node("CanvasLayer/pause").set_hidden(true)
+		get_node("CanvasLayer/instructions").set_hidden(true)
 		get_node("CanvasLayer/confirm_quit").popup_centered()
 	if event.is_action_pressed("full_screen"):
 		OS.set_window_fullscreen(not OS.is_window_fullscreen())
 	if initial_screen:
 		if event.is_action_pressed("ui_accept"):
 			toggle_pause(true)
-			get_node("CanvasLayer/welcome").set_hidden(true)
-			get_node("../CanvasLayer/instructions").set_hidden(true)
+			get_node("CanvasLayer/pause").set_hidden(true)
+			get_node("CanvasLayer/instructions").set_hidden(true)
 			initial_screen = false
 
 

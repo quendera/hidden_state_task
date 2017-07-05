@@ -22,7 +22,11 @@ Enemy laser and bullets damage your ship. Avoid them as much as possible. A cert
 
 `P` : pause/unpause.
 
+`F` : toggle fullscreen.
+
 `Esc` : exit the game.
+
+`Space` : start the game.
 
 ## Data collection
 
