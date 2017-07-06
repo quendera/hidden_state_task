@@ -10,7 +10,9 @@ func _ready():
 
 Arrows : move
 
-X      : shoot / shield 
+X      : shoot
+
+Space  : shield 
 
 C      : blue / red
 
@@ -20,7 +22,7 @@ F      : toggle fullscreen
 
 Esc    : exit the game
 
-Space  : start the game 
+Enter  : start the game 
 """)
 
 

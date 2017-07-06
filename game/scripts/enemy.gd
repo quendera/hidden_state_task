@@ -128,16 +128,21 @@ func _on_anim_finished():
 	data_line["reaction_time"] = get_node("../ship").movement_time
 	for key in data_line.keys():
 		data[key].push_back(data_line[key])
-	get_node("frames").get_material().set_shader_param("hidden", true)
-	get_node("lost_life").set_text("")
+#	get_node("frames").get_material().set_shader_param("hidden", true)
+	var mask = randi() % 4+1
+	get_node("frames").get_material().set_shader_param("x", polarity*mask/4.0+0.5*(1-mask/4.0))
+	#get_node("end_cue").start()
 	get_node("../ship").ready2shoot = true
 	get_node("../ship").charge = 0
+	get_node("lost_life").set_text("")
 	if life <= 0:
 		game_over()
 
-func inactivate_shield():
-	pass
-#	get_node("../ship").
+func _on_end_cue_timeout():
+	get_node("frames").get_material().set_shader_param("hidden",true)
+
+
+### ATTACK ###
 
 func spawn_enemy_bullet(dir):
 	enemy_bullet_instance = enemy_bullet_scene.instance()
@@ -213,3 +218,6 @@ func attack2():
 
 func _on_deactivate_shield_timeout():
 	get_node("../ship").ready2shield = false
+
+
+

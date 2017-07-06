@@ -10,7 +10,7 @@ include("load_data.jl")
 
 
 subdf = @from i in df begin
-    @where (i.Streak > 50) &&
+    @where (i.Streak > 200) &&
     (i.correct == false) # && (i.reaction_time != 0)
     @select i
     @collect DataFrame
@@ -23,7 +23,7 @@ cor(subdf[:steps], subdf[:reaction_time])
 scatter(subdf,:steps, :reaction_time,
  smooth = true)
 
-grp = groupapply(:density, subdf, :steps
+grp = groupapply(:reaction_time, subdf, :steps
 ,axis_type = :discrete, compute_error = :across)
 plt = plot(grp, line = :path, legend = :best, xlabel = "")
 
