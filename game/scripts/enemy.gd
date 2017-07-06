@@ -95,6 +95,7 @@ func _on_bullet_hit(steps):
 		consecutive = 0
 	else:
 		consecutive += 1
+	get_node("end_cue").start()
 
 
 func lose_life(steps, correct):
@@ -129,9 +130,9 @@ func _on_anim_finished():
 	for key in data_line.keys():
 		data[key].push_back(data_line[key])
 #	get_node("frames").get_material().set_shader_param("hidden", true)
-	var mask = randi() % 4+1
-	get_node("frames").get_material().set_shader_param("x", polarity*mask/4.0+0.5*(1-mask/4.0))
-	#get_node("end_cue").start()
+	var mask = rand_range(0,1)
+	get_node("frames").get_material().set_shader_param("x", 0.5*(polarity+mask))
+	get_node("end_cue").start()
 	get_node("../ship").ready2shoot = true
 	get_node("../ship").charge = 0
 	get_node("lost_life").set_text("")
