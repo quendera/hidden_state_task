@@ -69,13 +69,13 @@ vec3 hsv2rgb(vec3 c)
     return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
 }
 
-uniform bool x;
+uniform float x;
 uniform bool hidden;
 float new_hue;
 vec4 textureColor = tex(TEXTURE, UV);
 vec3 fragRGB = textureColor.rgb;
 vec3 fragHSV = rgb2hsv(fragRGB).xyz;
-if (x) {
+if (mod(TIME , 1) < x) {
 	new_hue = 0.56;
 }
 else {
@@ -102,7 +102,7 @@ COLOR  = vec4(fragRGB, textureColor.w);",
 
 shader/shader = SubResource( 2 )
 shader/shading_mode = 0
-shader_param/x = true
+shader_param/x = 0.0
 shader_param/hidden = true
 
 [sub_resource type="SpriteFrames" id=4]
@@ -263,7 +263,7 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 4 )
 animation = "default"
-frame = 3
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true

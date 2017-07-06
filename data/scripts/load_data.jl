@@ -6,7 +6,7 @@ plot_folder = joinpath(dirname(data_folder),"plots")
 
 df = DataFrame()
 
-for subject_folder in subject_folders
+for subject_folder in subject_folders[3:3]
     for file in readdir(subject_folder)
         if file[end-4:end] != ".json"
             continue

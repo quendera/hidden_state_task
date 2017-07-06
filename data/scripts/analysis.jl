@@ -10,7 +10,8 @@ include("load_data.jl")
 
 
 subdf = @from i in df begin
-    @where i.Streak > 50
+    @where (i.Streak > 50) &&
+    (i.correct == false) # && (i.reaction_time != 0)
     @select i
     @collect DataFrame
 end
@@ -19,11 +20,12 @@ end
 cor(subdf[:polarity_shot], subdf[:probability_blue])
 cor(subdf[:steps], subdf[:reaction_time])
 
+scatter(subdf,:steps, :reaction_time,
+ smooth = true)
 
-
-grp = groupapply(:polarity_shot, subdf, :probability_blue
+grp = groupapply(:density, subdf, :steps
 ,axis_type = :discrete, compute_error = :across)
-plt = plot!(grp, line = :path, legend = :best, xlabel = "")
+plt = plot(grp, line = :path, legend = :best, xlabel = "")
 
 xlabel!("Probability blue")
 savefig(joinpath(plot_folder, "prob.pdf"))

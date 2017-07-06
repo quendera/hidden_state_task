@@ -87,7 +87,7 @@ func _on_bullet_hit(steps):
 		life_sign = ""
 	get_node("lost_life").set_text(life_sign+str(int(-lost_life)))
 	get_node("frames").get_material().set_shader_param("hidden", false)
-	get_node("frames").get_material().set_shader_param("x", polarity == 1)
+	get_node("frames").get_material().set_shader_param("x", polarity)
 
 	hazard = (consecutive)*hazard_coef
 	if rand_range(0,1) < hazard:
@@ -112,7 +112,7 @@ func reflect(steps):
 
 func explode(steps):
 	get_node("explosion").set_scale(Vector2(steps/float(5), steps/float(5)))
-	get_node("explosion").get_material().set_shader_param("x", polarity == 1)
+	get_node("explosion").get_material().set_shader_param("x", polarity)
 	get_node("explosion").show()
 	get_node("anim").play("explosion")
 	get_node("sound").play("explosion")

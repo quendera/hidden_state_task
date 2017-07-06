@@ -30,7 +30,7 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("flip_color") and not Input.is_action_pressed("shoot"):
 		polarity = 1-polarity
-	if event.is_action_pressed("shoot") and ready2shield and not active:
+	if event.is_action_pressed("shield") and ready2shield and not active:
 		movement_time = OS.get_ticks_msec()-start_time
 		active = true
 		get_node("shield_off").start()
