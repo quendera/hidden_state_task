@@ -25,11 +25,12 @@ func _ready():
 	randomize()
 	set_process(true)
 	set_process_input(true)
-
+	get_node("frames").get_material().set_shader_param("x", polarity)
 
 func _input(event):
 	if event.is_action_pressed("flip_color") and not Input.is_action_pressed("shoot"):
 		polarity = 1-polarity
+		get_node("frames").get_material().set_shader_param("x", polarity)
 	if event.is_action_pressed("shield") and ready2shield and not active:
 		movement_time = OS.get_ticks_msec()-start_time
 		active = true

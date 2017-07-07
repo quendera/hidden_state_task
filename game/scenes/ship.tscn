@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=1]
+[gd_scene load_steps=26 format=1]
 
 [ext_resource path="res://scripts/ship.gd" type="Script" id=1]
 [ext_resource path="res://resources/animated_ship.tres" type="SpriteFrames" id=2]
@@ -19,12 +19,12 @@
 [ext_resource path="res://assets/Images/whitehole.png" type="Texture" id=17]
 [ext_resource path="res://scripts/shadow.gd" type="Script" id=18]
 
-[sub_resource type="ConvexPolygonShape2D" id=1]
+[sub_resource type="ConvexPolygonShape2D" id=3]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -24.181, 39.7297, -27.4208, -9.63426, -13.0976, -39.048, 2.76028, -37.6839, 10.1777, 32.6534 )
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=4]
 
 length = 0.6
 loop = false
@@ -50,7 +50,61 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="SampleLibrary" id=3]
+[sub_resource type="CanvasItemShader" id=8]
+
+_code = {
+"fragment": "vec3 rgb2hsv(vec3 c) {
+    vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
+    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+
+    float d = q.x - min(q.w, q.y);
+    float e = 1.0e-10;
+    return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+}
+
+
+vec3 hsv2rgb(vec3 c)
+{
+    vec4 K = vec4(1.0, 2.0 / 3.0, 1.0 / 3.0, 3.0);
+    vec3 p = abs(fract(c.xxx + K.xyz) * 6.0 - K.www);
+    return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
+}
+
+uniform bool x;
+float new_hue;
+vec4 textureColor = tex(TEXTURE, UV);
+vec3 fragRGB = textureColor.rgb;
+vec3 fragHSV = rgb2hsv(fragRGB).xyz;
+if (x) {
+	new_hue = 0.56;
+}
+else {
+	new_hue = 0.0;
+}
+bool is_blue = (fragRGB.b >fragRGB.r ) && (fragRGB.b > 0.6);
+
+if (is_blue ) {
+	fragHSV.x = new_hue;
+	fragHSV.y = clamp(fragHSV.y+0.1,0,1);
+}
+
+fragRGB = hsv2rgb(fragHSV);
+COLOR  = vec4(fragRGB, textureColor.w);",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
+[sub_resource type="CanvasItemMaterial" id=9]
+
+shader/shader = SubResource( 8 )
+shader/shading_mode = 0
+shader_param/x = false
+
+[sub_resource type="SampleLibrary" id=5]
 
 samples/explosion = {
 "db": -10.0,
@@ -59,7 +113,7 @@ samples/explosion = {
 "sample": ExtResource( 3 )
 }
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=6]
 
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
@@ -68,7 +122,7 @@ animations = [ {
 "speed": 12.0
 } ]
 
-[sub_resource type="CanvasItemMaterial" id=5]
+[sub_resource type="CanvasItemMaterial" id=7]
 
 shader/shader = ExtResource( 14 )
 shader/shading_mode = 0
@@ -79,7 +133,7 @@ transform/pos = Vector2( 169.788, 343.386 )
 transform/rot = -90.0
 z/z = 1
 input/pickable = true
-shapes/0/shape = SubResource( 1 )
+shapes/0/shape = SubResource( 3 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.225403, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -99,7 +153,7 @@ __meta__ = {
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/explosion = SubResource( 2 )
+anims/explosion = SubResource( 4 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -107,6 +161,7 @@ autoplay = ""
 
 [node name="collision" type="CollisionPolygon2D" parent="."]
 
+visibility/visible = false
 transform/pos = Vector2( 0.225403, 0 )
 build_mode = 0
 polygon = Vector2Array( 10.1777, 32.6534, 2.76028, -37.6839, -13.0976, -39.048, -27.4208, -9.63426, -24.181, 39.7297 )
@@ -118,12 +173,13 @@ __meta__ = {
 
 [node name="frames" type="AnimatedSprite" parent="."]
 
+material/material = SubResource( 9 )
 transform/pos = Vector2( -2.79742, 8.92931 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.35, 0.35 )
 frames = ExtResource( 2 )
 animation = "default"
-frame = 2
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -139,7 +195,7 @@ __meta__ = {
 [node name="sound" type="SamplePlayer" parent="."]
 
 config/polyphony = 1
-config/samples = SubResource( 3 )
+config/samples = SubResource( 5 )
 default/volume_db = 0.0
 default/pitch_scale = 1.0
 default/pan = 0.0
@@ -158,14 +214,14 @@ default/chorus_send = 0.0
 visibility/visible = false
 transform/pos = Vector2( -7.32651, 2.785 )
 transform/scale = Vector2( 0.281573, 0.281573 )
-frames = SubResource( 4 )
+frames = SubResource( 6 )
 animation = "default"
 frame = 9
 
 [node name="shader" type="Sprite" parent="."]
 
 visibility/visible = false
-material/material = SubResource( 5 )
+material/material = SubResource( 7 )
 transform/pos = Vector2( -4.94492, 6.8206 )
 transform/rot = 90.0
 z/z = -1
