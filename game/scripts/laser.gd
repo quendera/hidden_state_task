@@ -14,7 +14,7 @@ func activate(polarity):
 
 func explode():
 	if get_node("area").overlaps_area(get_node("../../ship")) and not get_node("../../ship").active:
-		get_node("../../ship").explode()
+		get_node("../../ship").explode(20)
 		hit = true
 
 func retract():

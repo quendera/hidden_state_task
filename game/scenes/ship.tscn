@@ -80,6 +80,7 @@ bool is_blue = (fragHSV.x > 0.45) && (fragHSV.x < 0.55);
 
 if (is_blue && !x) {
 	fragHSV.x += 0.45;
+	fragHSV.y = clamp(fragHSV.y-0.1,0,1);
 }
 
 fragRGB = hsv2rgb(fragHSV);

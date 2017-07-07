@@ -71,11 +71,11 @@ func spawn_bullet(polarity):
 	bullet_instance.set_global_pos(get_node("shoot_from").get_global_pos())
 	get_node("../").add_child(bullet_instance)
 
-func explode():
+func explode(damage = 1):
 	if not exploding:
 		get_node("sound").play("explosion")
 		get_node("anim").play("explosion")
-	hits += 1
+	hits += damage
 
 func _on_anim_animation_started( name ):
 	exploding = true

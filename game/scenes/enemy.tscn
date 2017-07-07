@@ -265,7 +265,7 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 4 )
 animation = "default"
-frame = 2
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -371,13 +371,6 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="toggle_shooting" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 4.0
-one_shot = true
-autostart = true
-
 [node name="deactivate_shield" type="Timer" parent="."]
 
 process_mode = 1
@@ -385,12 +378,19 @@ wait_time = 0.45
 one_shot = true
 autostart = false
 
+[node name="end_attack" type="Timer" parent="."]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
 [connection signal="finished" from="anim" to="." method="_on_anim_finished"]
 
 [connection signal="timeout" from="shooting" to="." method="_on_shooting_timeout"]
 
-[connection signal="timeout" from="toggle_shooting" to="." method="_on_toggle_shooting_timeout"]
-
 [connection signal="timeout" from="deactivate_shield" to="." method="_on_deactivate_shield_timeout"]
+
+[connection signal="timeout" from="end_attack" to="." method="_on_end_attack_timeout"]
 
 

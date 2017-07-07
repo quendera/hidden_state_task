@@ -118,7 +118,7 @@ func _on_anim_finished():
 		game_over()
 	probability_blue = rand_range(0,1)
 	polarity = int(rand_range(0,1) < probability_blue)
-
+	begin_attack()
 
 ### ATTACK ###
 
@@ -132,33 +132,22 @@ func _on_shooting_timeout():
 	if shooting:
 		attack(next_attack)
 
-func _on_toggle_shooting_timeout():
-	shooting = not shooting
-	if not shooting:
-		get_node("toggle_shooting").set_wait_time(4+4*(attacks_effectuated % 3 == 0))
-	else:
-		if attacks_effectuated % 3 == 0:
-			next_attack += 2*(randi() % 2)-1
-			next_attack = next_attack % 3
-		attacks_effectuated += 1
-		get_node("shooting").set_wait_time(attack_frequency[next_attack])
-		get_node("toggle_shooting").set_wait_time(attack_durations[next_attack])
-	get_node("toggle_shooting").start()
+func begin_attack():
+	next_attack = (randi() % 2)+1
+	shooting = true
+	get_node("shooting").set_wait_time(attack_frequency[next_attack])
+	get_node("end_attack").set_wait_time(attack_durations[next_attack])
+	get_node("end_attack").start()
+
+func _on_end_attack_timeout():
+	shooting = false
+
 
 func attack(attack_number):
-	if attack_number == 0:
-		attack0()
-	elif attack_number == 1:
+	if attack_number == 1:
 		attack1()
 	elif attack_number == 2:
 		attack2()
-
-func attack0():
-	for i in range(5):
-		var shooting_offset = sin(OS.get_ticks_msec()/float(1000))*0.5
-		var angle = shooting_offset+PI+PI*(i-2)/float(5)
-		var shooting_dir = Vector2(cos(angle),sin(angle))
-		spawn_enemy_bullet(shooting_dir)
 
 func get_num_rays(t):
 	if t > 0.78:
@@ -174,8 +163,8 @@ func get_num_rays(t):
 
 func attack1():
 	offset = -offset
-	var num_rays = get_num_rays(get_node("toggle_shooting").get_time_left()/
-	get_node("toggle_shooting").get_wait_time())
+	var num_rays = get_num_rays(get_node("end_attack").get_time_left()/
+	get_node("end_attack").get_wait_time())
 	for i in range(num_rays):
 		var angle = PI+0.2*PI*(i-0.5*(num_rays-1))+rand_range(-0.2,0.2)
 		var shooting_dir = Vector2(cos(angle),sin(angle))
