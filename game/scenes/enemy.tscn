@@ -69,32 +69,24 @@ vec3 hsv2rgb(vec3 c)
     return c.z * mix(K.xxx, clamp(p - K.xxx, 0.0, 1.0), c.y);
 }
 
-uniform float x;
+uniform bool x;
 uniform bool hidden;
 float new_hue;
-bool total = (x== 0) || (x == 1);
-bool roi = ((UV.x<0.55) &&  (UV.y > 0.45)) || total ;
 vec4 textureColor = tex(TEXTURE, UV);
 vec3 fragRGB = textureColor.rgb;
 vec3 fragHSV = rgb2hsv(fragRGB).xyz;
-if (mod(2*TIME,1) < x) {
+if (x) {
 	new_hue = 0.56;
 }
 else {
 	new_hue = 0.0;
 }
-if (!roi) {
-	new_hue = fragHSV.x;
-}
+
 if (!hidden) {
 	if ((fragHSV.y > 0.2) && (fragHSV.z > 0.2) ) {
 
 		fragHSV.x = new_hue;
-		//fragHSV.y = clamp(fragHSV.y+0.1,0,1);
-		if ( !roi ) {
-			fragHSV.y = fragHSV.y*0.0;
-			fragHSV.z = fragHSV.z*0.6;
-		}
+		fragHSV.y = clamp(fragHSV.y+0.1,0,1);
 	}
 }
 
@@ -112,7 +104,7 @@ COLOR  = vec4(fragRGB, textureColor.w);",
 
 shader/shader = SubResource( 2 )
 shader/shading_mode = 0
-shader_param/x = 0.1
+shader_param/x = true
 shader_param/hidden = true
 
 [sub_resource type="SpriteFrames" id=4]
@@ -273,7 +265,7 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 4 )
 animation = "default"
-frame = 3
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -393,13 +385,6 @@ wait_time = 0.45
 one_shot = true
 autostart = false
 
-[node name="end_cue" type="Timer" parent="."]
-
-process_mode = 1
-wait_time = 2.0
-one_shot = true
-autostart = false
-
 [connection signal="finished" from="anim" to="." method="_on_anim_finished"]
 
 [connection signal="timeout" from="shooting" to="." method="_on_shooting_timeout"]
@@ -407,7 +392,5 @@ autostart = false
 [connection signal="timeout" from="toggle_shooting" to="." method="_on_toggle_shooting_timeout"]
 
 [connection signal="timeout" from="deactivate_shield" to="." method="_on_deactivate_shield_timeout"]
-
-[connection signal="timeout" from="end_cue" to="." method="_on_end_cue_timeout"]
 
 
