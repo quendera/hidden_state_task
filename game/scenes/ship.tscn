@@ -72,21 +72,14 @@ vec3 hsv2rgb(vec3 c)
 }
 
 uniform bool x;
-float new_hue;
 vec4 textureColor = tex(TEXTURE, UV);
 vec3 fragRGB = textureColor.rgb;
 vec3 fragHSV = rgb2hsv(fragRGB).xyz;
-if (x) {
-	new_hue = 0.56;
-}
-else {
-	new_hue = 0.0;
-}
-bool is_blue = (fragRGB.b >fragRGB.r ) && (fragRGB.b > 0.6);
 
-if (is_blue ) {
-	fragHSV.x = new_hue;
-	fragHSV.y = clamp(fragHSV.y+0.1,0,1);
+bool is_blue = (fragHSV.x > 0.45) && (fragHSV.x < 0.55);
+
+if (is_blue && !x) {
+	fragHSV.x += 0.45;
 }
 
 fragRGB = hsv2rgb(fragHSV);

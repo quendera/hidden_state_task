@@ -14,6 +14,7 @@ const SPEED = 30
 var enemy_bullet_instance
 var dir
 var pos
+var prob = 0.5
 const low_x = 900
 const high_x = 1100
 const low_y = 250
@@ -133,13 +134,14 @@ func _on_anim_finished():
 	get_node("lost_life").set_text("")
 	if life <= 0:
 		game_over()
+	prob = rand_range(0,1)
 
 
 ### ATTACK ###
 
 func spawn_enemy_bullet(dir):
 	enemy_bullet_instance = enemy_bullet_scene.instance()
-	enemy_bullet_instance.init(dir)
+	enemy_bullet_instance.init(dir, (rand_range(0,1) > 0.5))
 	enemy_bullet_instance.set_global_pos(get_node("shoot_from").get_global_pos())
 	get_node("../").add_child(enemy_bullet_instance)
 
