@@ -6,8 +6,7 @@ var polarity
 
 func _process(delta):
 	translate(delta*SPEED*dir)
-	if not get_node("frames").get_frame() == int(polarity):
-		get_node("frames").set_frame(int(polarity))
+
 
 
 func _ready():
@@ -15,7 +14,8 @@ func _ready():
 
 func _on_enemy_bullet_area_enter(area):
 	if area.get_name() == "ship" and not area.active:
-		area.explode()
+		if not area.polarity == polarity:
+			area.explode()
 		queue_free()
 
 func _on_visibility_exit_screen():
@@ -24,4 +24,4 @@ func _on_visibility_exit_screen():
 func init(_dir, _polarity):
 	dir = _dir
 	polarity = _polarity
-	get_node("frames").set_frame(int(polarity))
+	get_node("frames").set_frame(polarity)

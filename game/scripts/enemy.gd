@@ -1,11 +1,9 @@
 extends Area2D
 
 var data = {"time":[], "polarity_shot":[], "polarity_enemy":[], "correct" : [], "steps":[],
-"escaped": [], "reaction_time" : [], "hazard_coef" : [], "hazard" : [], "consecutive" : [],
-"probability_blue" : []}
+"escaped": [], "reaction_time" : [], "probability_blue" : []}
 var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : true, "steps" : 0,
-"escaped": true, "reaction_time" : 0, "hazard_coef" : 0.0, "hazard" : 0.0, "consecutive" : 0,
-"probability_blue" : 0.5}
+"escaped": true, "reaction_time" : 0, "probability_blue" : 0.5}
 # class member variables go here, for example:
 var polarity = 1*(rand_range(0,1) > 0.5)
 var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
@@ -14,7 +12,7 @@ const SPEED = 30
 var enemy_bullet_instance
 var dir
 var pos
-var prob = 0.5
+var probability_blue = 0.5
 const low_x = 900
 const high_x = 1100
 const low_y = 250
@@ -32,10 +30,6 @@ var attacks_effectuated = 0
 var next_attack
 var attack_durations = [4, 2, 1]
 var attack_frequency = [0.3, 0.03, 0.1]
-var hazard = 0.5
-var hazard_coef = 0.2
-var consecutive = 0
-
 
 
 func _ready():
@@ -64,15 +58,9 @@ func save_data():
 	file.close()
 
 func _on_bullet_hit(steps):
-	data_line["hazard_coef"] = hazard_coef
-	data_line["hazard"] = hazard
-	data_line["consecutive"] = consecutive
 	data_line["time"] = OS.get_ticks_msec()
 	data_line["polarity_shot"] = get_node("../ship").polarity
-	if data_line["polarity_enemy"] == 1 :
-		data_line["probability_blue"] = 1-data_line["hazard"]
-	else :
-		data_line["probability_blue"] = data_line["hazard"]
+	data_line["probability_blue"] = probability_blue
 	data_line["polarity_enemy"] = polarity
 	data_line["correct"] = (data_line["polarity_shot"] == data_line["polarity_enemy"])
 	data_line["steps"] = steps
@@ -90,12 +78,6 @@ func _on_bullet_hit(steps):
 	get_node("frames").get_material().set_shader_param("hidden", false)
 	get_node("frames").get_material().set_shader_param("x", polarity)
 
-	hazard = (consecutive)*hazard_coef
-	if rand_range(0,1) < hazard:
-		polarity = 1-polarity
-		consecutive = 0
-	else:
-		consecutive += 1
 
 func lose_life(steps, correct):
 	if correct:
@@ -134,14 +116,15 @@ func _on_anim_finished():
 	get_node("lost_life").set_text("")
 	if life <= 0:
 		game_over()
-	prob = rand_range(0,1)
+	probability_blue = rand_range(0,1)
+	polarity = int(rand_range(0,1) < probability_blue)
 
 
 ### ATTACK ###
 
 func spawn_enemy_bullet(dir):
 	enemy_bullet_instance = enemy_bullet_scene.instance()
-	enemy_bullet_instance.init(dir, (rand_range(0,1) > 0.5))
+	enemy_bullet_instance.init(dir, int(rand_range(0,1) < probability_blue))
 	enemy_bullet_instance.set_global_pos(get_node("shoot_from").get_global_pos())
 	get_node("../").add_child(enemy_bullet_instance)
 
