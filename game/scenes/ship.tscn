@@ -19,12 +19,12 @@
 [ext_resource path="res://assets/Images/whitehole.png" type="Texture" id=17]
 [ext_resource path="res://scripts/shadow.gd" type="Script" id=18]
 
-[sub_resource type="ConvexPolygonShape2D" id=3]
+[sub_resource type="ConvexPolygonShape2D" id=1]
 
 custom_solver_bias = 0.0
 points = Vector2Array( -24.181, 39.7297, -27.4208, -9.63426, -13.0976, -39.048, 2.76028, -37.6839, 10.1777, 32.6534 )
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=2]
 
 length = 0.6
 loop = false
@@ -50,7 +50,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="CanvasItemShader" id=8]
+[sub_resource type="CanvasItemShader" id=3]
 
 _code = {
 "fragment": "vec3 rgb2hsv(vec3 c) {
@@ -92,9 +92,9 @@ COLOR  = vec4(fragRGB, textureColor.w);",
 "vertex_ofs": 0
 }
 
-[sub_resource type="CanvasItemMaterial" id=9]
+[sub_resource type="CanvasItemMaterial" id=4]
 
-shader/shader = SubResource( 8 )
+shader/shader = SubResource( 3 )
 shader/shading_mode = 0
 shader_param/x = false
 
@@ -127,7 +127,7 @@ transform/pos = Vector2( 169.788, 343.386 )
 transform/rot = -90.0
 z/z = 1
 input/pickable = true
-shapes/0/shape = SubResource( 3 )
+shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.225403, 0 )
 shapes/0/trigger = false
 gravity_vec = Vector2( 0, 1 )
@@ -147,7 +147,7 @@ __meta__ = {
 playback/process_mode = 1
 playback/default_blend_time = 0.0
 root/root = NodePath("..")
-anims/explosion = SubResource( 4 )
+anims/explosion = SubResource( 2 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -167,13 +167,12 @@ __meta__ = {
 
 [node name="frames" type="AnimatedSprite" parent="."]
 
-material/material = SubResource( 9 )
+material/material = SubResource( 4 )
 transform/pos = Vector2( -2.79742, 8.92931 )
 transform/rot = 90.0
 transform/scale = Vector2( 0.35, 0.35 )
 frames = ExtResource( 2 )
 animation = "default"
-frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -257,7 +256,7 @@ __meta__ = {
 [node name="shield_off" type="Timer" parent="."]
 
 process_mode = 1
-wait_time = 2.5
+wait_time = 10.0
 one_shot = true
 autostart = false
 

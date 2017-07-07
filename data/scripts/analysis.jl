@@ -8,10 +8,10 @@ gr(grid = false)
 include("load_data.jl")
 
 
-
+df
 subdf = @from i in df begin
-    @where (i.Streak > 200) &&
-    (i.correct == false) # && (i.reaction_time != 0)
+    @where (i.Streak > 50)  &&
+    (i.correct == true) # && (i.reaction_time != 0)
     @select i
     @collect DataFrame
 end
@@ -23,10 +23,15 @@ cor(subdf[:steps], subdf[:reaction_time])
 scatter(subdf,:steps, :reaction_time,
  smooth = true)
 
-grp = groupapply(:reaction_time, subdf, :steps
-,axis_type = :discrete, compute_error = :across)
-plt = plot(grp, line = :path, legend = :best, xlabel = "")
+subdf[:false_alarm] = (df[:reaction_time] .!= 0) .& df[:correct]
 
-xlabel!("Probability blue")
-savefig(joinpath(plot_folder, "prob.pdf"))
+grp = groupapply(:false_alarm, subdf, :steps
+,axis_type = :discrete, compute_error = :across)
+plt = plot(grp, line = :path, legend = :best, xlabel = "",
+ylims=(0,0.1))
+
+
+xlabel!("Steps")
+ylabel!("Reaction time")
+savefig(joinpath(plot_folder, "reaction.pdf"))
 mean(df[200:end,:correct])

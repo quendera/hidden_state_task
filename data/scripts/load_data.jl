@@ -6,7 +6,7 @@ plot_folder = joinpath(dirname(data_folder),"plots")
 
 df = DataFrame()
 
-for subject_folder in subject_folders[3:3]
+for subject_folder in subject_folders
     for file in readdir(subject_folder)
         if file[end-4:end] != ".json"
             continue
@@ -34,8 +34,7 @@ for subject_folder in subject_folders[3:3]
     end
 end
 
-get_prob_correct(pol, prob) = 0.2*round(((pol == 1)? prob : 1-prob)/0.2)
+get_prob_correct(pol, prob) = 0.05*round(((pol == 1)? prob : 1-prob)/0.05)
 
 df[:probability_correct] = get_prob_correct.(df[:polarity_shot], df[:probability_blue])
 df[:estimate] = 0.5+((-0.05+0.1*df[:steps]).*(-1).^(1+df[:correct]))
-df[:centered_steps] = df[:steps]-3

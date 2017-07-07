@@ -1,4 +1,4 @@
-# Schrödinger shooting
+# Schrödinger shot
 
 Space shooting game designed to study decision-making in humans. To play, download the zip file corresponding to your operating system from the latest release, unzip it and run it on your computer (you may need to give it permission).
 
@@ -11,7 +11,7 @@ When attacked, the enemy waveform collapses and the spaceship assumes a full red
 If your attack is of the same polarity as the enemy, the corresponding damage is inflicted. Otherwise, the enemy can use the energy of the attack to gain back health points.
 After the attack, the enemy returns to an unknown superposition state.
 
-In case of incorrect attack, the enemy will use your energy against you, unleashing a powerful laser. There is no escape: you can only protect yourself by warping space-time around you with your shield.
+In case of incorrect attack, the enemy will use your energy against you, unleashing a powerful laser. There is no escape: you can only protect yourself by warping space-time around you with your shield. Unnecessary usage of the shield will cost you a time-out.
 
 Enemy laser and bullets damage your ship. Avoid them as much as possible. A certain amount of hits will result in your doom.
 

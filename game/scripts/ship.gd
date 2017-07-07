@@ -31,10 +31,12 @@ func _input(event):
 	if event.is_action_pressed("flip_color") and not Input.is_action_pressed("shoot"):
 		polarity = 1-polarity
 		get_node("frames").get_material().set_shader_param("x", polarity)
-	if event.is_action_pressed("shield") and ready2shield and not active:
-		movement_time = OS.get_ticks_msec()-start_time
-		active = true
-		get_node("shield_off").start()
+	if event.is_action_pressed("shield") and not active:
+		if movement_time == 0:
+			movement_time = OS.get_ticks_msec()-start_time
+		if ready2shield:
+			active = true
+			get_node("shield_off").start()
 
 
 func _process(delta):
