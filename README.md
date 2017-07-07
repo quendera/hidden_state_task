@@ -1,13 +1,17 @@
-# Hidden state task
+# Schrödinger shooting
+
 Space shooting game designed to study decision-making in humans. To play, download the zip file corresponding to your operating system from the latest release, unzip it and run it on your computer (you may need to give it permission).
 
 ## Rules of the game
 
 Objective: destroy the enemy spaceship.
 
-A word of warning: the enemy spaceship is in a quantum state that can only be measured upon impact of your attack. If your attack is of the same polarity as the enemy, the corresponding damage is inflicted. Otherwise, the enemy can use the energy of the attack to gain back health points. The enemy may change polarity between attacks. Choose wisely.
+A word of warning: the enemy spaceship is in a quantum superposition state of red and blue. Its attacks reflect its quantic nature: red and blue bullets are emitted with corresponding probability. Only bullet of a polarity different from yours can hurt your ship.
+When attacked, the enemy waveform collapses and the spaceship assumes a full red or blue state.
+If your attack is of the same polarity as the enemy, the corresponding damage is inflicted. Otherwise, the enemy can use the energy of the attack to gain back health points.
+After the attack, the enemy returns to an unknown superposition state.
 
-In case of incorrect attack, the enemy may use your energy against you, unleashing a powerful laser. There is no escape: you can only protect yourself by warping space-time around you with your shield.
+In case of incorrect attack, the enemy will use your energy against you, unleashing a powerful laser. There is no escape: you can only protect yourself by warping space-time around you with your shield.
 
 Enemy laser and bullets damage your ship. Avoid them as much as possible. A certain amount of hits will result in your doom.
 
@@ -16,7 +20,9 @@ Enemy laser and bullets damage your ship. Avoid them as much as possible. A cert
 
 `←`, `↑`, `↓`, `→` : move.
 
-`X` : shoot (the longer you press, the more damaging/energetic the shot)/ shield (only available after shooting)
+`X` : shoot (the longer you press, the more damaging/energetic the shot)
+
+`Space` : shield (only available after shooting)
 
 `C` : change polarity (blue/red).
 
@@ -26,7 +32,7 @@ Enemy laser and bullets damage your ship. Avoid them as much as possible. A cert
 
 `Esc` : exit the game.
 
-`Space` : start the game.
+`Enter` : start the game.
 
 ## Data collection
 

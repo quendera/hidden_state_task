@@ -37,6 +37,7 @@ func _ready():
 	next_attack = randi() % 3
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
 	add_to_group("enemies")
+	get_node("frames").get_material().set_shader_param("x", polarity)
 	set_process(true)
 
 func _process(delta):
@@ -45,7 +46,7 @@ func _process(delta):
 	life = clamp(life,0,max_life)
 	pos = get_node("centroid").get_global_pos()
 	translate(SPEED*delta*dir)
-	
+
 	if (dir.x)*(pos.x-clamp(pos.x, low_x, high_x)) > 0.001:
 		dir.x = -dir.x
 	if (dir.y)*(pos.y-clamp(pos.y, low_y, high_y)) > 0.001:
@@ -76,7 +77,7 @@ func _on_bullet_hit(steps):
 		life_sign = ""
 	get_node("lost_life").set_text(life_sign+str(int(-lost_life)))
 	get_node("frames").get_material().set_shader_param("hidden", false)
-	get_node("frames").get_material().set_shader_param("x", polarity)
+
 
 
 func lose_life(steps, correct):
@@ -118,6 +119,7 @@ func _on_anim_finished():
 		game_over()
 	probability_blue = 0.05+0.1*(randi()%10)
 	polarity = int(rand_range(0,1) < probability_blue)
+	get_node("frames").get_material().set_shader_param("x", polarity)
 	begin_attack()
 
 ### ATTACK ###
@@ -159,7 +161,7 @@ func get_num_rays(t):
 	elif t > 0.22:
 		return 0
 	else:
-		return 1 
+		return 1
 
 func attack1():
 	offset = -offset
