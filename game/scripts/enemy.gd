@@ -116,7 +116,7 @@ func _on_anim_finished():
 	get_node("lost_life").set_text("")
 	if life <= 0:
 		game_over()
-	probability_blue = rand_range(0,1)
+	probability_blue = 0.05+0.1*(randi()%10)
 	polarity = int(rand_range(0,1) < probability_blue)
 	begin_attack()
 
@@ -185,6 +185,5 @@ func attack2():
 
 func _on_deactivate_shield_timeout():
 	get_node("../ship").ready2shield = false
-
-
-
+	get_node("end_attack").stop()
+	shooting = false

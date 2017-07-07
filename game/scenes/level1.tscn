@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=1]
+[gd_scene load_steps=18 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/bg/Space_bkgr.png" type="Texture" id=2]
@@ -7,13 +7,14 @@
 [ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=6]
 [ext_resource path="res://assets/Fonts/labelfont.fnt" type="BitmapFont" id=7]
-[ext_resource path="res://scenes/powerup.tscn" type="PackedScene" id=8]
-[ext_resource path="res://scenes/boss_life.tscn" type="PackedScene" id=9]
-[ext_resource path="res://assets/Images/white.png" type="Texture" id=10]
-[ext_resource path="res://scripts/pause.gd" type="Script" id=11]
-[ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=12]
-[ext_resource path="res://scripts/instructions.gd" type="Script" id=13]
-[ext_resource path="res://scripts/welcome.gd" type="Script" id=14]
+[ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=8]
+[ext_resource path="res://scripts/hits.gd" type="Script" id=9]
+[ext_resource path="res://scenes/powerup.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/boss_life.tscn" type="PackedScene" id=11]
+[ext_resource path="res://assets/Images/white.png" type="Texture" id=12]
+[ext_resource path="res://scripts/pause.gd" type="Script" id=13]
+[ext_resource path="res://scripts/instructions.gd" type="Script" id=14]
+[ext_resource path="res://scripts/welcome.gd" type="Script" id=15]
 
 [sub_resource type="CanvasItemShader" id=1]
 
@@ -106,9 +107,9 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 31.0
+margin/left = 20.0
 margin/top = 70.0
-margin/right = 166.0
+margin/right = 155.0
 margin/bottom = 114.0
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.996094, 0.515496, 0.00389099, 1 )
@@ -126,10 +127,10 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 34.0
-margin/top = 27.0
-margin/right = 169.0
-margin/bottom = 71.0
+margin/left = 24.0
+margin/top = 26.0
+margin/right = 159.0
+margin/bottom = 70.0
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.496817, 0.239624, 0.589844, 1 )
 text = "ENERGY"
@@ -146,9 +147,9 @@ focus/ignore_mouse = true
 focus/stop_mouse = true
 size_flags/horizontal = 2
 size_flags/vertical = 0
-margin/left = 1201.0
+margin/left = 1211.0
 margin/top = 24.0
-margin/right = 1252.0
+margin/right = 1262.0
 margin/bottom = 68.0
 custom_fonts/font = ExtResource( 7 )
 custom_colors/font_color = Color( 0.496817, 0.239624, 0.589844, 1 )
@@ -160,20 +161,43 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="powerup" parent="CanvasLayer" instance=ExtResource( 8 )]
+[node name="hits" type="Label" parent="CanvasLayer"]
 
-transform/pos = Vector2( 10.1968, -2.9459 )
+focus/ignore_mouse = true
+focus/stop_mouse = true
+size_flags/horizontal = 2
+size_flags/vertical = 0
+margin/left = 479.0
+margin/top = 16.0
+margin/right = 868.0
+margin/bottom = 81.0
+custom_fonts/font = ExtResource( 8 )
+custom_colors/font_color = Color( 0.976562, 0.976562, 0.94223, 1 )
+custom_colors/font_color_shadow = Color( 0.0114136, 0.0433106, 0.132812, 1 )
+text = "HITS 0"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script/script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="powerup" parent="CanvasLayer" instance=ExtResource( 10 )]
+
+transform/pos = Vector2( 3.19681, -2.9459 )
 transform/scale = Vector2( 0.626603, 0.626603 )
 
-[node name="boss_life" parent="CanvasLayer" instance=ExtResource( 9 )]
+[node name="boss_life" parent="CanvasLayer" instance=ExtResource( 11 )]
 
-transform/pos = Vector2( 845.602, 17.74 )
+transform/pos = Vector2( 861.602, 17.74 )
 transform/scale = Vector2( 0.356486, 0.356486 )
 
 [node name="shade" type="Sprite" parent="CanvasLayer"]
 
 material/material = SubResource( 2 )
-texture = ExtResource( 10 )
+texture = ExtResource( 12 )
 centered = false
 __meta__ = {
 "_edit_lock_": true
@@ -183,7 +207,7 @@ __meta__ = {
 
 process/pause_mode = 2
 transform/pos = Vector2( -5.99054, -8.24774 )
-script/script = ExtResource( 11 )
+script/script = ExtResource( 13 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -206,12 +230,12 @@ margin/left = 339.0
 margin/top = 112.0
 margin/right = 870.0
 margin/bottom = 649.0
-custom_fonts/bold_font = ExtResource( 12 )
+custom_fonts/bold_font = ExtResource( 8 )
 custom_fonts/normal_font = ExtResource( 7 )
 bbcode/enabled = false
 bbcode/bbcode = "F      : toggle fullscreen"
 visible_characters = -1
-script/script = ExtResource( 13 )
+script/script = ExtResource( 14 )
 
 [node name="pause" type="Label" parent="pause/CanvasLayer"]
 
@@ -224,11 +248,11 @@ margin/left = 431.0
 margin/top = 313.0
 margin/right = 627.0
 margin/bottom = 375.0
-custom_fonts/font = ExtResource( 12 )
+custom_fonts/font = ExtResource( 8 )
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 14 )
+script/script = ExtResource( 15 )
 
 [node name="confirm_quit" type="ConfirmationDialog" parent="pause/CanvasLayer"]
 
