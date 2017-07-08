@@ -10,11 +10,11 @@ func _ready():
 
 Arrows : move
 
-X      : shoot
+W      : shoot
+
+E      : blue / red
 
 Space  : shield 
-
-C      : blue / red
 
 P      : pause / unpause
 
