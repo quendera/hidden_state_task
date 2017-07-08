@@ -1,6 +1,7 @@
 extends Area2D
 
 # class member variables go here, for example:
+const lag = 0.1
 var active = false
 var movement_time = 0
 var start_time = 0
@@ -48,8 +49,7 @@ func _process(delta):
 	for dir in dirs.keys():
 		if Input.is_action_pressed(dir):
 			sum_dir += dirs[dir]
-	if not (ship_displace == sum_dir*velocity):
-		ship_displace = sum_dir*velocity
+	ship_displace += (sum_dir*velocity-ship_displace)*delta/lag
 	ship_pos += delta*ship_displace
 	if Input.is_action_pressed("shoot") and ready2shoot and not active:
 		if not shooting:
