@@ -2,6 +2,7 @@ extends Area2D
 
 # class member variables go here, for example:
 const lag = 0.1
+var escaped = false
 var active = false
 var movement_time = 0
 var start_time = 0

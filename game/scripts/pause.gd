@@ -31,6 +31,8 @@ func _input(event):
 			get_node("CanvasLayer/pause").set_hidden(true)
 			get_node("CanvasLayer/instructions").set_hidden(true)
 			initial_screen = false
+		if event.is_action_pressed("tutorial"):
+			get_tree().change_scene("res://scenes/tutorial.tscn")
 
 
 func _on_confirm_quit_confirmed():

@@ -22,6 +22,8 @@ F      : toggle fullscreen
 
 Esc    : exit the game
 
+Ctrl   : tutorial
+
 Enter  : start the game 
 """)
 

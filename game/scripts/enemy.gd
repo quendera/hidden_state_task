@@ -8,7 +8,7 @@ var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : tr
 var polarity = 1*(rand_range(0,1) > 0.5)
 var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
 var enemy_bullet_scene = preload("res://scenes/enemy_bullet.tscn")
-const SPEED = 30
+var SPEED = 30
 var enemy_bullet_instance
 var dir
 var pos

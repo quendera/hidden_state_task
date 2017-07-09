@@ -13,9 +13,13 @@ func activate(polarity):
 	get_node("../sound").play("laser")
 
 func explode():
-	if get_node("area").overlaps_area(get_node("../../ship")) and not get_node("../../ship").active:
-		get_node("../../ship").explode(20)
-		hit = true
+	if get_node("area").overlaps_area(get_node("../../ship")):
+		if not get_node("../../ship").active:
+			get_node("../../ship").explode(20)
+			hit = true
+			get_node("../../ship").escaped = false
+		else:
+			get_node("../../ship").escaped = true
 
 func retract():
 	get_node("../../ship").active = false

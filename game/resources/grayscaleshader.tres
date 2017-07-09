@@ -1,0 +1,27 @@
+[gd_resource type="CanvasItemShader" format=1]
+
+[resource]
+
+_code = {
+"fragment": "uniform float brightness = 1.0;
+uniform float contrast = 1.0;
+uniform float saturation = 1.0;
+
+color c = vec4(texscreen(SCREEN_UV),1);
+c.rgb = mix(vec3(0.0), c.rgb, brightness);
+c.rgb = mix(vec3(0.5), c.rgb, contrast);
+c.rgb = mix(vec3(dot(vec3(1.0), c.rgb)*0.33333), c.rgb, saturation);
+
+vec4 to_grayscale(vec4 pixcol) {
+	float average = (pixcol.r+pixcol.g+pixcol.b)/6;
+	return vec4(average,average,average,1);
+}
+
+COLOR = to_grayscale(c);",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}
+
