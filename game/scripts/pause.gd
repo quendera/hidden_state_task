@@ -26,7 +26,7 @@ func _input(event):
 	if event.is_action_pressed("full_screen"):
 		OS.set_window_fullscreen(not OS.is_window_fullscreen())
 	if initial_screen:
-		if event.is_action_pressed("ui_accept"):
+		if event.is_action_pressed("ui_accept") or (event.type == InputEvent.SCREEN_TOUCH):
 			toggle_pause(true)
 			get_node("CanvasLayer/pause").set_hidden(true)
 			get_node("CanvasLayer/instructions").set_hidden(true)

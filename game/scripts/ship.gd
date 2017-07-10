@@ -21,7 +21,11 @@ var bullet_scene = preload("res://scenes/bullet.tscn")
 var bullet_instance
 var ship_displace = Vector2(0,0)
 var dirs = {"ui_left":Vector2(-1,0), "ui_right":Vector2(1,0), "ui_up":Vector2(0,-1), "ui_down":Vector2(0,1)}
-
+var pos_touch = Vector2(0,0)
+var move_touch = false
+var dir_touch = Vector2(0,0)
+var pressed = false
+var shooting_pressed = false
 
 func _ready():
 	randomize()
@@ -30,15 +34,17 @@ func _ready():
 	get_node("frames").get_material().set_shader_param("x", polarity)
 
 func _input(event):
-	if event.is_action_pressed("flip_color") and not Input.is_action_pressed("shoot"):
-		polarity = 1-polarity
-		get_node("frames").get_material().set_shader_param("x", polarity)
-	if event.is_action_pressed("shield") and not active:
-		if movement_time == 0:
-			movement_time = OS.get_ticks_msec()-start_time
-		if ready2shield:
-			active = true
-			get_node("shield_off").start()
+	if event.is_action_pressed("flip_color"):
+		change_polarity()
+	if event.is_action_pressed("shield"):
+		shield()
+	
+	if (event.type == InputEvent.SCREEN_TOUCH) or (event.type == InputEvent.SCREEN_DRAG):
+		pos_touch = event.pos
+		pressed = (event.type == InputEvent.SCREEN_DRAG) or event.is_pressed()
+		dir_touch = pos_touch-get_node("../joystick").get_global_pos()
+		move_touch = pressed and dir_touch.length()<get_node("../joystick").ray and dir_touch.length()>get_node("../joystick").ray*0.5
+
 
 
 func _process(delta):
@@ -50,15 +56,18 @@ func _process(delta):
 	for dir in dirs.keys():
 		if Input.is_action_pressed(dir):
 			sum_dir += dirs[dir]
+	
+	if move_touch:
+		sum_dir = dir_touch.normalized()
 	ship_displace += (sum_dir*velocity-ship_displace)*delta/lag
 	ship_pos += delta*ship_displace
-	if Input.is_action_pressed("shoot") and ready2shoot and not active:
+	if (Input.is_action_pressed("shoot") or shooting_pressed) and ready2shoot and not active:
 		if not shooting:
 			shooting = true
 			spawn_bullet(polarity)
 		charge = clamp(charge+delta*charging_velocity, 0, 100)
 		bullet_instance.steps = steps
-	if not Input.is_action_pressed("shoot") and shooting:
+	if not (Input.is_action_pressed("shoot") or shooting_pressed) and shooting:
 		bullet_instance.detached = true
 		shooting = false
 		ready2shoot = false
@@ -90,3 +99,25 @@ func _on_anim_finished():
 
 func _on_shield_off_timeout():
 	active = false
+
+func change_polarity():
+	if not Input.is_action_pressed("shoot"):
+		polarity = 1-polarity
+		get_node("frames").get_material().set_shader_param("x", polarity)
+
+func shield():
+	if not active:
+		if movement_time == 0:
+			movement_time = OS.get_ticks_msec()-start_time
+		if ready2shield:
+			active = true
+			get_node("shield_off").start()
+
+func _on_polarity_button_pressed():
+	change_polarity()
+
+
+
+func _on_shield_pressed():
+	shield()
+	print("shield")
