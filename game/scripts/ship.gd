@@ -42,8 +42,7 @@ func _input(event):
 	if (event.type == InputEvent.SCREEN_TOUCH) or (event.type == InputEvent.SCREEN_DRAG):
 		pos_touch = event.pos
 		pressed = (event.type == InputEvent.SCREEN_DRAG) or event.is_pressed()
-		dir_touch = pos_touch-get_node("../joystick").get_global_pos()
-		move_touch = pressed and dir_touch.length()<get_node("../joystick").ray and dir_touch.length()>get_node("../joystick").ray*0.5
+
 
 
 
@@ -56,11 +55,13 @@ func _process(delta):
 	for dir in dirs.keys():
 		if Input.is_action_pressed(dir):
 			sum_dir += dirs[dir]
-	
-	if move_touch:
-		sum_dir = dir_touch.normalized()
 	ship_displace += (sum_dir*velocity-ship_displace)*delta/lag
 	ship_pos += delta*ship_displace
+	dir_touch = pos_touch-get_node("joystick").get_global_pos()
+	move_touch = pressed and dir_touch.length()<get_node("joystick").ray*1.2
+	if move_touch:
+		ship_pos += min(dir_touch.length(),2*velocity*delta)*dir_touch.normalized()
+
 	if (Input.is_action_pressed("shoot") or shooting_pressed) and ready2shoot and not active:
 		if not shooting:
 			shooting = true

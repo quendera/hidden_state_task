@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=1]
+[gd_scene load_steps=28 format=1]
 
 [ext_resource path="res://scripts/ship.gd" type="Script" id=1]
 [ext_resource path="res://resources/animated_ship.tres" type="SpriteFrames" id=2]
@@ -19,6 +19,7 @@
 [ext_resource path="res://assets/Images/whitehole.png" type="Texture" id=17]
 [ext_resource path="res://scripts/shadow.gd" type="Script" id=18]
 [ext_resource path="res://icon.png" type="Texture" id=19]
+[ext_resource path="res://scripts/joystick.gd" type="Script" id=20]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -276,6 +277,20 @@ shape_visible = false
 passby_press = false
 action = ""
 visibility_mode = 0
+
+[node name="joystick" type="Position2D" parent="."]
+
+transform/pos = Vector2( 0.219238, 164.95 )
+transform/scale = Vector2( 1.06935, 1.06935 )
+z/z = 2
+script/script = ExtResource( 20 )
+
+[node name="left" type="Position2D" parent="joystick"]
+
+transform/pos = Vector2( -97.3484, -1.40515 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [connection signal="animation_started" from="anim" to="." method="_on_anim_animation_started"]
 

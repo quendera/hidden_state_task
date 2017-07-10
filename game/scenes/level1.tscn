@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=1]
+[gd_scene load_steps=22 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/bg/Space_bkgr.png" type="Texture" id=2]
@@ -16,11 +16,10 @@
 [ext_resource path="res://scripts/pause.gd" type="Script" id=14]
 [ext_resource path="res://scripts/instructions.gd" type="Script" id=15]
 [ext_resource path="res://scripts/welcome.gd" type="Script" id=16]
-[ext_resource path="res://scripts/joystick.gd" type="Script" id=17]
-[ext_resource path="res://assets/Images/controls/joystick.png" type="Texture" id=18]
-[ext_resource path="res://icon.png" type="Texture" id=19]
-[ext_resource path="res://scripts/polarity_button.gd" type="Script" id=20]
-[ext_resource path="res://scripts/shoot_button.gd" type="Script" id=21]
+[ext_resource path="res://icon.png" type="Texture" id=17]
+[ext_resource path="res://scripts/polarity_button.gd" type="Script" id=18]
+[ext_resource path="res://assets/Images/controls/joystick.png" type="Texture" id=19]
+[ext_resource path="res://scripts/shoot_button.gd" type="Script" id=20]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
@@ -245,27 +244,25 @@ window/title = "Please Confirm..."
 dialog/text = "Exit the game?"
 dialog/hide_on_ok = true
 
-[node name="joystick" type="Position2D" parent="."]
-
-transform/pos = Vector2( 1123.05, 604.153 )
-z/z = 2
-script/script = ExtResource( 17 )
-
-[node name="sprite" type="Sprite" parent="joystick"]
-
-visibility/opacity = 0.5
-transform/pos = Vector2( -0.212036, -0.21582 )
-transform/scale = Vector2( 0.759886, 0.759886 )
-texture = ExtResource( 18 )
-
-[node name="left" type="Position2D" parent="joystick"]
-
-transform/pos = Vector2( -97.3484, -1.40515 )
-
 [node name="polarity_button" type="TouchScreenButton" parent="."]
 
-transform/pos = Vector2( 0, 597.1 )
+transform/pos = Vector2( 839.076, 586.826 )
 transform/scale = Vector2( 2.56766, 1.89471 )
+normal = ExtResource( 17 )
+pressed = null
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 0
+script/script = ExtResource( 18 )
+
+[node name="shoot_button" type="TouchScreenButton" parent="."]
+
+transform/pos = Vector2( 1026.17, 529.745 )
+transform/scale = Vector2( 0.907637, 0.727629 )
 normal = ExtResource( 19 )
 pressed = null
 bitmask = null
@@ -276,21 +273,6 @@ passby_press = false
 action = ""
 visibility_mode = 0
 script/script = ExtResource( 20 )
-
-[node name="shoot_button" type="TouchScreenButton" parent="."]
-
-transform/pos = Vector2( 265.834, 594.828 )
-transform/scale = Vector2( 2.31916, 1.85921 )
-normal = ExtResource( 19 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = false
-action = ""
-visibility_mode = 0
-script/script = ExtResource( 21 )
 
 [connection signal="confirmed" from="pause/CanvasLayer/confirm_quit" to="pause" method="_on_confirm_quit_confirmed"]
 
