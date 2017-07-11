@@ -58,7 +58,7 @@ func _process(delta):
 	ship_displace += (sum_dir*velocity-ship_displace)*delta/lag
 	ship_pos += delta*ship_displace
 	dir_touch = pos_touch-get_node("joystick").get_global_pos()
-	move_touch = pressed and dir_touch.length()<get_node("joystick").ray*1.2
+	move_touch = pressed and dir_touch.length()<get_node("joystick").ray
 	if move_touch:
 		ship_pos += min(dir_touch.length(),2*velocity*delta)*dir_touch.normalized()
 

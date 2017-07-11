@@ -11,12 +11,12 @@ func _ready():
 
 func _process(delta):
 	elapsed = OS.get_ticks_msec()-time0
-	get_node("../ship").shooting_pressed = is_pressed() and (elapsed > flip_time)
-
+	get_node("../../ship").shooting_pressed = is_pressed() and (elapsed > flip_time)
+	get_material().set_shader_param("x", get_node("../../ship").polarity)
 func _on_polarity_button_pressed():
 	time0 = OS.get_ticks_msec()
 
 
 func _on_polarity_button_released():
 	if elapsed < flip_time :
-		get_node("../ship").change_polarity()
+		get_node("../../ship").change_polarity()

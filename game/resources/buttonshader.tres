@@ -30,7 +30,7 @@ if (!x) {
 	fragHSV.x = mod(fragHSV.x+0.4,1);
 }
 fragRGB = hsv2rgb(fragHSV);
-COLOR  = vec4(fragRGB, textureColor.a);",
+COLOR  = vec4(fragRGB, textureColor.a*0.5);",
 "fragment_ofs": 0,
 "light": "",
 "light_ofs": 0,

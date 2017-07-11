@@ -13,7 +13,7 @@
 
 shader/shader = ExtResource( 2 )
 shader/shading_mode = 0
-shader_param/x = true
+shader_param/x = false
 
 [sub_resource type="SpriteFrames" id=2]
 

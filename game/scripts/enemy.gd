@@ -33,6 +33,27 @@ var attack_frequency = [0.3, 0.03, 0.1]
 
 
 func _ready():
+	var HTTP = HTTPClient.new()
+	var url = "http://10.40.11.166/"
+	var RESPONSE = HTTP.connect("10.40.11.166",80)
+	
+	while(HTTP.get_status() == HTTPClient.STATUS_CONNECTING or HTTP.get_status() == HTTPClient.STATUS_RESOLVING):
+		HTTP.poll()
+		OS.delay_msec(300)
+	assert(HTTP.get_status() == HTTPClient.STATUS_CONNECTED)
+	var data = {"a":2, "b":3}
+	var QUERY = HTTP.query_string_from_dict(data)
+	var HEADERS = ["User-Agent: Pirulo/1.0 (Godot)", "Content-Type: application/x-www-form-urlencoded", "Content-Length: " + str(QUERY.length())]
+	RESPONSE = HTTP.request(HTTPClient.METHOD_POST, url, HEADERS, QUERY)
+	assert(RESPONSE == OK)
+	
+	while (HTTP.get_status() == HTTPClient.STATUS_REQUESTING):
+		HTTP.poll()
+		OS.delay_msec(300)
+#    # Make sure request finished
+	assert(HTTP.get_status() == HTTPClient.STATUS_BODY or HTTP.get_status() == HTTPClient.STATUS_CONNECTED)
+	print("testsuccess")
+	
 	randomize()
 	next_attack = randi() % 3
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))

@@ -175,7 +175,6 @@ transform/rot = 90.0
 transform/scale = Vector2( 0.35, 0.35 )
 frames = ExtResource( 2 )
 animation = "default"
-frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -266,7 +265,7 @@ autostart = false
 [node name="shield" type="TouchScreenButton" parent="."]
 
 visibility/opacity = 0.0
-transform/pos = Vector2( -103.089, -203.991 )
+transform/pos = Vector2( -100.089, -186.991 )
 transform/scale = Vector2( 2.92899, 3.60948 )
 normal = ExtResource( 19 )
 pressed = null
@@ -280,17 +279,14 @@ visibility_mode = 0
 
 [node name="joystick" type="Position2D" parent="."]
 
-transform/pos = Vector2( -3.46399, 194.416 )
+transform/pos = Vector2( -7.46399, 135.416 )
 transform/scale = Vector2( 1.06935, 1.06935 )
 z/z = 2
 script/script = ExtResource( 20 )
 
-[node name="left" type="Position2D" parent="joystick"]
+[node name="right" type="Position2D" parent="joystick"]
 
-transform/pos = Vector2( -97.3484, -1.40515 )
-__meta__ = {
-"_edit_lock_": true
-}
+transform/pos = Vector2( 1.68619, -55.3027 )
 
 [connection signal="animation_started" from="anim" to="." method="_on_anim_animation_started"]
 

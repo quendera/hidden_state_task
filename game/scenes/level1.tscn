@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=1]
+[gd_scene load_steps=22 format=1]
 
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/bg/Space_bkgr.png" type="Texture" id=2]
@@ -11,17 +11,24 @@
 [ext_resource path="res://scripts/hits.gd" type="Script" id=9]
 [ext_resource path="res://scenes/powerup.tscn" type="PackedScene" id=10]
 [ext_resource path="res://scenes/boss_life.tscn" type="PackedScene" id=11]
-[ext_resource path="res://resources/grayscaleshader.tres" type="Shader" id=12]
-[ext_resource path="res://assets/Images/white.png" type="Texture" id=13]
-[ext_resource path="res://scripts/pause.gd" type="Script" id=14]
-[ext_resource path="res://scripts/instructions.gd" type="Script" id=15]
-[ext_resource path="res://scripts/welcome.gd" type="Script" id=16]
-[ext_resource path="res://icon.png" type="Texture" id=17]
-[ext_resource path="res://scripts/polarity_button.gd" type="Script" id=18]
+[ext_resource path="res://resources/buttonshader.tres" type="Shader" id=12]
+[ext_resource path="res://assets/Images/controls/joystick.png" type="Texture" id=13]
+[ext_resource path="res://scripts/polarity_button.gd" type="Script" id=14]
+[ext_resource path="res://resources/grayscaleshader.tres" type="Shader" id=15]
+[ext_resource path="res://assets/Images/white.png" type="Texture" id=16]
+[ext_resource path="res://scripts/pause.gd" type="Script" id=17]
+[ext_resource path="res://scripts/instructions.gd" type="Script" id=18]
+[ext_resource path="res://scripts/welcome.gd" type="Script" id=19]
+
+[sub_resource type="CanvasItemMaterial" id=2]
+
+shader/shader = ExtResource( 12 )
+shader/shading_mode = 0
+shader_param/x = false
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-shader/shader = ExtResource( 12 )
+shader/shader = ExtResource( 15 )
 shader/shading_mode = 0
 shader_param/brightness = 1.0
 shader_param/contrast = 1.0
@@ -165,10 +172,26 @@ transform/scale = Vector2( 0.626603, 0.626603 )
 transform/pos = Vector2( 861.602, 17.74 )
 transform/scale = Vector2( 0.356486, 0.356486 )
 
+[node name="polarity_button" type="TouchScreenButton" parent="CanvasLayer"]
+
+material/material = SubResource( 2 )
+transform/pos = Vector2( 1064.89, 501.217 )
+transform/scale = Vector2( 0.757914, 0.757914 )
+normal = ExtResource( 13 )
+pressed = null
+bitmask = null
+shape = null
+shape_centered = true
+shape_visible = true
+passby_press = false
+action = ""
+visibility_mode = 1
+script/script = ExtResource( 14 )
+
 [node name="shade" type="Sprite" parent="CanvasLayer"]
 
 material/material = SubResource( 1 )
-texture = ExtResource( 13 )
+texture = ExtResource( 16 )
 centered = false
 __meta__ = {
 "_edit_lock_": true
@@ -178,7 +201,7 @@ __meta__ = {
 
 process/pause_mode = 2
 transform/pos = Vector2( -5.99054, -8.24774 )
-script/script = ExtResource( 14 )
+script/script = ExtResource( 17 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -206,7 +229,7 @@ custom_fonts/normal_font = ExtResource( 7 )
 bbcode/enabled = false
 bbcode/bbcode = "F      : toggle fullscreen"
 visible_characters = -1
-script/script = ExtResource( 15 )
+script/script = ExtResource( 18 )
 
 [node name="pause" type="Label" parent="pause/CanvasLayer"]
 
@@ -223,7 +246,7 @@ custom_fonts/font = ExtResource( 8 )
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 16 )
+script/script = ExtResource( 19 )
 
 [node name="confirm_quit" type="ConfirmationDialog" parent="pause/CanvasLayer"]
 
@@ -241,27 +264,12 @@ window/title = "Please Confirm..."
 dialog/text = "Exit the game?"
 dialog/hide_on_ok = true
 
-[node name="polarity_button" type="TouchScreenButton" parent="."]
+[connection signal="pressed" from="CanvasLayer/polarity_button" to="CanvasLayer/polarity_button" method="_on_polarity_button_pressed"]
 
-transform/pos = Vector2( 814.469, 574.523 )
-transform/scale = Vector2( 6.70118, 1.89471 )
-normal = ExtResource( 17 )
-pressed = null
-bitmask = null
-shape = null
-shape_centered = true
-shape_visible = true
-passby_press = false
-action = ""
-visibility_mode = 0
-script/script = ExtResource( 18 )
+[connection signal="released" from="CanvasLayer/polarity_button" to="CanvasLayer/polarity_button" method="_on_polarity_button_released"]
 
 [connection signal="confirmed" from="pause/CanvasLayer/confirm_quit" to="pause" method="_on_confirm_quit_confirmed"]
 
 [connection signal="popup_hide" from="pause/CanvasLayer/confirm_quit" to="pause" method="_on_confirm_quit_popup_hide"]
-
-[connection signal="pressed" from="polarity_button" to="polarity_button" method="_on_polarity_button_pressed"]
-
-[connection signal="released" from="polarity_button" to="polarity_button" method="_on_polarity_button_released"]
 
 
