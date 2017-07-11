@@ -20,13 +20,13 @@
 [ext_resource path="res://scripts/instructions.gd" type="Script" id=18]
 [ext_resource path="res://scripts/welcome.gd" type="Script" id=19]
 
-[sub_resource type="CanvasItemMaterial" id=2]
+[sub_resource type="CanvasItemMaterial" id=1]
 
 shader/shader = ExtResource( 12 )
 shader/shading_mode = 0
 shader_param/x = false
 
-[sub_resource type="CanvasItemMaterial" id=1]
+[sub_resource type="CanvasItemMaterial" id=2]
 
 shader/shader = ExtResource( 15 )
 shader/shading_mode = 0
@@ -174,7 +174,7 @@ transform/scale = Vector2( 0.356486, 0.356486 )
 
 [node name="polarity_button" type="TouchScreenButton" parent="CanvasLayer"]
 
-material/material = SubResource( 2 )
+material/material = SubResource( 1 )
 transform/pos = Vector2( 1064.89, 501.217 )
 transform/scale = Vector2( 0.757914, 0.757914 )
 normal = ExtResource( 13 )
@@ -190,7 +190,7 @@ script/script = ExtResource( 14 )
 
 [node name="shade" type="Sprite" parent="CanvasLayer"]
 
-material/material = SubResource( 1 )
+material/material = SubResource( 2 )
 texture = ExtResource( 16 )
 centered = false
 __meta__ = {
