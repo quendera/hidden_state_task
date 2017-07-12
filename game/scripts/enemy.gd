@@ -1,40 +1,55 @@
 extends Area2D
 
+
+# Data collection:
 var data = {"time":[], "polarity_shot":[], "polarity_enemy":[], "correct" : [], "steps":[],
 "escaped": [], "reaction_time" : [], "probability_blue" : []}
 var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : true, "steps" : 0,
 "escaped": true, "reaction_time" : 0, "probability_blue" : 0.5}
-# class member variables go here, for example:
-var polarity = 1*(rand_range(0,1) > 0.5)
-var colors = [Color(1,0.2,0.2), Color(0.2,0.2,1)]
+
+#constants
+const SPEED = 30
+
+# bullets
 var enemy_bullet_scene = preload("res://scenes/enemy_bullet.tscn")
-var SPEED = 30
 var enemy_bullet_instance
+
+# time changing attributes
+var polarity = 1*(rand_range(0,1) > 0.5)
+var probability_blue = 0.5
+var stealable = false
+var shooting = false
+
+# navigate
 var dir
 var pos
-var probability_blue = 0.5
 const low_x = 900
 const high_x = 1100
 const low_y = 250
 const high_y = 500
-var shooting = false
-var max_life = 2000
+
+
+
+# life
+const max_life = 2000
 var life = max_life
-var die_vec = [0, 6, 12, 18, 24, 30]
-var regenerate_vec = [0, 6, 15, 29, 53, 107]
+const die_vec = [0, 6, 12, 18, 24, 30]
+const regenerate_vec = [0, 6, 15, 29, 53, 107]
 var lost_life = 0
 var life_sign
+
+# attacks
 var offset = 45
-var attack_amount = 3
-var attacks_effectuated = 0
-var next_attack
-var attack_durations = [4, 2, 1]
-var attack_frequency = [0.3, 0.03, 0.1]
-var stealable
+const attack_amount = 3
+var next_attack = randi() % 2
+const attack_durations = [2, 1]
+const attack_frequency = [0.03, 0.1]
+
+#
+
 
 func _ready():
 	randomize()
-	next_attack = randi() % 3
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
 	add_to_group("enemies")
 	get_node("frames").get_material().set_shader_param("x", polarity)
@@ -136,7 +151,7 @@ func _on_shooting_timeout():
 		attack(next_attack)
 
 func begin_attack():
-	next_attack = (randi() % 2)+1
+	next_attack = (randi() % 2)
 	shooting = true
 	get_node("shooting").set_wait_time(attack_frequency[next_attack])
 	get_node("end_attack").set_wait_time(attack_durations[next_attack])
@@ -147,10 +162,10 @@ func _on_end_attack_timeout():
 
 
 func attack(attack_number):
-	if attack_number == 1:
+	if attack_number == 0:
+		attack0()
+	elif attack_number == 1:
 		attack1()
-	elif attack_number == 2:
-		attack2()
 
 func get_num_rays(t):
 	if t > 0.78:
@@ -164,8 +179,7 @@ func get_num_rays(t):
 	else:
 		return 1
 
-func attack1():
-	offset = -offset
+func attack0():
 	var num_rays = get_num_rays(get_node("end_attack").get_time_left()/
 	get_node("end_attack").get_wait_time())
 	for i in range(num_rays):
@@ -174,7 +188,7 @@ func attack1():
 		spawn_enemy_bullet(shooting_dir)
 
 
-func attack2():
+func attack1():
 	offset = -offset
 	for i in range(5):
 		spawn_enemy_bullet(Vector2(-1,0))
