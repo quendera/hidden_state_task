@@ -6,26 +6,38 @@ extends Node
 
 func _ready():
 	var HTTP = HTTPClient.new()
-	var url = "http://10.40.11.166/"
-#	url = "http://posttestserver.com/post.php"
-#	var RESPONSE = HTTP.connect("posttestserver.com",80)
+	var url = "http://10.40.11.166/index.php"
 	var RESPONSE = HTTP.connect("10.40.11.166",80)
 	
 	while(HTTP.get_status() == HTTPClient.STATUS_CONNECTING or HTTP.get_status() == HTTPClient.STATUS_RESOLVING):
 		HTTP.poll()
 		OS.delay_msec(300)
 	assert(HTTP.get_status() == HTTPClient.STATUS_CONNECTED)
-	var data = {"a": [3,1,2], "b" : ["ww", "ee"]}
-	var QUERY = HTTP.query_string_from_dict(data)
-	var HEADERS = ["User-Agent: Pirulo/1.0 (Godot)", "Content-Type: application/x-www-form-urlencoded", "Content-Length: " + str(QUERY.length())]
-	RESPONSE = HTTP.request(HTTPClient.METHOD_POST, url, HEADERS, QUERY)
+	var r=RawArray()
+	r.append("----WebKitFormBoundaryePkpFF7tjBAqx29L\n")
+	r.append("Content-Disposition: form-data; name=\"imgFile\"; filename=\"cube.png\"\n")
+	r.append("Content-Type: image/png\n")
+	r.append("\n")
+	var file = File.new()
+	file.open("user://cube.png", file.READ) #Either have cube.png in appdata folder (see README)
+	var content = file.get_buffer(file.get_len())
+	file.close()
+	r.append_array(content)
+	r.append("----WebKitFormBoundaryePkpFF7tjBAqx29L")
+	var headers=[
+		"Content-Type: multipart/form-data,  boundary=----WebKitFormBoundaryePkpFF7tjBAqx29L",
+		"Content-Length: "+String(content.size())
+	]
+	RESPONSE = HTTP.request_raw(HTTPClient.METHOD_POST, url, headers, r)
 	assert(RESPONSE == OK)
 	
 	while (HTTP.get_status() == HTTPClient.STATUS_REQUESTING):
 		HTTP.poll()
 		OS.delay_msec(300)
-#    # Make sure request finished
+	#    # Make sure request finished
 	assert(HTTP.get_status() == HTTPClient.STATUS_BODY or HTTP.get_status() == HTTPClient.STATUS_CONNECTED)
+	print("got here")
+	print(str(RESPONSE))
 	var RB = RawArray()
 	var CHUNK = 0
 	var RESULT = 0
@@ -42,5 +54,4 @@ func _ready():
 				RB = RB + CHUNK
 	HTTP.close()
 	RESULT = RB.get_string_from_ascii()
-	# Do something with the response
 	print(str(RESULT))

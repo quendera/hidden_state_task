@@ -41,7 +41,7 @@ func _ready():
 #		HTTP.poll()
 #		OS.delay_msec(300)
 #	assert(HTTP.get_status() == HTTPClient.STATUS_CONNECTED)
-#	var data = {"a": 2, "b" : 3}
+#	var data = {"a": [1,2], "b" : ["a","b"]}
 #	var QUERY = HTTP.query_string_from_dict(data)
 #	var HEADERS = ["User-Agent: Pirulo/1.0 (Godot)", "Content-Type: application/x-www-form-urlencoded", "Content-Length: " + str(QUERY.length())]
 #	RESPONSE = HTTP.request(HTTPClient.METHOD_POST, url, HEADERS, QUERY)
@@ -50,7 +50,7 @@ func _ready():
 #	while (HTTP.get_status() == HTTPClient.STATUS_REQUESTING):
 #		HTTP.poll()
 #		OS.delay_msec(300)
-    # Make sure request finished
+#	#    # Make sure request finished
 #	assert(HTTP.get_status() == HTTPClient.STATUS_BODY or HTTP.get_status() == HTTPClient.STATUS_CONNECTED)
 #	var RB = RawArray()
 #	var CHUNK = 0
@@ -68,8 +68,63 @@ func _ready():
 #				RB = RB + CHUNK
 #	HTTP.close()
 #	RESULT = RB.get_string_from_ascii()
-	# Do something with the response
 
+#	var HTTP = HTTPClient.new()
+#	var url = "http://10.40.11.166/index.php"
+#	var RESPONSE = HTTP.connect("10.40.11.166",80)
+#	
+#	while(HTTP.get_status() == HTTPClient.STATUS_CONNECTING or HTTP.get_status() == HTTPClient.STATUS_RESOLVING):
+#		HTTP.poll()
+#		OS.delay_msec(300)
+#	assert(HTTP.get_status() == HTTPClient.STATUS_CONNECTED)
+#	var r=RawArray()
+#	r.append("----WebKitFormBoundaryePkpFF7tjBAqx29L\n")
+#	r.append("Content-Disposition: form-data; name=\"imgFile\"; filename=\"cube.png\"\n")
+#	r.append("Content-Type: image/png\n")
+#	r.append("\n")
+#	var file = File.new()
+#	file.open("user://cube.png", file.READ)
+#	var content = file.get_buffer(file.get_len())
+#	file.close()
+#	r.append_array(content)
+#	r.append("----WebKitFormBoundaryePkpFF7tjBAqx29L")
+#	var headers=[
+#		"User-Agent: Pirulo/1.0 (Godot)",
+#		"Content-Type: multipart/form-data  boundary=----WebKitFormBoundaryePkpFF7tjBAqx29L",
+#		"Content-Length: "+String(content.size())
+#	]
+#	RESPONSE = HTTP.request_raw(HTTPClient.METHOD_POST, url, headers, r)
+#	assert(RESPONSE == OK)
+#	
+#	while (HTTP.get_status() == HTTPClient.STATUS_REQUESTING):
+#		HTTP.poll()
+#		OS.delay_msec(300)
+#	#    # Make sure request finished
+#	assert(HTTP.get_status() == HTTPClient.STATUS_BODY or HTTP.get_status() == HTTPClient.STATUS_CONNECTED)
+#	print("got here")
+#	print(str(RESPONSE))
+#	var RB = RawArray()
+#	var CHUNK = 0
+#	var RESULT = 0
+#	print(str(HTTP.get_status() ))
+#	if HTTP.has_response():
+#        # Get response headers
+#		var headers = HTTP.get_response_headers_as_dictionary()
+#		while(HTTP.get_status() == HTTPClient.STATUS_BODY):
+#			HTTP.poll()
+#			CHUNK = HTTP.read_response_body_chunk()
+#			if(CHUNK.size() == 0):
+#				OS.delay_usec(100)
+#			else:
+#				RB = RB + CHUNK
+#	HTTP.close()
+#	RESULT = RB.get_string_from_ascii()
+#	print(str(RESULT))
+	
+	
+	
+	
+	
 	randomize()
 	next_attack = randi() % 3
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
