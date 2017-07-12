@@ -34,10 +34,10 @@ func _ready():
 	get_node("frames").get_material().set_shader_param("x", polarity)
 
 func _input(event):
-	if event.is_action_pressed("flip_color"):
-		change_polarity()
 	if event.is_action_pressed("shield"):
 		shield()
+	if event.is_action_pressed("steal"):
+		steal()
 	
 	if (event.type == InputEvent.SCREEN_TOUCH) or (event.type == InputEvent.SCREEN_DRAG):
 		pos_touch = event.pos
@@ -62,13 +62,13 @@ func _process(delta):
 	if move_touch:
 		ship_pos += min(dir_touch.length(),2*velocity*delta)*dir_touch.normalized()
 
-	if (Input.is_action_pressed("shoot") or shooting_pressed) and ready2shoot and not active:
+	if shooting_pressed and ready2shoot and not active:
 		if not shooting:
 			shooting = true
 			spawn_bullet(polarity)
 		charge = clamp(charge+delta*charging_velocity, 0, 100)
 		bullet_instance.steps = steps
-	if not (Input.is_action_pressed("shoot") or shooting_pressed) and shooting:
+	if not shooting_pressed and shooting:
 		bullet_instance.detached = true
 		shooting = false
 		ready2shoot = false
@@ -102,7 +102,7 @@ func _on_shield_off_timeout():
 	active = false
 
 func change_polarity():
-	if not Input.is_action_pressed("shoot"):
+	if not shooting:
 		polarity = 1-polarity
 		get_node("frames").get_material().set_shader_param("x", polarity)
 
@@ -114,11 +114,14 @@ func shield():
 			active = true
 			get_node("shield_off").start()
 
+func steal():
+	if get_node("../enemy").stealable:
+		hits -= 10
+
+
 func _on_polarity_button_pressed():
 	change_polarity()
 
 
-
 func _on_shield_pressed():
 	shield()
-	print("shield")

@@ -30,7 +30,7 @@ var attacks_effectuated = 0
 var next_attack
 var attack_durations = [4, 2, 1]
 var attack_frequency = [0.3, 0.03, 0.1]
-
+var stealable
 
 func _ready():
 	randomize()
@@ -101,6 +101,7 @@ func explode(steps):
 	get_node("sound").play("explosion")
 	lost_life = lose_life(steps, true)
 	_on_bullet_hit(steps)
+	stealable = true
 
 func game_over():
 	save_data()
@@ -186,6 +187,7 @@ func attack2():
 
 
 func _on_deactivate_shield_timeout():
+	stealable = false
 	get_node("../ship").ready2shield = false
 	get_node("end_attack").stop()
 	shooting = false

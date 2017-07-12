@@ -2,6 +2,7 @@ extends AnimatedSprite
 
 var hit = false
 
+
 func ready():
 	pass
 
