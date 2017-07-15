@@ -265,7 +265,7 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 4 )
 animation = "default"
-frame = 2
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -287,7 +287,6 @@ config/pitch_random = 0.0
 visibility/visible = false
 material/material = SubResource( 5 )
 transform/scale = Vector2( 0.53, 0.53 )
-z/z = 2
 frames = SubResource( 6 )
 animation = "default"
 frame = 10

@@ -39,13 +39,17 @@ var lost_life = 0
 var life_sign
 
 # attacks
+#onready var attack = preload("res://scripts/attacks.gd").new()
 var offset = 45
 const attack_amount = 3
 var next_attack = randi() % 2
 const attack_durations = [2, 1]
 const attack_frequency = [0.03, 0.1]
 
-#
+
+# signals
+
+signal exploded
 
 
 func _ready():
@@ -109,6 +113,7 @@ func reflect(steps):
 
 
 func explode(steps):
+	emit_signal("exploded")
 	get_node("explosion").set_scale(Vector2(steps/float(5), steps/float(5)))
 	get_node("explosion").get_material().set_shader_param("x", polarity)
 	get_node("explosion").show()
