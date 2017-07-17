@@ -9,4 +9,4 @@ func _ready():
 
 
 func _process(delta):
-	set_hidden(not get_node("../").active)
+	set_hidden(not get_node(global.player).active)

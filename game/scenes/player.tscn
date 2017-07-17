@@ -1,18 +1,17 @@
-[gd_scene load_steps=11 format=1]
+[gd_scene load_steps=10 format=1]
 
 [ext_resource path="res://scenes/ship.tscn" type="PackedScene" id=1]
 [ext_resource path="res://assets/Fonts/labelfont.fnt" type="BitmapFont" id=2]
 [ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=3]
 [ext_resource path="res://scripts/hits.gd" type="Script" id=4]
 [ext_resource path="res://scenes/powerup.tscn" type="PackedScene" id=5]
-[ext_resource path="res://scripts/powerup.gd" type="Script" id=6]
-[ext_resource path="res://resources/buttonshader.tres" type="Shader" id=7]
-[ext_resource path="res://assets/Images/controls/joystick.png" type="Texture" id=8]
-[ext_resource path="res://scripts/polarity_button.gd" type="Script" id=9]
+[ext_resource path="res://resources/buttonshader.tres" type="Shader" id=6]
+[ext_resource path="res://assets/Images/controls/joystick.png" type="Texture" id=7]
+[ext_resource path="res://scripts/polarity_button.gd" type="Script" id=8]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-shader/shader = ExtResource( 7 )
+shader/shader = ExtResource( 6 )
 shader/shading_mode = 0
 shader_param/x = false
 
@@ -90,18 +89,17 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="powerup" type="Node2D" parent="layer" instance=ExtResource( 5 )]
+[node name="powerup" parent="layer" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 3.19681, -2.9459 )
 transform/scale = Vector2( 0.626603, 0.626603 )
-script/script = ExtResource( 6 )
 
 [node name="polarity_button" type="TouchScreenButton" parent="layer"]
 
 material/material = SubResource( 1 )
 transform/pos = Vector2( 1064.89, 501.217 )
 transform/scale = Vector2( 0.757914, 0.757914 )
-normal = ExtResource( 8 )
+normal = ExtResource( 7 )
 pressed = null
 bitmask = null
 shape = null
@@ -110,7 +108,7 @@ shape_visible = true
 passby_press = false
 action = ""
 visibility_mode = 1
-script/script = ExtResource( 9 )
+script/script = ExtResource( 8 )
 
 [connection signal="pressed" from="layer/polarity_button" to="layer/polarity_button" method="_on_polarity_button_pressed"]
 

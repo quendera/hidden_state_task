@@ -13,6 +13,6 @@ func _ready():
 func _process(delta):
 	translate(-delta*SPEED*Vector2(1,0))
 	pos = get_pos()
-	if pos.x +  5000*0.9 <= get_node("..").w:
+	if pos.x +  5000*0.9 <= global.w:
 		pos.x += get_texture().get_size().x*0.9
 		set_pos(pos)

@@ -265,7 +265,7 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 4 )
 animation = "default"
-frame = 4
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -321,6 +321,7 @@ visibility/visible = false
 visibility/light_mask = 3
 material/material = SubResource( 9 )
 transform/pos = Vector2( -101.597, 70.4751 )
+z/z = 1
 frames = SubResource( 10 )
 animation = "default"
 frame = 19

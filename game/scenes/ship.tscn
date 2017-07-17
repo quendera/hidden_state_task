@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=1]
+[gd_scene load_steps=27 format=1]
 
 [ext_resource path="res://scripts/ship.gd" type="Script" id=1]
 [ext_resource path="res://resources/animated_ship.tres" type="SpriteFrames" id=2]
@@ -15,11 +15,10 @@
 [ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.10.png" type="Texture" id=13]
 [ext_resource path="res://resources/shieldshader.tres" type="Shader" id=14]
 [ext_resource path="res://assets/Images/white.png" type="Texture" id=15]
-[ext_resource path="res://scripts/shader.gd" type="Script" id=16]
-[ext_resource path="res://assets/Images/whitehole.png" type="Texture" id=17]
-[ext_resource path="res://scripts/shadow.gd" type="Script" id=18]
-[ext_resource path="res://icon.png" type="Texture" id=19]
-[ext_resource path="res://scripts/joystick.gd" type="Script" id=20]
+[ext_resource path="res://assets/Images/whitehole.png" type="Texture" id=16]
+[ext_resource path="res://scripts/shadow.gd" type="Script" id=17]
+[ext_resource path="res://icon.png" type="Texture" id=18]
+[ext_resource path="res://scripts/joystick.gd" type="Script" id=19]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -127,7 +126,7 @@ shader/shading_mode = 0
 
 transform/pos = Vector2( 169.788, 343.386 )
 transform/rot = -90.0
-z/z = 2
+z/z = 1
 input/pickable = true
 shapes/0/shape = SubResource( 1 )
 shapes/0/transform = Matrix32( 1, 0, 0, 1, 0.225403, 0 )
@@ -222,7 +221,6 @@ transform/pos = Vector2( -4.94492, 6.8206 )
 transform/rot = 90.0
 z/z = -1
 texture = ExtResource( 15 )
-script/script = ExtResource( 16 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -234,7 +232,7 @@ transform/scale = Vector2( 2.22454, 2.15747 )
 z/z = 1
 enabled = true
 editor_only = false
-texture = ExtResource( 17 )
+texture = ExtResource( 16 )
 offset = Vector2( 1.47336, 1.98471 )
 scale = 1.0
 color = Color( 1, 1, 1, 1 )
@@ -251,7 +249,7 @@ shadow/color = Color( 0, 0, 0, 0 )
 shadow/buffer_size = 2048
 shadow/esm_multiplier = 80.0
 shadow/item_mask = 1
-script/script = ExtResource( 18 )
+script/script = ExtResource( 17 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -268,7 +266,7 @@ autostart = false
 visibility/opacity = 0.0
 transform/pos = Vector2( -100.089, -186.991 )
 transform/scale = Vector2( 2.92899, 3.60948 )
-normal = ExtResource( 19 )
+normal = ExtResource( 18 )
 pressed = null
 bitmask = null
 shape = null
@@ -283,7 +281,7 @@ visibility_mode = 0
 transform/pos = Vector2( -7.46399, 135.416 )
 transform/scale = Vector2( 1.06935, 1.06935 )
 z/z = 2
-script/script = ExtResource( 20 )
+script/script = ExtResource( 19 )
 
 [node name="right" type="Position2D" parent="joystick"]
 

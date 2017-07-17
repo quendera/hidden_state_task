@@ -52,6 +52,15 @@ const attack_frequency = [0.03, 0.1]
 signal exploded
 
 
+#### Public Functions
+
+var laser_pos setget , get_laser_pos
+
+func get_laser_pos():
+	return get_node("laser/position").get_global_pos()
+
+
+
 func _ready():
 	randomize()
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
@@ -60,7 +69,7 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
-	var angle2ship = get_node("laser").get_angle_to(get_node("../ship/get_hits").get_global_pos())
+	var angle2ship = get_node("laser").get_angle_to(get_node("../player/ship/get_hits").get_global_pos())
 	get_node("laser").rotate(angle2ship+PI/2)
 	life = clamp(life,0,max_life)
 	pos = get_node("centroid").get_global_pos()
@@ -79,15 +88,15 @@ func save_data():
 
 func _on_bullet_hit(steps):
 	data_line["time"] = OS.get_ticks_msec()
-	data_line["polarity_shot"] = get_node("../ship").polarity
+	data_line["polarity_shot"] = global.player.get_node("ship").polarity
 	data_line["probability_blue"] = probability_blue
 	data_line["polarity_enemy"] = polarity
 	data_line["correct"] = (data_line["polarity_shot"] == data_line["polarity_enemy"])
 	data_line["steps"] = steps
 	data_line["escaped"] = false
-	get_node("../ship").movement_time = 0
-	get_node("../ship").start_time =  OS.get_ticks_msec()
-	get_node("../ship").ready2shield = true
+	global.player.get_node("ship").movement_time = 0
+	global.player.get_node("ship").start_time =  OS.get_ticks_msec()
+	global.player.get_node("ship").ready2shield = true
 	get_node("deactivate_shield").start()
 	life -= lost_life
 	if - lost_life > 0:
@@ -129,12 +138,12 @@ func game_over():
 
 func _on_anim_finished():
 	data_line["escaped"] = not get_node("laser").hit
-	data_line["reaction_time"] = get_node("../ship").movement_time
+	data_line["reaction_time"] = global.player.get_node("ship").movement_time
 	for key in data_line.keys():
 		data[key].push_back(data_line[key])
 	get_node("frames").get_material().set_shader_param("hidden", true)
-	get_node("../ship").ready2shoot = true
-	get_node("../ship").charge = 0
+	global.player.get_node("ship").ready2shoot = true
+	global.player.get_node("ship").charge = 0
 	get_node("lost_life").set_text("")
 	if life <= 0:
 		game_over()
@@ -198,7 +207,7 @@ func attack1():
 	for i in range(5):
 		spawn_enemy_bullet(Vector2(-1,0))
 		enemy_bullet_instance.translate(Vector2(0,180*(i-2)+offset))
-		var vec = (get_node("../ship/get_hits").get_global_pos() -
+		var vec = (global.player.get_node("ship/get_hits").get_global_pos() -
 		enemy_bullet_instance.get_global_pos())
 		vec.x *= 0.8
 		enemy_bullet_instance.dir = vec.normalized()
@@ -207,6 +216,6 @@ func attack1():
 
 func _on_deactivate_shield_timeout():
 	stealable = false
-	get_node("../ship").ready2shield = false
+	global.player.get_node("ship").ready2shield = false
 	get_node("end_attack").stop()
 	shooting = false

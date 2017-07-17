@@ -3,7 +3,13 @@ extends Area2D
 # class member variables go here, for example:
 const lag = 0.1
 var escaped = false
-var active = false
+var active = false setget set_active
+
+func set_active(new_active):
+	active = new_active
+	get_node("shader").set_hidden(not new_active)
+	set_z(1+2*int(new_active))
+
 var movement_time = 0
 var start_time = 0
 var polarity = int(rand_range(0,1) > 0.5)
@@ -49,7 +55,6 @@ func _input(event):
 func _process(delta):
 	if ready2shoot:
 		ready2shield = false
-	set_z(1+2*int(active))
 	ship_pos = get_pos()
 	var sum_dir = Vector2(0,0)
 	for dir in dirs.keys():
@@ -73,8 +78,8 @@ func _process(delta):
 		shooting = false
 		ready2shoot = false
 	steps = int(floor(charge/25))+(charge > 0 )
-	ship_pos.x = clamp(ship_pos.x, 80, get_node("..").w*0.35)
-	ship_pos.y = clamp(ship_pos.y, get_node("..").h*0.22, get_node("..").h*0.92)
+	ship_pos.x = clamp(ship_pos.x, 80, global.w*0.35)
+	ship_pos.y = clamp(ship_pos.y, global.h*0.22, global.h*0.92)
 	set_pos(ship_pos)
 
 
@@ -99,7 +104,7 @@ func _on_anim_finished():
 
 
 func _on_shield_off_timeout():
-	active = false
+	set_active(false)
 
 func change_polarity():
 	if not shooting:
@@ -111,11 +116,11 @@ func shield():
 		if movement_time == 0:
 			movement_time = OS.get_ticks_msec()-start_time
 		if ready2shield:
-			active = true
+			set_active(true)
 			get_node("shield_off").start()
 
 func steal():
-	if get_node("../enemy").stealable:
+	if global.enemy.stealable:
 		hits -= 10
 
 
