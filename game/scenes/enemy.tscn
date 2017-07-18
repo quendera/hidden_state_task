@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=1]
+[gd_scene load_steps=56 format=1]
 
 [ext_resource path="res://scripts/enemy.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/boss_mipmap/enemy_sideview_0.2_big1.tex" type="Texture" id=2]
@@ -42,6 +42,8 @@
 [ext_resource path="res://assets/Images/laser/laser_blue_big20.png" type="Texture" id=40]
 [ext_resource path="res://scripts/laser.gd" type="Script" id=41]
 [ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=42]
+[ext_resource path="res://assets/Images/star/star.png" type="Texture" id=43]
+[ext_resource path="res://scripts/energy.gd" type="Script" id=44]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 
@@ -265,6 +267,7 @@ transform/pos = Vector2( -3.54698, 3.85551 )
 transform/scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 4 )
 animation = "default"
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -385,6 +388,55 @@ wait_time = 1.0
 one_shot = false
 autostart = false
 
+[node name="energy" type="Particles2D" parent="."]
+
+transform/pos = Vector2( 10.6011, 3.40054 )
+z/z = 1
+config/amount = 100
+config/lifetime = 3.0
+config/time_scale = 3.0
+config/emit_timeout = 0.1
+config/emitting = false
+config/process_mode = 1
+config/local_space = false
+config/explosiveness = 0.01
+config/texture = ExtResource( 43 )
+params/direction = 0.0
+params/spread = 180.0
+params/linear_velocity = 750.0
+params/spin_velocity = 1.0
+params/orbit_velocity = 0.0
+params/gravity_direction = 0.0
+params/gravity_strength = 0.0
+params/radial_accel = 0.0
+params/tangential_accel = 0.0
+params/damping = 1100.0
+params/initial_angle = 180.0
+params/initial_size = 1.0
+params/final_size = 1.0
+params/hue_variation = 0.0
+params/anim_speed_scale = 1.0
+params/anim_initial_pos = 0.0
+randomness/initial_angle = 180.0
+script/script = ExtResource( 44 )
+
+[node name="hide" type="Timer" parent="energy"]
+
+process_mode = 1
+wait_time = 0.45
+one_shot = true
+autostart = false
+
+[node name="absorb" type="ParticleAttractor2D" parent="energy"]
+
+transform/pos = Vector2( 473.673, 27.2436 )
+enabled = false
+radius = 16000.0
+disable_radius = 0.0
+gravity = 10.0
+absorption = 30.0
+particles_path = NodePath("..")
+
 [connection signal="finished" from="anim" to="." method="_on_anim_finished"]
 
 [connection signal="timeout" from="shooting" to="." method="_on_shooting_timeout"]
@@ -392,5 +444,7 @@ autostart = false
 [connection signal="timeout" from="deactivate_shield" to="." method="_on_deactivate_shield_timeout"]
 
 [connection signal="timeout" from="end_attack" to="." method="_on_end_attack_timeout"]
+
+[connection signal="timeout" from="energy/hide" to="energy" method="_on_hide_timeout"]
 
 

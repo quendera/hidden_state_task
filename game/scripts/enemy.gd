@@ -122,7 +122,7 @@ func reflect(steps):
 
 
 func explode(steps):
-	emit_signal("exploded")
+	get_node("energy").start()
 	get_node("explosion").set_scale(Vector2(steps/float(5), steps/float(5)))
 	get_node("explosion").get_material().set_shader_param("x", polarity)
 	get_node("explosion").show()
