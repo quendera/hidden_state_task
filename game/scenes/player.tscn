@@ -1,17 +1,16 @@
-[gd_scene load_steps=10 format=1]
+[gd_scene load_steps=9 format=1]
 
 [ext_resource path="res://scripts/player.gd" type="Script" id=1]
 [ext_resource path="res://scenes/ship.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/Fonts/labelfont.fnt" type="BitmapFont" id=3]
 [ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=4]
-[ext_resource path="res://scripts/hits.gd" type="Script" id=5]
-[ext_resource path="res://scenes/powerup.tscn" type="PackedScene" id=6]
-[ext_resource path="res://resources/buttonshader.tres" type="Shader" id=7]
-[ext_resource path="res://assets/Images/controls/joystick.png" type="Texture" id=8]
+[ext_resource path="res://scenes/powerup.tscn" type="PackedScene" id=5]
+[ext_resource path="res://resources/buttonshader.tres" type="Shader" id=6]
+[ext_resource path="res://assets/Images/controls/joystick.png" type="Texture" id=7]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-shader/shader = ExtResource( 7 )
+shader/shader = ExtResource( 6 )
 shader/shading_mode = 0
 shader_param/x = false
 
@@ -86,12 +85,11 @@ align = 1
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 5 )
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="powerup" parent="layer" instance=ExtResource( 6 )]
+[node name="powerup" parent="layer" instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 3.19681, -2.9459 )
 transform/scale = Vector2( 0.626603, 0.626603 )
@@ -101,7 +99,7 @@ transform/scale = Vector2( 0.626603, 0.626603 )
 material/material = SubResource( 1 )
 transform/pos = Vector2( 1064.89, 501.217 )
 transform/scale = Vector2( 0.757914, 0.757914 )
-normal = ExtResource( 8 )
+normal = ExtResource( 7 )
 pressed = null
 bitmask = null
 shape = null

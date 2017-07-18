@@ -4,6 +4,8 @@ extends Node2D
 const FLIP_TIME = 300
 
 var polarity setget set_polarity
+
+#var hits setget set_hits
 var time0 = 0
 var button_pressed
 
@@ -42,3 +44,5 @@ func _input(event):
 
 func _process(delta):
 	get_node("ship").shooting_pressed = button_pressed and (OS.get_ticks_msec() > time0+FLIP_TIME)
+	get_node("layer/hits").set_text("HITS "+str(get_node("ship").hits))
+	get_node("layer/powerup/bars").set_frame(get_node("ship").steps)
