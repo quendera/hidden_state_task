@@ -3,8 +3,8 @@
 [ext_resource path="res://scripts/game.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/bg/Space_bkgr.png" type="Texture" id=2]
 [ext_resource path="res://scripts/background.gd" type="Script" id=3]
-[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=5]
 [ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=6]
 [ext_resource path="res://assets/Fonts/labelfont.fnt" type="BitmapFont" id=7]
 [ext_resource path="res://scenes/boss_life.tscn" type="PackedScene" id=8]
@@ -44,12 +44,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="enemy" parent="." instance=ExtResource( 4 )]
+[node name="player" parent="." instance=ExtResource( 4 )]
+
+[node name="enemy" parent="." instance=ExtResource( 5 )]
 
 transform/pos = Vector2( 1013.21, 341.53 )
 transform/scale = Vector2( 0.8, 0.8 )
-
-[node name="player" parent="." instance=ExtResource( 5 )]
 
 [node name="soundtrack" type="StreamPlayer" parent="."]
 
@@ -173,11 +173,10 @@ dialog/hide_on_ok = true
 
 [node name="energy" type="Particles2D" parent="."]
 
-transform/pos = Vector2( 1448.91, 413.906 )
+transform/pos = Vector2( 1008.46, 338.03 )
 z/z = 1
-config/amount = 50
+config/amount = 60
 config/lifetime = 1.0
-config/preprocess = -0.5
 config/emit_timeout = 0.1
 config/emitting = false
 config/process_mode = 1
@@ -186,14 +185,14 @@ config/explosiveness = 0.01
 config/texture = ExtResource( 15 )
 params/direction = 0.0
 params/spread = 180.0
-params/linear_velocity = 200.0
+params/linear_velocity = 700.0
 params/spin_velocity = 1.0
 params/orbit_velocity = 0.0
 params/gravity_direction = 0.0
 params/gravity_strength = 0.0
 params/radial_accel = 0.0
 params/tangential_accel = 0.0
-params/damping = 10.0
+params/damping = 1000.0
 params/initial_angle = 180.0
 params/initial_size = 1.0
 params/final_size = 1.0
@@ -213,11 +212,11 @@ autostart = false
 [node name="absorb" type="ParticleAttractor2D" parent="energy"]
 
 transform/pos = Vector2( 473.673, 27.2436 )
-enabled = true
+enabled = false
 radius = 16000.0
 disable_radius = 0.0
 gravity = 10.0
-absorption = 512.0
+absorption = 30.0
 particles_path = NodePath("..")
 
 [connection signal="confirmed" from="pause/CanvasLayer/confirm_quit" to="pause" method="_on_confirm_quit_confirmed"]

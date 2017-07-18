@@ -1,10 +1,15 @@
+#Functionality:
+#	move, shield and explode.
+#	Emit exploded signal when hit by an enemy bullet
+
+
 extends Area2D
 
 signal exploded(enemy_polarity)
 
-# class member variables go here, for example:
-const lag = 0.1
+const LAG = 0.1
 var escaped = false
+
 var active = false setget set_active
 
 func set_active(new_active):
@@ -16,10 +21,8 @@ var movement_time = 0
 var start_time = 0
 
 
-var hits = 0
 var ship_pos
 var velocity = 400
-
 
 
 var exploding = false
@@ -30,7 +33,7 @@ var pos_touch = Vector2(0,0)
 var move_touch = false
 var dir_touch = Vector2(0,0)
 var pressed = false
-var shooting_pressed = false
+
 
 func _ready():
 	randomize()
@@ -45,29 +48,28 @@ func _input(event):
 
 
 func _process(delta):
+# move the ship:
 	ship_pos = get_pos()
 	var sum_dir = Vector2(0,0)
 	for dir in dirs.keys():
 		if Input.is_action_pressed(dir):
 			sum_dir += dirs[dir]
-	ship_displace += (sum_dir*velocity-ship_displace)*delta/lag
+	ship_displace += (sum_dir*velocity-ship_displace)*delta/LAG
 	ship_pos += delta*ship_displace
 	dir_touch = pos_touch-get_node("joystick").get_global_pos()
 	move_touch = pressed and dir_touch.length()<get_node("joystick").ray
 	if move_touch:
 		ship_pos += min(dir_touch.length(),2*velocity*delta)*dir_touch.normalized()
-
-
 	ship_pos.x = clamp(ship_pos.x, 80, global.w*0.35)
 	ship_pos.y = clamp(ship_pos.y, global.h*0.22, global.h*0.92)
 	set_pos(ship_pos)
 
 
-func explode(damage = 1):
+func explode():
 	if not exploding:
 		get_node("sound").play("explosion")
 		get_node("anim").play("explosion")
-	hits += damage
+
 
 func _on_anim_animation_started( name ):
 	exploding = true
@@ -75,10 +77,6 @@ func _on_anim_animation_started( name ):
 
 func _on_anim_finished():
 	exploding = false
-
-
-func _on_shield_off_timeout():
-	set_active(false)
 
 
 func shield(ready2shield):
@@ -89,10 +87,5 @@ func shield(ready2shield):
 			set_active(true)
 			get_node("shield_off").start()
 
-func steal():
-	if global.enemy.stealable:
-		hits -= 10
 
 
-func _on_shield_pressed():
-	shield()

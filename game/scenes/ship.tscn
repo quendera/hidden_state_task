@@ -174,7 +174,7 @@ transform/rot = 90.0
 transform/scale = Vector2( 0.35, 0.35 )
 frames = ExtResource( 2 )
 animation = "default"
-frame = 2
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -290,9 +290,5 @@ transform/pos = Vector2( 1.68619, -55.3027 )
 [connection signal="animation_started" from="anim" to="." method="_on_anim_animation_started"]
 
 [connection signal="finished" from="anim" to="." method="_on_anim_finished"]
-
-[connection signal="timeout" from="shield_off" to="." method="_on_shield_off_timeout"]
-
-[connection signal="pressed" from="shield" to="." method="_on_shield_pressed"]
 
 

@@ -16,7 +16,7 @@ func activate(polarity):
 func explode():
 	if get_node("area").overlaps_area(global.player.get_node("ship")):
 		if not global.player.get_node("ship").active:
-			global.player.get_node("ship").explode(20)
+			global.player.explode_ship(20)
 			hit = true
 			global.player.get_node("ship").escaped = false
 		else:
