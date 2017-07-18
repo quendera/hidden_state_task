@@ -1,22 +1,21 @@
-[gd_scene load_steps=15 format=1]
+[gd_scene load_steps=14 format=1]
 
 [ext_resource path="res://assets/Images/bg/Space_bkgr.png" type="Texture" id=1]
 [ext_resource path="res://scripts/background.gd" type="Script" id=2]
 [ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=4]
 [ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=5]
-[ext_resource path="res://assets/Fonts/labelfont.fnt" type="BitmapFont" id=6]
-[ext_resource path="res://scenes/boss_life.tscn" type="PackedScene" id=7]
-[ext_resource path="res://resources/grayscaleshader.tres" type="Shader" id=8]
-[ext_resource path="res://assets/Images/white.png" type="Texture" id=9]
-[ext_resource path="res://scripts/pause.gd" type="Script" id=10]
-[ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=11]
-[ext_resource path="res://scripts/instructions.gd" type="Script" id=12]
-[ext_resource path="res://scripts/welcome.gd" type="Script" id=13]
+[ext_resource path="res://resources/grayscaleshader.tres" type="Shader" id=6]
+[ext_resource path="res://assets/Images/white.png" type="Texture" id=7]
+[ext_resource path="res://scripts/pause.gd" type="Script" id=8]
+[ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=9]
+[ext_resource path="res://assets/Fonts/labelfont.fnt" type="BitmapFont" id=10]
+[ext_resource path="res://scripts/instructions.gd" type="Script" id=11]
+[ext_resource path="res://scripts/welcome.gd" type="Script" id=12]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 
-shader/shader = ExtResource( 8 )
+shader/shader = ExtResource( 6 )
 shader/shading_mode = 0
 shader_param/brightness = 1.0
 shader_param/contrast = 1.0
@@ -44,9 +43,6 @@ __meta__ = {
 
 [node name="enemy" parent="." instance=ExtResource( 4 )]
 
-transform/pos = Vector2( 1013.21, 341.53 )
-transform/scale = Vector2( 0.8, 0.8 )
-
 [node name="soundtrack" type="StreamPlayer" parent="."]
 
 process/pause_mode = 1
@@ -66,35 +62,10 @@ offset = Vector2( 0, 0 )
 rotation = 0.0
 scale = Vector2( 1, 1 )
 
-[node name="hp" type="Label" parent="CanvasLayer"]
-
-focus/ignore_mouse = true
-focus/stop_mouse = true
-size_flags/horizontal = 2
-size_flags/vertical = 0
-margin/left = 1211.0
-margin/top = 24.0
-margin/right = 1262.0
-margin/bottom = 68.0
-custom_fonts/font = ExtResource( 6 )
-custom_colors/font_color = Color( 0.496817, 0.239624, 0.589844, 1 )
-text = "HP"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-__meta__ = {
-"_edit_lock_": true
-}
-
-[node name="boss_life" parent="CanvasLayer" instance=ExtResource( 7 )]
-
-transform/pos = Vector2( 861.602, 17.74 )
-transform/scale = Vector2( 0.356486, 0.356486 )
-
 [node name="shade" type="Sprite" parent="CanvasLayer"]
 
 material/material = SubResource( 1 )
-texture = ExtResource( 9 )
+texture = ExtResource( 7 )
 centered = false
 __meta__ = {
 "_edit_lock_": true
@@ -104,7 +75,7 @@ __meta__ = {
 
 process/pause_mode = 2
 transform/pos = Vector2( -5.99054, -8.24774 )
-script/script = ExtResource( 10 )
+script/script = ExtResource( 8 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -127,12 +98,12 @@ margin/left = 317.0
 margin/top = 90.0
 margin/right = 870.0
 margin/bottom = 675.0
-custom_fonts/bold_font = ExtResource( 11 )
-custom_fonts/normal_font = ExtResource( 6 )
+custom_fonts/bold_font = ExtResource( 9 )
+custom_fonts/normal_font = ExtResource( 10 )
 bbcode/enabled = false
 bbcode/bbcode = "F      : toggle fullscreen"
 visible_characters = -1
-script/script = ExtResource( 12 )
+script/script = ExtResource( 11 )
 
 [node name="pause" type="Label" parent="pause/CanvasLayer"]
 
@@ -145,11 +116,11 @@ margin/left = 431.0
 margin/top = 313.0
 margin/right = 627.0
 margin/bottom = 375.0
-custom_fonts/font = ExtResource( 11 )
+custom_fonts/font = ExtResource( 9 )
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script/script = ExtResource( 13 )
+script/script = ExtResource( 12 )
 
 [node name="confirm_quit" type="ConfirmationDialog" parent="pause/CanvasLayer"]
 

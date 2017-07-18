@@ -69,7 +69,7 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
-	var angle2ship = get_node("laser").get_angle_to(get_node("../player/ship/get_hits").get_global_pos())
+	var angle2ship = get_node("laser").get_angle_to(global.player.get_node("ship/get_hits").get_global_pos())
 	get_node("laser").rotate(angle2ship+PI/2)
 	life = clamp(life,0,max_life)
 	pos = get_node("centroid").get_global_pos()
