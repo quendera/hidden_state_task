@@ -96,7 +96,7 @@ func _on_bullet_hit(steps):
 	data_line["escaped"] = false
 	global.player.get_node("ship").movement_time = 0
 	global.player.get_node("ship").start_time =  OS.get_ticks_msec()
-	global.player.get_node("ship").ready2shield = true
+	global.player.ready2shield = true
 	get_node("deactivate_shield").start()
 	life -= lost_life
 	if - lost_life > 0:
@@ -142,8 +142,8 @@ func _on_anim_finished():
 	for key in data_line.keys():
 		data[key].push_back(data_line[key])
 	get_node("frames").get_material().set_shader_param("hidden", true)
-	global.player.get_node("ship").ready2shoot = true
-	global.player.get_node("ship").charge = 0
+	global.player.ready2shoot = true
+	global.player.charge = 0
 	get_node("lost_life").set_text("")
 	if life <= 0:
 		game_over()
@@ -216,6 +216,6 @@ func attack1():
 
 func _on_deactivate_shield_timeout():
 	stealable = false
-	global.player.get_node("ship").ready2shield = false
+	global.player.ready2shield = false
 	get_node("end_attack").stop()
 	shooting = false
