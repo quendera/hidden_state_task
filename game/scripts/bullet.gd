@@ -25,10 +25,7 @@ func _ready():
 func _on_bullet_area_enter(area):
 	if area.is_in_group("enemies"):
 		exploded = true
-		if area.polarity == polarity:
-			area.explode(steps)
-		else:
-			area.reflect(steps)
+		area.explode(steps, area.polarity == polarity)
 		queue_free()
 
 func _on_visibility_exit_screen():

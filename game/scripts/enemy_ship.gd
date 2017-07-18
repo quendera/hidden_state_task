@@ -23,33 +23,24 @@ var shooting = false
 # navigate
 var dir
 var pos
-const low_x = 900
-const high_x = 1100
-const low_y = 250
-const high_y = 500
+const LOW_X = 900
+const HIGH_X = 1100
+const LOW_Y = 250
+const HIGH_Y = 500
 
 
-
-# life
-const max_life = 2000
-var life = max_life
-const die_vec = [0, 6, 12, 18, 24, 30]
-const regenerate_vec = [0, 6, 15, 29, 53, 107]
-var lost_life = 0
-var life_sign
 
 # attacks
 #onready var attack = preload("res://scripts/attacks.gd").new()
 var offset = 45
-const attack_amount = 3
 var next_attack = randi() % 2
-const attack_durations = [2, 1]
-const attack_frequency = [0.03, 0.1]
+const ATTACK_DURATIONS = [2, 1]
+const ATTACK_FREQUENCY = [0.03, 0.1]
 
 
 # signals
 
-signal exploded
+signal hit
 
 
 #### Public Functions
@@ -65,19 +56,17 @@ func _ready():
 	randomize()
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
 	add_to_group("enemies")
-	get_node("frames").get_material().set_shader_param("x", polarity)
 	set_process(true)
 
 func _process(delta):
 	var angle2ship = get_node("laser").get_angle_to(global.player.get_node("ship/get_hits").get_global_pos())
 	get_node("laser").rotate(angle2ship+PI/2)
-	life = clamp(life,0,max_life)
 	pos = get_node("centroid").get_global_pos()
 	translate(SPEED*delta*dir)
 
-	if (dir.x)*(pos.x-clamp(pos.x, low_x, high_x)) > 0.001:
+	if (dir.x)*(pos.x-clamp(pos.x, LOW_X, HIGH_X)) > 0.001:
 		dir.x = -dir.x
-	if (dir.y)*(pos.y-clamp(pos.y, low_y, high_y)) > 0.001:
+	if (dir.y)*(pos.y-clamp(pos.y, LOW_Y, HIGH_Y)) > 0.001:
 		dir.y = -dir.y
 
 func save_data():
@@ -86,7 +75,7 @@ func save_data():
 	file.store_line(data.to_json())
 	file.close()
 
-func _on_bullet_hit(steps):
+func _on_bullet_hit(steps,correct):
 	data_line["time"] = OS.get_ticks_msec()
 	data_line["polarity_shot"] = global.player.polarity
 	data_line["probability_blue"] = probability_blue
@@ -98,39 +87,25 @@ func _on_bullet_hit(steps):
 	global.player.get_node("ship").start_time =  OS.get_ticks_msec()
 	global.player.ready2shield = true
 	get_node("deactivate_shield").start()
-	life -= lost_life
-	if - lost_life > 0:
-		life_sign = "+"
-	else:
-		life_sign = ""
-	get_node("lost_life").set_text(life_sign+str(int(-lost_life)))
 	get_node("frames").get_material().set_shader_param("hidden", false)
+	emit_signal("hit", steps, correct)
 
 
 
-func lose_life(steps, correct):
+
+func explode(steps, correct):
 	if correct:
-		return die_vec[steps]
+		stealable = true
+		get_node("energy").start()
+		get_node("explosion").set_scale(Vector2(steps/float(5), steps/float(5)))
+		get_node("explosion").get_material().set_shader_param("x", polarity)
+		get_node("explosion").show()
+		get_node("anim").play("explosion")
+		get_node("sound").play("explosion")
 	else:
-		return -regenerate_vec[steps]
+		get_node("laser").activate(polarity)
+	_on_bullet_hit(steps, correct)
 
-
-func reflect(steps):
-	get_node("laser").activate(polarity)
-	lost_life = lose_life(steps, false)
-	_on_bullet_hit(steps)
-
-
-func explode(steps):
-	get_node("energy").start()
-	get_node("explosion").set_scale(Vector2(steps/float(5), steps/float(5)))
-	get_node("explosion").get_material().set_shader_param("x", polarity)
-	get_node("explosion").show()
-	get_node("anim").play("explosion")
-	get_node("sound").play("explosion")
-	lost_life = lose_life(steps, true)
-	_on_bullet_hit(steps)
-	stealable = true
 
 func game_over():
 	save_data()
@@ -145,8 +120,8 @@ func _on_anim_finished():
 	global.player.ready2shoot = true
 	global.player.charge = 0
 	get_node("lost_life").set_text("")
-	if life <= 0:
-		game_over()
+#	if life <= 0:
+#		game_over()
 	probability_blue = 0.05+0.1*(randi()%10)
 	polarity = int(rand_range(0,1) < probability_blue)
 	get_node("frames").get_material().set_shader_param("x", polarity)
@@ -167,8 +142,8 @@ func _on_shooting_timeout():
 func begin_attack():
 	next_attack = (randi() % 2)
 	shooting = true
-	get_node("shooting").set_wait_time(attack_frequency[next_attack])
-	get_node("end_attack").set_wait_time(attack_durations[next_attack])
+	get_node("shooting").set_wait_time(ATTACK_FREQUENCY[next_attack])
+	get_node("end_attack").set_wait_time(ATTACK_DURATIONS[next_attack])
 	get_node("end_attack").start()
 
 func _on_end_attack_timeout():
