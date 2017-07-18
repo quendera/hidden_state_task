@@ -88,7 +88,7 @@ func save_data():
 
 func _on_bullet_hit(steps):
 	data_line["time"] = OS.get_ticks_msec()
-	data_line["polarity_shot"] = global.player.get_node("ship").polarity
+	data_line["polarity_shot"] = global.player.polarity
 	data_line["probability_blue"] = probability_blue
 	data_line["polarity_enemy"] = polarity
 	data_line["correct"] = (data_line["polarity_shot"] == data_line["polarity_enemy"])

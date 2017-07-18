@@ -1,5 +1,7 @@
 extends Area2D
 
+signal exploded(enemy_polarity)
+
 # class member variables go here, for example:
 const lag = 0.1
 var escaped = false
@@ -12,7 +14,6 @@ func set_active(new_active):
 
 var movement_time = 0
 var start_time = 0
-var polarity = int(rand_range(0,1) > 0.5)
 var charge = 0
 var steps = 0
 var hits = 0
@@ -37,7 +38,7 @@ func _ready():
 	randomize()
 	set_process(true)
 	set_process_input(true)
-	get_node("frames").get_material().set_shader_param("x", polarity)
+
 
 func _input(event):
 	if event.is_action_pressed("shield"):
@@ -70,7 +71,7 @@ func _process(delta):
 	if shooting_pressed and ready2shoot and not active:
 		if not shooting:
 			shooting = true
-			spawn_bullet(polarity)
+			spawn_bullet(get_node("..").polarity)
 		charge = clamp(charge+delta*charging_velocity, 0, 100)
 		bullet_instance.steps = steps
 	if not shooting_pressed and shooting:
@@ -106,10 +107,6 @@ func _on_anim_finished():
 func _on_shield_off_timeout():
 	set_active(false)
 
-func change_polarity():
-	if not shooting:
-		polarity = 1-polarity
-		get_node("frames").get_material().set_shader_param("x", polarity)
 
 func shield():
 	if not active:
@@ -122,10 +119,6 @@ func shield():
 func steal():
 	if global.enemy.stealable:
 		hits -= 10
-
-
-func _on_polarity_button_pressed():
-	change_polarity()
 
 
 func _on_shield_pressed():

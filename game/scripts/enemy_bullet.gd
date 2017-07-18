@@ -14,8 +14,7 @@ func _ready():
 
 func _on_enemy_bullet_area_enter(area):
 	if area.get_name() == "ship" and not area.active:
-		if not area.polarity == polarity:
-			area.explode()
+		area.emit_signal("exploded", polarity)
 		queue_free()
 
 func _on_visibility_exit_screen():
