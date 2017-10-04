@@ -21,7 +21,7 @@ func set_hits(new_hits):
 var charge = 0 setget set_charge
 func set_charge(new_charge):
 	charge = new_charge
-	var steps = int(floor(new_charge/25))+(new_charge > 0 )
+	var steps = int(floor(new_charge/25))+int(new_charge > 0 )
 	if shooting:
 		bullet_instance.steps = steps
 	get_node("layer/powerup/bars").set_frame(steps)
@@ -92,7 +92,7 @@ func _process(delta):
 func spawn_bullet(polarity):
 	bullet_instance = bullet_scene.instance()
 	bullet_instance.init(polarity)
-	bullet_instance.set_global_pos(get_node("ship/shoot_from").get_global_pos())
+	bullet_instance.set_global_position(get_node("ship/shoot_from").get_global_position())
 	add_child(bullet_instance)
 
 func explode_ship(damage = 1):

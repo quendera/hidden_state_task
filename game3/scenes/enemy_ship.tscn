@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=2]
+[gd_scene load_steps=50 format=2]
 
 [ext_resource path="res://scripts/enemy_ship.gd" type="Script" id=1]
 [ext_resource path="res://assets/Images/boss_mipmap/enemy_sideview_0.2_big1.tex" type="Texture" id=2]
@@ -7,39 +7,40 @@
 [ext_resource path="res://assets/Images/boss_mipmap/enemy_sideview_0.2_big4.tex" type="Texture" id=5]
 [ext_resource path="res://assets/Images/boss_mipmap/enemy_sideview_0.2_big5.tex" type="Texture" id=6]
 [ext_resource path="res://assets/Images/boss_mipmap/enemy_sideview_0.2_big6.tex" type="Texture" id=7]
-[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big1.png" type="Texture" id=8]
-[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big2.png" type="Texture" id=9]
-[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big3.png" type="Texture" id=10]
-[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big4.png" type="Texture" id=11]
-[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big5.png" type="Texture" id=12]
-[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big6.png" type="Texture" id=13]
-[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big7.png" type="Texture" id=14]
-[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big8.png" type="Texture" id=15]
-[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big9.png" type="Texture" id=16]
-[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big10.png" type="Texture" id=17]
-[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big11.png" type="Texture" id=18]
-[ext_resource path="res://assets/Images/laser/laser_blue_big1.png" type="Texture" id=19]
-[ext_resource path="res://assets/Images/laser/laser_blue_big2.png" type="Texture" id=20]
-[ext_resource path="res://assets/Images/laser/laser_blue_big3.png" type="Texture" id=21]
-[ext_resource path="res://assets/Images/laser/laser_blue_big4.png" type="Texture" id=22]
-[ext_resource path="res://assets/Images/laser/laser_blue_big5.png" type="Texture" id=23]
-[ext_resource path="res://assets/Images/laser/laser_blue_big6.png" type="Texture" id=24]
-[ext_resource path="res://assets/Images/laser/laser_blue_big7.png" type="Texture" id=25]
-[ext_resource path="res://assets/Images/laser/laser_blue_big8.png" type="Texture" id=26]
-[ext_resource path="res://assets/Images/laser/laser_blue_big9.png" type="Texture" id=27]
-[ext_resource path="res://assets/Images/laser/laser_blue_big10.png" type="Texture" id=28]
-[ext_resource path="res://assets/Images/laser/laser_blue_big11.png" type="Texture" id=29]
-[ext_resource path="res://assets/Images/laser/laser_blue_big12.png" type="Texture" id=30]
-[ext_resource path="res://assets/Images/laser/laser_blue_big13.png" type="Texture" id=31]
-[ext_resource path="res://assets/Images/laser/laser_blue_big14.png" type="Texture" id=32]
-[ext_resource path="res://assets/Images/laser/laser_blue_big15.png" type="Texture" id=33]
-[ext_resource path="res://assets/Images/laser/laser_blue_big16.png" type="Texture" id=34]
-[ext_resource path="res://assets/Images/laser/laser_blue_big17.png" type="Texture" id=35]
-[ext_resource path="res://assets/Images/laser/laser_blue_big18.png" type="Texture" id=36]
-[ext_resource path="res://assets/Images/laser/laser_blue_big19.png" type="Texture" id=37]
-[ext_resource path="res://assets/Images/laser/laser_blue_big20.png" type="Texture" id=38]
-[ext_resource path="res://scripts/laser.gd" type="Script" id=39]
-[ext_resource path="res://scripts/energy.gd" type="Script" id=40]
+[ext_resource path="res://assets/Sounds/explosion.wav" type="AudioStream" id=8]
+[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big1.png" type="Texture" id=9]
+[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big2.png" type="Texture" id=10]
+[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big3.png" type="Texture" id=11]
+[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big4.png" type="Texture" id=12]
+[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big5.png" type="Texture" id=13]
+[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big6.png" type="Texture" id=14]
+[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big7.png" type="Texture" id=15]
+[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big8.png" type="Texture" id=16]
+[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big9.png" type="Texture" id=17]
+[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big10.png" type="Texture" id=18]
+[ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big11.png" type="Texture" id=19]
+[ext_resource path="res://assets/Images/laser/laser_blue_big1.png" type="Texture" id=20]
+[ext_resource path="res://assets/Images/laser/laser_blue_big2.png" type="Texture" id=21]
+[ext_resource path="res://assets/Images/laser/laser_blue_big3.png" type="Texture" id=22]
+[ext_resource path="res://assets/Images/laser/laser_blue_big4.png" type="Texture" id=23]
+[ext_resource path="res://assets/Images/laser/laser_blue_big5.png" type="Texture" id=24]
+[ext_resource path="res://assets/Images/laser/laser_blue_big6.png" type="Texture" id=25]
+[ext_resource path="res://assets/Images/laser/laser_blue_big7.png" type="Texture" id=26]
+[ext_resource path="res://assets/Images/laser/laser_blue_big8.png" type="Texture" id=27]
+[ext_resource path="res://assets/Images/laser/laser_blue_big9.png" type="Texture" id=28]
+[ext_resource path="res://assets/Images/laser/laser_blue_big10.png" type="Texture" id=29]
+[ext_resource path="res://assets/Images/laser/laser_blue_big11.png" type="Texture" id=30]
+[ext_resource path="res://assets/Images/laser/laser_blue_big12.png" type="Texture" id=31]
+[ext_resource path="res://assets/Images/laser/laser_blue_big13.png" type="Texture" id=32]
+[ext_resource path="res://assets/Images/laser/laser_blue_big14.png" type="Texture" id=33]
+[ext_resource path="res://assets/Images/laser/laser_blue_big15.png" type="Texture" id=34]
+[ext_resource path="res://assets/Images/laser/laser_blue_big16.png" type="Texture" id=35]
+[ext_resource path="res://assets/Images/laser/laser_blue_big17.png" type="Texture" id=36]
+[ext_resource path="res://assets/Images/laser/laser_blue_big18.png" type="Texture" id=37]
+[ext_resource path="res://assets/Images/laser/laser_blue_big19.png" type="Texture" id=38]
+[ext_resource path="res://assets/Images/laser/laser_blue_big20.png" type="Texture" id=39]
+[ext_resource path="res://scripts/laser.gd" type="Script" id=40]
+[ext_resource path="res://scripts/energy.gd" type="Script" id=41]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -61,7 +62,7 @@ render_priority = 0
 [sub_resource type="SpriteFrames" id=4]
 
 animations = [ {
-"frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ) ],
+"frames": [ ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ), ExtResource( 14 ), ExtResource( 15 ), ExtResource( 16 ), ExtResource( 17 ), ExtResource( 18 ), ExtResource( 19 ) ],
 "loop": true,
 "name": "default",
 "speed": 12.0
@@ -156,7 +157,7 @@ render_priority = 0
 [sub_resource type="SpriteFrames" id=8]
 
 animations = [ {
-"frames": [ ExtResource( 19 ), ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ) ],
+"frames": [ ExtResource( 20 ), ExtResource( 21 ), ExtResource( 22 ), ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ), ExtResource( 35 ), ExtResource( 36 ), ExtResource( 37 ), ExtResource( 38 ), ExtResource( 39 ) ],
 "loop": true,
 "name": "default",
 "speed": 10.0
@@ -197,7 +198,7 @@ position = Vector2( -3.54698, 3.85551 )
 scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 1
+frame = 3
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -205,7 +206,7 @@ __meta__ = {
 
 [node name="sound" type="AudioStreamPlayer2D" parent="."]
 
-stream = null
+stream = ExtResource( 8 )
 volume_db = 0.0
 autoplay = false
 max_distance = 2000.0
@@ -255,7 +256,7 @@ animation = "default"
 frame = 19
 centered = false
 offset = Vector2( -3557.68, -87.0475 )
-script = ExtResource( 39 )
+script = ExtResource( 40 )
 
 [node name="position" type="Position2D" parent="laser"]
 
@@ -338,7 +339,7 @@ texture = null
 normal_map = null
 h_frames = 1
 v_frames = 1
-script = ExtResource( 40 )
+script = ExtResource( 41 )
 
 [node name="hide" type="Timer" parent="energy"]
 

@@ -57,7 +57,7 @@ signal exploded
 var laser_pos setget , get_laser_pos
 
 func get_laser_pos():
-	return get_node("laser/position").get_global_pos()
+	return get_node("laser/position").get_global_position()
 
 
 
@@ -69,10 +69,10 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
-	var angle2ship = get_node("laser").get_angle_to(global.player.get_node("ship/get_hits").get_global_pos())
+	var angle2ship = get_node("laser").get_angle_to(global.player.get_node("ship/get_hits").get_global_position())
 	get_node("laser").rotate(angle2ship+PI/2)
 	life = clamp(life,0,max_life)
-	pos = get_node("centroid").get_global_pos()
+	pos = get_node("centroid").get_global_position()
 	translate(SPEED*delta*dir)
 
 	if (dir.x)*(pos.x-clamp(pos.x, low_x, high_x)) > 0.001:
@@ -127,7 +127,7 @@ func explode(steps):
 	get_node("explosion").get_material().set_shader_param("x", polarity)
 	get_node("explosion").show()
 	get_node("anim").play("explosion")
-	get_node("sound").play("explosion")
+	get_node("sound").play()
 	lost_life = lose_life(steps, true)
 	_on_bullet_hit(steps)
 	stealable = true
@@ -157,7 +157,7 @@ func _on_anim_finished():
 func spawn_enemy_bullet(dir):
 	enemy_bullet_instance = enemy_bullet_scene.instance()
 	enemy_bullet_instance.init(dir, int(rand_range(0,1) < probability_blue))
-	enemy_bullet_instance.set_global_pos(get_node("shoot_from").get_global_pos())
+	enemy_bullet_instance.set_global_pos(get_node("shoot_from").get_global_position())
 	get_node("../").add_child(enemy_bullet_instance)
 
 func _on_shooting_timeout():
@@ -207,8 +207,8 @@ func attack1():
 	for i in range(5):
 		spawn_enemy_bullet(Vector2(-1,0))
 		enemy_bullet_instance.translate(Vector2(0,180*(i-2)+offset))
-		var vec = (global.player.get_node("ship/get_hits").get_global_pos() -
-		enemy_bullet_instance.get_global_pos())
+		var vec = (global.player.get_node("ship/get_hits").get_global_position() -
+		enemy_bullet_instance.get_global_position())
 		vec.x *= 0.8
 		enemy_bullet_instance.dir = vec.normalized()
 

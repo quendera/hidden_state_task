@@ -11,7 +11,7 @@ func activate(polarity):
 	get_material().set_shader_param("x", polarity)
 	show()
 	get_node("../anim").play("laser")
-	get_node("../sound").play("laser")
+	get_node("../sound").play()
 
 func explode():
 	if get_node("area").overlaps_area(global.player.get_node("ship")):

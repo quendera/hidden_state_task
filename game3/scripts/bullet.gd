@@ -14,7 +14,7 @@ func _process(delta):
 		translate(delta*SPEED*Vector2(1,0))
 		get_node("frames").set_frame(1)
 	else:
-		set_global_pos(get_global_pos()+get_node("../ship/shoot_from").get_global_pos()-get_node("tip").get_global_pos())
+		set_global_position(get_global_position()+get_node("../ship/shoot_from").get_global_position()-get_node("tip").get_global_position())
 
 func _ready():
 	set_scale(scale_baseline*pow(1+scale_step,steps-1))

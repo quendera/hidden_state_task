@@ -14,14 +14,13 @@ var active = false setget set_active
 
 func set_active(new_active):
 	active = new_active
-	get_node("shader").set_hidden(not new_active)
+	get_node("shader").set_visible(new_active)
 	set_z(1+2*int(new_active))
 
 var movement_time = 0
 var start_time = 0
 
 
-var ship_pos
 var velocity = 400
 
 
@@ -42,27 +41,26 @@ func _ready():
 
 
 func _input(event):
-	if (event.type == InputEvent.SCREEN_TOUCH) or (event.type == InputEvent.SCREEN_DRAG):
+	if (event is InputEventScreenDrag) or (event is InputEventScreenDrag):
 		pos_touch = event.pos
-		pressed = (event.type == InputEvent.SCREEN_DRAG) or event.is_pressed()
+		pressed = (InputEventScreenDrag) or event.is_pressed()
 
 
 func _process(delta):
 # move the ship:
-	ship_pos = get_pos()
 	var sum_dir = Vector2(0,0)
 	for dir in dirs.keys():
 		if Input.is_action_pressed(dir):
 			sum_dir += dirs[dir]
 	ship_displace += (sum_dir*velocity-ship_displace)*delta/LAG
-	ship_pos += delta*ship_displace
-	dir_touch = pos_touch-get_node("joystick").get_global_pos()
+	position += delta*ship_displace
+	dir_touch = pos_touch-get_node("joystick").get_global_position()
 	move_touch = pressed and dir_touch.length()<get_node("joystick").ray
 	if move_touch:
-		ship_pos += min(dir_touch.length(),2*velocity*delta)*dir_touch.normalized()
-	ship_pos.x = clamp(ship_pos.x, 80, global.w*0.35)
-	ship_pos.y = clamp(ship_pos.y, global.h*0.22, global.h*0.92)
-	set_pos(ship_pos)
+		position += min(dir_touch.length(),2*velocity*delta)*dir_touch.normalized()
+	position.x = clamp(position.x, 80, global.w*0.35)
+	position.y = clamp(position.y, global.h*0.22, global.h*0.92)
+
 
 
 func explode():
