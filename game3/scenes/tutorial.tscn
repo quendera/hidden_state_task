@@ -1,0 +1,206 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://scripts/game.gd" type="Script" id=1]
+[ext_resource path="res://assets/Images/bg/Space_bkgr.png" type="Texture" id=2]
+[ext_resource path="res://scripts/background.gd" type="Script" id=3]
+[ext_resource path="res://scenes/ship.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=6]
+[ext_resource path="res://assets/Fonts/labelfont.fnt" type="BitmapFont" id=7]
+[ext_resource path="res://assets/Fonts/scorefont.fnt" type="BitmapFont" id=8]
+[ext_resource path="res://scripts/hits.gd" type="Script" id=9]
+[ext_resource path="res://scenes/powerup.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/boss_life.tscn" type="PackedScene" id=11]
+[ext_resource path="res://scripts/tutorial.gd" type="Script" id=12]
+[ext_resource path="res://scripts/story.gd" type="Script" id=13]
+
+[node name="game" type="Node2D"]
+
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="background" type="Sprite" parent="."]
+
+scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 2 )
+centered = false
+region_enabled = true
+region_rect = Rect2( 0, 0, 5000, 800 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="ship" parent="." instance=ExtResource( 4 )]
+
+position = Vector2( 177.154, 601.213 )
+
+[node name="enemy" parent="." instance=ExtResource( 5 )]
+
+position = Vector2( 1089.33, 243.31 )
+scale = Vector2( 0.8, 0.8 )
+
+[node name="soundtrack" type="AudioStreamPlayer" parent="."]
+
+pause_mode = 1
+stream = ExtResource( 6 )
+playing = true
+loop = true
+volume_db = 1.0
+stream_autoplay = true
+stream_paused = false
+loop_restart_time = 0.0
+buffering_ms = 500
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="attack" type="Label" parent="CanvasLayer"]
+
+visible = false
+focus_ignore_mouse = true
+focus_stop_mouse = true
+size_flags_horizontal = 2
+size_flags_vertical = 0
+margin_left = 20.0
+margin_top = 70.0
+margin_right = 155.0
+margin_bottom = 114.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.996094, 0.515496, 0.00389099, 1 )
+text = "DAMAGE"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="energy" type="Label" parent="CanvasLayer"]
+
+visible = false
+focus_ignore_mouse = true
+focus_stop_mouse = true
+size_flags_horizontal = 2
+size_flags_vertical = 0
+margin_left = 24.0
+margin_top = 26.0
+margin_right = 159.0
+margin_bottom = 70.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.496817, 0.239624, 0.589844, 1 )
+text = "ENERGY"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="hp" type="Label" parent="CanvasLayer"]
+
+visible = false
+focus_ignore_mouse = true
+focus_stop_mouse = true
+size_flags_horizontal = 2
+size_flags_vertical = 0
+margin_left = 1211.0
+margin_top = 24.0
+margin_right = 1262.0
+margin_bottom = 68.0
+custom_fonts/font = ExtResource( 7 )
+custom_colors/font_color = Color( 0.496817, 0.239624, 0.589844, 1 )
+text = "HP"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="hits" type="Label" parent="CanvasLayer"]
+
+visible = false
+focus_ignore_mouse = true
+focus_stop_mouse = true
+size_flags_horizontal = 2
+size_flags_vertical = 0
+margin_left = 479.0
+margin_top = 16.0
+margin_right = 868.0
+margin_bottom = 81.0
+custom_fonts/font = ExtResource( 8 )
+custom_colors/font_color = Color( 0.976562, 0.976562, 0.94223, 1 )
+custom_colors/font_color_shadow = Color( 0.0114136, 0.0433106, 0.132812, 1 )
+text = "HITS 0"
+align = 1
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="powerup" parent="CanvasLayer" instance=ExtResource( 10 )]
+
+visible = false
+position = Vector2( 3.19681, -2.9459 )
+scale = Vector2( 0.626603, 0.626603 )
+
+[node name="boss_life" parent="CanvasLayer" instance=ExtResource( 11 )]
+
+visible = false
+position = Vector2( 861.602, 17.74 )
+scale = Vector2( 0.356486, 0.356486 )
+
+[node name="tutorial" type="Node2D" parent="."]
+
+pause_mode = 2
+position = Vector2( -5.99054, -8.24774 )
+script = ExtResource( 12 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CanvasLayer" type="CanvasLayer" parent="tutorial"]
+
+layer = 1
+offset = Vector2( 0, 0 )
+rotation = 0.0
+scale = Vector2( 1, 1 )
+
+[node name="story" type="RichTextLabel" parent="tutorial/CanvasLayer"]
+
+pause_mode = 2
+focus_ignore_mouse = false
+focus_stop_mouse = true
+size_flags_horizontal = 2
+size_flags_vertical = 2
+margin_left = 536.0
+margin_top = 399.0
+margin_right = 1280.0
+margin_bottom = 732.0
+custom_fonts/bold_font = ExtResource( 8 )
+custom_fonts/normal_font = ExtResource( 7 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_selected = Color( 0.941406, 0.283157, 0.283157, 1 )
+bbcode_enabled = false
+bbcode_text = "F      : toggle fullscreen"
+visible_characters = -1
+script = ExtResource( 13 )
+
+[node name="full_mode" type="Timer" parent="tutorial"]
+
+process_mode = 1
+wait_time = 5.0
+one_shot = true
+autostart = false
+
+[connection signal="timeout"  from="tutorial/full_mode"  to="tutorial" method="_on_full_mode_timeout" binds=[  ]]

@@ -1,0 +1,10 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Spacecrusher.ogg-ee13c029465d7f830a88013d2f36d345.oggstr"
+
+[params]
+
+loop=true
+loop_offset=0

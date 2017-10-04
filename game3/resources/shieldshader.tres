@@ -1,0 +1,40 @@
+[gd_resource type="Shader" load_steps=1 format=2]
+
+
+[resource]
+
+_code = {
+"fragment": "float sq(float x) {
+    return x*x;
+}
+
+float shelf_curve(vec2 v) {
+    // Simple parabola. Could use a smoothstep instead?
+    return clamp(1.0 - 16*(3*v.x*v.x+v.y*v.y), 0, 1);
+}
+
+// Get direction and distance to the black hole center
+vec2 center = vec2(0.5, 0.5);
+vec2 diff = vec2(UV.x, 1.0-UV.y) - center ;
+float d = length(diff);
+vec2 dir = normalize(diff);
+
+// This is a 0..1 value that will nullify displacement around the bounds of the effect,
+// for a seamless transition between the effect's area and the unaffected world pixels.
+float shelf = shelf_curve(UV-vec2(0.5, 0.5));
+
+// Calculate displacement amount
+float displacement = d;
+
+// Calculate distorted screen-space texture coordinates
+vec2 uv = SCREEN_UV - dir * (displacement * shelf);
+
+// Output pixels from the screen using distorted UVs
+vec3 col = texscreen(uv);
+COLOR.rgb = col;",
+"fragment_ofs": 0,
+"light": "",
+"light_ofs": 0,
+"vertex": "",
+"vertex_ofs": 0
+}

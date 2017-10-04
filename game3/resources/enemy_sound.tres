@@ -1,0 +1,31 @@
+[gd_resource type="Resource" load_steps=1 format=2]
+
+[ext_resource path="res://assets/Sounds/8bit_bomb_explosion.wav" type="Sample" id=1]
+[ext_resource path="res://assets/Sounds/burst_fire.wav" type="Sample" id=2]
+
+[resource]
+
+samples/explosion = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 1 )
+}
+samples/laser = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 2 )
+}
+samples/spare = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 2 )
+}
+samples/spare1 = {
+"db": 0.0,
+"pitch": 1.0,
+"priority": 0,
+"sample": ExtResource( 2 )
+}

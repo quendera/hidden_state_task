@@ -103,6 +103,7 @@ custom_fonts/normal_font = ExtResource( 10 )
 bbcode/enabled = false
 bbcode/bbcode = "F      : toggle fullscreen"
 visible_characters = -1
+percent_visible = 1.0
 script/script = ExtResource( 11 )
 
 [node name="pause" type="Label" parent="pause/CanvasLayer"]
