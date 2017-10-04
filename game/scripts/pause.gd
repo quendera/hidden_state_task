@@ -36,7 +36,7 @@ func _input(event):
 
 
 func _on_confirm_quit_confirmed():
-	get_node("../enemy").game_over()
+	get_node("../enemy/enemy_ship").game_over()
 
 
 func _on_confirm_quit_popup_hide():
