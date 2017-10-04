@@ -198,7 +198,7 @@ position = Vector2( -3.54698, 3.85551 )
 scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 3
+frame = 2
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -216,10 +216,12 @@ area_mask = 1
 
 [node name="explosion" type="AnimatedSprite" parent="."]
 
+visible = false
 material = SubResource( 3 )
 scale = Vector2( 0.53, 0.53 )
 frames = SubResource( 4 )
 animation = "default"
+frame = 10
 __meta__ = {
 "_edit_lock_": true
 }

@@ -112,6 +112,7 @@ rotation = -1.5708
 scale = Vector2( 0.35, 0.35 )
 frames = ExtResource( 2 )
 animation = "default"
+frame = 1
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -187,6 +188,7 @@ autostart = false
 
 [node name="shield" type="TouchScreenButton" parent="."]
 
+visible = false
 position = Vector2( -100.089, -186.991 )
 scale = Vector2( 2.92899, 3.60948 )
 normal = ExtResource( 16 )

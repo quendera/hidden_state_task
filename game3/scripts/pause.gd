@@ -31,7 +31,6 @@ func _input(event):
 		if event.is_action_pressed("ui_accept") or (event is InputEventScreenTouch):
 			toggle_pause(true)
 			get_node("CanvasLayer/pause").set_visible(false)
-			print("sss")
 			get_node("CanvasLayer/instructions").set_visible(false)
 			initial_screen = false
 		if event.is_action_pressed("tutorial"):
