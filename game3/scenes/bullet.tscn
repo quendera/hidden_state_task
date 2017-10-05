@@ -66,23 +66,12 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="sound" type="AudioStreamPlayer2D" parent="."]
-
-stream = null
-volume_db = 0.0
-autoplay = false
-max_distance = 2000.0
-attenuation = 1.0
-bus = "Master"
-area_mask = 1
-__meta__ = {
-"_edit_lock_": true
-}
-
 [node name="tip" type="Position2D" parent="."]
 
 position = Vector2( 0.272034, 14.3585 )
 
 [connection signal="area_entered" from="." to="." method="_on_bullet_area_enter"]
+
+[connection signal="screen_exited" from="visibility" to="." method="_on_visibility_exit_screen"]
 
 

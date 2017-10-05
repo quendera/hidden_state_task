@@ -136,7 +136,7 @@ func game_over():
 	save_data()
 	get_tree().quit()
 
-func _on_anim_finished():
+func _on_anim_finished(name):
 	data_line["escaped"] = not get_node("laser").hit
 	data_line["reaction_time"] = global.player.get_node("ship").movement_time
 	for key in data_line.keys():
@@ -157,7 +157,7 @@ func _on_anim_finished():
 func spawn_enemy_bullet(dir):
 	enemy_bullet_instance = enemy_bullet_scene.instance()
 	enemy_bullet_instance.init(dir, int(rand_range(0,1) < probability_blue))
-	enemy_bullet_instance.set_global_pos(get_node("shoot_from").get_global_position())
+	enemy_bullet_instance.set_global_position(get_node("shoot_from").get_global_position())
 	get_node("../").add_child(enemy_bullet_instance)
 
 func _on_shooting_timeout():

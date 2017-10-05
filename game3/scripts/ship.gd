@@ -65,15 +65,14 @@ func _process(delta):
 
 func explode():
 	if not exploding:
-		get_node("sound").play("explosion")
-		get_node("anim").play("explosion")
+		$anim.play("explosion")
 
 
-func _on_anim_animation_started( name ):
+func _on_anim_started( name ):
 	exploding = true
 
 
-func _on_anim_finished():
+func _on_anim_finished( name ):
 	exploding = false
 
 

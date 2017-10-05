@@ -12,7 +12,7 @@ func toggle_pause(paused):
 	is_paused = not paused
 	get_tree().set_pause(is_paused)
 	get_node("../CanvasLayer/shade").set_visible(is_paused)
-	get_node("../soundtrack").playing = not is_paused
+	get_node("../soundtrack").playing = false#not is_paused
 
 
 func _input(event):

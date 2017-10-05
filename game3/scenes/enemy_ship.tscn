@@ -198,7 +198,7 @@ position = Vector2( -3.54698, 3.85551 )
 scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 2
+frame = 5
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -349,6 +349,8 @@ process_mode = 1
 wait_time = 0.45
 one_shot = true
 autostart = false
+
+[connection signal="animation_finished" from="anim" to="." method="_on_anim_finished"]
 
 [connection signal="timeout" from="shooting" to="." method="_on_shooting_timeout"]
 

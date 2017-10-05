@@ -19,7 +19,6 @@ func _process(delta):
 func _ready():
 	set_scale(scale_baseline*pow(1+scale_step,steps-1))
 	get_node("frames").get_material().set_shader_param("x", polarity == 1)
-#	get_node("sound").play("laser")
 	set_process(true)
 
 func _on_bullet_area_enter(area):
@@ -33,8 +32,8 @@ func _on_bullet_area_enter(area):
 
 func _on_visibility_exit_screen():
 	if not exploded:
-		get_node("../ship").ready2shoot = true
-		get_node("../ship").charge = 0
+		get_parent().ready2shoot = true
+		get_parent().charge = 0
 	queue_free()
 
 func init(_polarity):
