@@ -1,27 +1,12 @@
-[gd_resource type="Shader" load_steps=1 format=2]
-
+[gd_resource type="Shader" format=2]
 
 [resource]
 
-_code = {
-"fragment": "uniform float brightness = 1.0;
-uniform float contrast = 1.0;
-uniform float saturation = 1.0;
+code = "shader_type canvas_item;
 
-color c = vec4(texscreen(SCREEN_UV),1);
-c.rgb = mix(vec3(0.0), c.rgb, brightness);
-c.rgb = mix(vec3(0.5), c.rgb, contrast);
-c.rgb = mix(vec3(dot(vec3(1.0), c.rgb)*0.33333), c.rgb, saturation);
+void fragment() {
+	vec4 Color =  textureLod( SCREEN_TEXTURE, SCREEN_UV, 0.0);
+	float v = (Color.r+Color.b+Color.g)/6.0 ;
+	COLOR.rgb = vec3(v);
+}"
 
-vec4 to_grayscale(vec4 pixcol) {
-	float average = (pixcol.r+pixcol.g+pixcol.b)/6;
-	return vec4(average,average,average,1);
-}
-
-COLOR = to_grayscale(c);",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}

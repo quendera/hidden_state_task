@@ -83,7 +83,7 @@ func _process(delta):
 func save_data():
 	var file = File.new()
 	file.open("user://data" + str(OS.get_unix_time())+".json", file.WRITE)
-	file.store_line(data.to_json())
+	file.store_line(to_json(data))
 	file.close()
 
 func _on_bullet_hit(steps):

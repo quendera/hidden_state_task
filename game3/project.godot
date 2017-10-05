@@ -10,6 +10,7 @@ config_version=3
 
 [application]
 
+config/name="Schroedinger shooting"
 run/main_scene="res://scenes/level1.tscn"
 icon="res://icon.png"
 main_scene="res://scenes/level1.tscn"
