@@ -1,22 +1,24 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://scripts/ship.gd" type="Script" id=1]
-[ext_resource path="res://resources/animated_ship.tres" type="SpriteFrames" id=2]
-[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.1.png" type="Texture" id=3]
-[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.2.png" type="Texture" id=4]
-[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.3.png" type="Texture" id=5]
-[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.4.png" type="Texture" id=6]
-[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.5.png" type="Texture" id=7]
-[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.6.png" type="Texture" id=8]
-[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.7.png" type="Texture" id=9]
-[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.8.png" type="Texture" id=10]
-[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.9.png" type="Texture" id=11]
-[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.10.png" type="Texture" id=12]
-[ext_resource path="res://assets/Images/white.png" type="Texture" id=13]
-[ext_resource path="res://assets/Images/whitehole.png" type="Texture" id=14]
-[ext_resource path="res://scripts/shadow.gd" type="Script" id=15]
-[ext_resource path="res://icon.png" type="Texture" id=16]
-[ext_resource path="res://scripts/joystick.gd" type="Script" id=17]
+[ext_resource path="res://resources/shipshader.tres" type="Shader" id=2]
+[ext_resource path="res://resources/animated_ship.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.1.png" type="Texture" id=4]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.2.png" type="Texture" id=5]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.3.png" type="Texture" id=6]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.4.png" type="Texture" id=7]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.5.png" type="Texture" id=8]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.6.png" type="Texture" id=9]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.7.png" type="Texture" id=10]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.8.png" type="Texture" id=11]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.9.png" type="Texture" id=12]
+[ext_resource path="res://assets/Images/explosion/enemy_explosion_big_0.10.png" type="Texture" id=13]
+[ext_resource path="res://resources/shieldshader.tres" type="Shader" id=14]
+[ext_resource path="res://assets/Images/white.png" type="Texture" id=15]
+[ext_resource path="res://assets/Images/whitehole.png" type="Texture" id=16]
+[ext_resource path="res://scripts/shadow.gd" type="Script" id=17]
+[ext_resource path="res://icon.png" type="Texture" id=18]
+[ext_resource path="res://scripts/joystick.gd" type="Script" id=19]
 
 [sub_resource type="Animation" id=1]
 
@@ -49,19 +51,23 @@ tracks/1/keys = {
 [sub_resource type="ShaderMaterial" id=2]
 
 render_priority = 0
+shader = ExtResource( 2 )
+shader_param/x = true
+_sections_unfolded = [ "shader_param" ]
 
 [sub_resource type="SpriteFrames" id=3]
 
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
 "loop": true,
 "name": "default",
 "speed": 12.0
 } ]
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=5]
 
 render_priority = 0
+shader = ExtResource( 14 )
 
 [node name="ship" type="Area2D"]
 
@@ -110,9 +116,11 @@ material = SubResource( 2 )
 position = Vector2( -2.79742, 8.92931 )
 rotation = -1.5708
 scale = Vector2( 0.35, 0.35 )
-frames = ExtResource( 2 )
+frames = ExtResource( 3 )
 animation = "default"
+frame = 3
 playing = true
+_sections_unfolded = [ "Material" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -135,12 +143,12 @@ frame = 9
 
 [node name="shader" type="Sprite" parent="."]
 
-visible = false
-material = SubResource( 4 )
+material = SubResource( 5 )
 position = Vector2( -4.94492, 6.8206 )
 rotation = -1.5708
 z = -1
-texture = ExtResource( 13 )
+texture = ExtResource( 15 )
+_sections_unfolded = [ "Material" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -152,7 +160,7 @@ scale = Vector2( 2.22454, 2.15747 )
 z = 1
 enabled = true
 editor_only = false
-texture = ExtResource( 14 )
+texture = ExtResource( 16 )
 offset = Vector2( 1.47336, 1.98471 )
 texture_scale = 1.0
 color = Color( 1, 1, 1, 1 )
@@ -171,7 +179,7 @@ shadow_gradient_length = 0.0
 shadow_filter = 0
 shadow_filter_smooth = 0.0
 shadow_item_cull_mask = 1
-script = ExtResource( 15 )
+script = ExtResource( 17 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -188,7 +196,7 @@ autostart = false
 visible = false
 position = Vector2( -100.089, -186.991 )
 scale = Vector2( 2.92899, 3.60948 )
-normal = ExtResource( 16 )
+normal = ExtResource( 18 )
 pressed = null
 bitmask = null
 shape = null
@@ -203,7 +211,7 @@ visibility_mode = 0
 position = Vector2( -7.46399, 135.416 )
 scale = Vector2( 1.06935, 1.06935 )
 z = 2
-script = ExtResource( 17 )
+script = ExtResource( 19 )
 
 [node name="right" type="Position2D" parent="joystick"]
 

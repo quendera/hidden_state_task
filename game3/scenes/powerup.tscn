@@ -1,20 +1,24 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://assets/Images/powerbar/bar1.png" type="Texture" id=1]
-[ext_resource path="res://assets/Images/powerbar/bar2.png" type="Texture" id=2]
-[ext_resource path="res://assets/Images/powerbar/bar3.png" type="Texture" id=3]
-[ext_resource path="res://assets/Images/powerbar/bar4.png" type="Texture" id=4]
-[ext_resource path="res://assets/Images/powerbar/bar5.png" type="Texture" id=5]
-[ext_resource path="res://assets/Images/powerbar/bar6.png" type="Texture" id=6]
+[ext_resource path="res://resources/redblueshader.tres" type="Shader" id=1]
+[ext_resource path="res://assets/Images/powerbar/bar1.png" type="Texture" id=2]
+[ext_resource path="res://assets/Images/powerbar/bar2.png" type="Texture" id=3]
+[ext_resource path="res://assets/Images/powerbar/bar3.png" type="Texture" id=4]
+[ext_resource path="res://assets/Images/powerbar/bar4.png" type="Texture" id=5]
+[ext_resource path="res://assets/Images/powerbar/bar5.png" type="Texture" id=6]
+[ext_resource path="res://assets/Images/powerbar/bar6.png" type="Texture" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 
 render_priority = 0
+shader = ExtResource( 1 )
+shader_param/x = true
+_sections_unfolded = [ "shader_param" ]
 
 [sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
-"frames": [ ExtResource( 1 ), ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ) ],
+"frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -29,6 +33,7 @@ position = Vector2( 506.199, 97.1691 )
 scale = Vector2( 0.552395, 0.552395 )
 frames = SubResource( 2 )
 animation = "default"
+_sections_unfolded = [ "Material" ]
 __meta__ = {
 "_edit_lock_": true
 }

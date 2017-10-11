@@ -1,17 +1,21 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://scripts/bullet.gd" type="Script" id=1]
-[ext_resource path="res://assets/Images/Lasers/blue_bullet1.png" type="Texture" id=2]
-[ext_resource path="res://assets/Images/Lasers/blue_bullet2.png" type="Texture" id=3]
+[ext_resource path="res://resources/redblueshader.tres" type="Shader" id=2]
+[ext_resource path="res://assets/Images/Lasers/blue_bullet1.png" type="Texture" id=3]
+[ext_resource path="res://assets/Images/Lasers/blue_bullet2.png" type="Texture" id=4]
 
 [sub_resource type="ShaderMaterial" id=1]
 
 render_priority = 0
+shader = ExtResource( 2 )
+shader_param/x = true
+_sections_unfolded = [ "shader_param" ]
 
 [sub_resource type="SpriteFrames" id=2]
 
 animations = [ {
-"frames": [ ExtResource( 2 ), ExtResource( 3 ) ],
+"frames": [ ExtResource( 3 ), ExtResource( 4 ) ],
 "loop": true,
 "name": "default",
 "speed": 5.0
@@ -62,6 +66,7 @@ scale = Vector2( 0.508392, 0.508392 )
 frames = SubResource( 2 )
 animation = "default"
 offset = Vector2( 64.9144, 3.22171 )
+_sections_unfolded = [ "Material" ]
 __meta__ = {
 "_edit_lock_": true
 }

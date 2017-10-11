@@ -1,10 +1,10 @@
-[gd_resource type="Shader" load_steps=1 format=2]
-
+[gd_resource type="Shader" format=2]
 
 [resource]
 
-_code = {
-"fragment": "vec3 rgb2hsv(vec3 c)
+code = "shader_type canvas_item;
+
+vec3 rgb2hsv(vec3 c)
 {
     vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
     vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
@@ -24,17 +24,24 @@ vec3 hsv2rgb(vec3 c)
 }
 
 uniform bool x;
-vec4 textureColor = tex(TEXTURE, UV);
-vec3 fragRGB = textureColor.rgb;
-vec3 fragHSV = rgb2hsv(fragRGB).xyz;
-if (!x) {
-	fragHSV.x = mod(fragHSV.x+0.4,1);
+
+
+void fragment() {
+	bool active = true;
+	vec4 textureColor = texture(TEXTURE,UV);
+	vec3 fragRGB = textureColor.rgb;
+	vec3 fragHSV = rgb2hsv(fragRGB).xyz;
+	if (!x) {
+	//	fragHSV.x = -0.85+fragHSV.z;//mod(fragHSV.x+0.4,1);
+		fragHSV.x = mod(fragHSV.x+0.4,1);
+	}
+	
+	if ((fragHSV.y <= 0.3) && !active) {
+		fragHSV.z = fragHSV.z*0.5;
+	}
+	
+	fragRGB = hsv2rgb(fragHSV);
+	COLOR  = vec4(fragRGB, textureColor.w);
 }
-fragRGB = hsv2rgb(fragHSV);
-COLOR  = vec4(fragRGB, textureColor.a);",
-"fragment_ofs": 0,
-"light": "",
-"light_ofs": 0,
-"vertex": "",
-"vertex_ofs": 0
-}
+"
+
