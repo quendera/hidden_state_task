@@ -31,7 +31,7 @@ centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 5000, 800 )
 script = ExtResource( 2 )
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
 }

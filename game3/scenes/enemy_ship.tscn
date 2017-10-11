@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=2]
+[gd_scene load_steps=54 format=2]
 
 [ext_resource path="res://scripts/enemy_ship.gd" type="Script" id=1]
 [ext_resource path="res://resources/enemyshipshader.tres" type="Shader" id=2]
@@ -42,7 +42,8 @@
 [ext_resource path="res://assets/Images/laser/laser_blue_big19.png" type="Texture" id=40]
 [ext_resource path="res://assets/Images/laser/laser_blue_big20.png" type="Texture" id=41]
 [ext_resource path="res://scripts/laser.gd" type="Script" id=42]
-[ext_resource path="res://scripts/energy.gd" type="Script" id=43]
+[ext_resource path="res://assets/Images/star/star.png" type="Texture" id=43]
+[ext_resource path="res://scripts/energy.gd" type="Script" id=44]
 
 [sub_resource type="ShaderMaterial" id=1]
 
@@ -173,6 +174,44 @@ animations = [ {
 "speed": 10.0
 } ]
 
+[sub_resource type="ParticlesMaterial" id=9]
+
+render_priority = 0
+trail_divisor = 1
+emission_shape = 0
+flag_align_y = false
+flag_rotate_y = false
+flag_disable_z = true
+spread = 45.0
+flatness = 0.0
+gravity = Vector3( 0, 98, 0 )
+initial_velocity = 1.0
+initial_velocity_random = 0.0
+angular_velocity = 4.58084e-41
+angular_velocity_random = 0.0
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+linear_accel = 0.0
+linear_accel_random = 0.0
+radial_accel = 0.0
+radial_accel_random = 0.0
+tangential_accel = 0.0
+tangential_accel_random = 0.0
+damping = 0.0
+damping_random = 0.0
+angle = 0.0
+angle_random = 0.0
+scale = 1.0
+scale_random = 0.0
+color = Color( 1, 1, 1, 1 )
+hue_variation = 0.0
+hue_variation_random = 0.0
+anim_speed = 0.0
+anim_speed_random = 0.0
+anim_offset = 0.0
+anim_offset_random = 0.0
+anim_loop = false
+
 [node name="enemy_ship" type="Area2D"]
 
 z = 1
@@ -208,7 +247,7 @@ position = Vector2( -3.54698, 3.85551 )
 scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 5
+frame = 3
 playing = true
 _sections_unfolded = [ "Material" ]
 __meta__ = {
@@ -349,12 +388,13 @@ fract_delta = true
 visibility_rect = Rect2( -100, -100, 200, 200 )
 local_coords = true
 draw_order = 0
-process_material = null
-texture = null
+process_material = SubResource( 9 )
+texture = ExtResource( 43 )
 normal_map = null
 h_frames = 1
 v_frames = 1
-script = ExtResource( 43 )
+script = ExtResource( 44 )
+_sections_unfolded = [ "Process Material", "Textures" ]
 
 [node name="hide" type="Timer" parent="energy"]
 
