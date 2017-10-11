@@ -118,7 +118,6 @@ rotation = -1.5708
 scale = Vector2( 0.35, 0.35 )
 frames = ExtResource( 3 )
 animation = "default"
-frame = 3
 playing = true
 _sections_unfolded = [ "Material" ]
 __meta__ = {
@@ -143,6 +142,7 @@ frame = 9
 
 [node name="shader" type="Sprite" parent="."]
 
+visible = false
 material = SubResource( 5 )
 position = Vector2( -4.94492, 6.8206 )
 rotation = -1.5708
@@ -162,7 +162,7 @@ enabled = true
 editor_only = false
 texture = ExtResource( 16 )
 offset = Vector2( 1.47336, 1.98471 )
-texture_scale = 1.0
+texture_scale = 4.0
 color = Color( 1, 1, 1, 1 )
 energy = 1.0
 mode = 3
@@ -171,7 +171,7 @@ range_z_min = -1024
 range_z_max = 1024
 range_layer_min = 0
 range_layer_max = 0
-range_item_cull_mask = 1
+range_item_cull_mask = 2
 shadow_enabled = false
 shadow_color = Color( 0, 0, 0, 0 )
 shadow_buffer_size = 2048
@@ -180,6 +180,7 @@ shadow_filter = 0
 shadow_filter_smooth = 0.0
 shadow_item_cull_mask = 1
 script = ExtResource( 17 )
+_sections_unfolded = [ "Range", "Shadow", "Visibility", "Z" ]
 __meta__ = {
 "_edit_lock_": true
 }

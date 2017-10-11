@@ -12,8 +12,6 @@ __meta__ = {
 [node name="enemy_ship" parent="." instance=ExtResource( 1 )]
 
 position = Vector2( 979.655, 339.998 )
-audio_bus_override = false
-audio_bus_name = "Master"
 
 [node name="layer" type="CanvasLayer" parent="."]
 

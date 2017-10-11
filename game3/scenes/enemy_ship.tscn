@@ -198,7 +198,7 @@ position = Vector2( -3.54698, 3.85551 )
 scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 5
+frame = 4
 playing = true
 __meta__ = {
 "_edit_lock_": true
@@ -250,7 +250,7 @@ autostart = true
 [node name="laser" type="AnimatedSprite" parent="."]
 
 visible = false
-light_mask = 3
+light_mask = 2
 material = SubResource( 7 )
 position = Vector2( -101.597, 70.4751 )
 frames = SubResource( 8 )
@@ -259,6 +259,7 @@ frame = 19
 centered = false
 offset = Vector2( -3557.68, -87.0475 )
 script = ExtResource( 40 )
+_sections_unfolded = [ "Visibility" ]
 
 [node name="position" type="Position2D" parent="laser"]
 

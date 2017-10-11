@@ -43,10 +43,12 @@ __meta__ = {
 
 [node name="frames" type="AnimatedSprite" parent="."]
 
+light_mask = 2
 position = Vector2( 2.43457, -5.97989 )
 scale = Vector2( 0.510423, 0.510423 )
 frames = SubResource( 1 )
 animation = "default"
+_sections_unfolded = [ "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
 }
