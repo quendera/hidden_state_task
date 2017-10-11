@@ -118,6 +118,7 @@ rotation = -1.5708
 scale = Vector2( 0.35, 0.35 )
 frames = ExtResource( 3 )
 animation = "default"
+frame = 1
 playing = true
 _sections_unfolded = [ "Material" ]
 __meta__ = {
