@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=1 format=2]
+[gd_resource type="SpriteFrames" load_steps=5 format=2]
 
 [ext_resource path="res://assets/Images/geko_blue/geko_0.2_sideview_big1.png" type="Texture" id=1]
 [ext_resource path="res://assets/Images/geko_blue/geko_0.2_sideview_big2.png" type="Texture" id=2]
@@ -13,3 +13,5 @@ animations = [ {
 "name": "default",
 "speed": 8.0
 } ]
+_sections_unfolded = [ "Resource" ]
+

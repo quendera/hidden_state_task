@@ -40,7 +40,7 @@ singletons=[  ]
 [image_loader]
 
 filter=true
-gen_mipmaps=true
+gen_mipmaps=false
 
 [input]
 
