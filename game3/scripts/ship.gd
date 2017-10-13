@@ -76,13 +76,11 @@ func _on_anim_finished( name ):
 	exploding = false
 
 
-func shield(ready2shield):
+func shield():
 	if not active:
 		if movement_time == 0:
 			movement_time = OS.get_ticks_msec()-start_time
-		if ready2shield:
-			set_active(true)
-			get_node("shield_off").start()
+		set_active(true)
 
 
 

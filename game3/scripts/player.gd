@@ -12,6 +12,7 @@ var shooting = false
 var bullet_scene = preload("res://scenes/bullet.tscn")
 var bullet_instance
 var reaction_window = false
+var reaction_chosen = "none"
 
 var hits setget set_hits
 func set_hits(new_hits):
@@ -35,28 +36,24 @@ func set_polarity(new_polarity):
 	get_node("layer/polarity_button").get_material().set_shader_param("x", new_polarity == 1)
 	get_node("ship/frames").get_material().set_shader_param("x", new_polarity == 1)
 
-func _on_attack_button_pressed():
-	time0 = OS.get_ticks_msec()
-	button_pressed = true
+#func _on_attack_button_pressed():
+#	time0 = OS.get_ticks_msec()
+#	button_pressed = true
 
 #func _on_attack_button_released():
 #	if OS.get_ticks_msec() < time0+FLIP_TIME :
 #		set_polarity(1 - polarity)
 #	button_pressed = false
 #
-#func _on_ship_exploded(enemy_polarity):
-#	if not (polarity == enemy_polarity):
-#		explode_ship()
+func _on_ship_exploded(enemy_polarity):
+	if not (polarity == enemy_polarity):
+		explode_ship()
 
 func _on_shield_pressed():
 	get_node("ship").shield(reaction_window)
 
-func _on_shield_off_timeout():
-	get_node("ship").active = false
-
 func _ready():
 	get_node("ship/shield").connect("pressed", self, "_on_shield_pressed")
-	get_node("ship/shield_off").connect("timeout", self, "_on_shield_off_timeout")
 	get_node("ship").connect("exploded", self, "_on_ship_exploded")
 	set_polarity( int(rand_range(0,1) > 0.5) )
 	set_hits(0)
@@ -66,9 +63,11 @@ func _ready():
 func _input(event):
 	if event.is_action_pressed("polarity"):
 		set_polarity(1-polarity)
-	if event.is_action_pressed("shield"):
-		get_node("ship").shield(reaction_window)
-	if event.is_action_pressed("combo"):
+	if event.is_action_pressed("shield") and reaction_chosen == "none" and reaction_window:
+		reaction_chosen = "shield"
+		get_node("ship").shield()
+	if event.is_action_pressed("combo") and reaction_chosen == "none" and reaction_window:
+		reaction_chosen = "combo"
 		combo()
 
 func _process(delta):
@@ -84,11 +83,12 @@ func _process(delta):
 		bullet_instance.detached = true
 		shooting = false
 		ready2shoot = false
+		reaction_chosen = "none"
 
 func spawn_bullet(polarity):
 	bullet_instance = bullet_scene.instance()
 	bullet_instance.init(polarity)
-	bullet_instance.set_global_position(get_node("ship/shoot_from").get_global_position())
+	bullet_instance.global_position = $"ship/shoot_from".global_position
 	add_child(bullet_instance)
 
 func explode_ship(damage = 1):
@@ -96,5 +96,4 @@ func explode_ship(damage = 1):
 	set_hits(hits+damage)
 
 func combo():
-	if reaction_window:
-		set_hits(hits - 10)
+	set_hits(hits - 10)

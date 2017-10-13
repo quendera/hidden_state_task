@@ -3,9 +3,9 @@ extends Area2D
 
 # Data collection:
 var data = {"time":[], "polarity_shot":[], "polarity_enemy":[], "correct" : [], "steps":[],
-"escaped": [], "reaction_time" : [], "probability_blue" : []}
+"fast": [], "reaction_time" : [], "reaction_chosen" : [], "probability_blue" : []}
 var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : true, "steps" : 0,
-"escaped": true, "reaction_time" : 0, "probability_blue" : 0.5}
+"fast": true, "reaction_time" : 0, "reaction_chosen" : "none", "probability_blue" : 0.5}
 
 #constants
 const SPEED = 30
@@ -92,7 +92,7 @@ func _on_bullet_hit(steps):
 	data_line["polarity_enemy"] = polarity
 	data_line["correct"] = (data_line["polarity_shot"] == data_line["polarity_enemy"])
 	data_line["steps"] = steps
-	data_line["escaped"] = false
+	data_line["fast"] = false
 	global.player.get_node("ship").movement_time = 0
 	global.player.get_node("ship").start_time =  OS.get_ticks_msec()
 	$reaction_window.start()
@@ -135,12 +135,14 @@ func game_over():
 	get_tree().quit()
 
 func _on_anim_finished(name):
-	data_line["escaped"] = not $laser.hit
+	data_line["fast"] = not $laser.hit
 	data_line["reaction_time"] = global.player.get_node("ship").movement_time
+	data_line["reaction_chosen"] = global.player.reaction_chosen
 	for key in data_line.keys():
 		data[key].push_back(data_line[key])
 	$frames.get_material().set_shader_param("hidden", true)
 	global.player.ready2shoot = true
+	global.player.get_node("ship").active = false
 	global.player.charge = 0
 	$lost_life.set_text("")
 	if life <= 0:
