@@ -14,13 +14,12 @@ func activate(polarity):
 	get_node("../sound").play()
 
 func explode():
-	if get_node("area").overlaps_area(global.player.get_node("ship")):
-		if not global.player.get_node("ship").active:
-			global.player.explode_ship(20)
-			hit = true
-			global.player.get_node("ship").escaped = false
-		else:
-			global.player.get_node("ship").escaped = true
+	if not global.player.get_node("ship").active:
+		global.player.explode_ship(20)
+		hit = true
+		global.player.get_node("ship").escaped = false
+	else:
+		global.player.get_node("ship").escaped = true
 
 func retract():
 	global.player.get_node("ship").active = false

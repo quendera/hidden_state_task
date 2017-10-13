@@ -156,6 +156,7 @@ __meta__ = {
 [node name="shadow" type="Light2D" parent="shader"]
 
 position = Vector2( 4.24701, -0.149323 )
+scale = Vector2( 0.8, 0.8 )
 z = 1
 enabled = true
 editor_only = false

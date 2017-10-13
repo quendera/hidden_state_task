@@ -7,11 +7,11 @@ const FLIP_TIME = 300
 var time0 = 0
 var button_pressed = false
 var ready2shoot = true
-var ready2shield = false
 var shooting_pressed = false
 var shooting = false
 var bullet_scene = preload("res://scenes/bullet.tscn")
 var bullet_instance
+var reaction_window = false
 
 var hits setget set_hits
 func set_hits(new_hits):
@@ -35,22 +35,21 @@ func set_polarity(new_polarity):
 	get_node("layer/polarity_button").get_material().set_shader_param("x", new_polarity == 1)
 	get_node("ship/frames").get_material().set_shader_param("x", new_polarity == 1)
 
-func _on_polarity_button_pressed():
+func _on_attack_button_pressed():
 	time0 = OS.get_ticks_msec()
 	button_pressed = true
 
-
-func _on_polarity_button_released():
-	if OS.get_ticks_msec() < time0+FLIP_TIME :
-		set_polarity(1 - polarity)
-	button_pressed = false
-
-func _on_ship_exploded(enemy_polarity):
-	if not (polarity == enemy_polarity):
-		explode_ship()
+#func _on_attack_button_released():
+#	if OS.get_ticks_msec() < time0+FLIP_TIME :
+#		set_polarity(1 - polarity)
+#	button_pressed = false
+#
+#func _on_ship_exploded(enemy_polarity):
+#	if not (polarity == enemy_polarity):
+#		explode_ship()
 
 func _on_shield_pressed():
-	get_node("ship").shield(ready2shield)
+	get_node("ship").shield(reaction_window)
 
 func _on_shield_off_timeout():
 	get_node("ship").active = false
@@ -66,18 +65,15 @@ func _ready():
 
 func _input(event):
 	if event.is_action_pressed("polarity"):
-		_on_polarity_button_pressed()
-	if event.is_action_released("polarity"):
-		_on_polarity_button_released()
+		set_polarity(1-polarity)
 	if event.is_action_pressed("shield"):
-		get_node("ship").shield(ready2shield)
-	if event.is_action_pressed("steal"):
-		steal()
+		get_node("ship").shield(reaction_window)
+	if event.is_action_pressed("combo"):
+		combo()
 
 func _process(delta):
 #shoot
-	if ready2shoot:
-		ready2shield = false
+	button_pressed = Input.is_action_pressed("attack")
 	shooting_pressed = button_pressed and (OS.get_ticks_msec() > time0+FLIP_TIME)
 	if shooting_pressed and ready2shoot and not get_node("ship").active:
 		if not shooting:
@@ -99,6 +95,6 @@ func explode_ship(damage = 1):
 	get_node("ship").explode()
 	set_hits(hits+damage)
 
-func steal():
-	if global.enemy.stealable:
+func combo():
+	if reaction_window:
 		set_hits(hits - 10)

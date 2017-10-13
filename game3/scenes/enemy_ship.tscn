@@ -209,7 +209,7 @@ position = Vector2( -3.54698, 3.85551 )
 scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 4
+frame = 5
 playing = true
 _sections_unfolded = [ "Material" ]
 __meta__ = {
@@ -228,12 +228,10 @@ area_mask = 1
 
 [node name="explosion" type="AnimatedSprite" parent="."]
 
-visible = false
 material = SubResource( 3 )
 scale = Vector2( 0.53, 0.53 )
 frames = SubResource( 4 )
 animation = "default"
-frame = 10
 _sections_unfolded = [ "Material" ]
 __meta__ = {
 "_edit_lock_": true
@@ -319,7 +317,7 @@ percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
 
-[node name="deactivate_shield" type="Timer" parent="."]
+[node name="reaction_window" type="Timer" parent="."]
 
 process_mode = 1
 wait_time = 0.45
@@ -337,7 +335,7 @@ autostart = false
 
 [connection signal="timeout" from="shooting" to="." method="_on_shooting_timeout"]
 
-[connection signal="timeout" from="deactivate_shield" to="." method="_on_deactivate_shield_timeout"]
+[connection signal="timeout" from="reaction_window" to="." method="_on_reaction_window_timeout"]
 
 [connection signal="timeout" from="end_attack" to="." method="_on_end_attack_timeout"]
 

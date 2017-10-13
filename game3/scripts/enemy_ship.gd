@@ -17,7 +17,6 @@ var enemy_bullet_instance
 # time changing attributes
 var polarity = int(rand_range(0,1) > 0.5)
 var probability_blue = 0.5
-var stealable = false
 var shooting = false
 
 # navigate
@@ -96,8 +95,8 @@ func _on_bullet_hit(steps):
 	data_line["escaped"] = false
 	global.player.get_node("ship").movement_time = 0
 	global.player.get_node("ship").start_time =  OS.get_ticks_msec()
-	global.player.ready2shield = true
-	get_node("deactivate_shield").start()
+	$reaction_window.start()
+	global.player.reaction_window = true
 	life -= lost_life
 	if - lost_life > 0:
 		life_sign = "+"
@@ -129,7 +128,7 @@ func explode(steps):
 	get_node("sound").play()
 	lost_life = lose_life(steps, true)
 	_on_bullet_hit(steps)
-	stealable = true
+
 
 func game_over():
 	save_data()
@@ -213,8 +212,7 @@ func attack1():
 
 
 
-func _on_deactivate_shield_timeout():
-	stealable = false
-	global.player.ready2shield = false
+func _on_reaction_window_timeout():
+	global.player.reaction_window = false
 	get_node("end_attack").stop()
 	shooting = false
