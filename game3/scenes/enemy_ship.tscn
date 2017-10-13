@@ -228,10 +228,12 @@ area_mask = 1
 
 [node name="explosion" type="AnimatedSprite" parent="."]
 
+visible = false
 material = SubResource( 3 )
 scale = Vector2( 0.53, 0.53 )
 frames = SubResource( 4 )
 animation = "default"
+frame = 10
 _sections_unfolded = [ "Material" ]
 __meta__ = {
 "_edit_lock_": true

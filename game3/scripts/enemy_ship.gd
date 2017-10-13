@@ -68,10 +68,10 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
-	var angle2ship = get_node("laser").get_angle_to(global.player.get_node("ship/get_hits").get_global_position())
-	get_node("laser").rotate(angle2ship+PI)
+	var angle2ship = $laser.get_angle_to(global.player.get_node("ship/get_hits").global_position)
+	$laser.rotate(angle2ship+PI)
 	life = clamp(life,0,max_life)
-	pos = get_node("centroid").get_global_position()
+	pos = $centroid.global_position
 	translate(SPEED*delta*dir)
 
 	if (dir.x)*(pos.x-clamp(pos.x, low_x, high_x)) > 0.001:
@@ -135,19 +135,19 @@ func game_over():
 	get_tree().quit()
 
 func _on_anim_finished(name):
-	data_line["escaped"] = not get_node("laser").hit
+	data_line["escaped"] = not $laser.hit
 	data_line["reaction_time"] = global.player.get_node("ship").movement_time
 	for key in data_line.keys():
 		data[key].push_back(data_line[key])
-	get_node("frames").get_material().set_shader_param("hidden", true)
+	$frames.get_material().set_shader_param("hidden", true)
 	global.player.ready2shoot = true
 	global.player.charge = 0
-	get_node("lost_life").set_text("")
+	$lost_life.set_text("")
 	if life <= 0:
 		game_over()
 	probability_blue = 0.05+0.1*(randi()%10)
 	polarity = int(rand_range(0,1) < probability_blue)
-	get_node("frames").get_material().set_shader_param("x", polarity)
+	$frames.get_material().set_shader_param("x", polarity)
 	begin_attack()
 
 ### ATTACK ###
@@ -155,8 +155,8 @@ func _on_anim_finished(name):
 func spawn_enemy_bullet(dir):
 	enemy_bullet_instance = enemy_bullet_scene.instance()
 	enemy_bullet_instance.init(dir, int(rand_range(0,1) < probability_blue))
-	enemy_bullet_instance.set_global_position(get_node("shoot_from").get_global_position())
-	get_node("../").add_child(enemy_bullet_instance)
+	enemy_bullet_instance.global_position = $shoot_from.global_position
+	get_parent().add_child(enemy_bullet_instance)
 
 func _on_shooting_timeout():
 	if shooting:
@@ -165,9 +165,9 @@ func _on_shooting_timeout():
 func begin_attack():
 	next_attack = (randi() % 2)
 	shooting = true
-	get_node("shooting").set_wait_time(attack_frequency[next_attack])
-	get_node("end_attack").set_wait_time(attack_durations[next_attack])
-	get_node("end_attack").start()
+	$shooting.set_wait_time(attack_frequency[next_attack])
+	$end_attack.set_wait_time(attack_durations[next_attack])
+	$end_attack.start()
 
 func _on_end_attack_timeout():
 	shooting = false
@@ -192,8 +192,8 @@ func get_num_rays(t):
 		return 1
 
 func attack0():
-	var num_rays = get_num_rays(get_node("end_attack").get_time_left()/
-	get_node("end_attack").get_wait_time())
+	var num_rays = get_num_rays($end_attack.get_time_left()/
+	$end_attack.get_wait_time())
 	for i in range(num_rays):
 		var angle = PI+0.2*PI*(i-0.5*(num_rays-1))+rand_range(-0.2,0.2)
 		var shooting_dir = Vector2(cos(angle),sin(angle))
@@ -214,5 +214,5 @@ func attack1():
 
 func _on_reaction_window_timeout():
 	global.player.reaction_window = false
-	get_node("end_attack").stop()
+	$end_attack.stop()
 	shooting = false
