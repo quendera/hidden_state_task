@@ -3,9 +3,9 @@ extends Area2D
 
 # Data collection:
 var data = {"time":[], "polarity_shot":[], "polarity_enemy":[], "correct" : [], "steps":[],
-"fast": [], "reaction_time" : [], "reaction_chosen" : [], "probability_blue" : []}
+"fast_reaction": [], "reaction_time" : [], "reaction_chosen" : [], "probability_blue" : []}
 var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : true, "steps" : 0,
-"fast": true, "reaction_time" : 0, "reaction_chosen" : "none", "probability_blue" : 0.5}
+"fast_reaction": true, "reaction_time" : 0, "reaction_chosen" : "none", "probability_blue" : 0.5}
 
 #constants
 const SPEED = 30
@@ -92,12 +92,12 @@ func _on_bullet_hit(steps):
 	data_line["polarity_enemy"] = polarity
 	data_line["correct"] = (data_line["polarity_shot"] == data_line["polarity_enemy"])
 	data_line["steps"] = steps
-	data_line["fast"] = false
 	global.player.movement_time = 0
 	global.player.start_time =  OS.get_ticks_msec()
 	$reaction_window.start()
 	global.player.reaction_window = true
 	global.player.reaction_chosen = "none"
+	global.player.fast_reaction = false
 	life -= lost_life
 	if - lost_life > 0:
 		life_sign = "+"
@@ -136,11 +136,11 @@ func game_over():
 	get_tree().quit()
 
 func _on_anim_finished(name):
-	data_line["fast"] = not $laser.hit
 	data_line["reaction_time"] = global.player.movement_time
 	if global.player.reaction_chosen == "none":
 		global.player.reaction_chosen = "timeout"
 	data_line["reaction_chosen"] = global.player.reaction_chosen
+	data_line["fast_reaction"] = global.player.fast_reaction
 	for key in data_line.keys():
 		data[key].push_back(data_line[key])
 	$frames.get_material().set_shader_param("hidden", true)

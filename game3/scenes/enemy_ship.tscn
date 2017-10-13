@@ -209,7 +209,6 @@ position = Vector2( -3.54698, 3.85551 )
 scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 1
 playing = true
 _sections_unfolded = [ "Material" ]
 __meta__ = {

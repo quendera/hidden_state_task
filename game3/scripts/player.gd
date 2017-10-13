@@ -14,6 +14,7 @@ var bullet_scene = preload("res://scenes/bullet.tscn")
 var bullet_instance
 var reaction_window = false
 var reaction_chosen = "none"
+var fast_reaction = false
 
 var hits setget set_hits
 func set_hits(new_hits):
@@ -68,6 +69,7 @@ func reaction(event, name):
 			movement_time = OS.get_ticks_msec()-start_time
 		if reaction_window:
 			execute_reaction(name)
+			fast_reaction = true
 
 
 func _input(event):
