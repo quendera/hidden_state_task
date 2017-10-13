@@ -17,9 +17,6 @@ func set_active(new_active):
 	get_node("shader").set_visible(new_active)
 	set_z(1+2*int(new_active))
 
-var movement_time = 0
-var start_time = 0
-
 
 var velocity = 400
 
@@ -76,11 +73,7 @@ func _on_anim_finished( name ):
 	exploding = false
 
 
-func shield():
-	if not active:
-		if movement_time == 0:
-			movement_time = OS.get_ticks_msec()-start_time
-		set_active(true)
+
 
 
 

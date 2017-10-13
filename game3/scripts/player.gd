@@ -3,7 +3,8 @@ extends Node2D
 
 const FLIP_TIME = 300
 
-
+var movement_time = 0
+var start_time = 0
 var time0 = 0
 var button_pressed = false
 var ready2shoot = true
@@ -60,15 +61,20 @@ func _ready():
 	set_process_input(true)
 	set_process(true)
 
+func reaction(event, name):
+	if event.is_action_pressed(name) and reaction_chosen == "none":
+		reaction_chosen = name
+		if movement_time == 0:
+			movement_time = OS.get_ticks_msec()-start_time
+		if reaction_window:
+			execute_reaction(name)
+
+
 func _input(event):
 	if event.is_action_pressed("polarity"):
 		set_polarity(1-polarity)
-	if event.is_action_pressed("shield") and reaction_chosen == "none" and reaction_window:
-		reaction_chosen = "shield"
-		get_node("ship").shield()
-	if event.is_action_pressed("combo") and reaction_chosen == "none" and reaction_window:
-		reaction_chosen = "combo"
-		combo()
+	reaction(event, "shield")
+	reaction(event, "combo")
 
 func _process(delta):
 #shoot
@@ -83,7 +89,7 @@ func _process(delta):
 		bullet_instance.detached = true
 		shooting = false
 		ready2shoot = false
-		reaction_chosen = "none"
+
 
 func spawn_bullet(polarity):
 	bullet_instance = bullet_scene.instance()
@@ -95,5 +101,8 @@ func explode_ship(damage = 1):
 	get_node("ship").explode()
 	set_hits(hits+damage)
 
-func combo():
-	set_hits(hits - 10)
+func execute_reaction(name):
+	if name == "combo":
+		set_hits(hits - 10)
+	elif name == "shield":
+		$ship.active = true

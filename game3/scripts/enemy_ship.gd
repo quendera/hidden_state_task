@@ -93,10 +93,11 @@ func _on_bullet_hit(steps):
 	data_line["correct"] = (data_line["polarity_shot"] == data_line["polarity_enemy"])
 	data_line["steps"] = steps
 	data_line["fast"] = false
-	global.player.get_node("ship").movement_time = 0
-	global.player.get_node("ship").start_time =  OS.get_ticks_msec()
+	global.player.movement_time = 0
+	global.player.start_time =  OS.get_ticks_msec()
 	$reaction_window.start()
 	global.player.reaction_window = true
+	global.player.reaction_chosen = "none"
 	life -= lost_life
 	if - lost_life > 0:
 		life_sign = "+"
@@ -136,7 +137,9 @@ func game_over():
 
 func _on_anim_finished(name):
 	data_line["fast"] = not $laser.hit
-	data_line["reaction_time"] = global.player.get_node("ship").movement_time
+	data_line["reaction_time"] = global.player.movement_time
+	if global.player.reaction_chosen == "none":
+		global.player.reaction_chosen = "timeout"
 	data_line["reaction_chosen"] = global.player.reaction_chosen
 	for key in data_line.keys():
 		data[key].push_back(data_line[key])
