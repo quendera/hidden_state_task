@@ -22,9 +22,11 @@ Enemy laser and bullets damage your ship. Avoid them as much as possible. A cert
 
 `W` : shoot (the longer you press, the more damaging/energetic the shot)
 
-`E` : change polarity (blue/red).
+`Q` : shield (only available after shooting)
 
-`Space` : shield (only available after shooting)
+`E` : combo button (for extra damage, only after successful shooting)
+
+`Space` : change polarity (blue/red).
 
 `P` : pause/unpause.
 

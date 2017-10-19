@@ -1,24 +1,26 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://assets/Images/bg/Space_bkgr.png" type="Texture" id=1]
-[ext_resource path="res://scripts/background.gd" type="Script" id=2]
-[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=5]
-[ext_resource path="res://resources/grayscaleshader.tres" type="Shader" id=6]
-[ext_resource path="res://assets/Images/white.png" type="Texture" id=7]
-[ext_resource path="res://scripts/pause.gd" type="Script" id=8]
-[ext_resource path="res://assets/Fonts/labelfont.tres" type="DynamicFont" id=9]
-[ext_resource path="res://scripts/instructions.gd" type="Script" id=10]
-[ext_resource path="res://scripts/welcome.gd" type="Script" id=11]
+[ext_resource path="res://scripts/level1.gd" type="Script" id=1]
+[ext_resource path="res://assets/Images/bg/Space_bkgr.png" type="Texture" id=2]
+[ext_resource path="res://scripts/background.gd" type="Script" id=3]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/enemy.tscn" type="PackedScene" id=5]
+[ext_resource path="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg" type="AudioStream" id=6]
+[ext_resource path="res://resources/grayscaleshader.tres" type="Shader" id=7]
+[ext_resource path="res://assets/Images/white.png" type="Texture" id=8]
+[ext_resource path="res://scripts/pause.gd" type="Script" id=9]
+[ext_resource path="res://assets/Fonts/labelfont.tres" type="DynamicFont" id=10]
+[ext_resource path="res://scripts/instructions.gd" type="Script" id=11]
+[ext_resource path="res://scripts/welcome.gd" type="Script" id=12]
 
 [sub_resource type="ShaderMaterial" id=1]
 
 render_priority = 0
-shader = ExtResource( 6 )
+shader = ExtResource( 7 )
 
 [node name="game" type="Node2D"]
 
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -26,24 +28,24 @@ __meta__ = {
 [node name="background" type="Sprite" parent="."]
 
 scale = Vector2( 0.9, 0.9 )
-texture = ExtResource( 1 )
+texture = ExtResource( 2 )
 centered = false
 region_enabled = true
 region_rect = Rect2( 0, 0, 5000, 800 )
-script = ExtResource( 2 )
+script = ExtResource( 3 )
 _sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="player" parent="." instance=ExtResource( 3 )]
+[node name="player" parent="." instance=ExtResource( 4 )]
 
-[node name="enemy" parent="." instance=ExtResource( 4 )]
+[node name="enemy" parent="." instance=ExtResource( 5 )]
 
 [node name="soundtrack" type="AudioStreamPlayer" parent="."]
 
 pause_mode = 1
-stream = ExtResource( 5 )
+stream = ExtResource( 6 )
 volume_db = 1.0
 autoplay = false
 mix_target = 0
@@ -59,7 +61,7 @@ scale = Vector2( 1, 1 )
 [node name="shade" type="Sprite" parent="CanvasLayer"]
 
 material = SubResource( 1 )
-texture = ExtResource( 7 )
+texture = ExtResource( 8 )
 centered = false
 _sections_unfolded = [ "Material", "Visibility" ]
 __meta__ = {
@@ -70,7 +72,7 @@ __meta__ = {
 
 pause_mode = 2
 position = Vector2( -5.99054, -8.24774 )
-script = ExtResource( 8 )
+script = ExtResource( 9 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -97,13 +99,14 @@ rect_pivot_offset = Vector2( 0, 0 )
 mouse_filter = 0
 size_flags_horizontal = 2
 size_flags_vertical = 2
-custom_fonts/bold_font = ExtResource( 9 )
-custom_fonts/normal_font = ExtResource( 9 )
+custom_fonts/bold_font = ExtResource( 10 )
+custom_fonts/normal_font = ExtResource( 10 )
 bbcode_enabled = false
 bbcode_text = "F      : toggle fullscreen"
 visible_characters = -1
 percent_visible = 1.0
-script = ExtResource( 10 )
+override_selected_font_color = false
+script = ExtResource( 11 )
 
 [node name="pause" type="Label" parent="pause/CanvasLayer"]
 
@@ -121,11 +124,11 @@ rect_clip_content = false
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
-custom_fonts/font = ExtResource( 9 )
+custom_fonts/font = ExtResource( 10 )
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
-script = ExtResource( 11 )
+script = ExtResource( 12 )
 
 [node name="confirm_quit" type="ConfirmationDialog" parent="pause/CanvasLayer"]
 
