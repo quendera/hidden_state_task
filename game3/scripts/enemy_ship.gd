@@ -4,8 +4,37 @@ extends Area2D
 # Data collection:
 var data = {"time":[], "polarity_shot":[], "polarity_enemy":[], "correct" : [], "steps":[],
 "fast_reaction": [], "reaction_time" : [], "reaction_chosen" : [], "probability_blue" : []}
-var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : true, "steps" : 0,
-"fast_reaction": true, "reaction_time" : 0, "reaction_chosen" : "none", "probability_blue" : 0.5}
+var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : 1, "steps" : 0,
+"fast_reaction": 1, "reaction_time" : 0, "reaction_chosen" : "none", "probability_blue" : 0.5}
+
+var data_keys = data.keys()
+var query_string = "INSERT INTO testdata ("
+var query_line = ""
+var has_data = false
+
+func set_query_string_header():
+	for i in range(data_keys.size()):
+		query_string += data_keys[i]
+		if i < data_keys.size() - 1:
+			query_string += ", "
+	query_string += ") values "
+
+func set_query_line():
+	query_line = "("
+	for i in range(data_keys.size()):
+		if typeof(data_line[data_keys[i]]) == TYPE_STRING:
+			query_line += "'"+data_line[data_keys[i]]+"'"
+		else:
+			query_line += str(data_line[data_keys[i]])
+		if i < data_keys.size() - 1:
+			query_line += ", "
+	query_line += "), "
+
+func add_query_line():
+	has_data = true
+	set_query_line()
+	query_string += query_line
+
 
 #constants
 const SPEED = 30
@@ -61,6 +90,7 @@ func get_laser_pos():
 
 
 func _ready():
+	set_query_string_header()
 	randomize()
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
 	add_to_group("enemies")
@@ -90,7 +120,7 @@ func _on_bullet_hit(steps):
 	data_line["polarity_shot"] = global.player.polarity
 	data_line["probability_blue"] = probability_blue
 	data_line["polarity_enemy"] = polarity
-	data_line["correct"] = (data_line["polarity_shot"] == data_line["polarity_enemy"])
+	data_line["correct"] = int(data_line["polarity_shot"] == data_line["polarity_enemy"])
 	data_line["steps"] = steps
 	global.player.movement_time = 0
 	global.player.start_time =  OS.get_ticks_msec()
@@ -132,6 +162,8 @@ func explode(steps):
 
 
 func game_over():
+	if has_data:
+		get_node("/root/game").send_string(query_string.substr(0, query_string.length( )-2)+";")
 	save_data()
 	get_tree().quit()
 
@@ -140,9 +172,10 @@ func _on_anim_finished(name):
 	if global.player.reaction_chosen == "none":
 		global.player.reaction_chosen = "timeout"
 	data_line["reaction_chosen"] = global.player.reaction_chosen
-	data_line["fast_reaction"] = global.player.fast_reaction
+	data_line["fast_reaction"] = int(global.player.fast_reaction)
 	for key in data_line.keys():
 		data[key].push_back(data_line[key])
+	add_query_line()
 	$frames.get_material().set_shader_param("hidden", true)
 	global.player.ready2shoot = true
 	global.player.get_node("ship").active = false
