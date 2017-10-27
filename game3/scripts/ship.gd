@@ -49,6 +49,8 @@ func _process(delta):
 	for dir in dirs.keys():
 		if Input.is_action_pressed(dir):
 			sum_dir += dirs[dir]
+		#	if not $sound_ship_engine.playing:
+		#		$sound_ship_engine.play()
 	ship_displace += (sum_dir*velocity-ship_displace)*delta/LAG
 	position += delta*ship_displace
 	dir_touch = pos_touch-get_node("joystick").get_global_position()
