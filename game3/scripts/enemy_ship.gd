@@ -95,6 +95,7 @@ func _ready():
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))
 	add_to_group("enemies")
 	get_node("frames").get_material().set_shader_param("x", polarity)
+	$sound_enemy_engine.play()
 	set_process(true)
 
 func _process(delta):
@@ -108,6 +109,8 @@ func _process(delta):
 		dir.x = -dir.x
 	if (dir.y)*(pos.y-clamp(pos.y, low_y, high_y)) > 0.001:
 		dir.y = -dir.y
+	if not $sound_enemy_engine.playing:
+		$sound_enemy_engine.play()
 
 func save_data():
 	var file = File.new()
@@ -156,7 +159,7 @@ func explode(steps):
 	get_node("explosion").get_material().set_shader_param("x", polarity)
 	get_node("explosion").show()
 	get_node("anim").play("explosion")
-	get_node("sound").play()
+	get_node("sound_explosion").play()
 	lost_life = lose_life(steps, true)
 	_on_bullet_hit(steps)
 

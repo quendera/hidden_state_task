@@ -49,7 +49,9 @@ func set_polarity(new_polarity):
 #
 func _on_ship_exploded(enemy_polarity):
 	if not (polarity == enemy_polarity):
+		get_node("ship/bullet_hit").play()
 		explode_ship()
+
 
 func _on_shield_pressed():
 	get_node("ship").shield(reaction_window)
@@ -75,6 +77,7 @@ func reaction(event, name):
 func _input(event):
 	if event.is_action_pressed("polarity"):
 		set_polarity(1-polarity)
+		get_node("sound_polarity").play()
 	reaction(event, "shield")
 	reaction(event, "combo")
 
