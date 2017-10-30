@@ -22,8 +22,6 @@ func _input(event):
 			get_node("CanvasLayer/pause").set_visible(is_paused)
 	if event.is_action_pressed("exit"):
 		toggle_pause(false)
-		get_node("CanvasLayer/pause").set_visible(is_paused)
-		get_node("CanvasLayer/instructions").set_visible(is_paused)
 		get_node("CanvasLayer/confirm_quit").popup_centered()
 	if event.is_action_pressed("full_screen"):
 		OS.set_window_fullscreen(not OS.is_window_fullscreen())

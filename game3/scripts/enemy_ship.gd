@@ -160,6 +160,7 @@ func explode(steps):
 	get_node("explosion").show()
 	get_node("anim").play("explosion")
 	get_node("sound_explosion").play()
+	global.player.get_node("ship/anim").play("laser")
 	lost_life = lose_life(steps, true)
 	_on_bullet_hit(steps)
 
@@ -187,7 +188,7 @@ func _on_anim_finished(name):
 	if life <= 0:
 		game_over()
 	probability_blue = 0.05+0.1*(randi()%10)
-	polarity = int(rand_range(0,1) < probability_blue)
+	polarity = int(rand_range(0,1) < probability_blue + global.bias_blue)
 	$frames.get_material().set_shader_param("x", polarity)
 	begin_attack()
 

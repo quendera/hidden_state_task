@@ -22,6 +22,7 @@ var velocity = 400
 
 
 var exploding = false
+var combo = false
 
 var ship_displace = Vector2(0,0)
 var dirs = {"ui_left":Vector2(-1,0), "ui_right":Vector2(1,0), "ui_up":Vector2(0,-1), "ui_down":Vector2(0,1)}
@@ -68,11 +69,17 @@ func explode():
 
 
 func _on_anim_started( name ):
-	exploding = true
+	if name == "explosion":
+		exploding = true
 
 
 func _on_anim_finished( name ):
-	exploding = false
+	if name == "explosion":
+		exploding = true
+	if name == "laser" and combo:
+		$anim.play("combo")
+		get_parent().set_hits(get_parent().hits - 10)
+		combo = false
 
 
 

@@ -11,3 +11,8 @@ func get_enemy():
 
 func get_player():
 	return get_node("/root/game/player")
+
+# Task variable:
+
+var bias_blue = 0.1
+var lasers = true
