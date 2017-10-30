@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/enemy_ship.tscn" type="PackedScene" id=1]
-[ext_resource path="res://scenes/boss_life.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/Fonts/labelfont.tres" type="DynamicFont" id=2]
+[ext_resource path="res://scenes/boss_life.tscn" type="PackedScene" id=3]
 
 [node name="enemy" type="Node2D"]
 
@@ -35,16 +36,18 @@ rect_clip_content = false
 mouse_filter = 2
 size_flags_horizontal = 2
 size_flags_vertical = 0
+custom_fonts/font = ExtResource( 2 )
 custom_colors/font_color = Color( 0.496817, 0.239624, 0.589844, 1 )
 text = "HP"
 percent_visible = 1.0
 lines_skipped = 0
 max_lines_visible = -1
+_sections_unfolded = [ "custom_fonts" ]
 __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="boss_life" parent="layer" instance=ExtResource( 2 )]
+[node name="boss_life" parent="layer" instance=ExtResource( 3 )]
 
 position = Vector2( 861.602, 17.74 )
 scale = Vector2( 0.356486, 0.356486 )

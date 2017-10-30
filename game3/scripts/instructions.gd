@@ -12,9 +12,11 @@ Arrows : move
 
 W      : shoot
 
-E      : blue / red
+Q      : shield
 
-Space  : shield 
+E      : combo
+
+Space  : blue / red
 
 P      : pause / unpause
 
