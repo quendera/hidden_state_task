@@ -37,6 +37,7 @@ func set_polarity(new_polarity):
 	get_node("layer/powerup/bars").get_material().set_shader_param("x", new_polarity == 1)
 	get_node("layer/polarity_button").get_material().set_shader_param("x", new_polarity == 1)
 	get_node("ship/frames").get_material().set_shader_param("x", new_polarity == 1)
+	get_node("ship/laser").get_material().set_shader_param("x", new_polarity == 1)
 
 #func _on_attack_button_pressed():
 #	time0 = OS.get_ticks_msec()

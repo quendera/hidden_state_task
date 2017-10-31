@@ -3,9 +3,11 @@ extends Area2D
 
 # Data collection:
 var data = {"time":[], "polarity_shot":[], "polarity_enemy":[], "correct" : [], "steps":[],
-"fast_reaction": [], "reaction_time" : [], "reaction_chosen" : [], "probability_blue" : []}
+"fast_reaction": [], "reaction_time" : [], "reaction_chosen" : [], "probability_blue" : [],
+"bias_blue" : []}
 var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : 1, "steps" : 0,
-"fast_reaction": 1, "reaction_time" : 0, "reaction_chosen" : "none", "probability_blue" : 0.5}
+"fast_reaction": 1, "reaction_time" : 0, "reaction_chosen" : "none", "probability_blue" : 0.5,
+"bias_blue" : global.bias_blue}
 
 var data_keys = data.keys()
 var query_string = "INSERT INTO testdata ("

@@ -14,5 +14,5 @@ func get_player():
 
 # Task variable:
 
-var bias_blue = 0
+var bias_blue = 0.0
 var lasers = true

@@ -35,7 +35,7 @@
 [ext_resource path="res://assets/Images/friendlylaser/Layer #10.png" type="Texture" id=33]
 [ext_resource path="res://assets/Images/friendlylaser/Layer #11.png" type="Texture" id=34]
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=1]
 
 resource_name = "combo"
 length = 0.75
@@ -64,7 +64,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=1]
+[sub_resource type="Animation" id=2]
 
 length = 0.6
 loop = false
@@ -92,7 +92,7 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=3]
 
 resource_name = "laser"
 length = 0.45
@@ -121,14 +121,14 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="ShaderMaterial" id=2]
+[sub_resource type="ShaderMaterial" id=4]
 
 render_priority = 0
 shader = ExtResource( 2 )
 shader_param/x = true
 _sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="SpriteFrames" id=3]
+[sub_resource type="SpriteFrames" id=5]
 
 animations = [ {
 "frames": [ ExtResource( 4 ), ExtResource( 5 ), ExtResource( 6 ), ExtResource( 7 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ), ExtResource( 11 ), ExtResource( 12 ), ExtResource( 13 ) ],
@@ -137,19 +137,19 @@ animations = [ {
 "speed": 12.0
 } ]
 
-[sub_resource type="ShaderMaterial" id=4]
+[sub_resource type="ShaderMaterial" id=6]
 
 render_priority = 0
 shader = ExtResource( 14 )
 
-[sub_resource type="ShaderMaterial" id=8]
+[sub_resource type="ShaderMaterial" id=7]
 
 render_priority = 0
 shader = ExtResource( 22 )
 shader_param/x = true
 _sections_unfolded = [ "shader_param" ]
 
-[sub_resource type="SpriteFrames" id=7]
+[sub_resource type="SpriteFrames" id=8]
 
 animations = [ {
 "frames": [ ExtResource( 23 ), ExtResource( 24 ), ExtResource( 25 ), ExtResource( 26 ), ExtResource( 27 ), ExtResource( 28 ), ExtResource( 29 ), ExtResource( 30 ), ExtResource( 31 ), ExtResource( 32 ), ExtResource( 33 ), ExtResource( 34 ) ],
@@ -183,9 +183,9 @@ __meta__ = {
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/combo = SubResource( 5 )
-anims/explosion = SubResource( 1 )
-anims/laser = SubResource( 6 )
+anims/combo = SubResource( 1 )
+anims/explosion = SubResource( 2 )
+anims/laser = SubResource( 3 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -203,13 +203,13 @@ __meta__ = {
 
 [node name="frames" type="AnimatedSprite" parent="."]
 
-material = SubResource( 2 )
+material = SubResource( 4 )
 position = Vector2( -2.79742, 8.92931 )
 rotation = -1.5708
 scale = Vector2( 0.35, 0.35 )
 frames = ExtResource( 3 )
 animation = "default"
-frame = 2
+frame = 3
 playing = true
 _sections_unfolded = [ "Material", "Visibility" ]
 __meta__ = {
@@ -228,14 +228,14 @@ __meta__ = {
 visible = false
 position = Vector2( -7.32651, 2.785 )
 scale = Vector2( 0.281573, 0.281573 )
-frames = SubResource( 3 )
+frames = SubResource( 5 )
 animation = "default"
 frame = 9
 
 [node name="shader" type="Sprite" parent="."]
 
 visible = false
-material = SubResource( 4 )
+material = SubResource( 6 )
 position = Vector2( -4.94492, 6.8206 )
 rotation = -1.5708
 z = -1
@@ -322,12 +322,13 @@ bus = "Master"
 [node name="laser" type="AnimatedSprite" parent="."]
 
 visible = false
-material = SubResource( 8 )
+material = SubResource( 7 )
 position = Vector2( 15.5037, -708.551 )
 rotation = -1.5708
-frames = SubResource( 7 )
+z = 1
+frames = SubResource( 8 )
 animation = "default"
-_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z" ]
 
 [connection signal="animation_finished" from="anim" to="." method="_on_anim_finished"]
 
