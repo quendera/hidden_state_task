@@ -64,34 +64,6 @@ tracks/1/keys = {
 "values": [ true, false ]
 }
 
-[sub_resource type="Animation" id=2]
-
-length = 0.6
-loop = false
-step = 0.1
-tracks/0/type = "value"
-tracks/0/path = NodePath("explosion:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 0,
-"values": [ 0, 9 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("explosion:visible")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/keys = {
-"times": PoolRealArray( 0, 0.6 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ true, false ]
-}
-
 [sub_resource type="Animation" id=3]
 
 resource_name = "laser"
@@ -119,6 +91,35 @@ tracks/1/keys = {
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
 "values": [ true, false ]
+}
+
+[sub_resource type="Animation" id=9]
+
+resource_name = "explosion"
+length = 1.0
+loop = false
+step = 0.1
+tracks/0/type = "value"
+tracks/0/path = NodePath("explosion:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("explosion:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.6 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ 0, 9 ]
 }
 
 [sub_resource type="ShaderMaterial" id=4]
@@ -184,8 +185,18 @@ playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
 anims/combo = SubResource( 1 )
-anims/explosion = SubResource( 2 )
 anims/laser = SubResource( 3 )
+playback/active = true
+playback/speed = 1.0
+blend_times = [  ]
+autoplay = ""
+
+[node name="anim_explosion" type="AnimationPlayer" parent="."]
+
+playback_process_mode = 1
+playback_default_blend_time = 0.0
+root_node = NodePath("..")
+anims/explosion = SubResource( 9 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]
@@ -230,6 +241,7 @@ scale = Vector2( 0.281573, 0.281573 )
 frames = SubResource( 5 )
 animation = "default"
 frame = 9
+_sections_unfolded = [ "Visibility" ]
 
 [node name="shader" type="Sprite" parent="."]
 
@@ -333,6 +345,8 @@ _sections_unfolded = [ "Material", "Transform", "Visibility", "Z" ]
 
 [connection signal="animation_finished" from="anim" to="." method="_on_anim_finished"]
 
-[connection signal="animation_started" from="anim" to="." method="_on_anim_started"]
+[connection signal="animation_finished" from="anim_explosion" to="." method="_on_anim_explosion_animation_finished"]
+
+[connection signal="animation_started" from="anim_explosion" to="." method="_on_anim_explosion_animation_started"]
 
 

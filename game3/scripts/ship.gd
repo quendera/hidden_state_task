@@ -66,24 +66,19 @@ func _process(delta):
 
 func explode():
 	if not exploding:
-		$anim.play("explosion")
-
-
-func _on_anim_started( name ):
-	if name == "explosion":
-		exploding = true
+		$anim_explosion.play("explosion")
 
 
 func _on_anim_finished( name ):
-	if name == "explosion":
-		exploding = true
 	if name == "laser" and combo:
 		$anim.play("combo")
 		get_parent().set_hits(get_parent().hits - 10)
 		combo = false
 
 
+func _on_anim_explosion_animation_started( name ):
+	exploding = true
 
 
-
-
+func _on_anim_explosion_animation_finished( name ):
+	exploding = false
