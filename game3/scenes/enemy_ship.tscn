@@ -2,12 +2,12 @@
 
 [ext_resource path="res://scripts/enemy_ship.gd" type="Script" id=1]
 [ext_resource path="res://resources/enemyshipshader.tres" type="Shader" id=2]
-[ext_resource path="res://assets/Images/boss_mipmap/enemy_sideview_0.2_big1.tex" type="Texture" id=3]
-[ext_resource path="res://assets/Images/boss_mipmap/enemy_sideview_0.2_big2.tex" type="Texture" id=4]
-[ext_resource path="res://assets/Images/boss_mipmap/enemy_sideview_0.2_big3.tex" type="Texture" id=5]
-[ext_resource path="res://assets/Images/boss_mipmap/enemy_sideview_0.2_big4.tex" type="Texture" id=6]
-[ext_resource path="res://assets/Images/boss_mipmap/enemy_sideview_0.2_big5.tex" type="Texture" id=7]
-[ext_resource path="res://assets/Images/boss_mipmap/enemy_sideview_0.2_big6.tex" type="Texture" id=8]
+[ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big1.png" type="Texture" id=3]
+[ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big2.png" type="Texture" id=4]
+[ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big3.png" type="Texture" id=5]
+[ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big4.png" type="Texture" id=6]
+[ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big5.png" type="Texture" id=7]
+[ext_resource path="res://assets/Images/boss/enemy_sideview_0.2_big6.png" type="Texture" id=8]
 [ext_resource path="res://assets/Sounds/enemy_explosion.wav" type="AudioStream" id=9]
 [ext_resource path="res://resources/redblueshader.tres" type="Shader" id=10]
 [ext_resource path="res://assets/Images/explosion_blue/enemy_explosion_blue_big1.png" type="Texture" id=11]
@@ -62,6 +62,7 @@ animations = [ {
 "name": "default",
 "speed": 8.0
 } ]
+_sections_unfolded = [ "Resource" ]
 
 [sub_resource type="ShaderMaterial" id=3]
 
@@ -212,7 +213,7 @@ position = Vector2( -3.54698, 3.85551 )
 scale = Vector2( 0.65831, 0.65831 )
 frames = SubResource( 2 )
 animation = "default"
-frame = 2
+frame = 5
 playing = true
 _sections_unfolded = [ "Material" ]
 __meta__ = {

@@ -1,16 +1,14 @@
 extends Node2D
 
-# class member variables go here, for example:
-# var a = 2
 var passed = {"polarity" : false, "arrows" : false, "shield" : false}
 var initial_polarity
 var can_shoot = false
 var ready2start = false
+var countdown = false
 
 func _ready():
-	initial_polarity = get_node("../ship").polarity
-	get_tree().set_pause(false)
-	get_node("../enemy").SPEED = 0
+	initial_polarity = global.player.polarity
+	global.enemy.SPEED = 0
 	set_process(true)
 	set_process_input(true)
 
@@ -20,24 +18,24 @@ func _input(event):
 
 func _process(delta):
 	if not (passed.polarity and passed.arrows):
-		get_node("../ship").ready2shoot = false
-		get_node("../ship").ready2shield = false
+		global.player.ready2shoot = false
 	elif not can_shoot:
-		get_node("../ship").ready2shoot = true
+		global.player.ready2shoot = true
 		can_shoot = true
-		get_node("CanvasLayer/story").put_text(1)
-	if get_node("../ship").polarity != initial_polarity:
+		get_node("game/CanvasLayer2/story").put_text(1)
+	if global.player.polarity != initial_polarity:
 		passed.polarity = true
-	if get_node("../ship").get_global_pos().y -50 < get_node("../enemy/centroid").get_global_pos().y:
+	if global.player.position.y -50 < global.enemy.get_node("centroid").position.y:
 		passed.arrows = true
-	if get_node("../ship").escaped:
+	if global.player.fast_reaction and not countdown:
 		passed.shield = true
-		get_node("../ship").hits = 0
-		get_node("CanvasLayer/story").put_text(2)
-		get_node("full_mode").start()
+		global.player.hits = 0
+		get_node("game/CanvasLayer2/story").put_text(1)
+		$next_step.start()
+		countdown = true
 
-func _on_full_mode_timeout():
-	for node in get_node("../CanvasLayer").get_children():
+func _on_next_step_timeout():
+	for node in get_node("game/player/layer").get_children():
 		node.set_hidden(false)
-	get_node("CanvasLayer/story").put_text(3)
+	get_node("game/CanvasLayer2/story").put_text(1)
 	ready2start = true

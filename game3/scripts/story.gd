@@ -9,13 +9,13 @@ func put_text(i):
 	if i == 0:
 		parse_bbcode("""
 [center][b] A peaceful start [/b][/center]
-Your ultimate goal is to defeat an enemy ship equipped with a quantum defense mechanism. However, oftentimes it is good to start small. Use the [color=#e02727]arrow[/color] keys to move in front of the enemy and change color pressing the key [color=#e02727]E[/color].
+Your ultimate goal is to defeat an enemy ship equipped with a quantum defense mechanism. However, oftentimes it is good to start small. Use the [color=#e02727]arrow[/color] keys to move in front of the enemy and change color pressing [color=#e02727]Space[/color].
 """)
 	elif i == 1:
 		parse_bbcode("""
 Well done! Now try and shoot at the enemy by pressing and releasing the
 [color=#e02727]W[/color] key. The longer you press, the more powerful the shot.
-Be careful: if the enemy is of the opposite color, it will fight back with a laser. Press [color=#e02727]Space[/color] to shield. Shielding unnecessarily costs you a timeout.
+Be careful: if the enemy is of the opposite color, it will fight back with a laser. Press [color=#e02727]Q[/color] to shield. Shielding unnecessarily costs you a timeout.
 """)
 	elif i == 2:
 		parse_bbcode("""
