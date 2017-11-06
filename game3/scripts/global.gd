@@ -3,8 +3,8 @@ extends Node
 var w = 1280
 var h = 720
 
-var player_path
-var enemy_path
+var player_path = NodePath("/root/game/player")
+var enemy_path = NodePath("/root/game/enemy/enemy_ship")
 
 var enemy setget , get_enemy
 var player setget , get_player

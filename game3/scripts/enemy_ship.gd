@@ -39,7 +39,7 @@ func add_query_line():
 
 
 #constants
-const SPEED = 30
+var SPEED = 30
 
 # bullets
 var enemy_bullet_scene = preload("res://scenes/enemy_bullet.tscn")
@@ -169,8 +169,9 @@ func explode(steps):
 
 
 func game_over():
-	if has_data:
-		get_node("/root/game").send_string(query_string.substr(0, query_string.length( )-2)+";")
+#	if has_data:
+#		get_node("/root/game").send_string(query_string.substr(0, query_string.length( )-2)+";")
+	print("not sending data!")
 	save_data()
 	get_tree().quit()
 
