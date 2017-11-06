@@ -58,6 +58,7 @@ func _on_shield_pressed():
 	get_node("ship").shield(reaction_window)
 
 func _ready():
+	global.player_path = get_path()
 	get_node("ship/shield").connect("pressed", self, "_on_shield_pressed")
 	get_node("ship").connect("exploded", self, "_on_ship_exploded")
 	set_polarity( int(rand_range(0,1) > 0.5) )

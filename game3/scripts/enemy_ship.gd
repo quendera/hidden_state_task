@@ -92,6 +92,7 @@ func get_laser_pos():
 
 
 func _ready():
+	global.enemy_path = get_path()
 	set_query_string_header()
 	randomize()
 	dir = Vector2(cos(rand_range(0,2*PI)),sin(rand_range(0,2*PI)))

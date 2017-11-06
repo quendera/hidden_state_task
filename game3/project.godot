@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="Schroedinger shooting"
-run/main_scene="res://scenes/level1.tscn"
+run/main_scene="res://scenes/game.tscn"
 icon="res://icon.png"
 main_scene="res://scenes/level1.tscn"
 name="two_state_shooting"
