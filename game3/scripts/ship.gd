@@ -63,6 +63,7 @@ func _process(delta):
 
 
 
+
 func explode():
 	if not exploding:
 		$anim.play("explosion")

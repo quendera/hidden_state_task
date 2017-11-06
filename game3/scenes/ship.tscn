@@ -209,9 +209,8 @@ rotation = -1.5708
 scale = Vector2( 0.35, 0.35 )
 frames = ExtResource( 3 )
 animation = "default"
-frame = 3
 playing = true
-_sections_unfolded = [ "Material", "Visibility" ]
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
 __meta__ = {
 "_edit_lock_": true
 }
@@ -323,11 +322,13 @@ bus = "Master"
 
 visible = false
 material = SubResource( 7 )
-position = Vector2( 15.5037, -708.551 )
+position = Vector2( 7.74258, -383.828 )
 rotation = -1.5708
+scale = Vector2( 0.5, 0.5 )
 z = 1
 frames = SubResource( 8 )
 animation = "default"
+frame = 11
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z" ]
 
 [connection signal="animation_finished" from="anim" to="." method="_on_anim_finished"]

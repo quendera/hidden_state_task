@@ -1,6 +1,5 @@
 extends Sprite
 
-
 # class member variables go here, for example:
 const SPEED = 15
 
