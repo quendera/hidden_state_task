@@ -47,6 +47,7 @@ var enemy_bullet_instance
 
 # time changing attributes
 var polarity = int(rand_range(0,1) > 0.5)
+const PROBABILITIES = [0.1, 0.3, 0.4, 0.45, 0.55, 0.6, 0.7, 0.9]
 var probability_blue = 0.5
 var shooting = false
 
@@ -192,8 +193,8 @@ func _on_anim_finished(name):
 	$lost_life.set_text("")
 	if life <= 0:
 		game_over()
-	probability_blue = 0.05+0.1*(randi()%10)
-	polarity = int(rand_range(0,1) < probability_blue + global.bias_blue)
+	probability_blue = PROBABILITIES[randi()%8]
+	polarity = int(probability_blue > 0.5)
 	$frames.get_material().set_shader_param("x", polarity)
 	begin_attack()
 

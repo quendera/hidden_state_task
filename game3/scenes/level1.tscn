@@ -6,10 +6,6 @@
 
 [node name="game" parent="." instance=ExtResource( 1 )]
 
-[node name="frames" parent="game/enemy/enemy_ship"]
-
-frame = 1
-
 
 [editable path="game"]
 [editable path="game/enemy"]

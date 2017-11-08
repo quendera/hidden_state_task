@@ -49,9 +49,8 @@ func set_polarity(new_polarity):
 #	button_pressed = false
 #
 func _on_ship_exploded(enemy_polarity):
-	if not (polarity == enemy_polarity):
-		get_node("ship/bullet_hit").play()
-		explode_ship()
+	get_node("ship/bullet_hit").play()
+	explode_ship()
 
 
 func _on_shield_pressed():
