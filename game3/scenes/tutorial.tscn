@@ -33,10 +33,6 @@ visible = false
 
 visible = false
 
-[node name="enemy" parent="game"]
-
-editor/display_folded = true
-
 [node name="enemy_ship" parent="game/enemy"]
 
 position = Vector2( 982.172, 266.993 )

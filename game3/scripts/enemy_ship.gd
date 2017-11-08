@@ -133,6 +133,7 @@ func _on_bullet_hit(steps):
 	$reaction_window.start()
 	global.player.reaction_window = true
 	global.player.reaction_chosen = "none"
+	global.player.get_node("ship").combo = false
 	global.player.fast_reaction = false
 	life -= lost_life
 	if - lost_life > 0:

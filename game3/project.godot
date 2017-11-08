@@ -12,7 +12,6 @@ config_version=3
 
 config/name="Schroedinger shooting"
 run/main_scene="res://scenes/level1.tscn"
-run/disable_stdout=true
 icon="res://icon.png"
 name="two_state_shooting"
 

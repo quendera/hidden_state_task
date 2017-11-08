@@ -73,7 +73,6 @@ func _on_anim_finished( name ):
 	if name == "laser" and combo:
 		$anim.play("combo")
 		get_parent().set_hits(get_parent().hits - 10)
-		combo = false
 
 
 func _on_anim_explosion_animation_started( name ):

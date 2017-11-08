@@ -8,7 +8,7 @@
 
 [node name="frames" parent="game/enemy/enemy_ship"]
 
-frame = 4
+frame = 1
 
 
 [editable path="game"]

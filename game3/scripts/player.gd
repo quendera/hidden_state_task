@@ -109,7 +109,7 @@ func explode_ship(damage = 1):
 	set_hits(hits+damage)
 
 func execute_reaction(name):
-	if name == "combo":
+	if name == "combo" and not $ship.active:
 		$ship.combo = true
-	elif name == "shield":
+	elif name == "shield" and not $ship.combo:
 		$ship.active = true
