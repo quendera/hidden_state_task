@@ -88,6 +88,7 @@ func _process(delta):
 	shooting_pressed = button_pressed and (OS.get_ticks_msec() > time0+FLIP_TIME)
 	if shooting_pressed and ready2shoot and not get_node("ship").active:
 		if not shooting:
+			global.enemy.shooting = false
 			spawn_bullet(polarity)
 			shooting = true
 		set_charge(clamp(charge+delta*charging_velocity, 0, 100))

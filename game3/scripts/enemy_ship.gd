@@ -51,6 +51,7 @@ const PROBABILITIES = [0.1, 0.3, 0.4, 0.45, 0.55, 0.6, 0.7, 0.9]
 var probability_blue = 0.5
 var shooting = false
 
+
 # navigate
 var dir
 var pos
@@ -76,7 +77,8 @@ const attack_amount = 3
 var next_attack = randi() % 2
 const attack_durations = [2, 1]
 const attack_frequency = [0.03, 0.1]
-
+var num_rays = 3
+var attack_start_time = 0
 
 # signals
 
@@ -213,12 +215,8 @@ func _on_shooting_timeout():
 func begin_attack():
 	next_attack = (randi() % 2)
 	shooting = true
+	attack_start_time = OS.get_ticks_msec()
 	$shooting.set_wait_time(attack_frequency[next_attack])
-	$end_attack.set_wait_time(attack_durations[next_attack])
-	$end_attack.start()
-
-func _on_end_attack_timeout():
-	shooting = false
 
 
 func attack(attack_number):
@@ -227,10 +225,11 @@ func attack(attack_number):
 	elif attack_number == 1:
 		attack1()
 
+
 func get_num_rays(t):
 	if t > 0.78:
 		return 3
-	elif t > 0.61:
+	elif t > 0.55:
 		return 0
 	elif t > 0.39:
 		return 2
@@ -240,8 +239,7 @@ func get_num_rays(t):
 		return 1
 
 func attack0():
-	var num_rays = get_num_rays($end_attack.get_time_left()/
-	$end_attack.get_wait_time())
+	num_rays = get_num_rays(((OS.get_ticks_msec() - attack_start_time) % 2000)/2000.0)
 	for i in range(num_rays):
 		var angle = PI+0.2*PI*(i-0.5*(num_rays-1))+rand_range(-0.2,0.2)
 		var shooting_dir = Vector2(cos(angle),sin(angle))
@@ -262,5 +260,4 @@ func attack1():
 
 func _on_reaction_window_timeout():
 	global.player.reaction_window = false
-	$end_attack.stop()
-	shooting = false
+
