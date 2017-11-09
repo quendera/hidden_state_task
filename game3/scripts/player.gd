@@ -76,7 +76,7 @@ func reaction(event, name):
 
 
 func _input(event):
-	if event.is_action_pressed("polarity"):
+	if event.is_action_pressed("polarity") and not shooting:
 		set_polarity(1-polarity)
 		get_node("sound_polarity").play()
 	reaction(event, "shield")
@@ -86,7 +86,7 @@ func _process(delta):
 #shoot
 	button_pressed = Input.is_action_pressed("attack")
 	shooting_pressed = button_pressed and (OS.get_ticks_msec() > time0+FLIP_TIME)
-	if shooting_pressed and ready2shoot and not get_node("ship").active:
+	if shooting_pressed and ready2shoot:
 		if not shooting:
 			global.enemy.shooting = false
 			spawn_bullet(polarity)

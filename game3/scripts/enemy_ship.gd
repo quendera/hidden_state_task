@@ -4,10 +4,10 @@ extends Area2D
 # Data collection:
 var data = {"time":[], "polarity_shot":[], "polarity_enemy":[], "correct" : [], "steps":[],
 "fast_reaction": [], "reaction_time" : [], "reaction_chosen" : [], "probability_blue" : [],
-"bias_blue" : []}
+"bias_blue" : [], "attack_number" : []}
 var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : 1, "steps" : 0,
 "fast_reaction": 1, "reaction_time" : 0, "reaction_chosen" : "none", "probability_blue" : 0.5,
-"bias_blue" : global.bias_blue}
+"bias_blue" : global.bias_blue, "attack_number" : 0}
 
 var data_keys = data.keys()
 var query_string = "INSERT INTO testdata ("
@@ -132,6 +132,7 @@ func _on_bullet_hit(steps):
 	data_line["polarity_enemy"] = polarity
 	data_line["correct"] = int(data_line["polarity_shot"] == data_line["polarity_enemy"])
 	data_line["steps"] = steps
+	data_line["attack_number"] = next_attack
 	global.player.movement_time = 0
 	global.player.start_time =  OS.get_ticks_msec()
 	$reaction_window.start()
@@ -226,6 +227,9 @@ func _on_shooting_timeout():
 
 func begin_attack():
 	next_attack = (randi() % 3)
+	while next_attack == 1:
+		next_attack = (randi() % 3)
+#	next_attack = 2
 	shooting = true
 	attack_start_time = OS.get_ticks_msec()
 	$shooting.set_wait_time(attack_frequency[next_attack])
@@ -267,7 +271,7 @@ func attack1():
 		enemy_bullet_instance.translate(Vector2(0,180*(i-2)+offset))
 		var vec = (global.player.get_node("ship/get_hits").get_global_position() -
 		enemy_bullet_instance.get_global_position())
-		vec.x *= 0.9
+#		vec.x *= 0.9
 		enemy_bullet_instance.dir = vec.normalized()
 
 func attack2():
