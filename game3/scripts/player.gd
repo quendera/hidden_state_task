@@ -39,14 +39,14 @@ func set_polarity(new_polarity):
 	get_node("ship/frames").get_material().set_shader_param("x", new_polarity == 1)
 	get_node("ship/laser").get_material().set_shader_param("x", new_polarity == 1)
 
-#func _on_attack_button_pressed():
-#	time0 = OS.get_ticks_msec()
-#	button_pressed = true
+func _on_attack_button_pressed():
+	time0 = OS.get_ticks_msec()
+	button_pressed = true
 
-#func _on_attack_button_released():
-#	if OS.get_ticks_msec() < time0+FLIP_TIME :
-#		set_polarity(1 - polarity)
-#	button_pressed = false
+func _on_attack_button_released():
+	if OS.get_ticks_msec() < time0+FLIP_TIME :
+		set_polarity(1 - polarity)
+	button_pressed = false
 #
 func _on_ship_exploded(enemy_polarity):
 	get_node("ship/bullet_hit").play()
@@ -76,15 +76,19 @@ func reaction(event, name):
 
 
 func _input(event):
-	if event.is_action_pressed("polarity") and not shooting:
-		set_polarity(1-polarity)
-		get_node("sound_polarity").play()
+#	if event.is_action_pressed("polarity") and not shooting:
+#		set_polarity(1-polarity)
+#		get_node("sound_polarity").play()
+	if event.is_action_pressed("attack"):
+		_on_attack_button_pressed()
+	if event.is_action_released("attack"):
+		_on_attack_button_released()
 	reaction(event, "shield")
 	reaction(event, "combo")
 
 func _process(delta):
 #shoot
-	button_pressed = Input.is_action_pressed("attack")
+#	button_pressed = Input.is_action_pressed("attack")
 	shooting_pressed = button_pressed and (OS.get_ticks_msec() > time0+FLIP_TIME)
 	if shooting_pressed and ready2shoot:
 		if not shooting:
