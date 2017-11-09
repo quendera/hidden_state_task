@@ -16,6 +16,7 @@ func toggle_pause(paused):
 	get_node("../soundtrack").playing = not is_paused
 
 
+
 func _input(event):
 	if not initial_screen:
 		if event.is_action_pressed("pause"):

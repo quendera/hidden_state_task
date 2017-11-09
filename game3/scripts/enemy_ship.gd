@@ -47,7 +47,9 @@ var enemy_bullet_instance
 
 # time changing attributes
 var polarity = int(rand_range(0,1) > 0.5)
-const PROBABILITIES = [0.1, 0.3, 0.4, 0.45, 0.55, 0.6, 0.7, 0.9]
+#const PROBABILITIES = [0.1, 0.3, 0.4, 0.45, 0.55, 0.6, 0.7, 0.9]
+const ALPHA = 2
+const BETA = 2
 var probability_blue = 0.5
 var shooting = false
 
@@ -75,8 +77,7 @@ var life_sign
 var offset = 45
 const attack_amount = 3
 var next_attack = randi() % 2
-const attack_durations = [2, 1]
-const attack_frequency = [0.03, 0.1]
+const attack_frequency = [0.075, 0.1, 0.3]
 var num_rays = 3
 var attack_start_time = 0
 
@@ -195,10 +196,21 @@ func _on_anim_finished(name):
 	$lost_life.set_text("")
 	if life <= 0:
 		game_over()
-	probability_blue = PROBABILITIES[randi()%8]
+	probability_blue = sample() #PROBABILITIES[randi()%8]
 	polarity = int(probability_blue > 0.5)
 	$frames.get_material().set_shader_param("x", polarity)
 	begin_attack()
+
+func beta(q):
+	return float(pow(q, ALPHA -1)*pow(1-q, BETA -1))
+
+func sample():
+	var attempt = rand_range(0,1)
+	while rand_range(0, 1) > beta(attempt)/beta(0.5):
+		attempt = rand_range(0,1)
+	return attempt
+
+
 
 ### ATTACK ###
 
@@ -213,7 +225,7 @@ func _on_shooting_timeout():
 		attack(next_attack)
 
 func begin_attack():
-	next_attack = (randi() % 2)
+	next_attack = (randi() % 3)
 	shooting = true
 	attack_start_time = OS.get_ticks_msec()
 	$shooting.set_wait_time(attack_frequency[next_attack])
@@ -224,22 +236,24 @@ func attack(attack_number):
 		attack0()
 	elif attack_number == 1:
 		attack1()
+	elif attack_number == 2:
+		attack2()
 
+func get_num_rays():
+	return get_num_rays_norm(((OS.get_ticks_msec() - attack_start_time) % 2000)/2000.0)
 
-func get_num_rays(t):
-	if t > 0.78:
+func get_num_rays_norm(t):
+	if t > 0.85:
 		return 3
-	elif t > 0.55:
+	elif t > 0.5:
 		return 0
-	elif t > 0.39:
+	elif t > 0.35:
 		return 2
-	elif t > 0.22:
-		return 0
 	else:
-		return 1
+		return 0
 
 func attack0():
-	num_rays = get_num_rays(((OS.get_ticks_msec() - attack_start_time) % 2000)/2000.0)
+	num_rays = get_num_rays()
 	for i in range(num_rays):
 		var angle = PI+0.2*PI*(i-0.5*(num_rays-1))+rand_range(-0.2,0.2)
 		var shooting_dir = Vector2(cos(angle),sin(angle))
@@ -248,14 +262,20 @@ func attack0():
 
 func attack1():
 	offset = -offset
-	for i in range(5):
+	for i in range(1, 1+ get_num_rays()):
 		spawn_enemy_bullet(Vector2(-1,0))
 		enemy_bullet_instance.translate(Vector2(0,180*(i-2)+offset))
 		var vec = (global.player.get_node("ship/get_hits").get_global_position() -
 		enemy_bullet_instance.get_global_position())
-		vec.x *= 0.8
+		vec.x *= 0.9
 		enemy_bullet_instance.dir = vec.normalized()
 
+func attack2():
+	for i in range(1, 4):
+		var shooting_offset = sin(OS.get_ticks_msec()/float(1000))*0.5
+		var angle = shooting_offset+PI+PI*(i-2)/float(5)
+		var shooting_dir = Vector2(cos(angle),sin(angle))
+		spawn_enemy_bullet(shooting_dir)
 
 
 func _on_reaction_window_timeout():
