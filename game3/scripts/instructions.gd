@@ -10,11 +10,13 @@ func _ready():
 
 Arrows : move
 
-W      : shoot
+X      : shoot (long press)
 
-Q      : shield
+X      : polarity (short press)
 
-E      : combo
+Z      : shield
+
+C      : combo
 
 Space  : blue / red
 

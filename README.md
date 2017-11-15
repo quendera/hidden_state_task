@@ -21,13 +21,13 @@ Enemy bullets damage your ship. Avoid them as much as possible. A certain amount
 
 `←`, `↑`, `↓`, `→` : move.
 
-`X` : shoot (the longer you press, the more damaging/energetic the shot)
+`X` : shoot (long press)
+
+`X` : polarity (short press)
 
 `Z` : shield (only available after shooting)
 
 `C` : combo button (for extra damage, only after successful shooting)
-
-`Space` : change polarity (blue/red).
 
 `P` : pause/unpause.
 
