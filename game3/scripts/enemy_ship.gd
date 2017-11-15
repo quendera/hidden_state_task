@@ -1,15 +1,22 @@
 extends Area2D
 
+# time changing attributes
+var polarity = int(rand_range(0,1) > 0.5)
+#const PROBABILITIES = [0.1, 0.3, 0.4, 0.45, 0.55, 0.6, 0.7, 0.9]
+const ALPHA = 2
+const BETA = 2
+var probability_blue = 0.5
+var shooting = false setget set_shooting
 
 # Data collection:
 var data = {"time":[], "polarity_shot":[], "polarity_enemy":[], "correct" : [], "steps":[],
 "fast_reaction": [], "reaction_time" : [], "reaction_chosen" : [], "probability_blue" : [],
 "probability_neutral" : [], "bias_blue" : [], "attack_number" : [], "bullet_0" :[], "bullet_1" : [], "bullet_2" : [],
-"choice_time" : []}
+"choice_time" : [], "ALPHA" : [], "BETA" : []}
 var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : 1, "steps" : 0,
 "fast_reaction": 1, "reaction_time" : 0, "reaction_chosen" : "none", "probability_blue" : 0.5,
 "probability_neutral" : 0.0, "bias_blue" : global.bias_blue, "attack_number" : 0, "bullet_0" : 0, "bullet_1" : 0, "bullet_2" : 0,
-"choice_time" : 0}
+"choice_time" : 0, "ALPHA" : ALPHA, "BETA" : BETA}
 
 var data_keys = data.keys()
 var query_string = "INSERT INTO testdata ("
@@ -46,14 +53,9 @@ var SPEED = 30
 # bullets
 var enemy_bullet_scene = preload("res://scenes/enemy_bullet.tscn")
 var enemy_bullet_instance
+var bullet_count = [0, 0, 0]
 
-# time changing attributes
-var polarity = int(rand_range(0,1) > 0.5)
-#const PROBABILITIES = [0.1, 0.3, 0.4, 0.45, 0.55, 0.6, 0.7, 0.9]
-const ALPHA = 2
-const BETA = 2
-var probability_blue = 0.5
-var shooting = false setget set_shooting
+
 
 func set_shooting(new_shooting):
 	if shooting and not new_shooting:
@@ -141,6 +143,8 @@ func _on_bullet_hit(steps):
 	data_line["steps"] = steps
 	data_line["attack_number"] = next_attack
 	data_line["choice_time"] = attack_end_time - attack_start_time
+	for i in range(3):
+		data_line["bullet_"+str(i)] = bullet_count[i]
 	global.player.movement_time = 0
 	global.player.start_time =  OS.get_ticks_msec()
 	$reaction_window.start()
@@ -202,6 +206,7 @@ func _on_anim_finished(name):
 	global.player.ready2shoot = true
 	global.player.get_node("ship").active = false
 	global.player.charge = 0
+	bullet_count = [0, 0, 0]
 	$lost_life.set_text("")
 	if life <= 0:
 		game_over()
@@ -225,8 +230,10 @@ func sample():
 
 func spawn_enemy_bullet(dir):
 	enemy_bullet_instance = enemy_bullet_scene.instance()
-	enemy_bullet_instance.init(dir, int(rand_range(0,1) < probability_blue))
+	var bullet_polarity = int(rand_range(0,1) < probability_blue)
+	enemy_bullet_instance.init(dir, bullet_polarity)
 	enemy_bullet_instance.global_position = $shoot_from.global_position
+	bullet_count[bullet_polarity] += 1
 	get_parent().add_child(enemy_bullet_instance)
 
 func _on_shooting_timeout():
