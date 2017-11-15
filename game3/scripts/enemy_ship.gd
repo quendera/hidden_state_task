@@ -6,16 +6,19 @@ var polarity = int(rand_range(0,1) > 0.5)
 const ALPHA = 2
 const BETA = 2
 var probability_blue = 0.5
+var probability_neutral = 0.3
 var shooting = false setget set_shooting
 
 # Data collection:
 var data = {"time":[], "polarity_shot":[], "polarity_enemy":[], "correct" : [], "steps":[],
 "fast_reaction": [], "reaction_time" : [], "reaction_chosen" : [], "probability_blue" : [],
-"probability_neutral" : [], "bias_blue" : [], "attack_number" : [], "bullet_0" :[], "bullet_1" : [], "bullet_2" : [],
+"probability_neutral" : [], "bias_blue" : [], "attack_number" : [],
+"bullet_0" :[], "bullet_1" : [], "bullet_2" : [],
 "choice_time" : [], "ALPHA" : [], "BETA" : []}
 var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : 1, "steps" : 0,
 "fast_reaction": 1, "reaction_time" : 0, "reaction_chosen" : "none", "probability_blue" : 0.5,
-"probability_neutral" : 0.0, "bias_blue" : global.bias_blue, "attack_number" : 0, "bullet_0" : 0, "bullet_1" : 0, "bullet_2" : 0,
+"probability_neutral" : 0.0, "bias_blue" : global.bias_blue, "attack_number" : 0,
+"bullet_0" : 0, "bullet_1" : 0, "bullet_2" : 0,
 "choice_time" : 0, "ALPHA" : ALPHA, "BETA" : BETA}
 
 var data_keys = data.keys()
@@ -138,6 +141,7 @@ func _on_bullet_hit(steps):
 	data_line["time"] = OS.get_ticks_msec()
 	data_line["polarity_shot"] = global.player.polarity
 	data_line["probability_blue"] = probability_blue
+	data_line["probability_neutral"] = probability_neutral
 	data_line["polarity_enemy"] = polarity
 	data_line["correct"] = int(data_line["polarity_shot"] == data_line["polarity_enemy"])
 	data_line["steps"] = steps
@@ -231,6 +235,8 @@ func sample():
 func spawn_enemy_bullet(dir):
 	enemy_bullet_instance = enemy_bullet_scene.instance()
 	var bullet_polarity = int(rand_range(0,1) < probability_blue)
+	if rand_range(0,1) < probability_neutral:
+		bullet_polarity = 2
 	enemy_bullet_instance.init(dir, bullet_polarity)
 	enemy_bullet_instance.global_position = $shoot_from.global_position
 	bullet_count[bullet_polarity] += 1

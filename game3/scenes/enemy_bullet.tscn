@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/Images/Lasers/ball_green_big2.png" type="Texture" id=9]
 [ext_resource path="res://assets/Images/Lasers/ball_green_big3.png" type="Texture" id=10]
 
-[sub_resource type="SpriteFrames" id=4]
+[sub_resource type="SpriteFrames" id=1]
 
 animations = [ {
 "frames": [ ExtResource( 2 ), ExtResource( 3 ), ExtResource( 4 ) ],
@@ -29,7 +29,7 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="SpriteFrames" id=5]
+[sub_resource type="SpriteFrames" id=3]
 
 animations = [ {
 "frames": [ ExtResource( 8 ), ExtResource( 9 ), ExtResource( 10 ) ],
@@ -38,12 +38,12 @@ animations = [ {
 "speed": 5.0
 } ]
 
-[sub_resource type="CircleShape2D" id=3]
+[sub_resource type="CircleShape2D" id=4]
 
 custom_solver_bias = 0.0
 radius = 10.0
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 
 resource_name = "disappear"
 length = 0.3
@@ -108,10 +108,11 @@ __meta__ = {
 
 [node name="frames0" type="AnimatedSprite" parent="."]
 
+visible = false
 light_mask = 2
 position = Vector2( 2.43457, -5.97989 )
 scale = Vector2( 0.510423, 0.510423 )
-frames = SubResource( 4 )
+frames = SubResource( 1 )
 animation = "default"
 _sections_unfolded = [ "Material", "Visibility" ]
 __meta__ = {
@@ -120,6 +121,7 @@ __meta__ = {
 
 [node name="frames1" type="AnimatedSprite" parent="."]
 
+visible = false
 light_mask = 2
 position = Vector2( 2.43457, -5.97989 )
 scale = Vector2( 0.510423, 0.510423 )
@@ -135,7 +137,7 @@ __meta__ = {
 visible = false
 position = Vector2( 2.36514, -6.41972 )
 scale = Vector2( 0.510423, 0.510423 )
-frames = SubResource( 5 )
+frames = SubResource( 3 )
 animation = "default"
 _sections_unfolded = [ "Transform" ]
 __meta__ = {
@@ -147,7 +149,7 @@ __meta__ = {
 visible = false
 position = Vector2( 2.80307, -6.21176 )
 scale = Vector2( 1.51898, 1.51898 )
-shape = SubResource( 3 )
+shape = SubResource( 4 )
 __meta__ = {
 "_edit_lock_": true
 }
@@ -157,7 +159,7 @@ __meta__ = {
 playback_process_mode = 1
 playback_default_blend_time = 0.0
 root_node = NodePath("..")
-anims/disappear = SubResource( 6 )
+anims/disappear = SubResource( 5 )
 playback/active = true
 playback/speed = 1.0
 blend_times = [  ]

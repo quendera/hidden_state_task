@@ -26,7 +26,7 @@ func _on_visibility_exit_screen():
 func init(_dir, _polarity):
 	dir = _dir
 	polarity = _polarity
-	get_node("frames"+str(1-int(polarity))).set_visible(false)
+	get_node("frames"+str(int(polarity))).set_visible(true)
 
 
 func _on_anim_animation_finished( name ):
