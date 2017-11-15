@@ -22,18 +22,18 @@
 [ext_resource path="res://assets/Sounds/tiny_explosion3.wav" type="AudioStream" id=20]
 [ext_resource path="res://assets/Sounds/jet.wav" type="AudioStream" id=21]
 [ext_resource path="res://resources/redblueshader.tres" type="Shader" id=22]
-[ext_resource path="res://assets/Images/friendlylaser/Layer.png" type="Texture" id=23]
-[ext_resource path="res://assets/Images/friendlylaser/Layer #1.png" type="Texture" id=24]
-[ext_resource path="res://assets/Images/friendlylaser/Layer #2.png" type="Texture" id=25]
-[ext_resource path="res://assets/Images/friendlylaser/Layer #3.png" type="Texture" id=26]
-[ext_resource path="res://assets/Images/friendlylaser/Layer #4.png" type="Texture" id=27]
-[ext_resource path="res://assets/Images/friendlylaser/Layer #5.png" type="Texture" id=28]
-[ext_resource path="res://assets/Images/friendlylaser/Layer #6.png" type="Texture" id=29]
-[ext_resource path="res://assets/Images/friendlylaser/Layer #7.png" type="Texture" id=30]
-[ext_resource path="res://assets/Images/friendlylaser/Layer #8.png" type="Texture" id=31]
-[ext_resource path="res://assets/Images/friendlylaser/Layer #9.png" type="Texture" id=32]
-[ext_resource path="res://assets/Images/friendlylaser/Layer #10.png" type="Texture" id=33]
-[ext_resource path="res://assets/Images/friendlylaser/Layer #11.png" type="Texture" id=34]
+[ext_resource path="res://assets/Images/friendlylaser/Layer #1.png" type="Texture" id=23]
+[ext_resource path="res://assets/Images/friendlylaser/Layer #2.png" type="Texture" id=24]
+[ext_resource path="res://assets/Images/friendlylaser/Layer #3.png" type="Texture" id=25]
+[ext_resource path="res://assets/Images/friendlylaser/Layer #4.png" type="Texture" id=26]
+[ext_resource path="res://assets/Images/friendlylaser/Layer #5.png" type="Texture" id=27]
+[ext_resource path="res://assets/Images/friendlylaser/Layer #6.png" type="Texture" id=28]
+[ext_resource path="res://assets/Images/friendlylaser/Layer #7.png" type="Texture" id=29]
+[ext_resource path="res://assets/Images/friendlylaser/Layer #8.png" type="Texture" id=30]
+[ext_resource path="res://assets/Images/friendlylaser/Layer #9.png" type="Texture" id=31]
+[ext_resource path="res://assets/Images/friendlylaser/Layer #10.png" type="Texture" id=32]
+[ext_resource path="res://assets/Images/friendlylaser/Layer #11.png" type="Texture" id=33]
+[ext_resource path="res://assets/Images/friendlylaser/Layer #12.png" type="Texture" id=34]
 
 [sub_resource type="Animation" id=1]
 
@@ -220,7 +220,6 @@ rotation = -1.5708
 scale = Vector2( 0.35, 0.35 )
 frames = ExtResource( 3 )
 animation = "default"
-frame = 2
 playing = true
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 __meta__ = {
@@ -335,14 +334,17 @@ bus = "Master"
 
 visible = false
 material = SubResource( 7 )
-position = Vector2( 7.74258, -383.828 )
+position = Vector2( 12.4782, -631.846 )
 rotation = -1.5708
-scale = Vector2( 0.5, 0.5 )
+scale = Vector2( 0.8, 0.8 )
 z = 1
 frames = SubResource( 8 )
 animation = "default"
-frame = 11
+frame = 7
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z" ]
+__meta__ = {
+"_edit_lock_": true
+}
 
 [connection signal="animation_finished" from="anim" to="." method="_on_anim_finished"]
 

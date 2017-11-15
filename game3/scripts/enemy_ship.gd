@@ -4,10 +4,12 @@ extends Area2D
 # Data collection:
 var data = {"time":[], "polarity_shot":[], "polarity_enemy":[], "correct" : [], "steps":[],
 "fast_reaction": [], "reaction_time" : [], "reaction_chosen" : [], "probability_blue" : [],
-"bias_blue" : [], "attack_number" : []}
+"probability_neutral" : [], "bias_blue" : [], "attack_number" : [], "bullet_0" :[], "bullet_1" : [], "bullet_2" : [],
+"choice_time" : []}
 var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : 1, "steps" : 0,
 "fast_reaction": 1, "reaction_time" : 0, "reaction_chosen" : "none", "probability_blue" : 0.5,
-"bias_blue" : global.bias_blue, "attack_number" : 0}
+"probability_neutral" : 0.0, "bias_blue" : global.bias_blue, "attack_number" : 0, "bullet_0" : 0, "bullet_1" : 0, "bullet_2" : 0,
+"choice_time" : 0}
 
 var data_keys = data.keys()
 var query_string = "INSERT INTO testdata ("
@@ -51,8 +53,12 @@ var polarity = int(rand_range(0,1) > 0.5)
 const ALPHA = 2
 const BETA = 2
 var probability_blue = 0.5
-var shooting = false
+var shooting = false setget set_shooting
 
+func set_shooting(new_shooting):
+	if shooting and not new_shooting:
+		attack_end_time = OS.get_ticks_msec()
+	shooting = new_shooting
 
 # navigate
 var dir
@@ -80,6 +86,7 @@ var next_attack = randi() % 2
 const attack_frequency = [0.075, 0.1, 0.3]
 var num_rays = 3
 var attack_start_time = 0
+var attack_end_time = 0
 
 # signals
 
@@ -133,6 +140,7 @@ func _on_bullet_hit(steps):
 	data_line["correct"] = int(data_line["polarity_shot"] == data_line["polarity_enemy"])
 	data_line["steps"] = steps
 	data_line["attack_number"] = next_attack
+	data_line["choice_time"] = attack_end_time - attack_start_time
 	global.player.movement_time = 0
 	global.player.start_time =  OS.get_ticks_msec()
 	$reaction_window.start()

@@ -2,6 +2,8 @@ extends Node2D
 
 var is_paused = true
 var initial_screen = true
+var latest_pos = 0
+
 
 
 func _ready():
@@ -13,7 +15,11 @@ func toggle_pause(paused):
 	is_paused = not paused
 	get_tree().set_pause(is_paused)
 	get_node("../CanvasLayer/shade").set_visible(is_paused)
-	get_node("../soundtrack").playing = not is_paused
+	if is_paused:
+		latest_pos = get_node("../soundtrack").get_playback_position( ) 
+		get_node("../soundtrack").stop()
+	else:
+		get_node("../soundtrack").play(latest_pos)
 
 
 
