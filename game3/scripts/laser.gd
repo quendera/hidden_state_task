@@ -12,7 +12,8 @@ func activate(polarity):
 
 func explode():
 	if not global.player.get_node("ship").active:
-		global.player.explode_ship(20)
+		global.player.explode_ship(0)
+		global.enemy.take_life_points(-30)
 		get_node("sound_laser_hit").play()
 
 func retract():

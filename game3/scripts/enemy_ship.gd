@@ -156,14 +156,16 @@ func _on_bullet_hit(steps):
 	global.player.reaction_chosen = "none"
 	global.player.get_node("ship").combo = false
 	global.player.fast_reaction = false
-	life -= lost_life
-	if - lost_life > 0:
+	take_life_points(lost_life)
+	get_node("frames").get_material().set_shader_param("hidden", false)
+
+func take_life_points(_lost_life):
+	life -= _lost_life
+	if - _lost_life > 0:
 		life_sign = "+"
 	else:
 		life_sign = ""
-	get_node("lost_life").set_text(life_sign+str(int(-lost_life)))
-	get_node("frames").get_material().set_shader_param("hidden", false)
-
+	get_node("lost_life").set_text(life_sign+str(int(-_lost_life)))
 
 
 func lose_life(steps, correct):
