@@ -20,3 +20,4 @@ func get_player():
 var bias_blue = 0.0
 var bonus = "blue"
 var lasers = true
+var time_pressure = 1

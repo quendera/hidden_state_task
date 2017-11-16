@@ -235,9 +235,9 @@ func sample():
 
 ### ATTACK ###
 
-func spawn_enemy_bullet(dir):
+func spawn_enemy_bullet(dir, bullet_polarity = int(rand_range(0,1) < probability_blue)):
 	enemy_bullet_instance = enemy_bullet_scene.instance()
-	var bullet_polarity = int(rand_range(0,1) < probability_blue)
+#	var bullet_polarity = 
 	if rand_range(0,1) < probability_neutral:
 		bullet_polarity = 2
 	enemy_bullet_instance.init(dir, bullet_polarity)
@@ -266,6 +266,8 @@ func attack(attack_number):
 		attack1()
 	elif attack_number == 2:
 		attack2()
+	if global.time_pressure ==1:
+		time_pressure_attack()
 
 func get_num_rays():
 	return get_num_rays_norm(((OS.get_ticks_msec() - attack_start_time) % 2000)/2000.0)
@@ -293,8 +295,8 @@ func attack1():
 	for i in range(1, 1+ get_num_rays()):
 		spawn_enemy_bullet(Vector2(-1,0))
 		enemy_bullet_instance.translate(Vector2(0,180*(i-2)+offset))
-		var vec = (global.player.get_node("ship/get_hits").get_global_position() -
-		enemy_bullet_instance.get_global_position())
+		var vec = (global.player.get_node("ship/get_hits").global_position -
+		enemy_bullet_instance.global_position)
 #		vec.x *= 0.9
 		enemy_bullet_instance.dir = vec.normalized()
 
@@ -304,6 +306,21 @@ func attack2():
 		var angle = shooting_offset+PI+PI*(i-2)/float(5)
 		var shooting_dir = Vector2(cos(angle),sin(angle))
 		spawn_enemy_bullet(shooting_dir)
+#	for i in range(1, 4):
+#		var shooting_offset = sin(OS.get_ticks_msec()/float(1000))*0.5
+#		var angle = shooting_offset+PI+PI*(i-2)/float(5)
+#		var shooting_dir = Vector2(cos(angle),sin(angle))
+#		spawn_enemy_bullet(shooting_dir)
+
+func time_pressure_attack():
+	pass
+#	offset = -offset
+#	for i in range(1, 1+ get_num_rays()):
+#		spawn_enemy_bullet(Vector2(-1,0), 2)
+#		enemy_bullet_instance.translate(Vector2(0,180*(i-2)+offset))
+#		var vec = (global.player.get_node("ship/get_hits").global_position -
+#		enemy_bullet_instance.global_position)
+#		enemy_bullet_instance.dir = vec.normalized()
 
 
 func _on_reaction_window_timeout():
