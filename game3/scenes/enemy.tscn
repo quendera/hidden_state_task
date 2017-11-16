@@ -28,9 +28,9 @@ anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 1211.0
-margin_top = 24.0
+margin_top = 27.0
 margin_right = 1262.0
-margin_bottom = 68.0
+margin_bottom = 71.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 mouse_filter = 2
@@ -49,7 +49,7 @@ __meta__ = {
 
 [node name="boss_life" parent="layer" instance=ExtResource( 3 )]
 
-position = Vector2( 861.602, 17.74 )
-scale = Vector2( 0.356486, 0.356486 )
+position = Vector2( 596.208, 20.7354 )
+scale = Vector2( 0.632906, 0.383853 )
 
 

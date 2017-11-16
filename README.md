@@ -12,9 +12,11 @@ When attacked, the enemy waveform collapses and the spaceship assumes a full red
 If your attack is of the same polarity as the enemy, the corresponding damage is inflicted. Otherwise, the enemy can use the energy of the attack to gain back health points.
 After the attack, the enemy returns to an unknown superposition state.
 
-In case of incorrect attack, the enemy will use your energy against you, unleashing a powerful laser. There is no escape: you can only protect yourself by warping space-time around you with your shield. In case of successful attack, inflict extra damage with your own laser combo attack.
+In case of successful attack, you can inflict extra damage with your own laser combo attack.
 
-Enemy bullets damage your ship. Avoid them as much as possible. A certain amount of hits will result in your doom.
+Be careful however, your enemy is not without resources. In case of incorrect attack, it will use your energy against you, unleashing a powerful laser. There is no escape: you can only protect yourself by warping space-time around you with your shield. 
+
+Quantum fights obey the conservation of energy principle. When enemy bullets, just like the enemy laser, impact with you ship, the energy that you lose is regained by the enemy. Avoid enemy bullets as much as possible.
 
 
 ## Controls

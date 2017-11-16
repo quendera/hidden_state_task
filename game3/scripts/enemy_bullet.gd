@@ -18,6 +18,7 @@ func _ready():
 func _on_enemy_bullet_area_enter(area):
 	if area.get_name() == "ship" and not area.active and not harmless:
 		area.emit_signal("exploded", polarity)
+		global.enemy.take_life_points(-5)
 		queue_free()
 
 func _on_visibility_exit_screen():

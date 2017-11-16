@@ -76,7 +76,7 @@ const high_y = 500
 
 
 # life
-const max_life = 2000
+const max_life = 3000
 var life = max_life
 const die_vec = [0, 6, 12, 18, 24, 30]
 const regenerate_vec = [0, 6, 15, 29, 53, 107]
@@ -156,16 +156,17 @@ func _on_bullet_hit(steps):
 	global.player.reaction_chosen = "none"
 	global.player.get_node("ship").combo = false
 	global.player.fast_reaction = false
-	take_life_points(lost_life)
+	take_life_points(lost_life, true)
 	get_node("frames").get_material().set_shader_param("hidden", false)
 
-func take_life_points(_lost_life):
+func take_life_points(_lost_life, show_value = false):
 	life -= _lost_life
-	if - _lost_life > 0:
-		life_sign = "+"
-	else:
-		life_sign = ""
-	get_node("lost_life").set_text(life_sign+str(int(-_lost_life)))
+	if show_value:
+		if - _lost_life > 0:
+			life_sign = "+"
+		else:
+			life_sign = ""
+		get_node("lost_life").set_text(life_sign+str(int(-_lost_life)))
 
 
 func lose_life(steps, correct):
