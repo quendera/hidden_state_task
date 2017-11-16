@@ -14,12 +14,12 @@ var data = {"time":[], "polarity_shot":[], "polarity_enemy":[], "correct" : [], 
 "fast_reaction": [], "reaction_time" : [], "reaction_chosen" : [], "probability_blue" : [],
 "probability_neutral" : [], "bias_blue" : [], "attack_number" : [],
 "bullet_0" :[], "bullet_1" : [], "bullet_2" : [],
-"choice_time" : [], "ALPHA" : [], "BETA" : []}
+"choice_time" : [], "time_pressure" : [], "ALPHA" : [], "BETA" : []}
 var data_line = {"time":0, "polarity_shot":0, "polarity_enemy":0, "correct" : 1, "steps" : 0,
 "fast_reaction": 1, "reaction_time" : 0, "reaction_chosen" : "none", "probability_blue" : 0.5,
 "probability_neutral" : 0.0, "bias_blue" : global.bias_blue, "attack_number" : 0,
 "bullet_0" : 0, "bullet_1" : 0, "bullet_2" : 0,
-"choice_time" : 0, "ALPHA" : ALPHA, "BETA" : BETA}
+"choice_time" : 0, "time_pressure" : 0, "ALPHA" : ALPHA, "BETA" : BETA}
 
 var data_keys = data.keys()
 var query_string = "INSERT INTO testdata ("
@@ -149,6 +149,7 @@ func _on_bullet_hit(steps):
 	data_line["choice_time"] = attack_end_time - attack_start_time
 	for i in range(3):
 		data_line["bullet_"+str(i)] = bullet_count[i]
+	data_line["time_pressure"] = global.time_pressure
 	global.player.movement_time = 0
 	global.player.start_time =  OS.get_ticks_msec()
 	$reaction_window.start()
@@ -220,6 +221,8 @@ func _on_anim_finished(name):
 	probability_blue = sample() #PROBABILITIES[randi()%8]
 	polarity = int(probability_blue > 0.5)
 	$frames.get_material().set_shader_param("x", polarity)
+	if life < max_life*0.4:
+		global.time_pressure = 1
 	begin_attack()
 
 func beta(q):
@@ -266,8 +269,6 @@ func attack(attack_number):
 		attack1()
 	elif attack_number == 2:
 		attack2()
-	if global.time_pressure ==1:
-		time_pressure_attack()
 
 func get_num_rays():
 	return get_num_rays_norm(((OS.get_ticks_msec() - attack_start_time) % 2000)/2000.0)
@@ -288,6 +289,11 @@ func attack0():
 		var angle = PI+0.2*PI*(i-0.5*(num_rays-1))+rand_range(-0.2,0.2)
 		var shooting_dir = Vector2(cos(angle),sin(angle))
 		spawn_enemy_bullet(shooting_dir)
+	if global.time_pressure == 1:
+		for i in range(num_rays):
+			var angle = PI+0.2*PI*(i-0.5*(num_rays-1)+0.5)+rand_range(-0.2,0.2)
+			var shooting_dir = Vector2(cos(angle),sin(angle))
+			spawn_enemy_bullet(shooting_dir, 2)
 
 
 func attack1():
@@ -306,22 +312,12 @@ func attack2():
 		var angle = shooting_offset+PI+PI*(i-2)/float(5)
 		var shooting_dir = Vector2(cos(angle),sin(angle))
 		spawn_enemy_bullet(shooting_dir)
-#	for i in range(1, 4):
-#		var shooting_offset = sin(OS.get_ticks_msec()/float(1000))*0.5
-#		var angle = shooting_offset+PI+PI*(i-2)/float(5)
-#		var shooting_dir = Vector2(cos(angle),sin(angle))
-#		spawn_enemy_bullet(shooting_dir)
-
-func time_pressure_attack():
-	pass
-#	offset = -offset
-#	for i in range(1, 1+ get_num_rays()):
-#		spawn_enemy_bullet(Vector2(-1,0), 2)
-#		enemy_bullet_instance.translate(Vector2(0,180*(i-2)+offset))
-#		var vec = (global.player.get_node("ship/get_hits").global_position -
-#		enemy_bullet_instance.global_position)
-#		enemy_bullet_instance.dir = vec.normalized()
-
+	if global.time_pressure == 1:
+		for i in range(1, 3):
+			var shooting_offset = sin(OS.get_ticks_msec()/float(1000))*0.5
+			var angle = shooting_offset+PI+PI*(i+0.5-2)/float(5)
+			var shooting_dir = Vector2(cos(angle),sin(angle))
+			spawn_enemy_bullet(shooting_dir, 2)
 
 func _on_reaction_window_timeout():
 	global.player.reaction_window = false
