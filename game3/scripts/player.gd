@@ -29,7 +29,7 @@ func set_charge(new_charge):
 		bullet_instance.steps = steps
 	get_node("layer/powerup/bars").set_frame(steps)
 
-var charging_velocity = 100
+var charging_velocity = 60
 
 var polarity setget set_polarity
 func set_polarity(new_polarity):
