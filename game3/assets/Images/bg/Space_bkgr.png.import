@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/Space_bkgr.png-b5aa4690ce0672bf9c47089833006726.stex"
 
+[deps]
+
+source_file="res://assets/Images/bg/Space_bkgr.png"
+source_md5="08f5d1cc9b4f306e654d516dedbee679"
+
+dest_files=[ "res://.import/Space_bkgr.png-b5aa4690ce0672bf9c47089833006726.stex" ]
+dest_md5="e5769a2a02ab581f3e22db77737b7f34"
+
 [params]
 
 compress/mode=0

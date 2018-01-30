@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/Layer #7.png-0badda16777a78b9c29ac91042ee6e9f.stex"
 
+[deps]
+
+source_file="res://assets/Images/friendlylaser/Layer #7.png"
+source_md5="6de15aa0358217e591431a1e8f2880cf"
+
+dest_files=[ "res://.import/Layer #7.png-0badda16777a78b9c29ac91042ee6e9f.stex" ]
+dest_md5="40718dff6005646b3cd750fbb4c74f30"
+
 [params]
 
 compress/mode=0

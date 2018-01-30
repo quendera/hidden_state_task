@@ -4,6 +4,14 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/8bit_bomb_explosion.wav-3053ed73f868003f88e32d49d091b773.sample"
 
+[deps]
+
+source_file="res://assets/Sounds/8bit_bomb_explosion.wav"
+source_md5="2a1f123e9f6a308a3f0ca7cc57848e31"
+
+dest_files=[ "res://.import/8bit_bomb_explosion.wav-3053ed73f868003f88e32d49d091b773.sample" ]
+dest_md5="227aa8139987cdb494adf887c74d1c96"
+
 [params]
 
 force/8_bit=false

@@ -4,6 +4,14 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/burst_fire-old2.wav-76598f73c070dd49987b87a332ee4c01.sample"
 
+[deps]
+
+source_file="res://assets/Sounds/burst_fire-old2.wav"
+source_md5="c6172392959e45c5be982b83bddc8205"
+
+dest_files=[ "res://.import/burst_fire-old2.wav-76598f73c070dd49987b87a332ee4c01.sample" ]
+dest_md5="3ebb933328640aa8bde00c6c22e3e8a0"
+
 [params]
 
 force/8_bit=false

@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/bar5.png-52014970ddb566ceaeb53ccf0b98f8c9.stex"
 
+[deps]
+
+source_file="res://assets/Images/powerbar/bar5.png"
+source_md5="6b10b4cffffcd5de13099e114e07ca6b"
+
+dest_files=[ "res://.import/bar5.png-52014970ddb566ceaeb53ccf0b98f8c9.stex" ]
+dest_md5="dc157a47dd340eba6f7405a5f6b42507"
+
 [params]
 
 compress/mode=0

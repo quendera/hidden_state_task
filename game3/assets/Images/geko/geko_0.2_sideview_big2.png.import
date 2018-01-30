@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/geko_0.2_sideview_big2.png-613b5f5c0b08ca225d199fcabac8987b.stex"
 
+[deps]
+
+source_file="res://assets/Images/geko/geko_0.2_sideview_big2.png"
+source_md5="5be5d680025829f146074fc0c02125d9"
+
+dest_files=[ "res://.import/geko_0.2_sideview_big2.png-613b5f5c0b08ca225d199fcabac8987b.stex" ]
+dest_md5="d35b04154fa2a93a1802e764438d45d5"
+
 [params]
 
 compress/mode=0

@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/star.png-ee2f967e437ad853efd1ae98c88d2c21.stex"
 
+[deps]
+
+source_file="res://assets/Images/star/star.png"
+source_md5="72eb24239b06edc026c9b8e33e857005"
+
+dest_files=[ "res://.import/star.png-ee2f967e437ad853efd1ae98c88d2c21.stex" ]
+dest_md5="158aa3db4ebdbd642e4f39b33d4250fe"
+
 [params]
 
 compress/mode=0

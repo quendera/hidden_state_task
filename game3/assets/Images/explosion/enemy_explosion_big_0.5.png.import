@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/enemy_explosion_big_0.5.png-de763fc0945da329db15f6a52430f698.stex"
 
+[deps]
+
+source_file="res://assets/Images/explosion/enemy_explosion_big_0.5.png"
+source_md5="36d00902c3e7a380959d7691efc2b56e"
+
+dest_files=[ "res://.import/enemy_explosion_big_0.5.png-de763fc0945da329db15f6a52430f698.stex" ]
+dest_md5="148be58b684106a337df0acf08788849"
+
 [params]
 
 compress/mode=0

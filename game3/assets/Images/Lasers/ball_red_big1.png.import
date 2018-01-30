@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/ball_red_big1.png-8bad950beb8fa4d825ae0f5491f827f5.stex"
 
+[deps]
+
+source_file="res://assets/Images/Lasers/ball_red_big1.png"
+source_md5="875cd799e5b19c7f708bc39b104e9cef"
+
+dest_files=[ "res://.import/ball_red_big1.png-8bad950beb8fa4d825ae0f5491f827f5.stex" ]
+dest_md5="5a2b895218dea57fb159993f7aa5abc2"
+
 [params]
 
 compress/mode=0

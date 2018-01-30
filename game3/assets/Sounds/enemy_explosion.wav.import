@@ -4,6 +4,14 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/enemy_explosion.wav-a2295fa9c78401dd882dc19b3d772327.sample"
 
+[deps]
+
+source_file="res://assets/Sounds/enemy_explosion.wav"
+source_md5="9e69b7ceb1d3d1e9f897a1f88e6fca5c"
+
+dest_files=[ "res://.import/enemy_explosion.wav-a2295fa9c78401dd882dc19b3d772327.sample" ]
+dest_md5="d7bd1bce580249164cf4fc7eb83d28a7"
+
 [params]
 
 force/8_bit=false

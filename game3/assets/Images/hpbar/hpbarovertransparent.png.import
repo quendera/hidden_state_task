@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/hpbarovertransparent.png-09d357f090807969d5b912a2f91ad003.stex"
 
+[deps]
+
+source_file="res://assets/Images/hpbar/hpbarovertransparent.png"
+source_md5="5dfcf1567227f69972db0efb1a94e993"
+
+dest_files=[ "res://.import/hpbarovertransparent.png-09d357f090807969d5b912a2f91ad003.stex" ]
+dest_md5="006c15b3188b24f38ebf15e43583ec08"
+
 [params]
 
 compress/mode=0

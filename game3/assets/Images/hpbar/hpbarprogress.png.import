@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/hpbarprogress.png-d0c1034de8c7403cd91b345242c2d3d0.stex"
 
+[deps]
+
+source_file="res://assets/Images/hpbar/hpbarprogress.png"
+source_md5="910599f687375113b47d865ecf640945"
+
+dest_files=[ "res://.import/hpbarprogress.png-d0c1034de8c7403cd91b345242c2d3d0.stex" ]
+dest_md5="aca666dc097b71f0cd30046449b68105"
+
 [params]
 
 compress/mode=0

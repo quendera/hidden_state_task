@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/laser_blue_big4.png-636fdfe496d25203807ec08e9ac799ec.stex"
 
+[deps]
+
+source_file="res://assets/Images/laser/laser_blue_big4.png"
+source_md5="c691b6d40a924a20f2348debd1f04d35"
+
+dest_files=[ "res://.import/laser_blue_big4.png-636fdfe496d25203807ec08e9ac799ec.stex" ]
+dest_md5="be30b11e9e34c7dbdde874b763c048cb"
+
 [params]
 
 compress/mode=0

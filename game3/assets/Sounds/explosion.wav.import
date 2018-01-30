@@ -4,6 +4,14 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/explosion.wav-93e21e40027214a8688fc278084923ec.sample"
 
+[deps]
+
+source_file="res://assets/Sounds/explosion.wav"
+source_md5="00ee5cd33279c302ce444108537db941"
+
+dest_files=[ "res://.import/explosion.wav-93e21e40027214a8688fc278084923ec.sample" ]
+dest_md5="4270a83781b713ddbd716439880ad5aa"
+
 [params]
 
 force/8_bit=false

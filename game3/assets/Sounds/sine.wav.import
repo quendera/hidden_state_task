@@ -4,6 +4,14 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/sine.wav-47e7d78f4c5b0f0c19c059ca18448011.sample"
 
+[deps]
+
+source_file="res://assets/Sounds/sine.wav"
+source_md5="1f9c4c4692b2f191601a6e1f824f6666"
+
+dest_files=[ "res://.import/sine.wav-47e7d78f4c5b0f0c19c059ca18448011.sample" ]
+dest_md5="5cb3f2b1b49a39f0fe18ad5ed409b5e8"
+
 [params]
 
 force/8_bit=false

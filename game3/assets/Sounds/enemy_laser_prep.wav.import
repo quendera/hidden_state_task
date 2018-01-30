@@ -4,6 +4,14 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/enemy_laser_prep.wav-5c774e89e7c00efa152cbe698e1b5a6e.sample"
 
+[deps]
+
+source_file="res://assets/Sounds/enemy_laser_prep.wav"
+source_md5="8f957bab3f58ed687ec41999a413650c"
+
+dest_files=[ "res://.import/enemy_laser_prep.wav-5c774e89e7c00efa152cbe698e1b5a6e.sample" ]
+dest_md5="56203a760140031f7fcc4839d58921a0"
+
 [params]
 
 force/8_bit=false

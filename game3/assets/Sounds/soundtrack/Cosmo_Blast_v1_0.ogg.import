@@ -4,6 +4,14 @@ importer="ogg_vorbis"
 type="AudioStreamOGGVorbis"
 path="res://.import/Cosmo_Blast_v1_0.ogg-854c5dcab111be410edc5a5f38cfa13f.oggstr"
 
+[deps]
+
+source_file="res://assets/Sounds/soundtrack/Cosmo_Blast_v1_0.ogg"
+source_md5="3b4cda3012cdbb2fcd02c3aab710987f"
+
+dest_files=[ "res://.import/Cosmo_Blast_v1_0.ogg-854c5dcab111be410edc5a5f38cfa13f.oggstr" ]
+dest_md5="6180f229dbb5f1d2db7afa25d809a32e"
+
 [params]
 
 loop=true

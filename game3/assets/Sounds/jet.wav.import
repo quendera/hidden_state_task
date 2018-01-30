@@ -4,6 +4,14 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/jet.wav-812a36d7a2388b0004446149bf59b281.sample"
 
+[deps]
+
+source_file="res://assets/Sounds/jet.wav"
+source_md5="7bc2840a78495302c8ff08172d719779"
+
+dest_files=[ "res://.import/jet.wav-812a36d7a2388b0004446149bf59b281.sample" ]
+dest_md5="47da31e1959b2abd9a0f7a359a678489"
+
 [params]
 
 force/8_bit=false

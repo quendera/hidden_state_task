@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/joystick.png-b4cbffb45ea37ec2b5213c43041a5fcf.stex"
 
+[deps]
+
+source_file="res://assets/Images/controls/joystick.png"
+source_md5="1ca1cf47bdc1c110ac6f78403ab6e50b"
+
+dest_files=[ "res://.import/joystick.png-b4cbffb45ea37ec2b5213c43041a5fcf.stex" ]
+dest_md5="8f54dfbc08dc9d9fbea280f4c62f7cf1"
+
 [params]
 
 compress/mode=0

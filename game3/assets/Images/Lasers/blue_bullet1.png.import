@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/blue_bullet1.png-f5643660c7e8be758c2a113118647a0a.stex"
 
+[deps]
+
+source_file="res://assets/Images/Lasers/blue_bullet1.png"
+source_md5="e751d03fadeb7f865c3a8c7a4345e6e7"
+
+dest_files=[ "res://.import/blue_bullet1.png-f5643660c7e8be758c2a113118647a0a.stex" ]
+dest_md5="739c4e94bf4f55f648d459d7349e08c9"
+
 [params]
 
 compress/mode=0

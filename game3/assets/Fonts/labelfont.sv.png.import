@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/labelfont.sv.png-49ab1be10dd60ba41e969d9a995ee9fa.stex"
 
+[deps]
+
+source_file="res://assets/Fonts/labelfont.sv.png"
+source_md5="60add22ee442ab240f106e4d2f25cc73"
+
+dest_files=[ "res://.import/labelfont.sv.png-49ab1be10dd60ba41e969d9a995ee9fa.stex" ]
+dest_md5="06cdf38192e1b02e1e8c098d0b666579"
+
 [params]
 
 compress/mode=0

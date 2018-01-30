@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/whitehole.png-febe0d701821d83de20adcacc46e7c3e.stex"
 
+[deps]
+
+source_file="res://assets/Images/whitehole.png"
+source_md5="91ef1e41324299eba8b08ee5f7e83f00"
+
+dest_files=[ "res://.import/whitehole.png-febe0d701821d83de20adcacc46e7c3e.stex" ]
+dest_md5="b3440c5aa31f26c6a27fbe448a1c266e"
+
 [params]
 
 compress/mode=0

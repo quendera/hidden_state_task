@@ -15,7 +15,7 @@ var active = false setget set_active
 func set_active(new_active):
 	active = new_active
 	get_node("shader").set_visible(new_active)
-	set_z(1+2*int(new_active))
+	z_index = 1+2*int(new_active)
 
 
 var velocity = 400

@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/enemy_sideview_0.2_big6.png-a740fd796de180ddd3dec5416f810809.stex"
 
+[deps]
+
+source_file="res://assets/Images/boss/enemy_sideview_0.2_big6.png"
+source_md5="866ecbf30c8ef177c9aef59bfd239208"
+
+dest_files=[ "res://.import/enemy_sideview_0.2_big6.png-a740fd796de180ddd3dec5416f810809.stex" ]
+dest_md5="e2e992c87d2a43ce0e1dfbb48ea5cdb2"
+
 [params]
 
 compress/mode=0

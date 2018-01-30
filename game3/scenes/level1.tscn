@@ -4,15 +4,58 @@
 
 [node name="level1" type="Node2D"]
 
-[node name="game" parent="." instance=ExtResource( 1 )]
+[node name="game" parent="." index="0" instance=ExtResource( 1 )]
 
-[node name="frames" parent="game/enemy/enemy_ship"]
+[node name="frames" parent="game/enemy/enemy_ship" index="2"]
 
-frame = 2
+frame = 3
 
-[node name="laser" parent="game/enemy/enemy_ship"]
+[node name="anim" parent="game/enemy/enemy_ship" index="5"]
+
+playback_speed = 1.0
+
+[node name="laser" parent="game/enemy/enemy_ship" index="8"]
 
 frame = 0
+
+[node name="lost_life" parent="game/enemy/enemy_ship" index="9"]
+
+mouse_default_cursor_shape = 0
+
+[node name="layer" parent="game/enemy" index="1"]
+
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="hp" parent="game/enemy/layer" index="0"]
+
+mouse_default_cursor_shape = 0
+
+[node name="CanvasLayer" parent="game" index="4"]
+
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="CanvasLayer" parent="game/pause" index="0"]
+
+transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+
+[node name="instructions" parent="game/pause/CanvasLayer" index="0"]
+
+rect_clip_content = true
+mouse_default_cursor_shape = 0
+meta_underlined = true
+tab_size = 4
+text = "F      : toggle fullscreen"
+scroll_active = true
+scroll_following = false
+selection_enabled = false
+
+[node name="pause" parent="game/pause/CanvasLayer" index="1"]
+
+mouse_default_cursor_shape = 0
+
+[node name="confirm_quit" parent="game/pause/CanvasLayer" index="2"]
+
+mouse_default_cursor_shape = 0
 
 
 [editable path="game"]

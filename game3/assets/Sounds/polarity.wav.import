@@ -4,6 +4,14 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/polarity.wav-6522d2c9d2297ded504c74bf434946de.sample"
 
+[deps]
+
+source_file="res://assets/Sounds/polarity.wav"
+source_md5="813b825dbbd418d48fb4188a8d22c333"
+
+dest_files=[ "res://.import/polarity.wav-6522d2c9d2297ded504c74bf434946de.sample" ]
+dest_md5="1c129db7d2795c0a6233f3e0792c4294"
+
 [params]
 
 force/8_bit=false

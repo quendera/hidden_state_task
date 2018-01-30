@@ -4,6 +4,14 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/laser_shooting_sfx.wav-0c17b1a57500987c3e9fa143e33d2eca.sample"
 
+[deps]
+
+source_file="res://assets/Sounds/laser_shooting_sfx.wav"
+source_md5="f5e0e579537fff389396d5bf29be4ae6"
+
+dest_files=[ "res://.import/laser_shooting_sfx.wav-0c17b1a57500987c3e9fa143e33d2eca.sample" ]
+dest_md5="406859ffa44db7f732e43514ad93a2f9"
+
 [params]
 
 force/8_bit=false

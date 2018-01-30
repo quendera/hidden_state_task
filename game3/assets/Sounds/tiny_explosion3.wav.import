@@ -4,6 +4,14 @@ importer="wav"
 type="AudioStreamSample"
 path="res://.import/tiny_explosion3.wav-ee8b3b6b327004fba23f068e0ea8e40c.sample"
 
+[deps]
+
+source_file="res://assets/Sounds/tiny_explosion3.wav"
+source_md5="ecf8efead18f38d0a8d846992b89ee03"
+
+dest_files=[ "res://.import/tiny_explosion3.wav-ee8b3b6b327004fba23f068e0ea8e40c.sample" ]
+dest_md5="a3afb5820dc78a6e0168276b08e4a967"
+
 [params]
 
 force/8_bit=false

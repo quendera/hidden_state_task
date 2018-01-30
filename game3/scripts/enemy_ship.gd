@@ -199,6 +199,7 @@ func game_over():
 #		get_node("/root/game").send_string(query_string.substr(0, query_string.length( )-2)+";")
 	print("not sending data!")
 	save_data()
+	print("data saved locally")
 	get_tree().quit()
 
 func _on_anim_finished(name):

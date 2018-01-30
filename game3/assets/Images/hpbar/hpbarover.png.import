@@ -4,6 +4,14 @@ importer="texture"
 type="StreamTexture"
 path="res://.import/hpbarover.png-246dfbef508f3411e96e798baa7adb75.stex"
 
+[deps]
+
+source_file="res://assets/Images/hpbar/hpbarover.png"
+source_md5="d29b70af44d0bf3c72eb202897ed991b"
+
+dest_files=[ "res://.import/hpbarover.png-246dfbef508f3411e96e798baa7adb75.stex" ]
+dest_md5="9ea15c8a34b832750f25b1469c997e7a"
+
 [params]
 
 compress/mode=0
